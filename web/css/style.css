@@ -1,0 +1,58 @@
+#welcome{
+	background-color: orange;
+}
+
+#upper{
+	background-color: green;
+}
+
+#tracks{
+	background-color: purple;
+}
+
+#chords_info{
+	background-color: #F0F8FF;
+}
+
+#chords_track{
+	background-color: blue;
+}
+
+#melody_info{
+	background-color: #FFE4E1;
+}
+
+#melody_track{
+	background-color: red;
+}
+
+#synth{
+	background-color: yellow;
+}
+
+#upper {
+	height: 80px;
+}
+
+.info {
+	width: 200px;
+}
+
+.track {
+	position: relative;
+	left: 200px;
+	width: 1064px;
+	transform: translate(0, -100%);
+}
+
+.info, .track {
+	height: 100px;
+}
+
+#tracks > div {
+	height: 100px;
+}
+
+#synth {
+	height: 250px;
+}
