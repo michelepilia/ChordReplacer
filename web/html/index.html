@@ -2,6 +2,8 @@
 	<head>
 		<title>Chord Replacer</title>
 		<link rel="stylesheet" type="text/css" href="../css/style.css">
+		<script src="pureknob.js"></script>
+
 	</head>
 
 	<body>
@@ -18,7 +20,40 @@
 					<div class="track" id="melody_track">MELODY TRACK</div>
 				</div>
 			</div>
-			<div id="synth">SYNTH</div>
+			<div id="synth">
+				<div id="oscillator" class="synth">
+					<h3>OSCILLATOR</h3>
+					<div class="oscillator-row" id="osc-row1">
+						<div class="knob-bar" id="knob-bar-oscillator1">KNOBS OSCILLATOR 1</div>
+						<div class="waveform" id="waveform1">WAVE 1</div>
+					</div>
+
+					<div class="oscillator-row" id="osc-row2">
+						<div class="knob-bar" id="knob-bar-oscillator2">KNOBS OSCILLATOR 2</div>
+						<div class="waveform" id="waveform2">WAVE2</div>
+					</div>
+				</div>
+				<div id="filter" class="synth">
+					<h3>FILTER</h3>
+					<div class="knob-bar" id="knob-bar-filter">KNOBS FILTER</div>
+					<div class="sliders" id="filter-sliders">SLIDERS</div>
+				</div>
+
+				<div id="lfo" class="synth">
+					<h3>LFO</h3>
+					<div class="lfo-bar" id="lfo-bar">LFO BAR</div>
+					<div class="sliders" id="lfo-sliders">SLIDERS</div>
+				</div>
+				<div id="master" class="synth">
+					<h3>MASTER</h3>
+					<div class="knob" id="knob-master">KNOB MASTER</div>
+					<div class="sliders" id="master-sliders">SLIDERS</div>
+				</div>
+			</div>
 		</div>
+
+
+
+		<script src="../js/knobRotation.js"></script>
 	</body>
 </html>
