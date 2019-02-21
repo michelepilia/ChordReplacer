@@ -78,8 +78,17 @@
 	height: 450px;
 }
 
-.oscillator-row, .filter-row {
+.oscillator-row, .filter-row, .lfo-row {
 	margin: 30px 0px 0px 30px;
+}
+
+#osc-row2 {
+	position: absolute;
+	top: 269px;
+}
+
+.master-row {
+	margin: 30 0px 0px 25px;
 }
 
 .waveform {
