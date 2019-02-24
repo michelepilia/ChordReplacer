@@ -24,38 +24,128 @@
 			<div id="synth">
 				<div id="oscillator" class="synth_element">
 					<h3>OSCILLATOR</h3>
-					<div class="oscillator-row" id="osc-row1">
-						<div class="knob-bar" id="knob-bar-oscillator1">KNOBS OSCILLATOR 1</div>
-						<div class="waveform" id="waveform1">WAVE 1</div>
+
+					<div class="oscillator-row" id="osc-row1"> <!--First oscillator Wave row!-->
+						<div class="knob-bar"> <!--Knob Bar -->
+							<div class="knob-border osc-knob-border" id="knob-osc1-pitch"> <!-- Pitch Knob for first row !-->
+            					<div class="knob-background" id="k-osc1-pitch"> <!--Knob Background !-->
+               						<div class="level-amount" id="l-osc1-pitch"></div> <!--Level amount !-->
+            					</div>
+            					<div class="knob-label knob-label-osc1" id="pitch-label-osc1">PITCH</div> <!--Knob label !-->
+        					</div>
+
+        					<div class="knob-border osc-knob-border" id="knob-osc1-lvl"> <!--Level knob for first row !-->
+            					<div class="knob-background" id="k-osc1-lvl">
+               						<div class="level-amount" id="l-osc1-lvl"></div>
+            					</div>
+            					<div class="knob-label knob-label-osc1" id="lvl-label-osc1">LEVEL</div>
+        					</div>
+
+        					<div class="knob-border osc-knob-border" id="knob-osc1-fm"> <!--FM knob for first row !-->
+            					<div class="knob-background" id="k-osc1-fm">
+               						<div class="level-amount" id="l-osc1-fm"></div>
+            					</div>
+            					<div class="knob-label knob-label-osc1" id="fm-label-osc1">FM</div>
+        					</div>
+        				</div>
+
+						<div class="waveform" id="waveform1">WAVE 1</div> <!--Indicator label for first row !-->
 					</div>
 
+
+
 					<div class="oscillator-row" id="osc-row2">
-						<div class="knob-bar" id="knob-bar-oscillator2">KNOBS OSCILLATOR 2</div>
+						<div class="knob-bar"> <!--Knob Bar -->
+							<div class="knob-border osc-knob-border" id="knob-osc2-pitch"> <!-- Pitch Knob for first row !-->
+            					<div class="knob-background" id="k-osc2-pitch"> <!--Knob Background !-->
+               						<div class="level-amount" id="l-osc2-pitch"></div> <!--Level amount !-->
+            					</div>
+            					<div class="knob-label knob-label-osc1" id="pitch-label-osc2">PITCH</div> <!--Knob label !-->
+        					</div>
+
+        					<div class="knob-border osc-knob-border" id="knob-osc2-lvl"> <!--Level knob for first row !-->
+            					<div class="knob-background" id="k-osc2-lvl">
+               						<div class="level-amount" id="l-osc2-lvl"></div>
+            					</div>
+            					<div class="knob-label knob-label-osc2" id="lvl-label-osc2">LEVEL</div>
+        					</div>
+        				</div>
 						<div class="waveform" id="waveform2">WAVE2</div>
 					</div>
 				</div>
+
+
 				<div id="filter" class="synth_element">
 					<h3>FILTER</h3>
+
 					<div class="filter-row" id="filt-row1">
-						<div class="knob-bar" id="knob-bar-filter">KNOBS FILTER</div>
+
+						<div class="knob-bar"> <!--Knob Bar -->
+							<div class="knob-border filter-knob-border" id="knob-filter-cutoff"> <!-- Pitch Knob for first row !-->
+            					<div class="knob-background" id="k-filter-cutoff"> <!--Knob Background !-->
+               						<div class="level-amount" id="l-filter-cutoff"></div> <!--Level amount !-->
+            					</div>
+            					<div class="knob-label knob-label-filter" id="cutoff-label-filter">CUTOFF</div> <!--Knob label !-->
+        					</div>
+
+        					<div class="knob-border osc-knob-border" id="knob-filter-res"> <!--Level knob for first row !-->
+            					<div class="knob-background" id="k-filter-res">
+               						<div class="level-amount" id="l-filter-res"></div>
+            					</div>
+            					<div class="knob-label knob-label-filter" id="res-label-filter">RESONANCE</div>
+        					</div>
+
+        					<div class="knob-border osc-knob-border" id="knob-filter-eg"> <!--FM knob for first row !-->
+            					<div class="knob-background" id="k-filter-eg">
+               						<div class="level-amount" id="l-filter-eg"></div>
+            					</div>
+            					<div class="knob-label knob-label-filter" id="eg-label-filter">EG</div>
+        					</div>
+        				</div>
+
 						<div class="sliders" id="filter-sliders">SLIDERS</div>
 					</div>
+
 				</div>
+
 
 				<div id="lfo" class="synth_element">
 					<h3>LFO</h3>
+
 					<div class="lfo-row" id="lfo-row1">
-						<div class="lfo-bar knob-bar" id="lfo-bar">LFO BAR</div>
+						<div class="knob-bar"> <!--Knob Bar -->
+							<div class="knob-border lfo-knob-border" id="knob-lfo-rate"> <!-- Pitch Knob for first row !-->
+            					<div class="knob-background" id="k-lfo-rate"> <!--Knob Background !-->
+               						<div class="level-amount" id="l-lfo-rate"></div> <!--Level amount !-->
+            					</div>
+            					<div class="knob-label knob-label-lfo" id="rate-label-lfo">RATE</div> <!--Knob label !-->
+        					</div>
+        				</div>
 						<div class="sliders" id="lfo-sliders">SLIDERS</div>
 					</div>
+
 				</div>
+
+
 				<div id="master" class="synth_element">
 					<h3>MASTER</h3>
+
 					<div class="master-row" id="mast-row1">
-						<div class="knob knob-bar" id="knob-master">KNOB MASTER</div>
+
+						<div class="knob-bar" id="master-knob-bar"> <!--Knob Bar -->
+							<div class="knob-border master-knob-border" id="knob-master-lvl"> <!-- Pitch Knob for first row !-->
+            					<div class="knob-background" id="k-master-lvl"> <!--Knob Background !-->
+               						<div class="level-amount" id="l-master-lvl"></div> <!--Level amount !-->
+            					</div>
+            					<div class="knob-label knob-label-master" id="lvl-label-master">MASTER</div> <!--Knob label !-->
+        					</div>
+        				</div>
+
 						<div class="sliders" id="master-sliders">SLIDERS</div>
 					</div>
+
 				</div>
+
 			</div>
 		</div>
 
