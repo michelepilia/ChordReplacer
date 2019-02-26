@@ -107,6 +107,23 @@
 	margin-top: 20px;
 }
 
+.slider_container {
+	position: relative;
+	width: 130px;
+}
+
+#master_slider_cont {
+	transform: translate(-25%);
+}
+
+
+.slider {
+	float: right;
+	position: relative;
+}
+
+
+
 
 #lfo {
 	position: absolute;
@@ -129,6 +146,31 @@
 h3 {
 	text-align: center;
 	margin: 10px 0px 1e0px 0px;
+}
+
+.wave-selector, .dest-selector {
+	width: auto;
+	height: 20%;
+	position: relative;
+}
+
+
+.osc-sel, .lfo-sel {
+	top: 50%;
+	transform: translate(0, -20px);
+}
+
+#wave-osc1 {
+	left: 25px;
+}
+
+#wave-osc2 {
+	left: 65px;
+}
+
+.lfo-sel {
+	left: 10px;
+	margin: 0px 35px 0px 0px;
 }
 
 

@@ -7,8 +7,17 @@
     border-bottom-color: transparent;
     border-width: 1.5px;
     border-radius: 50%;
-    margin:2%;
+    margin:5%;
 }
+
+.osc-knob-border {
+    left: -50px;
+}
+
+#osc-row2 .osc-knob-border {
+    left: -90px;
+}
+
 
 .knob-background {
     position: relative;
@@ -33,7 +42,7 @@
 
 }
 
-.knob-level-label {
+.knob-label {
     position: relative;
     font-size: 50%;
     text-align: center;
@@ -61,7 +70,16 @@
 }
 
 #master-knob-bar {
-    width: 194;
+    width: 194px;
+    height: 334px;
+}
+
+#knob-master-lvl {
+    top: -110px;
+    left: 50%;
+    transform: translate(-90%);
+    margin-left: auto;
+    margin-right: auto;
 }
 
 

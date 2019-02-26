@@ -47,6 +47,9 @@
             					</div>
             					<div class="knob-label knob-label-osc1" id="fm-label-osc1">FM</div>
         					</div>
+
+        					<div class="wave-selector osc-sel" id="wave-osc1">WAVE</div>
+
         				</div>
 
 						<div class="waveform" id="waveform1">WAVE 1</div> <!--Indicator label for first row !-->
@@ -69,6 +72,9 @@
             					</div>
             					<div class="knob-label knob-label-osc2" id="lvl-label-osc2">LEVEL</div>
         					</div>
+
+        					<div class="wave-selector osc-sel" id="wave-osc2">WAVE</div>
+
         				</div>
 						<div class="waveform" id="waveform2">WAVE2</div>
 					</div>
@@ -88,22 +94,29 @@
             					<div class="knob-label knob-label-filter" id="cutoff-label-filter">CUTOFF</div> <!--Knob label !-->
         					</div>
 
-        					<div class="knob-border osc-knob-border" id="knob-filter-res"> <!--Level knob for first row !-->
+        					<div class="knob-border filter-knob-border" id="knob-filter-res"> <!--Level knob for first row !-->
             					<div class="knob-background" id="k-filter-res">
                						<div class="level-amount" id="l-filter-res"></div>
             					</div>
             					<div class="knob-label knob-label-filter" id="res-label-filter">RESONANCE</div>
         					</div>
 
-        					<div class="knob-border osc-knob-border" id="knob-filter-eg"> <!--FM knob for first row !-->
+        					<div class="knob-border filter-knob-border" id="knob-filter-eg"> <!--FM knob for first row !-->
             					<div class="knob-background" id="k-filter-eg">
                						<div class="level-amount" id="l-filter-eg"></div>
             					</div>
             					<div class="knob-label knob-label-filter" id="eg-label-filter">EG</div>
         					</div>
+
+        					<div class="slider_container" id="filter_slider_cont"> <!--Sliders div !-->
+        						<input type="range" min="1" max="100" value="50" class="slider attack" id="filter_atk">
+        						<input type="range" min="1" max="100" value="50" class="slider decay" id="filter_dec">
+        						<input type="range" min="1" max="100" value="50" class="slider sustain" id="filter_sus">
+        						<input type="range" min="1" max="100" value="50" class="slider release" id="filter_rel">
+        					</div>
+
         				</div>
 
-						<div class="sliders" id="filter-sliders">SLIDERS</div>
 					</div>
 
 				</div>
@@ -120,8 +133,19 @@
             					</div>
             					<div class="knob-label knob-label-lfo" id="rate-label-lfo">RATE</div> <!--Knob label !-->
         					</div>
+
+        					<div class="wave-selector lfo-sel" id="wave-lfo">WAVE </div>
+
+        					<div class="dest-selector lfo-sel" id="dest-lfo">DEST</div>
+
+        					<div class="slider_container" id="lfo_slider_cont"> <!--Sliders div !-->
+        						<input type="range" min="1" max="100" value="50" class="slider attack" id="lfo_atk">
+        						<input type="range" min="1" max="100" value="50" class="slider decay" id="lfo_dec">
+        						<input type="range" min="1" max="100" value="50" class="slider sustain" id="lfo_sus">
+        						<input type="range" min="1" max="100" value="50" class="slider release" id="lfo_rel">
+        					</div>
+
         				</div>
-						<div class="sliders" id="lfo-sliders">SLIDERS</div>
 					</div>
 
 				</div>
@@ -139,9 +163,15 @@
             					</div>
             					<div class="knob-label knob-label-master" id="lvl-label-master">MASTER</div> <!--Knob label !-->
         					</div>
-        				</div>
 
-						<div class="sliders" id="master-sliders">SLIDERS</div>
+        					<div class="slider_container" id="master_slider_cont"> <!--Sliders div !-->
+        						<input type="range" min="1" max="100" value="50" class="slider attack" id="mast_atk">
+        						<input type="range" min="1" max="100" value="50" class="slider decay" id="mast_dec">
+        						<input type="range" min="1" max="100" value="50" class="slider sustain" id="mast_sus">
+        						<input type="range" min="1" max="100" value="50" class="slider release" id="mast_rel">
+        					</div>
+
+        				</div>
 					</div>
 
 				</div>
