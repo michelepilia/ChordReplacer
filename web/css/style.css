@@ -110,6 +110,7 @@
 .slider_container {
 	position: relative;
 	width: 130px;
+	height: 82px;
 }
 
 #master_slider_cont {
@@ -120,6 +121,7 @@
 .slider {
 	float: right;
 	position: relative;
+	width: 100px;
 }
 
 
@@ -173,4 +175,21 @@ h3 {
 	margin: 0px 35px 0px 0px;
 }
 
+
+
+.slider_label {
+	position: relative;
+	top: 0px;
+	left: 10px;
+	float: left;
+	height: 15px;
+	width: 15px;
+	margin: 2px;
+	font-size: 100%;
+	display: inline;
+}
+
+.sl-lab {
+	height: 20px;
+}
 
