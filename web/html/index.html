@@ -48,7 +48,13 @@
             					<div class="knob-label knob-label-osc1" id="fm-label-osc1">FM</div>
         					</div>
 
-        					<div class="wave-selector osc-sel" id="wave-osc1">WAVE</div>
+        					<div class="wave-selector osc-sel" id="wave-osc1">
+                                <select>
+                                    <option value="0">Square</option>
+                                    <option value="1">Sawtooth</option>
+                                    <option value="2">Triangular</option>
+                                </select>   
+                            </div>
 
         				</div>
 
@@ -73,7 +79,13 @@
             					<div class="knob-label knob-label-osc2" id="lvl-label-osc2">LEVEL</div>
         					</div>
 
-        					<div class="wave-selector osc-sel" id="wave-osc2">WAVE</div>
+        					<div class="wave-selector osc-sel" id="wave-osc2">
+                                <select>
+                                    <option value="0">Square</option>
+                                    <option value="1">Sawtooth</option>
+                                    <option value="2">Triangular</option>
+                                </select>   
+                            </div>
 
         				</div>
 						<div class="waveform" id="waveform2">WAVE2</div>
@@ -138,9 +150,20 @@
             					<div class="knob-label knob-label-lfo" id="rate-label-lfo">RATE</div> <!--Knob label !-->
         					</div>
 
-        					<div class="wave-selector lfo-sel" id="wave-lfo">WAVE </div>
+        					<div class="wave-selector lfo-sel" id="wave-lfo">
+                                <select>
+                                    <option value="0">Square</option>
+                                    <option value="1">Sawtooth</option>
+                                    <option value="2">Triangular</option>
+                                </select>   
+                            </div>
 
-        					<div class="dest-selector lfo-sel" id="dest-lfo">DEST</div>
+        					<div class="dest-selector lfo-sel" id="dest-lfo">
+                                <select>
+                                    <option value="0">LFO->Cutoff</option>
+                                    <option value="1">Pitch</option>
+                                </select>   
+                            </div>
 
         					<div class="slider_container" id="lfo_slider_cont"> <!--Sliders div !-->
                                 <span class="slider_label atck_label" id="lfo-atck">A</span>

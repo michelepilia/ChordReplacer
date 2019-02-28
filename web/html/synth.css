@@ -1,3 +1,49 @@
+#oscillator { grid-area: oscillator; }
+#filter { grid-area: filter; }
+#lfo { grid-area: lfo; }
+#master { grid-area: master; }
+
+#synth {
+  display: grid;
+  grid-template-areas:
+    'oscillator oscillator filter filter master'
+    'oscillator oscillator lfo lfo master';
+  grid-gap: 10px;
+  background-color: #2196F3;
+  padding: 10px;
+}
+
+#synth > div {
+  background-color: rgba(255, 255, 255, 0.8);
+  text-align: center;
+}
+
+
+
+#oscillator > div {
+	position: relative;
+	border: 1px solid black;
+	height: 120px;
+}
+
+#osc1{
+	background-color: red;
+}
+
+#osc2{
+	background-color: green;
+}
+
+
+
+
+
+
+
+
+
+
+
 .knob-border {
     position: relative;
     width: 40px;
@@ -7,11 +53,9 @@
     border-bottom-color: transparent;
     border-width: 1.5px;
     border-radius: 50%;
-    margin:5%;
+    margin:2%;
+    float: left;
 }
-
-
-
 
 .knob-background {
     position: relative;
@@ -36,7 +80,7 @@
 
 }
 
-.knob-label {
+.knob-level-label {
     position: relative;
     font-size: 50%;
     text-align: center;
@@ -48,31 +92,3 @@
     -moz-user-select: none;
     -ms-user-select: none;
 }
-
-.knob-bar {
-    position: relative;
-    width: 400px;
-    height: 100px;
-    background-color: grey;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    border:solid black;
-   
-}
-
-#master-knob-bar {
-    width: 194px;
-    height: 334px;
-}
-
-#knob-master-lvl {
-    left: 50%;
-    transform: translate(-90%);
-    margin-left: auto;
-    margin-right: auto;
-}
-
-
-
-

@@ -68,7 +68,11 @@
 	margin-top: 30px;
 	border: 1px solid black;
 	border-radius: 10px;
-	padding: 20px;
+}
+
+.synth-element{
+	justify-content: center;
+    align-content: center;
 }
 
 #oscillator {
@@ -76,6 +80,7 @@
 	border: 1px solid black;
 	width: 450px;
 	height: 450px;
+	grid-area: osc;
 }
 
 .oscillator-row, .filter-row, .lfo-row {
@@ -100,17 +105,18 @@
 	border: 1px solid black;
 	width: 450px;
 	height: 214px;
-	left: 500px;
+	grid-area: filter;
 }
 
 .sliders {
-	margin-top: 20px;
+//	margin-top: 20px;
 }
 
 .slider_container {
 	position: relative;
 	width: 130px;
 	height: 82px;
+	top: 
 }
 
 #master_slider_cont {
@@ -129,12 +135,11 @@
 
 #lfo {
 	position: absolute;
-	left: 500;
-	top: 633;
 	//margin-top: 50px;
 	border: 1px solid black;
 	width: 450px;
 	height: 214px;
+	grid-area: lfo;
 }
 
 #master {
@@ -142,7 +147,7 @@
 	border: 1px solid black;
 	width: 250;
 	height: 450px;
-	left: 980px;
+	grid-area: master;
 }
 
 h3 {
@@ -172,7 +177,7 @@ h3 {
 
 .lfo-sel {
 	left: 10px;
-	margin: 0px 35px 0px 0px;
+	margin: 0px 20px 0px 0px;
 }
 
 
@@ -189,7 +194,28 @@ h3 {
 	display: inline;
 }
 
-.sl-lab {
-	height: 20px;
+
+
+#synth {
+  display: grid;
+  grid-template-areas:
+    'osc osc filter filter master'
+    'osc osc lfo lfo master';
+  grid-gap: 15px;
+  background-color: #2196F3;
+  padding: 0px;
 }
+
+
+.synth > div {
+  background-color: rgba(255, 255, 255, 0.8);
+  text-align: center;
+  padding: 20px 0;
+}
+
+
+
+
+
+
 
