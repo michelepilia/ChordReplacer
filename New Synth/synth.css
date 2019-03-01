@@ -1,0 +1,43 @@
+#synth{
+	background-color: red;
+	width:80%;
+	height:25%;
+	display: grid;
+	grid-template-columns: 40% 40% 20% ;
+}
+
+.synth-element{
+	background-color: red;
+	border: 1px solid black;
+	display: inline-flex;
+}
+
+.knob-bar{
+	display: inline-flex;
+	padding: 5px;
+	transform: translate(0,5%);
+}
+.knob{
+	transform: translate(0,50%);
+	width: 30px;
+	height: 30px;
+	border-radius: 50%;
+	background-color: white;
+	border:1px solid silver;
+}
+
+.oscillators{
+	background-color: blue;
+	display: grid;
+	grid-template-columns: 25% 25% 25% auto ;
+}
+.osc-element{
+	background-color: red;
+	border: 1px solid green;
+	display: inline-flex;
+	justify-content: center;
+}
+
+
+
+
