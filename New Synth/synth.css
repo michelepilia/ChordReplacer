@@ -3,7 +3,7 @@
 	width:80%;
 	height:25%;
 	display: grid;
-	grid-template-columns: 40% 40% 20% ;
+	grid-template-columns: auto auto auto;
 }
 
 .synth-element{
@@ -36,6 +36,30 @@
 	border: 1px solid green;
 	display: inline-flex;
 	justify-content: center;
+}
+
+#osc1 {
+	grid-area: 1 / 1 / span 1 / span 5;
+} 
+
+#filter {
+	grid-area: 1 / 6 /  span 1 / span 5;
+}
+
+#master1 {
+	grid-area: 1 / 11 /  span 1 / span 2;
+}
+
+#osc2 {
+	grid-area: 2 / 1 /  span 1 / span 5;
+} 
+
+#lfo {
+	grid-area: 2 / 6 / span 1 / span 5;
+}
+
+#master2 {
+	grid-area: 2 / 11 / span 1 / span 2;
 }
 
 
