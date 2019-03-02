@@ -1,0 +1,31 @@
+#synth {
+  display: grid;
+  grid-template-columns: auto auto auto auto auto auto auto auto auto;
+  grid-gap: 10px;
+  background-color: #2196F3;
+  padding: 10px;
+  height: 200px;
+  width:90%;
+  max-width: 900px;
+  min-width: 700px;
+}
+
+#synth > div {
+  background-color: rgba(255, 255, 255, 0.8);
+  text-align: center;
+  padding: 20px 0;
+  font-size: 30px;
+}
+
+.item1 {
+  grid-area: 1 / 1 / span 2 / span 4;
+}
+.item2 {
+  grid-area: 1 / 5 / span 1 / span 4;
+}
+.item3{
+  grid-area: 1 / 9 / span 2 / span 1;
+}
+.item4{
+  grid-area: 2 / 5 / span 1 / span 4;
+}
