@@ -8,24 +8,63 @@
   width:90%;
   max-width: 900px;
   min-width: 700px;
+  border:1px solid black;
+  border-radius: 1%;
 }
-
 #synth > div {
   background-color: rgba(255, 255, 255, 0.8);
   text-align: center;
-  padding: 20px 0;
+  padding: 20px 0px;
   font-size: 30px;
 }
-
-.item1 {
-  grid-area: 1 / 1 / span 2 / span 4;
+.knob{
+  background-color: red;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border-color: black;
+  border-width: 1px;
+  border-style: solid;
+  margin-left: 10%;
+  margin-top: 2.5%;
 }
-.item2 {
+.oscillators {
+  grid-area: 1 / 1 / span 2 / span 4;
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+  grid-gap:25%;
+  border:1px solid red;
+  border-radius: 2%;
+}
+.filter {
   grid-area: 1 / 5 / span 1 / span 4;
 }
-.item3{
+.master{
   grid-area: 1 / 9 / span 2 / span 1;
 }
-.item4{
+.lfo{
   grid-area: 2 / 5 / span 1 / span 4;
+}
+#osc1{
+  align-content: center;
+  border:1px solid black;
+  grid-area: 1 / 1 / span 1 / span 4;
+  display: inline-flex;
+}
+#osc2{
+  border:1px solid black;
+  grid-area: 2 / 1 / span 1 / span 4;
+  display: inline-flex;
+}
+.label{
+  margin-top: 100%;
+  font-size: 15px;
+}
+#knob6{
+  visibility: hidden;
+}
+.waveforms{
+  height: 50%;
+  margin-left: 10%;
+  margin-top: 2.5%;
 }
