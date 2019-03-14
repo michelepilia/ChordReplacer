@@ -1,12 +1,13 @@
 #synth {
   display: grid;
-  grid-template-columns: auto auto auto auto auto auto auto auto auto;
-  grid-gap: 10px;
+  grid-template-columns: 41% 41% 14%;
+  row-gap: 10px;
+  column-gap: 2%;
   background-color: #2196F3;
   padding: 10px;
-  height: 200px;
-  width:90%;
-  max-width: 900px;
+  height: auto;
+  width: auto;
+  max-width: 1300px;
   min-width: 700px;
   border:1px solid black;
   border-radius: 1%;
@@ -25,41 +26,33 @@
   border-color: black;
   border-width: 1px;
   border-style: solid;
-  margin-left: 10%;
-  margin-top: 2.5%;
 }
 .oscillators {
-  grid-area: 1 / 1 / span 2 / span 4;
+  grid-area: 1 / 1 / span 2 / span 1;
   display: grid;
   grid-template-columns: auto;
   grid-gap:25%;
   border:1px solid red;
-  border-radius: 2%;
 }
 .filter {
-  grid-area: 1 / 5 / span 1 / span 4;
+  grid-area: 1 / 2 / span 1 / span 1;
   display: grid;
-  grid-template-columns: auto auto auto;
-  grid-gap:25%;
+  grid-template-columns: 25% 25% 25% 25%;
   border:1px solid red;
-  border-radius: 2%;
 }
 .master{
-  grid-area: 1 / 9 / span 2 / span 1;
+  grid-area: 1 / 3 / span 2 / span 1;
 }
 .lfo{
-  grid-area: 2 / 5 / span 1 / span 4;
+  grid-area: 2 / 2 / span 1 / span 1;
+  display: grid;
+  grid-template-columns: 25% 25% 25% 25%;
 }
 #osc1{
-  align-content: center;
-  border:1px solid black;
   grid-area: 1 / 1 / span 1 / span 1;
-  display: inline-flex;
 }
 #osc2{
-  border:1px solid black;
   grid-area: 2 / 1 / span 1 / span 1;
-  display: inline-flex;
 }
 .label{
   margin-top: 100%;
@@ -68,26 +61,77 @@
 #knob6{
   visibility: hidden;
 }
-.waveforms{
+.selector{
   height: 50%;
-  margin-left: 10%;
-  margin-top: 2.5%;
+  width: 70%;
+}
+
+.lfo .waveforms {
+  grid-area: 1 / 2 / span 1 / span 1;
+}
+
+.destination {
+  grid-area: 1 / 3 / span 1 / span 1;
 }
 
 .slider-container{
-  display: flex;
-  flex-direction: column;
-  grid-area: 1 / 3 / span 1 / span 1;
+  display: grid;
+  grid-template-columns: 10% 90%;
+  grid-area: 1 / 4 / span 1 / span 1;
 }
 
 
 .slider-label{
   font-size: 10px;
+  text-align: left;
+  display: inline-flex;
+  width: 10%;
 }
 
 .slider{
-  width: 10%;
+  width: 70%;
+  display: inline;
 }
+
+.attack{
+  grid-area: 1 / 2 / span 1 / span 1;
+}
+
+.decay{
+  grid-area: 2 / 2 / span 1 / span 1;
+}
+
+.sustain{
+  grid-area: 3 / 2 / span 1 / span 1;
+}
+
+.release{
+  grid-area: 4 / 2 / span 1 / span 1;
+}
+
+.atck-label {
+  grid-area: 1 / 1 / span 1 / span 1;
+}
+
+.dcy-label {
+  grid-area: 2 / 1 / span 1 / span 1;
+}
+
+.sus-label {
+  grid-area: 3 / 1 / span 1 / span 1;
+}
+
+.rel-label {
+  grid-area: 4 / 1 / span 1 / span 1;
+}
+
+
+.oscillator {
+  border:1px solid black;
+  display: grid;
+  grid-template-columns: 25% 25% 25% 25%;
+}
+
 
 
 #knob7 {
@@ -97,3 +141,7 @@
 #knob8 {
   grid-area: 1 / 2 / span 1 / span 1;
 }
+
+
+
+
