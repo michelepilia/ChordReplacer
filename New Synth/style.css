@@ -38,6 +38,11 @@
 }
 .filter {
   grid-area: 1 / 5 / span 1 / span 4;
+  display: grid;
+  grid-template-columns: auto auto auto;
+  grid-gap:25%;
+  border:1px solid red;
+  border-radius: 2%;
 }
 .master{
   grid-area: 1 / 9 / span 2 / span 1;
@@ -70,5 +75,25 @@
 }
 
 .slider-container{
-  display: none;
+  display: flex;
+  flex-direction: column;
+  grid-area: 1 / 3 / span 1 / span 1;
+}
+
+
+.slider-label{
+  font-size: 10px;
+}
+
+.slider{
+  width: 10%;
+}
+
+
+#knob7 {
+  grid-area: 1 / 1 / span 1 / span 1;
+}
+
+#knob8 {
+  grid-area: 1 / 2 / span 1 / span 1;
 }
