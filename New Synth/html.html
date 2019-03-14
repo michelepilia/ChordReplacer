@@ -24,7 +24,7 @@
     	<div id="osc2" class="oscillator">
     		<div class="knob" id="knob4"><div class="label">level</div></div>
     		<div class="knob" id="knob5"><div class="label">pitch</div></div>
-    		<div class="knob" id="knob6"></div>
+
     		<select class="waveforms selector">
     			<option value="sawtooth">SAWTOOTH</option>
   		  	<option value="square">SQUARE</option>
@@ -33,8 +33,8 @@
     	</div>
     </div>
     <div class="filter">
-      <div class="knob" id="knob7"><div class="label">cutoff</div></div>
-      <div class="knob" id="knob8"><div class="label">resonance</div></div>
+      <div class="knob" id="knob6"><div class="label">cutoff</div></div>
+      <div class="knob" id="knob7"><div class="label">resonance</div></div>
 
       <div class="slider-container" id="filter-slider-cont"> <!--Sliders div !-->
         <span class="slider-label atck-label" id="filt-atck">A</span>
@@ -47,23 +47,9 @@
         <input type="range" min="1" max="100" value="50" class="slider release" id="filter-rel">
       </div>
     </div>
-    <div class="master">
-
-      <div class="knob" id="knob9"><div class="label">Master</div></div>
-
-      <div class="slider-container" id="mast-slider-cont"> <!--Sliders div !-->
-        <span class="slider-label atck-label" id="mast-atck">A</span>
-        <input type="range" min="1" max="100" value="50" class="slider attack" id="mast-atk">
-        <span class="slider-label dcy-label" id="mast-dcy">D</span>
-        <input type="range" min="1" max="100" value="50" class="slider decay" id="mast-dec">
-        <span class="slider-label sus-label" id="mast-sus">S</span>
-        <input type="range" min="1" max="100" value="50" class="slider sustain" id="mast-sus">
-        <span class="slider-label rel-label" id="mast-rel">R</span>
-        <input type="range" min="1" max="100" value="50" class="slider release" id="mast-rel">
-      </div>
-    </div>  
+     
     <div class="lfo">
-      <div class="knob" id="knob10"><div class="label">rate</div></div>
+      <div class="knob" id="knob8"><div class="label">rate</div></div>
       <select class="waveforms selector">
           <option value="sawtooth">SAWTOOTH</option>
           <option value="square">SQUARE</option>
@@ -88,6 +74,22 @@
         <input type="range" min="1" max="100" value="50" class="slider release" id="lfo-rel">
       </div>
     </div>
+
+    <div class="master">
+
+      <div class="knob" id="knob9"><div class="label">Master</div></div>
+
+      <div class="slider-container" id="mast-slider-cont"> <!--Sliders div !-->
+        <span class="slider-label atck-label" id="mast-atck">A</span>
+        <input type="range" min="1" max="100" value="50" class="slider attack" id="mast-atk">
+        <span class="slider-label dcy-label" id="mast-dcy">D</span>
+        <input type="range" min="1" max="100" value="50" class="slider decay" id="mast-dec">
+        <span class="slider-label sus-label" id="mast-sus">S</span>
+        <input type="range" min="1" max="100" value="50" class="slider sustain" id="mast-sus">
+        <span class="slider-label rel-label" id="mast-rel">R</span>
+        <input type="range" min="1" max="100" value="50" class="slider release" id="mast-rel">
+      </div>
+    </div> 
 
 
 

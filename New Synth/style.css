@@ -64,9 +64,11 @@
   margin-top: 100%;
   font-size: 15px;
 }
-#knob6{
-  visibility: hidden;
+
+.oscillator select.waveforms.selector {
+  grid-area: 1 / 4 / span 1 / span 1;
 }
+
 .selector{
   height: 50%;
   width: 70%;
@@ -140,11 +142,11 @@
 
 
 
-#knob7 {
+#knob6 {
   grid-area: 1 / 1 / span 1 / span 1;
 }
 
-#knob8 {
+#knob7 {
   grid-area: 1 / 2 / span 1 / span 1;
 }
 
