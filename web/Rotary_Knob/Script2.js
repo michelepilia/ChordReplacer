@@ -1,7 +1,8 @@
 var SENS = 5; /*an user can change only SENS parameter*/
 /*-----------------------------------------------------------------------------*/
-var classToRotate = "knob-background";
+var classToRotate = "int-knob";
 var classToRotate2 = "." + classToRotate;
+var mouseTarget = "level-amount2"
 var knobNumbers = document.getElementsByClassName(classToRotate).length;
 var amounts = Array(knobNumbers).fill(0);
 var knobToRotateIndex = 0;
@@ -12,7 +13,7 @@ var minAmount = 0;
 
 function updateView() {
     console.log(amounts[knobToRotateIndex])
-    document.getElementsByClassName(classToRotate)[knobToRotateIndex].style.transform = "translate(10%,10%) rotate(" + amounts[knobToRotateIndex] * SENS + "deg)";
+    document.getElementsByClassName(classToRotate)[knobToRotateIndex].style.transform = "rotate(" + amounts[knobToRotateIndex] * SENS + "deg)";
 }
 
 function f1(knob) {
