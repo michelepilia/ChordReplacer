@@ -1,11 +1,14 @@
-html{
-      -moz-user-select: none; /* Firefox */
-      -ms-user-select: none; /* Internet Explorer */
-   -khtml-user-select: none; /* KHTML browsers (e.g. Konqueror) */
+html{    
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer */
+  -khtml-user-select: none; /* KHTML browsers (e.g. Konqueror) */
   -webkit-user-select: none; /* Chrome, Safari, and Opera */
   -webkit-touch-callout: none; /* Disable Android and iOS callouts*/
 }
+
 #synth {
+  position: relative;
+  top: 150px;
   display: grid;
   grid-template-columns: 41% 41% 14%;
   row-gap: 10px;
@@ -17,7 +20,6 @@ html{
   max-width: 1500px;
   min-width: 700px;
   border:1px solid black;
-  border-radius: 1%;
 }
 #synth > div {
   background-color: rgba(255, 255, 255, 0.8);
@@ -25,8 +27,8 @@ html{
   padding: 20px 0px;
   font-size: 30px;
 }
-
 .oscillators {
+  border: 1px solid red;
   grid-area: 1 / 1 / span 2 / span 1;
   display: grid;
   grid-template-columns: auto;
@@ -38,20 +40,25 @@ html{
   display: grid;
   grid-template-columns: 25% 25% 25% 25%;
   border:1px solid red;
+  justify-items:center;
+  align-items: center;
 }
-
-
 .master{
   grid-area: 1 / 3 / span 2 / span 1;
   display: grid;
   grid-template-columns: auto;
   grid-template-rows: 50% 50%;
   border:1px solid red;
+  justify-items:center;
+  align-items: center;
 }
 .lfo{
+  border:1px solid red;
   grid-area: 2 / 2 / span 1 / span 1;
   display: grid;
   grid-template-columns: 25% 25% 25% 25%;
+  align-items: center;
+  justify-items:center;
 }
 #osc1{
   grid-area: 1 / 1 / span 1 / span 1;
@@ -63,11 +70,9 @@ html{
   margin-top: 100%;
   font-size: 15px;
 }
-
 .oscillator select.waveforms.selector {
   grid-area: 1 / 4 / span 1 / span 1;
 }
-
 .selector{
   height: 50%;
   width: 70%;
@@ -135,9 +140,10 @@ html{
 
 
 .oscillator {
-  border:1px solid black;
   display: grid;
   grid-template-columns: 25% 25% 25% 25%;
+  align-items: center;
+  justify-items:center;
 }
 
 
@@ -217,7 +223,7 @@ html{
 .knob-level-label{
     font-size: 45%;
     color: black;
-    background-color: red;
+    background-color: lightblue;
     text-align: center;
     width:86%;
     margin: auto;
