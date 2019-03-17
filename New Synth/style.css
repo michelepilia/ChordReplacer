@@ -5,7 +5,6 @@ html{
   -webkit-user-select: none; /* Chrome, Safari, and Opera */
   -webkit-touch-callout: none; /* Disable Android and iOS callouts*/
 }
-
 #synth {
   position: relative;
   top: 150px;
@@ -13,33 +12,32 @@ html{
   grid-template-columns: 41% 41% 14%;
   row-gap: 10px;
   column-gap: 2%;
-  background-color: #2196F3;
+  background-color: #1c6dd8;
   padding: 10px;
   height: auto;
   width: auto;
   max-width: 1500px;
-  min-width: 700px;
+  min-width: 1315px;
   border:1px solid black;
 }
 #synth > div {
-  background-color: rgba(255, 255, 255, 0.8);
+  background-color: rgba(255, 255, 255, 0.5);
   text-align: center;
   padding: 20px 0px;
   font-size: 30px;
 }
 .oscillators {
-  border: 1px solid red;
+  border: 1px solid blue;
   grid-area: 1 / 1 / span 2 / span 1;
   display: grid;
   grid-template-columns: auto;
   grid-gap:25%;
-  border:1px solid red;
 }
 .filter {
   grid-area: 1 / 2 / span 1 / span 1;
   display: grid;
   grid-template-columns: 25% 25% 25% 25%;
-  border:1px solid red;
+  border:1px solid black;
   justify-items:center;
   align-items: center;
 }
@@ -48,12 +46,12 @@ html{
   display: grid;
   grid-template-columns: auto;
   grid-template-rows: 50% 50%;
-  border:1px solid red;
+  border:1px solid darkred;
   justify-items:center;
   align-items: center;
 }
 .lfo{
-  border:1px solid red;
+  border:1px solid black;
   grid-area: 2 / 2 / span 1 / span 1;
   display: grid;
   grid-template-columns: 25% 25% 25% 25%;
@@ -78,32 +76,42 @@ html{
   width: 70%;
   margin: auto 0px auto 0px;
 }
-
 .lfo .waveforms {
   grid-area: 1 / 2 / span 1 / span 1;
 }
-
 .destination {
   grid-area: 1 / 3 / span 1 / span 1;
 }
 
 .slider-container{
+  align-items: center;
   display: grid;
   grid-template-columns: 10% 90%;
   grid-area: 1 / 4 / span 1 / span 1;
 }
-
-
 .slider-label{
   font-size: 10px;
   text-align: left;
   display: inline-flex;
   width: 10%;
 }
-
 .slider{
+  -webkit-appearance: none;
   width: 70%;
+  height: 25%;
   display: inline;
+  background: rgba(255, 255, 255, 0.5);
+  opacity: 0.8;
+  -webkit-transition: 1s ;
+}
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 10px;
+  height: 20px;
+  background: rgba(0, 0, 0, 1);
+  cursor: pointer;
+  border:1px solid darkgray;
 }
 
 .attack{
@@ -138,7 +146,6 @@ html{
   grid-area: 4 / 1 / span 1 / span 1;
 }
 
-
 .oscillator {
   display: grid;
   grid-template-columns: 25% 25% 25% 25%;
@@ -158,11 +165,6 @@ html{
 
 #knob9 {
   grid-area: 1 / 1 / span 1 / span 1;
-  margin-left: auto;
-  margin-right: auto;
-    width: 70px;
-    height:70px;
-
 }
 
 #mast-slider-cont {
@@ -176,11 +178,6 @@ html{
   margin-right: auto;
   width: 85%;
 }
-
-
-
-
-
 
 .knob {
     width: 60px;
@@ -202,37 +199,38 @@ html{
 }
 
 .int-knob{
-    background-color: blue;
     height: 80%;
     width: 80%;
     display: flex;
     justify-content: center;
     border-radius:50%;
     transform:rotate(-135deg);
-
-}
+    cursor: pointer;
+    background-image: radial-gradient(white 62% , #0d0d0d);
+  }
 
 .level-amount {
-    height: 20%;
-    width: 20%;
-    background-color: lightgray;
-    border-radius:50%;
+    height: 35%;
+    width: 6%;
+    background-color:rgb(0, 0, 102,0.6);
+    border-radius:10%;
     transform: translate(0, 10%);
 }
 
 .knob-level-label{
-    font-size: 45%;
+    font-size: 40%;
     color: black;
-    background-color: lightblue;
+    background-color: rgba(255, 255, 255, 0.2);
     text-align: center;
     width:86%;
     margin: auto;
 }
 
-
-
-
-
-
-
-
+.selector{
+  color: white;
+  border:1px solid black;
+  background-color: #002c47;
+  cursor:pointer;
+  font-size: 40%;
+  text-align-last:center
+}
