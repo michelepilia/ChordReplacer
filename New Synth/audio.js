@@ -7,7 +7,7 @@ var now = c.currentTime;
 keys = "awsedftgyhujkolpòà";
 var keys_elem_array = [];
 
-
+alert(pitch_osc2);
 
 function attack(freq){
     var osc1 = c.createOscillator();
@@ -32,12 +32,12 @@ function attack(freq){
     gates2[freq] = g2;
 }
 
-function release(freq) {
+/*function release(freq) {
     console.log(gates1);
     gates1[freq].gain.linearRampToValueAtTime(0, now+2.6);
     gates2[freq].gain.linearRampToValueAtTime(0, now+2.6);
     
-}
+}*/
 
 function createButton(n, freq) {
   var b = document.createElement("button");
