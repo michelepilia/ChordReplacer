@@ -234,3 +234,7 @@ html{
   font-size: 40%;
   text-align-last:center
 }
+
+.knob-level-amount-percentage{
+  font-size: 15px;
+}

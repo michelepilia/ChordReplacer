@@ -7,7 +7,7 @@ var now = c.currentTime;
 keys = "awsedftgyhujkolpòà";
 var keys_elem_array = [];
 
-alert(pitch_osc2);
+//alert(pitch_osc2);
 
 function attack(freq){
     var osc1 = c.createOscillator();

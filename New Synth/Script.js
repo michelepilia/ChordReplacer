@@ -1,4 +1,4 @@
-var SENS = 5; /*Parametro di sensibilita' alla rotazione. E' possibile cambiarlo senza influenzare il resto del codice.*/
+var SENS = 5; /*Parametro di sensibilita' alla rotazione. E' possibile cambiarlo senza influenzare il resto del codice, a patto che sia un divisore esatto di 270.*/
 /*-----------------------------------------------------------------------------*/
 
 
@@ -13,9 +13,21 @@ var maxAmount = 270 / SENS;
 var minAmount = 0;
 var antiGlitchFlag = 0;
 
+function updateSound(){
+
+}
+
 function updateView() {
-    console.log("after view: " + amounts[knobToRotateIndex]);
     document.getElementsByClassName(classToRotate)[knobToRotateIndex].style.transform = "rotate(" + (amounts[knobToRotateIndex] * SENS - 135 )+ "deg)";
+    document.getElementsByClassName("knob-level-amount-percentage")[knobToRotateIndex].innerHTML=parseInt((amounts[knobToRotateIndex])*SENS/270*100) +" %";
+}
+
+function updateView2(){
+     document.getElementsByClassName("knob-level-amount-percentage")[knobToRotateIndex].style.visibility="hidden";
+}
+
+function updateView3(){
+    document.getElementsByClassName("knob-level-amount-percentage")[knobToRotateIndex].style.visibility="visible";
 }
 
 function f1(knob) {
@@ -28,6 +40,7 @@ function preRotate(data) {
     antiGlitchFlag=-2;
     knobToRotateIndex = parseInt(data.target.getAttribute("id")[1]) - 1;
     document.addEventListener("mousemove", rotate, false); 
+    updateView3();
 }
 
 function rotate(data) {
@@ -37,14 +50,19 @@ function rotate(data) {
         if (amounts[knobToRotateIndex] < maxAmount) {
             amounts[knobToRotateIndex]++;
             console.log("before view, up movement: "+ amounts[knobToRotateIndex]);
+            updateKnobs();
             updateView();
+            updateSound();
+
         }
     }
     else if (yDirection == "down" && antiGlitchFlag > -1) {
         if (amounts[knobToRotateIndex] > minAmount) {
             amounts[knobToRotateIndex]--;
             console.log("before view, down movement: "+ amounts[knobToRotateIndex]);
+            updateKnobs();
             updateView();
+            updateSound();
         }
     }
 }
@@ -52,8 +70,8 @@ function rotate(data) {
 function stop() {
 
     document.removeEventListener("mousemove", rotate);
-    if (knobToRotateIndex[amounts]==minAmount) {
-    }
+    updateView2();
+   
 }
 
 /*

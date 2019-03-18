@@ -25,6 +25,23 @@ var sus_mast = 0;
 var rel_mast = 0;
 
 
+function updateKnobs(){
+
+	lvl_osc1=(amounts[0] * SENS) / 270 * 100;
+	pitch_osc1=(amounts[1] * SENS) / 270 * 100;
+	fm_osc1=(amounts[2] * SENS) / 270 * 100;
+	lvl_osc2=(amounts[3] * SENS) / 270 * 100;
+	pitch_osc2=(amounts[4] * SENS) / 270 * 100;
+	cutoff_filt=(amounts[5] * SENS) / 270 * 100;
+	reso_filt=(amounts[6] * SENS) / 270 * 100;
+	rate_lfo=(amounts[7] * SENS) / 270 * 100 ;
+	lvl_mast=(amounts[8] * SENS) / 270 * 100;
+
+}
+
+
+
+
 
 /*frequency1 = document.querySelector("#freq1"); //slide freq
 
