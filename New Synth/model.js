@@ -24,6 +24,10 @@ var dcy_mast = 0;
 var sus_mast = 0;
 var rel_mast = 0;
 
+var sliderNumbers = document.getElementsByClassName("slider").length;
+var sliderAmounts = Array(sliderNumbers).fill(50); //Ipotizzando che il valore sia da 0 a 100 e all'inizio gli slider sono tutti a metà
+var sliderChangeIndex = 0;
+
 
 function updateKnobs(){
 
@@ -41,13 +45,19 @@ function updateKnobs(){
 
 
 
+function updateSliders(slider){
+	id = slider.getAttribute("id");
+	id = id.substr(1); //Rimuove il primo elemento dell'array, dunque la prima lettera dell'id. Non si poteva utilizzare il metodo usato coi knob perchè alcuni index hanno due cifre
+    sliderChangeIndex = parseInt(id) - 1;
+    console.log(sliderChangeIndex);
+    sliderAmounts[sliderChangeIndex]=slider.value;
+    console.log("New value: "+sliderAmounts[sliderChangeIndex]);
+}
 
 
-/*frequency1 = document.querySelector("#freq1"); //slide freq
+document.querySelectorAll(".slider").forEach(function(){
+	this.addEventListener("input", function(e){updateSliders(e.target)});
+})
 
 
-frequency1.addEventListener('input', function (e) {
-  field1.value = e.target.value;
-});
-*/
 
