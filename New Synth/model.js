@@ -28,7 +28,8 @@ var sliderNumbers = document.getElementsByClassName("slider").length;
 var sliderAmounts = Array(sliderNumbers).fill(50); //Ipotizzando che il valore sia da 0 a 100 e all'inizio gli slider sono tutti a metà
 var sliderChangeIndex = 0;
 
-var selectorTypes = Array(document.getElementsByClassName("selector").length);
+var selectorNumbers = Array(document.getElementsByClassName("selector").length);
+var selectorValues = Array(selectorNumbers).fill(0);
 var selectorChangeIndex = 0;
 
 
@@ -53,14 +54,28 @@ function updateSliders(slider){
     sliderChangeIndex = parseInt(id) - 1;
     console.log(sliderChangeIndex);
     sliderAmounts[sliderChangeIndex]=slider.value;
-    console.log("New value: "+sliderAmounts[0]);
+    console.log("New value: "+sliderAmounts[sliderChangeIndex]);
 }
 
 
 document.querySelectorAll(".slider").forEach(function(){
-	this.addEventListener("input", function(e){updateSliders(e.target)});
+	this.oninput = function(e){updateSliders(e.target)};
 })
 
+
+function updateSelectors(selector){
+	id = selector.getAttribute("id");
+	id = id.substr(8); //Rimuove il primo elemento dell'array, dunque la prima lettera dell'id. Non si poteva utilizzare il metodo usato coi knob perchè alcuni index hanno due cifre
+    selectorChangeIndex = parseInt(id) - 1;
+    console.log(selectorChangeIndex);
+    selectorValues[selectorChangeIndex]=selector.value;
+    console.log("New value: "+selectorValues[selectorChangeIndex]);
+}
+
+
+document.querySelectorAll(".selector").forEach(function(){
+	this.oninput = function(e){updateSelectors(e.target)};
+})
 
 
 
