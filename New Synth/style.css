@@ -37,7 +37,7 @@ html{
   grid-area: 1 / 2 / span 1 / span 1;
   display: grid;
   grid-template-columns: 25% 25% 25% 25%;
-  border:1px solid black;
+  border:1px solid blue;
   justify-items:center;
   align-items: center;
 }
@@ -51,7 +51,7 @@ html{
   align-items: center;
 }
 .lfo{
-  border:1px solid black;
+  border:1px solid blue;
   grid-area: 2 / 2 / span 1 / span 1;
   display: grid;
   grid-template-columns: 25% 25% 25% 25%;
