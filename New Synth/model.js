@@ -33,7 +33,7 @@ var selectorValues = Array(selectorNumbers).fill(0);
 var selectorChangeIndex = 0;
 
 
-function updateKnobs(){
+/*function updateKnobs(){
 
 	lvl_osc1=(amounts[0] * SENS) / 270 * 100;
 	pitch_osc1=(amounts[1] * SENS) / 270 * 100;
@@ -45,7 +45,7 @@ function updateKnobs(){
 	rate_lfo=(amounts[7] * SENS) / 270 * 100 ;
 	lvl_mast=(amounts[8] * SENS) / 270 * 100;
 
-}
+}*/
 
 
 function updateSliders(slider){
@@ -65,7 +65,7 @@ document.querySelectorAll(".slider").forEach(function(){
 
 function updateSelectors(selector){
 	id = selector.getAttribute("id");
-	id = id.substr(8); //Rimuove il primo elemento dell'array, dunque la prima lettera dell'id. Non si poteva utilizzare il metodo usato coi knob perchè alcuni index hanno due cifre
+	id = id.substr(8); 
     selectorChangeIndex = parseInt(id) - 1;
     console.log(selectorChangeIndex);
     selectorValues[selectorChangeIndex]=selector.value;
@@ -76,83 +76,3 @@ function updateSelectors(selector){
 document.querySelectorAll(".selector").forEach(function(){
 	this.oninput = function(e){updateSelectors(e.target)};
 })
-
-
-
-
-/*
-
-function updateSliders(slider){
-	id = slider.getAttribute("id");
-	id = id.substr(1); //Rimuove il primo elemento dell'array, dunque la prima lettera dell'id. Non si poteva utilizzare il metodo usato coi knob perchè alcuni index hanno due cifre
-    sliderChangeIndex = parseInt(id) - 1;
-    console.log(sliderChangeIndex);
-    sliderAmounts[sliderChangeIndex]=slider.value;
-    console.log("New value: "+sliderAmounts[sliderChangeIndex]);
-}
-
-
-document.querySelectorAll(".slider").forEach(function(){
-	this.addEventListener("input", function(e){controller1(e.target)});
-})
-
-function controller1(data){
-	if (data.getAttribute("class").includes("slider")){
-		updateSliders(data);
-	}
-	else if(data.getAttribute("class").includes("selector")){
-
-	}
-	else{
-		console.log("AAAAAAA");
-	}
-
-}*/
-
-
-
-
-
-
-
-
-
-
-
-/*
-function updateSliders(slider){	
-    sliderAmounts[sliderChangeIndex]=slider.value;
-    console.log("New value: "+sliderAmounts[sliderChangeIndex]);
-}
-function preMoveSlider(data){
-	id = data.target.getAttribute("id");
-	id = id.substr(1); //Rimuove il primo elemento dell'array, dunque la prima lettera dell'id. Non si poteva utilizzare il metodo usato coi knob perchè alcuni index hanno due cifre
-    sliderChangeIndex = parseInt(id) - 1;
-    console.log(sliderChangeIndex);
-    data.target.addEventListener("input", function(e){updateSliders(e.target)});
-    updateSliders(data.target);
-}
-function barrierFunctionSlider(slider){
-	slider.onmousedown = preMoveSlider;
-}
-document.querySelectorAll(".slider").forEach(barrierFunctionSlider);
-
-
-
-function updateSelectors(selector){	
-    selectorTypes[selectorChangeIndex]=selector.value;
-    console.log("New value: "+selectorTypes[selectorChangeIndex]);
-}
-function preMoveSelector(data){
-	id = data.target.getAttribute("id");
-	id = id.substr(8); //Rimuove il primo elemento dell'array, dunque la prima lettera dell'id. Non si poteva utilizzare il metodo usato coi knob perchè alcuni index hanno due cifre
-    selectorTypes = parseInt(id) - 1;
-    console.log("selectorChangeIndex = "+selectorChangeIndex);
-    updateSelectors(data.target);
-}
-
-function barrierFunctionSelector(selector){
-	selector.onmousedown = preMoveSelector;
-}
-document.querySelectorAll(".selector").forEach(barrierFunctionSelector);
-*/

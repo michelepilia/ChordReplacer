@@ -7,9 +7,51 @@ var now = c.currentTime;
 keys = "awsedftgyhujkolpòà";
 var keys_elem_array = [];
 
-//alert(pitch_osc2);
+var osc1 = c.createOscillator();
+var osc2 = c.createOscillator();
 
-function attack(freq){
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+document.onkeydown = function(e){
+    attack(tones[keys.indexOf(e.key)]);
+    console.log(e.key);
+  }
+document.onkeyup = function(e){
+  release(tones[keys.indexOf(e.key)]);
+}
+
+
+
+function keyboardMaker() {
+  var f = 440;
+  var i;
+  for (i=0; i<(keys.length); i++){
+    tones[i] = Math.round(440*Math.pow(2,1/12)**i);
+    createButton((i), tones[i]);
+    //console.log(scale[i]+" "+(i+1));
+  }
+  //console.log("Ciao");
+}
+
+keyboardMaker();
+
+
+
+
+/*function attack(freq){
     var osc1 = c.createOscillator();
     var osc2 = c.createOscillator();
     var g1 = c.createGain();
@@ -38,7 +80,7 @@ function attack(freq){
     gates2[freq].gain.linearRampToValueAtTime(0, now+2.6);
     
 }*/
-
+/*
 function createButton(n, freq) {
   var b = document.createElement("button");
   keys_elem_array[n] = b;
@@ -48,18 +90,7 @@ function createButton(n, freq) {
   b.onclick = function(){attack(freq); b.onmousedown = function(){release(freq)}}
 }
 
-function keyboardMaker() {
-  var f = 440;
-  var i;
-  for (i=0; i<(keys.length); i++){
-    tones[i] = Math.round(440*Math.pow(2,1/12)**i);
-    createButton((i), tones[i]);
-    //console.log(scale[i]+" "+(i+1));
-  }
-  //console.log("Ciao");
-}
 
-keyboardMaker();
 
 document.onkeydown = function(e){
   if(!e.repeat) {
@@ -70,3 +101,4 @@ document.onkeydown = function(e){
 document.onkeyup = function(e){
   release(tones[keys.indexOf(e.key)]);
 }
+*/
