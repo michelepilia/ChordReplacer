@@ -14,7 +14,6 @@ master.connect(c.destination);
 var ADSR_values = [0.1/*s*/,0.2 /*s*/,0.5/*gain*/,0.2/*s*/]; 
 
 document.onkeydown = function(e){
-  console.log(e.key);
   if(keys.includes(e.key) && !e.repeat){
     console.log(e.key);
     attack(tones[keys.indexOf(e.key)]);
@@ -49,6 +48,9 @@ keyboardMaker();
 
 
 function attack(freq){
+    if (typeof gates1[freq] != undefined) {
+      console.log("saluti");
+    }
     var osc1 = c.createOscillator();
     var osc2 = c.createOscillator();
     oscillators.push(osc1);
@@ -66,7 +68,8 @@ function attack(freq){
 	  osc1.start();
 	  osc2.start();
     console.log(osc1.frequency.value);
-
+    gates1[freq] = g1;
+    gates2[freq] = g2;
     now=c.currentTime;
     g1.gain.setValueAtTime(0, now);
     g2.gain.setValueAtTime(0, now);
@@ -78,8 +81,7 @@ function attack(freq){
     now = c.currentTime;
     g1.gain.exponentialRampToValueAtTime(0.0000001+sliderAmounts[10]/100, now + sliderAmounts[9]/100);
     g2.gain.exponentialRampToValueAtTime(0.0000001+sliderAmounts[10]/100, now + sliderAmounts[9]/100);
-    gates1[freq] = g1;
-    gates2[freq] = g2;
+
     /*Now sustain. So waits until a keyUp Event, and then release() is called*/
 }
 
@@ -95,6 +97,10 @@ function release(freq) {
     osc2.disconnect;
     delete osc1;
     delete osc2;
+    gates1[freq].disconnect;
+    gates2[freq].disconnect;
+    delete gates1[freq];
+    delete gates2[freq];
 }
 
 function createButton(n, freq) {
