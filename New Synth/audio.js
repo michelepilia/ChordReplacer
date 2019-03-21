@@ -7,23 +7,7 @@ var now = c.currentTime;
 keys = "awsedftgyhujkolpòà";
 var keys_elem_array = [];
 
-var osc1 = c.createOscillator();
-var osc2 = c.createOscillator();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+var ADSR_values = [0.1/*s*/,0.2 /*s*/,0.5/*gain*/,0.2/*s*/]; 
 
 document.onkeydown = function(e){
     attack(tones[keys.indexOf(e.key)]);
@@ -51,7 +35,7 @@ keyboardMaker();
 
 
 
-/*function attack(freq){
+function attack(freq){
     var osc1 = c.createOscillator();
     var osc2 = c.createOscillator();
     var g1 = c.createGain();
@@ -65,22 +49,34 @@ keyboardMaker();
 	  osc1.start();
 	  osc2.start();
     console.log(osc1.frequency.value);
+
+    now=c.currentTime;
     g1.gain.setValueAtTime(0, now);
-    g2.gain.linearRampToValueAtTime(1, now+0.1);
-    g1.gain.setValueAtTime(0, now);
-    g2.gain.linearRampToValueAtTime(0.2, now+0.1);
-	  //g.gain.linearRampToValueAtTime(0, now+0.6);
+    g2.gain.setValueAtTime(0, now);
+    g1.gain.linearRampToValueAtTime(1, now+ADSR_values[0]);
+    g2.gain.linearRampToValueAtTime(1, now+ADSR_values[0]);
+
+    now = c.currentTime;
+    g1.gain.exponentialRampToValueAtTime(ADSR_values[2], now + ADSR_values[1]);
+    g2.gain.exponentialRampToValueAtTime(ADSR_values[2], now + ADSR_values[1]);
     gates1[freq] = g1;
     gates2[freq] = g2;
+    /*Now sustain. So waits until a keyUp Event, and then release() is called*/
 }
 
-/*function release(freq) {
+function release(freq) {
     console.log(gates1);
-    gates1[freq].gain.linearRampToValueAtTime(0, now+2.6);
-    gates2[freq].gain.linearRampToValueAtTime(0, now+2.6);
-    
-}*/
-/*
+    now = c.currentTime;
+    gates1[freq].gain.linearRampToValueAtTime(0, now+ADSR_values[3]);
+    gates2[freq].gain.linearRampToValueAtTime(0, now+ADSR_values[3]);
+    osc1.stop();
+    osc2.stop();
+    osc1.disconnect();
+    osc2.disconnect();
+    delete osc1;
+    delete osc2;
+}
+
 function createButton(n, freq) {
   var b = document.createElement("button");
   keys_elem_array[n] = b;
@@ -101,4 +97,3 @@ document.onkeydown = function(e){
 document.onkeyup = function(e){
   release(tones[keys.indexOf(e.key)]);
 }
-*/

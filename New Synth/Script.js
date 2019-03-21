@@ -50,7 +50,7 @@ function rotate(data) {
         if (amounts[knobToRotateIndex] < maxAmount) {
             amounts[knobToRotateIndex]++;
             console.log("before view, up movement: "+ amounts[knobToRotateIndex]);
-            updateKnobs();
+            //updateKnobs();
             //Qui scrivere il valore dell'angolazione su firebase
             updateView();
             updateSound();
@@ -61,7 +61,7 @@ function rotate(data) {
             amounts[knobToRotateIndex]--;
             console.log("before view, down movement: "+ amounts[knobToRotateIndex]);
             //Qui scrivere il valore dell'angolazione su firebase
-            updateKnobs();
+            //updateKnobs();
             updateView();
             updateSound();
         }
