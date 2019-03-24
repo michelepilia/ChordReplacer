@@ -23,25 +23,29 @@ function keyboardMaker() {
 keyboardMaker();
 
 
+
 function release(note) {
   /*Should be called once reached point AAAA, and not before*/
     console.log("RELEASE STARTED");
     now = c.currentTime;
-    console.log("gates is: "+gates1);
+    console.log(gates1[note.frequency]);
     gates1[note.frequency].gain.linearRampToValueAtTime(0, now+sliderAmounts[11]/100);
     gates2[note.frequency].gain.linearRampToValueAtTime(0, now+sliderAmounts[11]/100);
+    setTimeout(function(){
     note.oscillator1.stop();
     note.oscillator2.stop();
     note.oscillator1.disconnect();
     note.oscillator2.disconnect();
-    delete note.oscillator1;
-    delete note.oscillator2;
     gates1[note.frequency].disconnect();
     gates2[note.frequency].disconnect();
+    delete note.oscillator1;
+    delete note.oscillator2;
     delete gates1[note.frequency];
     delete gates2[note.frequency];
     delete note;
-    console.log("ENDED RELEASE");
+    console.log("ENDED RELEASE");    
+    },now + sliderAmounts[11]/100*1000);
+
 }
 
 function createButton(n, freq) {
@@ -73,7 +77,7 @@ function playNote(note){
     note.oscillator1.connect(g1);
     note.oscillator2.connect(g2);
     note.oscillator1.frequency.value = note.frequency;
-    note.oscillator2.frequency.value = 2*note.frequency;
+    note.oscillator2.frequency.value = note.frequency;
     note.oscillator1.start();
     note.oscillator2.start();
     gates1[note.frequency] = g1;
