@@ -45,8 +45,8 @@ function Note(frequency){
     this.oscillator1.frequency.value = this.frequency * offset1;
     this.oscillator2.frequency.value = this.frequency * offset2;
   this.playNote = function(){
-    this.oscillator1.type = "sawtooth";
-    this.oscillator2.type = "sawtooth";
+    this.oscillator1.type = selectorValues[0];
+    this.oscillator2.type = selectorValues[1];
     this.oscillator1.start();
     this.oscillator2.start(); 
 
@@ -60,7 +60,6 @@ function Note(frequency){
     now = c.currentTime;
     this.gain1.gain.linearRampToValueAtTime(sliderAmounts[10]/100*amounts[0]*SENS/270, now + sliderAmounts[9]/100);
     this.gain2.gain.linearRampToValueAtTime(sliderAmounts[10]/100*amounts[3]*SENS/270, now + sliderAmounts[9]/100);
-
   }
 
   this.release = function(){

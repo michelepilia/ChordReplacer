@@ -29,7 +29,7 @@ var sliderAmounts = Array(sliderNumbers).fill(50); //Ipotizzando che il valore s
 var sliderChangeIndex = 0;
 
 var selectorNumbers = Array(document.getElementsByClassName("selector").length);
-var selectorValues = Array(selectorNumbers).fill(0);
+var selectorValues = ["sawtooth", "sawtooth", "sawtooth", "osc 1"];
 var selectorChangeIndex = 0;
 
 
@@ -69,7 +69,7 @@ function updateSelectors(selector){
 	id = id.substr(8); 
     selectorChangeIndex = parseInt(id) - 1;
     console.log(selectorChangeIndex);
-    selectorValues[selectorChangeIndex]=parseInt(selector.value);
+    selectorValues[selectorChangeIndex]=selector.value;
     console.log("New value: "+selectorValues[selectorChangeIndex]);
 }
 
