@@ -7,6 +7,8 @@ var keys_elem_array = [];
 var master = c.createGain();
 master.connect(c.destination);
 var playingNotes = [];
+var offset1 = 1;
+var offset2 = 1;
 
 function keyboardMaker() {
   var f = 440;
@@ -40,9 +42,8 @@ function Note(frequency){
     this.gain2.connect(master);
     this.oscillator1.connect(this.gain1);
     this.oscillator2.connect(this.gain2);
-    this.oscillator1.frequency.value = this.frequency;
-    this.oscillator2.frequency.value = this.frequency;
-
+    this.oscillator1.frequency.value = this.frequency * offset1;
+    this.oscillator2.frequency.value = this.frequency * offset2;
   this.playNote = function(){
     this.oscillator1.type = "sawtooth";
     this.oscillator2.type = "sawtooth";
@@ -53,12 +54,13 @@ function Note(frequency){
     this.gain1.gain.setValueAtTime(0, now);
     this.gain2.gain.setValueAtTime(0, now);
 
-    this.gain1.gain.linearRampToValueAtTime(1, now+sliderAmounts[8]/100);
-    this.gain2.gain.linearRampToValueAtTime(1, now+sliderAmounts[8]/100);
+    this.gain1.gain.linearRampToValueAtTime(1*amounts[0]*SENS/270, now+sliderAmounts[8]/100);
+    this.gain2.gain.linearRampToValueAtTime(1*amounts[3]*SENS/270, now+sliderAmounts[8]/100);
 
     now = c.currentTime;
-    this.gain1.gain.linearRampToValueAtTime(sliderAmounts[10]/100, now + sliderAmounts[9]/100);
-    this.gain2.gain.linearRampToValueAtTime(sliderAmounts[10]/100, now + sliderAmounts[9]/100);
+    this.gain1.gain.linearRampToValueAtTime(sliderAmounts[10]/100*amounts[0]*SENS/270, now + sliderAmounts[9]/100);
+    this.gain2.gain.linearRampToValueAtTime(sliderAmounts[10]/100*amounts[3]*SENS/270, now + sliderAmounts[9]/100);
+
   }
 
   this.release = function(){
@@ -125,10 +127,13 @@ document.onkeyup = function(e){
 
 function noteIsPlaying(frequency){
   for (var i = 0; i < playingNotes.length; i++) {
-    if (playingNotes[i].frequency==frequency) {
+    if (playingNotes[i].frequency==frequency) { //add cents to freq offset
       return i;
     }
   }
   return -1;
 
 }
+
+//if no more key pressed and note is still playing and is not in release, call dustMan().
+

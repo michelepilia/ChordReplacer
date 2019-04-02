@@ -14,6 +14,20 @@ var minAmount = 0;
 var antiGlitchFlag = 0;
 
 function updateSound(){
+    if (knobToRotateIndex == 1 ) {
+        offset1 = Math.pow(2,(amounts[1]*SENS/270*2 - 1)/12);
+        console.log("o1 " + offset1);
+        console.log(amounts[1]*SENS/270*2-1);
+
+
+
+    }
+    else if (knobToRotateIndex == 4) {
+        offset2 = Math.pow(2,(amounts[4]*SENS/270*2 - 1)/12);
+
+    }
+
+    
 
 }
 
