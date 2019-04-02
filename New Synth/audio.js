@@ -1,7 +1,5 @@
 var c = new AudioContext(); 
 
-var gates1 = [];
-var gates2 = [];
 var tones = [];
 var now ;
 keys = "awsedftgyhujkolpòà";
@@ -23,31 +21,6 @@ function keyboardMaker() {
 keyboardMaker();
 
 
-
-function release(note) {
-  /*Should be called once reached point AAAA, and not before*/
-    console.log("RELEASE STARTED");
-    now = c.currentTime;
-    console.log(gates1[note.frequency]);
-    gates1[note.frequency].gain.linearRampToValueAtTime(0, now+sliderAmounts[11]/100);
-    gates2[note.frequency].gain.linearRampToValueAtTime(0, now+sliderAmounts[11]/100);
-    setTimeout(function(){
-    note.oscillator1.stop();
-    note.oscillator2.stop();
-    note.oscillator1.disconnect();
-    note.oscillator2.disconnect();
-    gates1[note.frequency].disconnect();
-    gates2[note.frequency].disconnect();
-    delete note.oscillator1;
-    delete note.oscillator2;
-    delete gates1[note.frequency];
-    delete gates2[note.frequency];
-    delete note;
-    console.log("ENDED RELEASE");    
-    },now + sliderAmounts[11]/100*1000);
-
-}
-
 function createButton(n, freq) {
   var b = document.createElement("button");
   keys_elem_array[n] = b;
@@ -59,71 +32,81 @@ function createButton(n, freq) {
 
 function Note(frequency){
   this.frequency = frequency;
-  this.hasReachedSustain = false;
-  this.keyUpOccured = false;
   this.oscillator1 = c.createOscillator();
   this.oscillator2 = c.createOscillator();
-}
+  this.gain1 = c.createGain();
+  this.gain2 = c.createGain();
+    this.gain1.connect(master);
+    this.gain2.connect(master);
+    this.oscillator1.connect(this.gain1);
+    this.oscillator2.connect(this.gain2);
+    this.oscillator1.frequency.value = this.frequency;
+    this.oscillator2.frequency.value = this.frequency;
 
-function playNote(note){
-    console.log("EXECUTING playNote: " + note.frequency);
-
-    note.oscillator1.type = "sawtooth";
-    note.oscillator2.type = "sawtooth";
-    var g1 = c.createGain();
-    var g2 = c.createGain();
-    g1.connect(master);
-    g2.connect(master);
-    note.oscillator1.connect(g1);
-    note.oscillator2.connect(g2);
-    note.oscillator1.frequency.value = note.frequency;
-    note.oscillator2.frequency.value = note.frequency;
-    note.oscillator1.start();
-    note.oscillator2.start();
-    gates1[note.frequency] = g1;
-    gates2[note.frequency] = g2;
+  this.playNote = function(){
+    this.oscillator1.type = "sawtooth";
+    this.oscillator2.type = "sawtooth";
+    this.oscillator1.start();
+    this.oscillator2.start(); 
 
     now=c.currentTime;
-    g1.gain.setValueAtTime(0, now);
-    g2.gain.setValueAtTime(0, now);
+    this.gain1.gain.setValueAtTime(0, now);
+    this.gain2.gain.setValueAtTime(0, now);
 
-    g1.gain.linearRampToValueAtTime(1, now+sliderAmounts[8]/100);
-    g2.gain.linearRampToValueAtTime(1, now+sliderAmounts[8]/100);
+    this.gain1.gain.linearRampToValueAtTime(1, now+sliderAmounts[8]/100);
+    this.gain2.gain.linearRampToValueAtTime(1, now+sliderAmounts[8]/100);
 
     now = c.currentTime;
-    g1.gain.linearRampToValueAtTime(sliderAmounts[10]/100, now + sliderAmounts[9]/100);
-    g2.gain.linearRampToValueAtTime(sliderAmounts[10]/100, now + sliderAmounts[9]/100);
-    note.hasReachedSustain = true;
-    console.log("SUSTAIN REACHED FOR NOTE: "+note.frequency); 
-    if (note.keyUpOccured) {
-      console.log("Already keyUp Event, occured during attack decay phase: " + note.frequency);
-      release(note);
-    }
-    updatePlayingNotes(note);
-    console.log("NOT EVEN KEYUP EVENT FOR NOTE: "+note.frequency);
+    this.gain1.gain.linearRampToValueAtTime(sliderAmounts[10]/100, now + sliderAmounts[9]/100);
+    this.gain2.gain.linearRampToValueAtTime(sliderAmounts[10]/100, now + sliderAmounts[9]/100);
+  }
+
+  this.release = function(){
+    console.log("RELEASE STARTED");
+    now = c.currentTime;
+    this.gain1.gain.linearRampToValueAtTime(0, now+sliderAmounts[11]/100);
+    this.gain2.gain.linearRampToValueAtTime(0, now+sliderAmounts[11]/100);
+    this.oscillator1.stop();
+    this.oscillator2.stop();
+    /*
+    this.oscillator1.disconnect();
+    this.oscillator2.disconnect();
+    this.gain1.gain.disconnect();
+    this.gain2.gain.disconnect();
+    delete this.oscillator1;
+    delete this.oscillator2;
+    delete gates1[note.frequency];
+    delete gates2[note.frequency];
+    delete note;
+    console.log("ENDED RELEASE");*/
+  }
 }
+
+
+
 
 document.onkeydown = function(e){
   if(keys.includes(e.key) && !e.repeat){
     note = new Note(tones[keys.indexOf(e.key)])
     playingNotes.push(note);
-    playNote(note);
+    console.log("1): "+note);
+    playingNotes[playingNotes.length-1].playNote();
+    console.log("2) " +playingNotes.length-1);
   }
   else{
-    console.log("a");
+    console.log("KEY NOT VALID");
   }
 }
 
 document.onkeyup = function(e){
   console.log("KEY UP EVENT OCCURED...")
-  if(keys.includes(e.key)){
+  if(keys.includes(e.key) && !e.repeat){
     console.log("It's a VALID KEY");
     var a = noteIsPlaying(tones[keys.indexOf(e.key)]);
     console.log("Element position in playingNotes is: "+a);
     if (a!=-1) {
-        console.log(playingNotes[a]);
-        playingNotes[a].keyUpOccured=true;
-        release(playingNotes[a]);
+      console.log(playingNotes);
+        playingNotes[a].release();
     }
   }
 }
@@ -136,10 +119,4 @@ function noteIsPlaying(frequency){
   }
   return -1;
 
-}
-
-function updatePlayingNotes(note){
-  console.log("UPDATE CALLED");
-  playingNotes[noteIsPlaying(note.frequency)]=note;
-  console.log(playingNotes);
 }
