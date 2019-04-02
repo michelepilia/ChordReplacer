@@ -68,17 +68,16 @@ function Note(frequency){
     this.gain2.gain.linearRampToValueAtTime(0, now+sliderAmounts[11]/100);
     this.oscillator1.stop();
     this.oscillator2.stop();
-    /*
+    
     this.oscillator1.disconnect();
     this.oscillator2.disconnect();
-    this.gain1.gain.disconnect();
-    this.gain2.gain.disconnect();
+    this.gain1.disconnect();
+    this.gain2.disconnect();
     delete this.oscillator1;
     delete this.oscillator2;
-    delete gates1[note.frequency];
-    delete gates2[note.frequency];
-    delete note;
-    console.log("ENDED RELEASE");*/
+    delete this.gain1;
+    delete this.gain2;
+    console.log("ENDED RELEASE");
   }
 }
 
@@ -107,6 +106,7 @@ document.onkeyup = function(e){
     if (a!=-1) {
       console.log(playingNotes);
         playingNotes[a].release();
+        playingNotes.splice(a,1);
     }
   }
 }
