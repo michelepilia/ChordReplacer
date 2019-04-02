@@ -66,6 +66,12 @@ function Note(frequency){
     now = c.currentTime;
     this.gain1.gain.linearRampToValueAtTime(0, now+sliderAmounts[11]/100);
     this.gain2.gain.linearRampToValueAtTime(0, now+sliderAmounts[11]/100);
+
+  }
+
+  this.release2 = function(){
+
+
     this.oscillator1.stop();
     this.oscillator2.stop();
     
@@ -77,6 +83,7 @@ function Note(frequency){
     delete this.oscillator2;
     delete this.gain1;
     delete this.gain2;
+
     console.log("ENDED RELEASE");
   }
 }
@@ -105,8 +112,13 @@ document.onkeyup = function(e){
     console.log("Element position in playingNotes is: "+a);
     if (a!=-1) {
       console.log(playingNotes);
+
         playingNotes[a].release();
+        setTimeout(function(){
+        playingNotes[a].release2();
         playingNotes.splice(a,1);
+
+    }, now + sliderAmounts[11]/100*1000);
     }
   }
 }
