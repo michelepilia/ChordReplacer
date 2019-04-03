@@ -9,6 +9,7 @@ master.connect(c.destination);
 var playingNotes = [];
 var offset1 = 1;
 var offset2 = 1;
+var indexOfPlayingNote = 0;
 
 function keyboardMaker() {
   var f = 440;
@@ -63,7 +64,7 @@ function Note(frequency){
   }
 
   this.release = function(){
-    console.log("RELEASE STARTED");
+    console.log("RELEASE STARTED...: "+this.frequency);
     now = c.currentTime;
     this.gain1.gain.linearRampToValueAtTime(0, now+sliderAmounts[11]/100);
     this.gain2.gain.linearRampToValueAtTime(0, now+sliderAmounts[11]/100);
@@ -71,7 +72,7 @@ function Note(frequency){
   }
 
   this.release2 = function(){
-
+    console.log("release2 started...: " + this.frequency);
 
     this.oscillator1.stop();
     this.oscillator2.stop();
@@ -84,8 +85,6 @@ function Note(frequency){
     delete this.oscillator2;
     delete this.gain1;
     delete this.gain2;
-
-    console.log("ENDED RELEASE");
   }
 }
 
@@ -106,22 +105,24 @@ document.onkeydown = function(e){
 }
 
 document.onkeyup = function(e){
-  console.log("KEY UP EVENT OCCURED...")
   if(keys.includes(e.key) && !e.repeat){
-    console.log("It's a VALID KEY");
-    var a = noteIsPlaying(tones[keys.indexOf(e.key)]);
-    console.log("Element position in playingNotes is: "+a);
-    if (a!=-1) {
-      console.log(playingNotes);
-
-        playingNotes[a].release();
-        setTimeout(function(){
-        playingNotes[a].release2();
-        playingNotes.splice(a,1);
-
-    }, now + sliderAmounts[11]/100*1000);
+    indexOfPlayingNote = noteIsPlaying(tones[keys.indexOf(e.key)]);
+    console.log("KEY UP EVENT OCCURED...: " + tones[keys.indexOf(e.key)]);
+    if (indexOfPlayingNote!=-1) {
+        timeoutRelease(e);
     }
   }
+}
+
+function timeoutRelease(e){
+  var a = noteIsPlaying(tones[keys.indexOf(e.key)]);//prevents global variable to be changed while executing code here
+  playingNotes[a].release();
+  console.log("timeout release called...: " + playingNotes[a].frequency);
+  setTimeout(function(){
+        a = noteIsPlaying(tones[keys.indexOf(e.key)]);
+        playingNotes[a].release2();
+        playingNotes.splice(a,1);
+    }, now + sliderAmounts[11]/100*1000);
 }
 
 function noteIsPlaying(frequency){
@@ -131,8 +132,7 @@ function noteIsPlaying(frequency){
     }
   }
   return -1;
-
 }
 
-//if no more key pressed and note is still playing and is not in release, call dustMan().
-
+//durante il timeout il valore di indexOfPlayingNote puo' essere modificato da
+//un evento key up per cui si generano errori nel release.
