@@ -161,15 +161,15 @@ html{
   transform:translate(0,10%);
 }
 
-#knob6 {
+#knob5 {
   grid-area: 1 / 1 / span 1 / span 1;
 }
 
-#knob7 {
+#knob6 {
   grid-area: 1 / 2 / span 1 / span 1;
 }
 
-#knob9 {
+#knob8 {
   grid-area: 1 / 1 / span 1 / span 1;
 }
 

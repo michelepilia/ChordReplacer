@@ -12,6 +12,7 @@ var yDirection = "";
 var maxAmount = 270 / SENS;
 var minAmount = 0;
 var antiGlitchFlag = 0;
+var pitch_amount = 0;
 
 function updateSound(){
     if (knobToRotateIndex == 1 ) {

@@ -58,7 +58,7 @@ function updateSliders(slider){
 }
 
 function updatePitch(slider){
-	amounts[2] = parseInt(slider.value);
+	pitch_amount = parseInt(slider.value);
 }
 
 
