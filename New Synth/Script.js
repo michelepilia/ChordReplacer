@@ -34,6 +34,7 @@ function updateSound(){
 function updateView() {
     document.getElementsByClassName(classToRotate)[knobToRotateIndex].style.transform = "rotate(" + (amounts[knobToRotateIndex] * SENS - 135 )+ "deg)";
     document.getElementsByClassName("knob-level-amount-percentage")[knobToRotateIndex].innerHTML=parseInt((amounts[knobToRotateIndex])*SENS/270*100) +" %";
+
 }
 
 function updateView2(){
@@ -119,3 +120,5 @@ function getMouseDirection(e) {
 
 document.querySelectorAll(classToRotate2).forEach(f1);
 document.onmouseup = stop;
+
+

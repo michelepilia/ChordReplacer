@@ -57,6 +57,10 @@ function updateSliders(slider){
     console.log("New value: "+sliderAmounts);
 }
 
+function updatePitch(slider){
+	amounts[2] = parseInt(slider.value);
+}
+
 
 document.querySelectorAll(".slider").forEach(function(){
 	this.oninput = function(e){controller(e.target)};
@@ -82,6 +86,9 @@ function controller(data){
 
 	if (data.getAttribute("class").includes("selector")){
 		updateSelectors(data);
+	}
+	else if(data.getAttribute("id")=='sp1'){
+		updatePitch(data);
 	}
 	else{
 		updateSliders(data);
