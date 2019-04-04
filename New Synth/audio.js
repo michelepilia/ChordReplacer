@@ -40,6 +40,8 @@ function Note(frequency){
   this.oscillator2 = c.createOscillator();
   this.gain1 = c.createGain();
   this.gain2 = c.createGain();
+  master.gain.value=amounts[7]*SENS/270;
+  console.log("master value: "+master.gain.value);
     this.gain1.connect(master);
     this.gain2.connect(master);
     this.oscillator1.connect(this.gain1);
@@ -140,3 +142,4 @@ function noteIsPlaying(frequency){
 
 //durante il timeout il valore di indexOfPlayingNote puo' essere modificato da
 //un evento key up per cui si generano errori nel release.
+
