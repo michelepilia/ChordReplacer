@@ -5,7 +5,6 @@ var SENS = 3; /*Parametro di sensibilita' alla rotazione. E' possibile cambiarlo
 var classToRotate = "int-knob";/*indica la classe html di cui si vuole effettuare la rotazione*/
 var classToRotate2 = "." + classToRotate;
 var knobNumbers = document.getElementsByClassName(classToRotate).length;
-var amounts = Array(knobNumbers).fill(0); /*Array contenente il valore di ogni knob*/
 var knobToRotateIndex = 0;
 var oldY = 0;
 var yDirection = "";
@@ -13,18 +12,19 @@ var maxAmount = 270 / SENS;
 var minAmount = 0;
 var antiGlitchFlag = 0;
 var pitch_amount = 0;
+var amounts = Array(knobNumbers).fill(maxAmount/2); /*Array contenente il valore di ogni knob*/
+
 
 function updateSound(){
     if (knobToRotateIndex == 1 ) {
         offset1 = Math.pow(2,(amounts[1]*SENS/270*2 - 1)/12);
-        console.log("o1 " + offset1);
-        console.log(amounts[1]*SENS/270*2-1);
+
 
 
 
     }
-    else if (knobToRotateIndex == 4) {
-        offset2 = Math.pow(2,(amounts[4]*SENS/270*2 - 1)/12);
+    else if (knobToRotateIndex == 3) {
+        offset2 = Math.pow(2,(amounts[3]*SENS/270*2 - 1)/12);
 
     }
 
@@ -33,7 +33,8 @@ function updateSound(){
 }
 
 function updateView() {
-    document.getElementsByClassName(classToRotate)[knobToRotateIndex].style.transform = "rotate(" + (amounts[knobToRotateIndex] * SENS - 135 )+ "deg)";
+
+    document.getElementsByClassName(classToRotate)[knobToRotateIndex].style.transform = "rotate(" + ((amounts[knobToRotateIndex] -maxAmount/2) * SENS )+ "deg)";
     document.getElementsByClassName("knob-level-amount-percentage")[knobToRotateIndex].innerHTML=parseInt((amounts[knobToRotateIndex])*SENS/270*100) +" %";
 
 }
@@ -45,27 +46,26 @@ function updateView2(){
 function updateView3(){
     document.getElementsByClassName("knob-level-amount-percentage")[knobToRotateIndex].style.visibility="visible";
 }
-
+    
 function f1(knob) {
-  //  console.log("Added event");
     knob.onmousedown = preRotate;
 }
 
 function preRotate(data) {
-    console.log("preROtate");
+    
     antiGlitchFlag=-2;
     knobToRotateIndex = parseInt(data.target.getAttribute("id")[1]) - 1;
     document.addEventListener("mousemove", rotate, false); 
     updateView3();
+
+
 }
 
 function rotate(data) {
-    console.log("STARTED EXECUTING ROTATE");
     getMouseDirection(data);
     if (yDirection == "up" && antiGlitchFlag > -1) {
         if (amounts[knobToRotateIndex] < maxAmount) {
             amounts[knobToRotateIndex]++;
-            console.log("before view, up movement: "+ amounts[knobToRotateIndex]);
             //updateKnobs();
             //Qui scrivere il valore dell'angolazione su firebase
             updateView();
@@ -75,7 +75,6 @@ function rotate(data) {
     else if (yDirection == "down" && antiGlitchFlag > -1) {
         if (amounts[knobToRotateIndex] > minAmount) {
             amounts[knobToRotateIndex]--;
-            console.log("before view, down movement: "+ amounts[knobToRotateIndex]);
             //Qui scrivere il valore dell'angolazione su firebase
             //updateKnobs();
             updateView();

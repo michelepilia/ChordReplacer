@@ -13,10 +13,10 @@ var offset2 = 1;
 var indexOfPlayingNote = 0;
 
 function keyboardMaker() {
-  var f = 440;
+  var f = 220;
   var i;
   for (i=0; i<(keys.length); i++){
-    tones[i] = Math.round(440*Math.pow(2,1/12)**i);
+    tones[i] = Math.round(220*Math.pow(2,1/12)**i);
     createButton((i), tones[i]);
     //console.log(scale[i]+" "+(i+1));k
   }
@@ -47,7 +47,8 @@ function Note(frequency){
     offset3 = Math.pow(2,(pitch_amount)/12);
     this.oscillator1.frequency.value = this.frequency * offset3;
     this.oscillator1.frequency.value = this.oscillator1.frequency.value * offset1;
-    this.oscillator2.frequency.value = this.frequency.value * offset2;
+    this.oscillator2.frequency.value = this.frequency * offset2;
+    console.log("freq: " + this.frequency + " osc1 freq: " + this.oscillator1.frequency.value + " osc2 freq: " + this.oscillator2.frequency.value);
   this.playNote = function(){
     this.oscillator1.type = selectorValues[0];
     this.oscillator2.type = selectorValues[1];
@@ -59,11 +60,11 @@ function Note(frequency){
     this.gain2.gain.setValueAtTime(0, now);
 
     this.gain1.gain.linearRampToValueAtTime(1*amounts[0]*SENS/270, now+sliderAmounts[8]/100);
-    this.gain2.gain.linearRampToValueAtTime(1*amounts[3]*SENS/270, now+sliderAmounts[8]/100);
+    this.gain2.gain.linearRampToValueAtTime(1*amounts[2]*SENS/270, now+sliderAmounts[8]/100);
 
     now = c.currentTime;
     this.gain1.gain.linearRampToValueAtTime(sliderAmounts[10]/100*amounts[0]*SENS/270, now + sliderAmounts[9]/100);
-    this.gain2.gain.linearRampToValueAtTime(sliderAmounts[10]/100*amounts[3]*SENS/270, now + sliderAmounts[9]/100);
+    this.gain2.gain.linearRampToValueAtTime(sliderAmounts[10]/100*amounts[2]*SENS/270, now + sliderAmounts[9]/100);
   }
 
   this.release = function(){
