@@ -1,5 +1,16 @@
-Finire i knob.
-Ridimensionamento elementi.
--> fare controller 
-Sistemare le scritte.
-Design.
+introdurre funzionalita' che con doubleclick su un elemento, ritorna al valore di default.
+
+Sistemare definitivamente il release.
+
+allineare tutto html e css. Piu' informazioni su pitch.
+
+Sistemare innerHtml e percentuali dei knob.
+
+Filtro e lfo.
+
+refactoring.
+
+Modifica dei parametri realtime ? Cioe' durante la fase di sustain ? In teoria e' possibile aggiungendo eventi ed alcuni metodi nella classe nota. vedere se e' fattibile.
+
+Pulsewidth: cambiare ciclo lavoro onda quadra
+

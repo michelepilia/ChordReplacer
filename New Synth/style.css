@@ -10,7 +10,8 @@ html{
   top: 150px;
   display: grid;
   grid-template-columns: 41% 41% 14%;
-  row-gap: 10px;
+  grid-template-rows: auto auto;
+  row-gap: 28px;
   column-gap: 2%;
   background-color: #1c6dd8;
   padding: 10px;
@@ -22,7 +23,6 @@ html{
 }
 #synth > div {
   background-color: rgba(255, 255, 255, 0.5);
-  text-align: center;
   padding: 20px 0px;
   font-size: 30px;
 }
@@ -30,13 +30,13 @@ html{
   border: 1px solid blue;
   grid-area: 1 / 1 / span 2 / span 1;
   display: grid;
-  grid-template-columns: auto;
   grid-gap:25%;
 }
 .filter {
   grid-area: 1 / 2 / span 1 / span 1;
   display: grid;
-  grid-template-columns: 25% 25% 25% 25%;
+  grid-template-rows: 85% 15%;
+    grid-template-columns: 25% 25% 25% 25%;
   border:1px solid blue;
   justify-items:center;
   align-items: center;
@@ -44,25 +44,27 @@ html{
 .master{
   grid-area: 1 / 3 / span 2 / span 1;
   display: grid;
-  grid-template-columns: auto;
-  grid-template-rows: 50% 50%;
+  grid-template-rows: auto auto auto;
   border:1px solid darkred;
   justify-items:center;
-  align-items: center;
-}
+    align-items: center;}
 .lfo{
   border:1px solid blue;
   grid-area: 2 / 2 / span 1 / span 1;
   display: grid;
+  grid-template-rows: 85% 15%;
   grid-template-columns: 25% 25% 25% 25%;
   align-items: center;
   justify-items:center;
+
 }
 #osc1{
   grid-area: 1 / 1 / span 1 / span 1;
+  grid-template-rows: 85% 15%;
 }
 #osc2{
   grid-area: 2 / 1 / span 1 / span 1;
+  grid-template-rows: 85% 15%;
 }
 .label{
   margin-top: 100%;
@@ -85,15 +87,17 @@ html{
 
 .slider-container{
   align-items: center;
+  justify-items: center;
   display: grid;
   grid-template-columns: 10% 90%;
-  grid-area: 1 / 4 / span 1 / span 1;
 }
+
+
 .slider-label{
   font-size: 10px;
   text-align: left;
   display: inline-flex;
-  width: 10%;
+  height: auto;
 }
 .slider{
   -webkit-appearance: none;
@@ -151,32 +155,12 @@ html{
   grid-template-columns: 25% 25% 25% 25%;
   align-items: center;
   justify-items:center;
-}
 
-#pitch-slider-cont {
-  grid-area: 1 / 3 / span 1 / span 1;
-  grid-template-columns: auto;
-  align-items: center;
-  justify-items:center;
-  transform:translate(0,10%);
-}
-
-#knob5 {
-  grid-area: 1 / 1 / span 1 / span 1;
-}
-
-#knob6 {
-  grid-area: 1 / 2 / span 1 / span 1;
-}
-
-#knob8 {
-  grid-area: 1 / 1 / span 1 / span 1;
 }
 
 #mast-slider-cont {
   margin: auto;
   align-content:center;
-  grid-area: 2 / 1 / span 1 / span 1;
 }
 
 #mast-slider-cont .slider {
@@ -188,11 +172,9 @@ html{
 .knob {
     width: 60px;
     height:60px;
-
 }
 
 .ext-knob{
-    position: relative;
     border: 1px dashed black;
     border-bottom-color: transparent;
     width: 85%;
@@ -210,7 +192,6 @@ html{
     display: flex;
     justify-content: center;
     border-radius:50%;
-    /*transform:rotate(-135deg);*/
     cursor: pointer;
     background-image: radial-gradient(white 62% , #0d0d0d);
   }
@@ -228,24 +209,21 @@ html{
     color: black;
     background-color: rgba(255, 255, 255, 0.2);
     text-align: center;
-    width: 86%;
+    width: auto;
     margin: auto;
 }
 
 #osc1-pitch {
-    grid-area: 2 / 1 / span 1 / span 1;
     font-size: 40%;
     color: black;
     background-color: rgba(255, 255, 255, 0.2);
-    text-align: center;
     width: auto;
-    margin: auto;
-
-    transform:translate(0,100%);
 }
 
-datalist {
-  display: none;
+
+#pitch-slider-cont{
+  position: relative;
+  text-align: center;
 }
 
 .selector{
@@ -259,4 +237,11 @@ datalist {
 
 .knob-level-amount-percentage{
   font-size: 15px;
+}
+
+.mid-section{
+  border: 1px solid blue;
+  grid-area: 1 / 2 / span 2 / span 1;
+  display: grid;
+  grid-gap:25%;
 }

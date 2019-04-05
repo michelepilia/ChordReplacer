@@ -12,15 +12,16 @@
   <h2>"The Jazziest Synth Ever! Rating: 5/5 &#x2605 &#x2605 &#x2605 &#x2605 &#x2605"</h2>
   <h2>  Augusto</h2>
    <div id="synth">
+
     <div class="oscillators">
-    	<div id="osc1" class="oscillator">
+    	
+      <div id="osc1" class="oscillator">
     		<div class="knob" id="knob1">
             <div class="ext-knob">
               <div class="int-knob" id="k1">
                 <div class="level-amount" id="l1"></div>
               </div>
             </div>
-            <div class="knob-level-label">LEVEL</div>
             <div class="knob-level-amount-percentage"></div>
         </div>
 
@@ -30,133 +31,134 @@
                 <div class="level-amount" id="l2"></div>
               </div>
             </div>
-            <div class="knob-level-label">DETUNE</div>
             <div class="knob-level-amount-percentage"></div>
         </div>
 
+    	  <div class="slider-container-2" id="pitch-slider-cont"> <!--Sliders div !-->
+       
+          <input type="range" min="-12" max="12" value="0" step="1" class="slider pitch" id="sp1">
 
-
-    	<div class="slider-container" id="pitch-slider-cont"> <!--Sliders div !-->
-        <span class="slider-label pitch-label" id="osc1-pitch">PITCH</span>
-        <input type="range" min="-12" max="12" value="0" step="1" class="slider pitch" id="sp1">
-      </div>
+        </div>
 
 
     		<select class="waveforms selector" id="selector1">
     			<option value="sawtooth">SAWTOOTH</option>
   		  	<option value="square">SQUARE</option>
-  		 	<option value="triangle">TRIANGULAR</option>
-  		</select>
-
-
-
+  		 	  <option value="triangle">TRIANGULAR</option>
+  		  </select>
+        <div class="knob-level-label" id="label1">LEVEL</div>
+        <div class="knob-level-label">DETUNE</div>
+        <div class="slider-label pitch-label" id="osc1-pitch">PITCH</div>
+        <div class="knob-level-label" id="waveform-selector-label1">WAVEFORM</div>
     	</div>
 
 
     	<div id="osc2" class="oscillator">
-
-
-
     		<div class="knob" id="knob3">
             <div class="ext-knob">
               <div class="int-knob" id="k3">
                 <div class="level-amount" id="l3"></div>
               </div>
             </div>
-            <div class="knob-level-label">LEVEL</div>
             <div class="knob-level-amount-percentage"></div>
         </div>
-
     		<div class="knob" id="knob4">
             <div class="ext-knob">
               <div class="int-knob double-knob" id="k4">
                 <div class="level-amount" id="l4"></div>
               </div>
             </div>
-            <div class="knob-level-label">DETUNE</div>
             <div class="knob-level-amount-percentage"></div>
         </div>
-
-
-
+        <div></div>
+        <div class="knob-level-label">LEVEL</div>
+        <div class="knob-level-label">DETUNE</div>
+        <div></div>
+        <div class="knob-level-label">WAVEFORM</div>
     		<select class="waveforms selector" id="selector2">
     			<option value="sawtooth">SAWTOOTH</option>
   		  	<option value="square">SQUARE</option>
-  		 	<option value="triangle">TRIANGULAR</option>
-  		</select>
-    	</div>
-    </div>
-    <div class="filter">
-      <div class="knob" id="knob5">
-          <div class="ext-knob">
-              <div class="int-knob" id="k5">
-                <div class="level-amount" id="l5"></div>
-              </div>
-            </div>
-            <div class="knob-level-label">CUTOFF</div>
-            <div class="knob-level-amount-percentage"></div>
-      </div>
-
-
-      <div class="knob" id="knob6">
-          <div class="ext-knob">
-              <div class="int-knob double-knob" id="k6">
-                <div class="level-amount" id="l6"></div>
-              </div>
-            </div>
-            <div class="knob-level-label">EG</div>
-            <div class="knob-level-amount-percentage"></div>
-      </div>
-
-      <div class="slider-container" id="filter-slider-cont"> <!--Sliders div !-->
-        <span class="slider-label atck-label" id="filt-atck">A</span>
-        <input type="range" min="1" max="100" value="50" class="slider attack" id="s1">
-        <span class="slider-label dcy-label" id="filt-dcy">D</span>
-        <input type="range" min="1" max="100" value="50" class="slider decay" id="s2">
-        <span class="slider-label sus-label" id="filt-sus">S</span>
-        <input type="range" min="1" max="100" value="50" class="slider sustain" id="s3">
-        <span class="slider-label rel-label" id="filt-rel">R</span>
-        <input type="range" min="1" max="100" value="50" class="slider release" id="s4">
+  		 	  <option value="triangle">TRIANGULAR</option>
+  		  </select>
       </div>
     </div>
-     
-    <div class="lfo">
 
-      <div class="knob" id="knob7">
-          <div class="ext-knob">
-              <div class="int-knob" id="k7">
-                <div class="level-amount" id="l7"></div>
+      <div class="filter">
+        <div class="knob" id="knob5">
+            <div class="ext-knob">
+                <div class="int-knob" id="k5">
+                  <div class="level-amount" id="l5"></div>
+                </div>
               </div>
-            </div>
-            <div class="knob-level-label">RATE</div>
-            <div class="knob-level-amount-percentage"></div>
+              <div class="knob-level-amount-percentage"></div>
+        </div>
+
+
+        <div class="knob" id="knob6">
+            <div class="ext-knob">
+                <div class="int-knob double-knob" id="k6">
+                  <div class="level-amount" id="l6"></div>
+                </div>
+              </div>
+              <div class="knob-level-amount-percentage"></div>
+        </div>
+        <div></div>
+
+        <div class="slider-container" id="filter-slider-cont"> <!--Sliders div !-->
+          <span class="slider-label atck-label" id="filt-atck">A</span>
+          <input type="range" min="1" max="100" value="50" class="slider attack" id="s1">
+          <span class="slider-label dcy-label" id="filt-dcy">D</span>
+          <input type="range" min="1" max="100" value="50" class="slider decay" id="s2">
+          <span class="slider-label sus-label" id="filt-sus">S</span>
+          <input type="range" min="1" max="100" value="50" class="slider sustain" id="s3">
+          <span class="slider-label rel-label" id="filt-rel">R</span>
+          <input type="range" min="1" max="100" value="50" class="slider release" id="s4">
+        </div>
+          <div class="knob-level-label">CUTOFF</div>
+          <div class="knob-level-label">EG</div>
+          <div class="knob-level-label"></div>
+
+      </div>
+      <div class="lfo">
+        <div class="knob" id="knob7">
+            <div class="ext-knob">
+                <div class="int-knob" id="k7">
+                  <div class="level-amount" id="l7"></div>
+                </div>
+              </div>
+              <div class="knob-level-amount-percentage"></div>
+        </div>
+
+
+        <select class="waveforms selector" id="selector3">
+            <option value="sawtooth">SAWTOOTH</option>
+            <option value="square">SQUARE</option>
+          <option value="sine">SINE</option>
+        </select>
+
+        <select class="destination selector" id="selector4">
+            <option value="osc1">OSC 1</option>
+            <option value="osc2">OSC 2</option>
+            <option value="cutoff">CUTOFF</option>
+        </select>
+
+
+        <div class="slider-container" id="lfo-slider-cont"> <!--Sliders div !-->
+          <span class="slider-label atck-label" id="lfo-atck">A</span>
+          <input type="range" min="1" max="100" value="50" class="slider attack" id="s5">
+          <span class="slider-label dcy-label" id="lfo-dcy">D</span>
+          <input type="range" min="1" max="100" value="50" class="slider decay" id="s6">
+          <span class="slider-label sus-label" id="lfo-sus">S</span>
+          <input type="range" min="1" max="100" value="50" class="slider sustain" id="s7">
+          <span class="slider-label rel-label" id="lfo-rel">R</span>
+          <input type="range" min="1" max="100" value="50" class="slider release" id="s8">
+        </div>
+        <div class="knob-level-label">RATE</div>
+        <div class="knob-level-label">WAVEFORM</div>
+        <div class="knob-level-label">DESTINATION</div>
+
       </div>
 
-
-      <select class="waveforms selector" id="selector3">
-          <option value="sawtooth">SAWTOOTH</option>
-          <option value="square">SQUARE</option>
-        <option value="sine">SINE</option>
-      </select>
-
-      <select class="destination selector" id="selector4">
-          <option value="osc1">OSC 1</option>
-          <option value="osc2">OSC 2</option>
-          <option value="cutoff">CUTOFF</option>
-      </select>
-
-
-      <div class="slider-container" id="lfo-slider-cont"> <!--Sliders div !-->
-        <span class="slider-label atck-label" id="lfo-atck">A</span>
-        <input type="range" min="1" max="100" value="50" class="slider attack" id="s5">
-        <span class="slider-label dcy-label" id="lfo-dcy">D</span>
-        <input type="range" min="1" max="100" value="50" class="slider decay" id="s6">
-        <span class="slider-label sus-label" id="lfo-sus">S</span>
-        <input type="range" min="1" max="100" value="50" class="slider sustain" id="s7">
-        <span class="slider-label rel-label" id="lfo-rel">R</span>
-        <input type="range" min="1" max="100" value="50" class="slider release" id="s8">
-      </div>
-    </div>
 
     <div class="master">
 
@@ -166,9 +168,10 @@
                 <div class="level-amount" id="l8"></div>
               </div>
             </div>
-            <div class="knob-level-label">MASTER</div>
+
             <div class="knob-level-amount-percentage"></div>
       </div>
+        <div class="knob-level-label">MASTER</div>
 
       <div class="slider-container" id="mast-slider-cont"> <!--Sliders div !-->
         <span class="slider-label atck-label" id="mast-atck">A</span>
@@ -182,13 +185,11 @@
       </div>
     </div> 
 
-    <footer> <!-- creato momentaneamente per creare la tastierina col js!-->
-
+    <footer> <!-- creato momentaneamente per creare la tastierina col js!--></footer>
   </div>
   </body>
   <script src="Script.js"></script>
   <script src="model.js"></script>
   <script src="audio.js"></script>
-
 
   </html>
