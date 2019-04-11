@@ -15,13 +15,10 @@ var pitch_amount = 0;
 var amounts = Array(knobNumbers).fill(maxAmount/2); /*Array contenente il valore di ogni knob*/
 
 
+
 function updateSound(){
     if (knobToRotateIndex == 1 ) {
         offset1 = Math.pow(2,(amounts[1]*SENS/270*2 - 1)/12);
-
-
-
-
     }
     else if (knobToRotateIndex == 3) {
         offset2 = Math.pow(2,(amounts[3]*SENS/270*2 - 1)/12);
