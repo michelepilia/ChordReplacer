@@ -1,16 +1,19 @@
-introdurre funzionalita' che con doubleclick su un elemento, ritorna al valore di default.
+------------------------------------------------------------------------------------------------------------------------------------------------
+PARTE SYNTH:
 
-Sistemare definitivamente il release.
 
-allineare tutto html e css. Piu' informazioni su pitch.
-
-Sistemare innerHtml e percentuali dei knob.
-
-Filtro e lfo.
-
-refactoring.
-
+Sistemare LFO -> Aggiungere Attack e Level (il level regola l'intensita' dell lfo).
+Implementare il filtro -> funzionalita' EG con Attack e Level.
+Refactoring completo -> semplificare il codice, aggiungere classi.
+Sistemare view: 
+  1) Sistemare view all'apertura (alcuni knob non sono ruotati del loro valore di default).
+  2) Sistemare view knob (knob bipolari devono mostrare valori appropriati all'inizio).
+Sistemare definitivamente ADSR sul master.
+Sistemare allineamento html.
+Design css, migliorare colori ecc...
 Modifica dei parametri realtime ? Cioe' durante la fase di sustain ? In teoria e' possibile aggiungendo eventi ed alcuni metodi nella classe nota. vedere se e' fattibile.
 
-Pulsewidth: cambiare ciclo lavoro onda quadra
+----------------------------------------------------------------------------------------------------------------------------------------------
+PARTE SOSTITUZIONI:
 
+---------------------------------------------------------------------------------------------------------------------------------------------
