@@ -32,7 +32,7 @@ function updateSound(){
 function updateView() {
 
     document.getElementsByClassName(classToRotate)[knobToRotateIndex].style.transform = "rotate(" + ((amounts[knobToRotateIndex] -maxAmount/2) * SENS )+ "deg)";
-    document.getElementsByClassName("knob-level-amount-percentage")[knobToRotateIndex].innerHTML=parseInt((amounts[knobToRotateIndex])*SENS/270*100) +" %";
+    document.getElementsByClassName("knob-level-amount-percentage")[knobToRotateIndex].innerHTML=parseInt((amounts[knobToRotateIndex])*SENS/270*100);
 
 }
 
@@ -119,3 +119,6 @@ document.querySelectorAll(classToRotate2).forEach(f1);
 document.onmouseup = stop;
 
 
+document.getElementById('sp1').onmousemove = function(){
+    document.getElementById('osc1-pitch-value').innerHTML=pitch_amount;
+}
