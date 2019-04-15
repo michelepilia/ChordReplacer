@@ -70,12 +70,13 @@ function Note(frequency){
   this.gain1 = c.createGain();
   this.gain2 = c.createGain();
   filt.Q.value = minQ+(amounts[5]/(maxAmount-minAmount)*(maxQ-minQ));
-  this.lfo_destinations = [this.pre_gain1.gain, this.pre_gain2.gain, (c.createGain().gain)]; //Il terzo parametro è provvisorio, in attesa di implementare il filtro
+  this.lfo_destinations = [this.pre_gain1.gain, this.pre_gain2.gain, filt.frequency, filt.Q]; //Il terzo parametro è provvisorio, in attesa di implementare il filtro
   this.lfo_gain = c.createGain();
   lfo.connect(this.lfo_gain);
   this.lfo_gain.gain = 0;
   this.lfo_gain.disconnect();
   this.lfo_gain.connect(this.lfo_destinations[(parseInt(selectorValues[3]))]);
+  console.log(this.lfo_destinations[(parseInt(selectorValues[3]))]);
   master.gain.value=amounts[8]*SENS/270;
     this.gain1.connect(pre_filt_gain);
     this.gain2.connect(pre_filt_gain);
@@ -95,6 +96,8 @@ function Note(frequency){
     this.oscillator1.start();
     this.oscillator2.start(); 
 
+
+
     now=c.currentTime;
     this.gain1.gain.setValueAtTime(0, now);
     this.gain2.gain.setValueAtTime(0, now);
@@ -104,7 +107,18 @@ function Note(frequency){
     this.gain2.gain.linearRampToValueAtTime(1*amounts[2]*SENS/270, now+sliderAmounts[8]/100);
     filt.frequency.linearRampToValueAtTime(eg, now+sliderAmounts[0]/100); //Linear ramp to eg at tima ATCK
     lfo.frequency.linearRampToValueAtTime(minLfo+(amounts[7]/(maxAmount-minAmount)*(maxLfo-minLfo)), now+sliderAmounts[4]/100);
-    this.lfo_gain.gain.value = sliderAmounts[5]/100;
+    if (selectorValues[3] == "0" || selectorValues[3] == "1") {
+      this.lfo_gain.gain.value = sliderAmounts[5]/100;
+    }
+    else if (selectorValues[3] == "2"){
+      this.lfo_gain.gain.value = sliderAmounts[5]*10;
+      console.log("PIPPO");
+    }
+    else {
+      this.lfo_gain.gain.value = 28*sliderAmounts[5]/100;
+    }
+    console.log("Lfo gain"+this.lfo_gain.gain.value);
+
     filt.frequency.linearRampToValueAtTime(sliderAmounts[2]/100*eg, now + sliderAmounts[1]/100 + sliderAmounts[0]/100); //linear ramp tu SUS (% di eg) at time DCY
     this.gain1.gain.linearRampToValueAtTime(sliderAmounts[10]/100*amounts[0]*SENS/270, now + sliderAmounts[9]/100 +sliderAmounts[8]/100);
     this.gain2.gain.linearRampToValueAtTime(sliderAmounts[10]/100*amounts[2]*SENS/270, now + sliderAmounts[9]/100+sliderAmounts[8]/100);
