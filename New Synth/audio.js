@@ -2,10 +2,17 @@ var c = new AudioContext();
 var lfo = c.createOscillator();
 var minLfo = 0;
 var maxLfo = 20;
+var minFilt = 200;
+var maxFilt = 15000; //Hz
+var minQ = -3;
+var maxQ = 3;
 var tones = [];
 var now ;
 keys = "awsedftgyhujkolpòà";
 var keys_elem_array = [];
+var pre_filt_gain = c.createGain();
+var filt = c.createBiquadFilter();
+var eg;
 var master = c.createGain();
 master.connect(c.destination);
 var playingNotes = [];
@@ -18,10 +25,17 @@ var indexOfPlayingNote = 0;
 function setUp(){
   amounts[4] = maxAmount; //Prevedendo che il filtro (LPF) abbia inizialmente una cutoff freq. al massimo (=> inattivo)
   amounts[5] = 0; //Idem, perché la frequenza "target" dell'EG è uguale a quella di cutoff
-  amounts[6] = 0; //Inizialmente la frequenza dell'LFO è 0
+  amounts[6] = maxAmount; //Inizialmente la frequenza dell'LFO è 0
   amounts[7] = 0;
+  filt.type = "lowpass";
+  filt.gain.value = 1;
+  pre_filt_gain.connect(filt);
+  pre_filt_gain.gain.value = 1;
+  filt.connect(master);
+  eg = minFilt+(amounts[6]/(maxAmount-minAmount)*(maxFilt-minFilt));
   lfo.frequency.value = minLfo+(amounts[7]/(maxAmount-minAmount)*maxLfo);
   lfo.start();
+
 }
 
 
@@ -55,6 +69,7 @@ function Note(frequency){
   this.pre_gain2 = c.createGain();
   this.gain1 = c.createGain();
   this.gain2 = c.createGain();
+  filt.Q = minQ+(amounts[5]/(maxAmount-minAmount)*(maxQ-minQ));
   this.lfo_destinations = [this.pre_gain1.gain, this.pre_gain2.gain, (c.createGain().gain)]; //Il terzo parametro è provvisorio, in attesa di implementare il filtro
   this.lfo_gain = c.createGain();
   lfo.connect(this.lfo_gain);
@@ -62,8 +77,8 @@ function Note(frequency){
   this.lfo_gain.disconnect();
   this.lfo_gain.connect(this.lfo_destinations[(parseInt(selectorValues[3]))]);
   master.gain.value=amounts[8]*SENS/270;
-    this.gain1.connect(master);
-    this.gain2.connect(master);
+    this.gain1.connect(pre_filt_gain);
+    this.gain2.connect(pre_filt_gain);
     this.oscillator1.connect(this.pre_gain1);
     this.oscillator2.connect(this.pre_gain2);
     this.pre_gain1.connect(this.gain1);
@@ -72,7 +87,7 @@ function Note(frequency){
     this.oscillator1.frequency.value = this.frequency * offset3;
     this.oscillator1.frequency.value = this.oscillator1.frequency.value * offset1;
     this.oscillator2.frequency.value = this.frequency * offset2;
-    lfo.frequency.value = minLfo+(amounts[7]/(maxAmount-minAmount)*maxLfo);
+    lfo.frequency.value = minLfo+(amounts[7]/(maxAmount-minAmount)*(maxLfo-minLfo));
     console.log("freq: " + this.frequency + " osc1 freq: " + this.oscillator1.frequency.value + " osc2 freq: " + this.oscillator2.frequency.value);
   this.playNote = function(){
     this.oscillator1.type = selectorValues[0];
@@ -84,11 +99,15 @@ function Note(frequency){
     now=c.currentTime;
     this.gain1.gain.setValueAtTime(0, now);
     this.gain2.gain.setValueAtTime(0, now);
+    filt.frequency.setValueAtTime(minFilt+(amounts[4]/(maxAmount-minAmount)*(maxFilt-minFilt)), now); //Freq cutoff at time 0
+    eg = minFilt+(amounts[6]/(maxAmount-minAmount)*(maxFilt-minFilt)); //Calcolo frequenza eg
     this.gain1.gain.linearRampToValueAtTime(1*amounts[0]*SENS/270, now+sliderAmounts[8]/100);
     this.gain2.gain.linearRampToValueAtTime(1*amounts[2]*SENS/270, now+sliderAmounts[8]/100);
+    filt.frequency.linearRampToValueAtTime(eg, now+sliderAmounts[0]/100); //Linear ramp to eg at tima ATCK
     this.lfo_gain.gain.linearRampToValueAtTime(0.3*SENS, now+sliderAmounts[4]/100);
     now = c.currentTime;
     this.lfo_gain.gain.linearRampToValueAtTime(sliderAmounts[6]/100, now+sliderAmounts[5]/100);
+    filt.frequency.linearRampToValueAtTime(sliderAmounts[2]/100*eg, now + sliderAmounts[1]/100); //linear ramp tu SUS (% di eg) at time DCY
     this.gain1.gain.linearRampToValueAtTime(sliderAmounts[10]/100*amounts[0]*SENS/270, now + sliderAmounts[9]/100);
     this.gain2.gain.linearRampToValueAtTime(sliderAmounts[10]/100*amounts[2]*SENS/270, now + sliderAmounts[9]/100);
   }
@@ -99,7 +118,7 @@ function Note(frequency){
     this.gain1.gain.linearRampToValueAtTime(0, now+sliderAmounts[11]/100);
     this.gain2.gain.linearRampToValueAtTime(0, now+sliderAmounts[11]/100);
     this.lfo_gain.gain.linearRampToValueAtTime(0, now+sliderAmounts[7]/100);
-
+    filt.frequency.linearRampToValueAtTime(minFilt+(amounts[4]/(maxAmount-minAmount)*(maxFilt-minFilt)), now + sliderAmounts[3]/100);
   }
 
   this.release2 = function(){
