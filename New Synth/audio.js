@@ -17,9 +17,10 @@ var indexOfPlayingNote = 0;
 
 function setUp(){
   amounts[4] = maxAmount; //Prevedendo che il filtro (LPF) abbia inizialmente una cutoff freq. al massimo (=> inattivo)
-  amounts[5] = maxAmount; //Idem, perché la frequenza "target" dell'EG è uguale a quella di cutoff
+  amounts[5] = 0; //Idem, perché la frequenza "target" dell'EG è uguale a quella di cutoff
   amounts[6] = 0; //Inizialmente la frequenza dell'LFO è 0
-  lfo.frequency.value = minLfo+(amounts[6]/(maxAmount-minAmount)*maxLfo);
+  amounts[7] = 0;
+  lfo.frequency.value = minLfo+(amounts[7]/(maxAmount-minAmount)*maxLfo);
   lfo.start();
 }
 
@@ -60,7 +61,7 @@ function Note(frequency){
   this.lfo_gain.gain = 0;
   this.lfo_gain.disconnect();
   this.lfo_gain.connect(this.lfo_destinations[(parseInt(selectorValues[3]))]);
-  master.gain.value=amounts[7]*SENS/270;
+  master.gain.value=amounts[8]*SENS/270;
     this.gain1.connect(master);
     this.gain2.connect(master);
     this.oscillator1.connect(this.pre_gain1);
@@ -71,7 +72,7 @@ function Note(frequency){
     this.oscillator1.frequency.value = this.frequency * offset3;
     this.oscillator1.frequency.value = this.oscillator1.frequency.value * offset1;
     this.oscillator2.frequency.value = this.frequency * offset2;
-    lfo.frequency.value = minLfo+(amounts[6]/(maxAmount-minAmount)*maxLfo);
+    lfo.frequency.value = minLfo+(amounts[7]/(maxAmount-minAmount)*maxLfo);
     console.log("freq: " + this.frequency + " osc1 freq: " + this.oscillator1.frequency.value + " osc2 freq: " + this.oscillator2.frequency.value);
   this.playNote = function(){
     this.oscillator1.type = selectorValues[0];
