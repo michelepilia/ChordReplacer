@@ -72,10 +72,16 @@
             </div>
             <div class="knob-level-amount-percentage"></div>
         </div>
-        <div></div>
+        <div class="slider-container-2" id="pitch-slider-cont"> <!--Sliders div !-->
+       
+          <input type="range" min="-12" max="12" value="0" step="1" class="slider pitch" id="sp2">
+          <div id="osc2-pitch-value"></div>
+
+        </div>
         <div class="knob-level-label">LEVEL</div>
         <div class="knob-level-label">DETUNE</div>
-        <div></div>
+        <div class="slider-label pitch-label" id="osc2-pitch">PITCH
+        </div>
         <div class="knob-level-label">WAVEFORM</div>
     		<select class="waveforms selector" id="selector2">
     			<option value="sawtooth">SAWTOOTH</option>

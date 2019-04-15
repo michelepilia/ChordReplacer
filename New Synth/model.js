@@ -57,8 +57,12 @@ function updateSliders(slider){
     console.log("New value: "+sliderAmounts);
 }
 
-function updatePitch(slider){
-	pitch_amount = parseInt(slider.value);
+function updatePitch1(slider){
+	pitch_amount1 = parseInt(slider.value);
+}
+
+function updatePitch2(slider){
+	pitch_amount2 = parseInt(slider.value);
 }
 
 
@@ -88,7 +92,10 @@ function controller(data){
 		updateSelectors(data);
 	}
 	else if(data.getAttribute("id")=='sp1'){
-		updatePitch(data);
+		updatePitch1(data);
+	}
+	else if(data.getAttribute("id")=='sp2'){
+		updatePitch2(data);
 	}
 	else{
 		updateSliders(data);

@@ -213,7 +213,7 @@ html{
     margin: auto;
 }
 
-#osc1-pitch {
+#osc1-pitch, #osc2-pitch {
     font-size: 40%;
     color: black;
     background-color: rgba(255, 255, 255, 0.2);
@@ -245,7 +245,7 @@ html{
   display: grid;
   grid-gap:25%;
 }
-#osc1-pitch-value{
+#osc1-pitch-value, #osc2-pitch-value{
   font-size: 15px;
   text-align: center;
   transform: translate(0,15%);

@@ -84,10 +84,12 @@ function Note(frequency){
     this.oscillator2.connect(this.pre_gain2);
     this.pre_gain1.connect(this.gain1);
     this.pre_gain2.connect(this.gain2);
-    offset3 = Math.pow(2,(pitch_amount)/12);
+    offset3 = Math.pow(2,(pitch_amount1)/12);
+    offset4 = Math.pow(2,(pitch_amount2)/12);
     this.oscillator1.frequency.value = this.frequency * offset3;
     this.oscillator1.frequency.value = this.oscillator1.frequency.value * offset1;
-    this.oscillator2.frequency.value = this.frequency * offset2;
+    this.oscillator2.frequency.value = this.frequency * offset4;
+    this.oscillator2.frequency.value = this.oscillator2.frequency.value * offset2;
     console.log("freq: " + this.frequency + " osc1 freq: " + this.oscillator1.frequency.value + " osc2 freq: " + this.oscillator2.frequency.value);
   this.playNote = function(){
     this.oscillator1.type = selectorValues[0];

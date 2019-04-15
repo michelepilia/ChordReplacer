@@ -11,7 +11,8 @@ var yDirection = "";
 var maxAmount = 270 / SENS;
 var minAmount = 0;
 var antiGlitchFlag = 0;
-var pitch_amount = 0;
+var pitch_amount1 = 0;
+var pitch_amount2 = 0;
 var amounts = Array(knobNumbers).fill(maxAmount/2); /*Array contenente il valore di ogni knob*/
 
 
@@ -120,5 +121,9 @@ document.onmouseup = stop;
 
 
 document.getElementById('sp1').onmousemove = function(){
-    document.getElementById('osc1-pitch-value').innerHTML=pitch_amount;
+    document.getElementById('osc1-pitch-value').innerHTML=pitch_amount1;
+}
+
+document.getElementById('sp2').onmousemove = function(){
+    document.getElementById('osc2-pitch-value').innerHTML=pitch_amount2;
 }
