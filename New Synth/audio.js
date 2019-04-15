@@ -4,8 +4,8 @@ var minLfo = 0;
 var maxLfo = 20;
 var minFilt = 200;
 var maxFilt = 15000; //Hz
-var minQ = -3;
-var maxQ = 3;
+var minQ = -0.5;
+var maxQ = 30;
 var tones = [];
 var now ;
 keys = "awsedftgyhujkolpòà";
@@ -40,10 +40,10 @@ function setUp(){
 
 
 function keyboardMaker() {
-  var f = 220;
+  var f = 262;
   var i;
   for (i=0; i<(keys.length); i++){
-    tones[i] = Math.round(220*Math.pow(2,1/12)**i);
+    tones[i] = Math.round(262*Math.pow(2,1/12)**i);
     createButton((i), tones[i]);
     //console.log(scale[i]+" "+(i+1));k
   }
@@ -69,7 +69,7 @@ function Note(frequency){
   this.pre_gain2 = c.createGain();
   this.gain1 = c.createGain();
   this.gain2 = c.createGain();
-  filt.Q = minQ+(amounts[5]/(maxAmount-minAmount)*(maxQ-minQ));
+  filt.Q.value = minQ+(amounts[5]/(maxAmount-minAmount)*(maxQ-minQ));
   this.lfo_destinations = [this.pre_gain1.gain, this.pre_gain2.gain, (c.createGain().gain)]; //Il terzo parametro è provvisorio, in attesa di implementare il filtro
   this.lfo_gain = c.createGain();
   lfo.connect(this.lfo_gain);
@@ -87,7 +87,6 @@ function Note(frequency){
     this.oscillator1.frequency.value = this.frequency * offset3;
     this.oscillator1.frequency.value = this.oscillator1.frequency.value * offset1;
     this.oscillator2.frequency.value = this.frequency * offset2;
-    lfo.frequency.value = minLfo+(amounts[7]/(maxAmount-minAmount)*(maxLfo-minLfo));
     console.log("freq: " + this.frequency + " osc1 freq: " + this.oscillator1.frequency.value + " osc2 freq: " + this.oscillator2.frequency.value);
   this.playNote = function(){
     this.oscillator1.type = selectorValues[0];
@@ -104,12 +103,11 @@ function Note(frequency){
     this.gain1.gain.linearRampToValueAtTime(1*amounts[0]*SENS/270, now+sliderAmounts[8]/100);
     this.gain2.gain.linearRampToValueAtTime(1*amounts[2]*SENS/270, now+sliderAmounts[8]/100);
     filt.frequency.linearRampToValueAtTime(eg, now+sliderAmounts[0]/100); //Linear ramp to eg at tima ATCK
-    this.lfo_gain.gain.linearRampToValueAtTime(0.3*SENS, now+sliderAmounts[4]/100);
-    now = c.currentTime;
-    this.lfo_gain.gain.linearRampToValueAtTime(sliderAmounts[6]/100, now+sliderAmounts[5]/100);
-    filt.frequency.linearRampToValueAtTime(sliderAmounts[2]/100*eg, now + sliderAmounts[1]/100); //linear ramp tu SUS (% di eg) at time DCY
-    this.gain1.gain.linearRampToValueAtTime(sliderAmounts[10]/100*amounts[0]*SENS/270, now + sliderAmounts[9]/100);
-    this.gain2.gain.linearRampToValueAtTime(sliderAmounts[10]/100*amounts[2]*SENS/270, now + sliderAmounts[9]/100);
+    lfo.frequency.linearRampToValueAtTime(minLfo+(amounts[7]/(maxAmount-minAmount)*(maxLfo-minLfo)), now+sliderAmounts[4]/100);
+    this.lfo_gain.gain.value = sliderAmounts[5]/100;
+    filt.frequency.linearRampToValueAtTime(sliderAmounts[2]/100*eg, now + sliderAmounts[1]/100 + sliderAmounts[0]/100); //linear ramp tu SUS (% di eg) at time DCY
+    this.gain1.gain.linearRampToValueAtTime(sliderAmounts[10]/100*amounts[0]*SENS/270, now + sliderAmounts[9]/100 +sliderAmounts[8]/100);
+    this.gain2.gain.linearRampToValueAtTime(sliderAmounts[10]/100*amounts[2]*SENS/270, now + sliderAmounts[9]/100+sliderAmounts[8]/100);
   }
 
   this.release = function(){
