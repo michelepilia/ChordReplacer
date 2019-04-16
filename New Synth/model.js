@@ -61,6 +61,15 @@ function setUp(){
 
 
 	/*Inizializzazione nodi Web Audio API*/
+	
+	/*Sezione Filter*/
+	pre_filt_gain = c.createGain();
+	pre_filt_gain.gain.value = 1;
+	filt = c.createBiquadFilter();
+	filt.type = "lowpass";
+	filt.gain.value = 1;
+	eg = minFilt+(amounts[6]/(maxAmount-minAmount)*(maxFilt-minFilt));
+	pre_filt_gain.connect(filt);
 
 	/*Sezione LFO*/
 	pre_gain1 = c.createGain(); //Nodo gain intermedio tra oscillator e gain1, su cui lfo agisce, indipendentemente dal valore del knob
@@ -74,20 +83,12 @@ function setUp(){
 	lfo.connect(lfo_gain); 
 	lfo.start();
 
-	/*Sezione Filter*/
-	pre_filt_gain = c.createGain();
-	pre_filt_gain.gain.value = 1;
-	filt = c.createBiquadFilter();
-	filt.type = "lowpass";
-	filt.gain.value = 1;
-	eg = minFilt+(amounts[6]/(maxAmount-minAmount)*(maxFilt-minFilt));
-	pre_filt_gain.connect(filt);
+	
 
 	/*Sezione Master*/
 	master = c.createGain();
 	filt.connect(master);
 	master.connect(c.destination);
-
 }
 
 

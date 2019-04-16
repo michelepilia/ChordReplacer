@@ -1,5 +1,3 @@
-setUp();
-
 function startVoice(voice) {
 
   voice.gain1.connect(pre_filt_gain);
@@ -171,11 +169,10 @@ function getMouseDirection(e) {
 
 function timeoutRelease(e){
   var a = noteIsPlaying(tones[keys.indexOf(e.key)]);//prevents global variable to be changed while executing code here
-  playingNotes[a].release();
-  console.log("timeout release called...: " + playingNotes[a].frequency);
+  release(playingNotes[a]);
   setTimeout(function(){
         a = noteIsPlaying(tones[keys.indexOf(e.key)]);
-        playingNotes[a].release2();
+        release2(playingNotes[a]);
         playingNotes.splice(a,1);
     }, now + sliderAmounts[11]/100*1000);
 }
@@ -191,3 +188,14 @@ function noteIsPlaying(frequency){
 
 //durante il timeout il valore di indexOfPlayingNote puo' essere modificato da
 //un evento key up per cui si generano errori nel release.
+
+
+function keyboardMaker() {
+  var f = 262;
+  var i;
+  for (i=0; i<(keys.length); i++){
+    tones[i] = Math.round(262*Math.pow(2,1/12)**i);
+    //console.log(scale[i]+" "+(i+1));k
+  }
+  //console.log("Ciao");
+}
