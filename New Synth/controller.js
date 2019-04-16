@@ -1,14 +1,11 @@
 function startVoice(voice) {
 
-  voice.lfo_gain.gain = 0;
-
-  lfo.connect(this.lfo_gain);
   voice.gain1.connect(pre_filt_gain);
   voice.gain2.connect(pre_filt_gain);
-  voice.oscillator1.connect(voice.pre_gain1);
-  voice.oscillator2.connect(voice.pre_gain2);
-  voice.pre_gain1.connect(voice.gain1);
-  voice.pre_gain2.connect(voice.gain2);
+  voice.oscillator1.connect(pre_gain1);
+  voice.oscillator2.connect(pre_gain2);
+  pre_gain1.connect(voice.gain1);
+  pre_gain2.connect(voice.gain2);
 
   voice.oscillator1.frequency.value = voice.frequency * offset3;
   voice.oscillator1.frequency.value = voice.oscillator1.frequency.value * offset1;
@@ -19,32 +16,8 @@ function startVoice(voice) {
   
   
 
-  //Inizio sezione da sistemare
-  voice.lfo_gain.disconnect();
-  this.lfo_gain.connect(this.lfo_destinations[(parseInt(selectorValues[3]))]);
 
-  filt.Q.value = minQ+(amounts[5]/(maxAmount-minAmount)*(maxQ-minQ));
-  master.gain.value=amounts[8]*SENS/270;
-  offset3 = Math.pow(2,(pitch_amount1)/12);
-  offset4 = Math.pow(2,(pitch_amount2)/12);
-  lfo.type = selectorValues[2];
-  eg = minFilt+(amounts[6]/(maxAmount-minAmount)*(maxFilt-minFilt)); //Calcolo frequenza eg
-
-  lfo_gain.gain.value = lfoGainType
-    if (selectorValues[3] == "0" || selectorValues[3] == "1") {
-      this.lfo_gain.gain.value = sliderAmounts[5]/100;
-    }
-    else if (selectorValues[3] == "2"){
-      this.lfo_gain.gain.value = sliderAmounts[5]*10;
-      console.log("PIPPO");
-    }
-    else {
-      this.lfo_gain.gain.value = 28*sliderAmounts[5]/100;
-    }
-  
-//Fine sezione da sistemare
-
-
+  playNote(voice);
 
 
 
@@ -72,38 +45,103 @@ function keyUpListener(e) {
   }
 }
 
+function sliderListener(data){
+  slider = data.target;
+
+  if(slider.getAttribute("id")=='sp1'){
+    pitch_amount1 = parseInt(slider.value);
+    offset3 = Math.pow(2,(pitch_amount1)/12);
+  }
+  else if(slider.getAttribute("id")=='sp2'){
+    pitch_amount2 = parseInt(slider.value);
+    offset4 = Math.pow(2,(pitch_amount2)/12);
+  }
+  else{
+    id = slider.getAttribute("id");
+    id = id.substr(1); //Rimuove il primo elemento dell'array, dunque la prima lettera dell'id. Non si poteva utilizzare il metodo usato coi knob perchè alcuni index hanno due cifre
+    sliderChangeIndex = parseInt(id) - 1;
+    sliderAmounts[sliderChangeIndex]=parseInt(slider.value);
+    if (sliderChangeIndex == 5) {
+      lfo_gain.gain.value = lfoGainType();
+    }
+  }
+}
+
+function selectorListener(data){
+  selector = data.target;
+
+  id = selector.getAttribute("id");
+  id = id.substr(8); 
+  selectorChangeIndex = parseInt(id) - 1;
+  selectorValues[selectorChangeIndex]=selector.value;
+
+  if (selectorChangeIndex==2) {
+    lfo.type = selectorValues[2];
+  }
+  else if (selectorChangeIndex==3) {
+    lfo_gain.disconnect();
+    lfo_gain.connect(lfo_destinations[(parseInt(selectorValues[3]))]); 
+  }
+}
+
+
+
+
 function rotate(data) {
-    getMouseDirection(data);
-    if (yDirection == "up" && antiGlitchFlag > -1) {
-        if (amounts[knobToRotateIndex] < maxAmount) {
-            amounts[knobToRotateIndex]++;
-            //updateKnobs();
-            //Qui scrivere il valore dell'angolazione su firebase
-            updateView();
-            updateSound();
-        }
-    }
-    else if (yDirection == "down" && antiGlitchFlag > -1) {
-        if (amounts[knobToRotateIndex] > minAmount) {
-            amounts[knobToRotateIndex]--;
-            //Qui scrivere il valore dell'angolazione su firebase
-            //updateKnobs();
-            updateView();
-            updateSound();
-        }
-    }
+  getMouseDirection(data);
+  if (yDirection == "up" && antiGlitchFlag > -1) {
+      if (amounts[knobToRotateIndex] < maxAmount) {
+          amounts[knobToRotateIndex]++;
+      }
+  }
+  else if (yDirection == "down" && antiGlitchFlag > -1) {
+      if (amounts[knobToRotateIndex] > minAmount) {
+          amounts[knobToRotateIndex]--;
+      }
+  }
+  updateView();
+
+  if (knobToRotateIndex == 1 ) { //Detune 1
+      offset1 = Math.pow(2,(amounts[1]/(maxAmount-minAmount)*2 - 1)/12);
+  }
+  else if (knobToRotateIndex == 3) { //Detune 2
+      offset2 = Math.pow(2,(amounts[3]/(maxAmount-minAmount)*2 - 1)/12);
+  }
+  else if (knobToRotateIndex == 4){ //Cutoff
+    filt.frequency.value = minFilt+(amounts[4]/(maxAmount-minAmount)*(maxFilt-minFilt));
+  }
+  else if (knobToRotateIndex == 5){ //Reso
+    filt.Q.value = minQ+(amounts[5]/(maxAmount-minAmount)*(maxQ-minQ));
+  }
+  else if (knobToRotateIndex == 6){ //EG
+    eg = minFilt+(amounts[6]/(maxAmount-minAmount)*(maxFilt-minFilt)); //Calcolo frequenza eg
+  }
+  else if (knobToRotateIndex == 7){ //LFO Rate 
+    lfo.frequency.value = minLfo+(amounts[7]/(maxAmount-minAmount)*maxLfo);
+  }
+  else if (knobToRotateIndex == 8){ //Master
+    master.gain.value=amounts[8]/(maxAmount-minAmount);
+  }
+
+
 }
 
-function updateSound(){
-    if (knobToRotateIndex == 1 ) {
-        offset1 = Math.pow(2,(amounts[1]*SENS/270*2 - 1)/12);
-    }
-    else if (knobToRotateIndex == 3) {
-        offset2 = Math.pow(2,(amounts[3]*SENS/270*2 - 1)/12);
 
-    }
 
+function lfoGainType(){
+  if (selectorValues[3] == "0" || selectorValues[3] == "1") {
+    return sliderAmounts[5]/100;
+  }
+  else if (selectorValues[3] == "2"){
+    return sliderAmounts[5]*10;
+  }
+  else {
+    return 25*sliderAmounts[5]/100;
+  }
 }
+
+
+
 
 /*
 e.PageY ritorna l'altezza della pagina, a cui si trova il puntatore del mouse.
@@ -210,63 +248,20 @@ function noteIsPlaying(frequency){
 
 
 
-/*DA SISTEMARE FINO ALLA FINE*/
 
 
 
-function updateSliders(slider){
-  id = slider.getAttribute("id");
-  id = id.substr(1); //Rimuove il primo elemento dell'array, dunque la prima lettera dell'id. Non si poteva utilizzare il metodo usato coi knob perchè alcuni index hanno due cifre
-    sliderChangeIndex = parseInt(id) - 1;
-    console.log(sliderChangeIndex);
-    sliderAmounts[sliderChangeIndex]=parseInt(slider.value);
-    console.log("New value: "+sliderAmounts);
-}
-
-function updatePitch1(slider){
-  pitch_amount1 = parseInt(slider.value);
-}
-
-function updatePitch2(slider){
-  pitch_amount2 = parseInt(slider.value);
-}
-
-
-document.querySelectorAll(".slider").forEach(function(){
-  this.oninput = function(e){controller(e.target)};
-})
 
 
 
-function updateSelectors(selector){
-  id = selector.getAttribute("id");
-  id = id.substr(8); 
-    selectorChangeIndex = parseInt(id) - 1;
-    console.log(selectorChangeIndex);
-    selectorValues[selectorChangeIndex]=selector.value;
-    console.log("New value: "+selectorValues[selectorChangeIndex]);
-}
 
 
-document.querySelectorAll(".selector").forEach(function(){
-  this.oninput = function(e){controller(e.target)};
-})
 
-function controller(data){
 
-  if (data.getAttribute("class").includes("selector")){
-    updateSelectors(data);
-  }
-  else if(data.getAttribute("id")=='sp1'){
-    updatePitch1(data);
-  }
-  else if(data.getAttribute("id")=='sp2'){
-    updatePitch2(data);
-  }
-  else{
-    updateSliders(data);
-  }
-}
+
+
+
+
 
 
 

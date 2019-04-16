@@ -2,9 +2,10 @@
 
 document.addEventListener("keydown", keyDownListener, false);
 document.addEventListener("keyup", keyUpListener, false);
-document.addEventListener("mouseup", stop, false);
 document.getElementsByClass(classToRotate).forEach(addEventListener("mousedown", preRotate, false));
-
+document.addEventListener("mouseup", stop, false);
+document.getElementsByClassName("slider").forEach(addEventListener("input", sliderHandler, false));
+document.getElementsByClassName("selector").forEach(addEventListener("input", selectorHandler, false))
 
 
 /*Mouse Rotation*/
@@ -51,8 +52,6 @@ function playNote(voice) {
     now=c.currentTime;
     voice.gain1.gain.setValueAtTime(0, now);
     voice.gain2.gain.setValueAtTime(0, now);
-
-    filt.frequency.setValueAtTime(minFilt+(amounts[4]/(maxAmount-minAmount)*(maxFilt-minFilt)), now); //Freq cutoff at time 0
     
     voice.gain1.gain.linearRampToValueAtTime(1*amounts[0]*SENS/270, now+sliderAmounts[8]/100);
     voice.gain2.gain.linearRampToValueAtTime(1*amounts[2]*SENS/270, now+sliderAmounts[8]/100);
@@ -85,3 +84,13 @@ function playNote(voice) {
     delete voice;
   }
 
+
+
+
+
+
+
+
+
+
+  

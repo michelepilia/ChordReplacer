@@ -3,6 +3,8 @@ var SENS = 3; /*Parametro di sensibilita' alla rotazione. E' possibile cambiarlo
 
 //Definizione nodi Web Audio API
 var c = new AudioContext(); 
+var pre_gain1;
+var pre_gain2;
 var lfo;
 var lfo_destinations;
 var lfo_gain;
@@ -47,13 +49,6 @@ var playingNotes = [];
 var indexOfPlayingNote = 0;
 
 
-
-
-
-master.connect(c.destination);
-
-
-
 function setUp(){
 
 	/*Definizione variabili knob, slider, selettori*/
@@ -67,8 +62,12 @@ function setUp(){
 	/*Inizializzazione nodi Web Audio API*/
 
 	/*Sezione LFO*/
+	pre_gain1 = c.createGain(); //Nodo gain intermedio tra oscillator e gain1, su cui lfo agisce, indipendentemente dal valore del knob
+	pre_gain2 = c.createGain();
+	pre_gain1.gain.value = 1;
+	pre_gain2.gain.value = 1;
 	lfo = c.createOscillator();
-	lfo_destinations = [this.pre_gain1.gain, this.pre_gain2.gain, filt.frequency, filt.Q]; //Il terzo parametro è provvisorio, in attesa di implementare il filtro
+	lfo_destinations = [pre_gain1.gain, pre_gain2.gain, filt.frequency, filt.Q]; 
 	lfo_gain = c.createGain();
 	lfo.frequency.value = minLfo+(amounts[7]/(maxAmount-minAmount)*maxLfo);
 	lfo.connect(lfo_gain); 
@@ -95,9 +94,6 @@ function Voice(frequency){ //Voce è inteso come signal path totale
 	this.frequency = frequency;
 	this.oscillator1 = c.createOscillator();
 	this.oscillator2 = c.createOscillator();
-
-	this.pre_gain1 = c.createGain(); //Nodo gain intermedio tra oscillator e gain1, su cui lfo agisce, indipendentemente dal valore del knob
-	this.pre_gain2 = c.createGain();
 
 	this.gain1 = c.createGain();
 	this.gain2 = c.createGain();
