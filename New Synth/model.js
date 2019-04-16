@@ -28,8 +28,9 @@ var knobToRotateIndex = 0;
 var oldY = 0;
 var yDirection = "";
 var offset1 = 1;
-var offset3 = 1;
 var offset2 = 1;
+var offset3 = 1;
+var offset4 = 1;
 var pitch_amount1 = 0;
 var pitch_amount2 = 0;
 
@@ -100,44 +101,4 @@ function Voice(frequency){ //Voce è inteso come signal path totale
  
   
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

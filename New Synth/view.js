@@ -5,7 +5,8 @@ document.addEventListener("keyup", keyUpListener, false);
 document.getElementsByClass(classToRotate).forEach(addEventListener("mousedown", preRotate, false));
 document.addEventListener("mouseup", stop, false);
 document.getElementsByClassName("slider").forEach(addEventListener("input", sliderHandler, false));
-document.getElementsByClassName("selector").forEach(addEventListener("input", selectorHandler, false))
+document.getElementsByClassName("selector").forEach(addEventListener("input", selectorHandler, false));
+document.addEventListener("load", viewInit, false);
 
 
 /*Mouse Rotation*/
@@ -22,13 +23,37 @@ function stop() {
     updateView2();
 }
 
-
+function rotateFromModel(knob){
+	knob.style.transform = "rotate(" + ((amounts[knobToRotateIndex] -maxAmount/2) * SENS )+ "deg)";
+	knobToRotateIndex++;
+}
 
 /*Update View Functions*/
 
+function viewInit(){
+	knobToRotateIndex = 0;
+	document.getElementsByClassName("knob").forEach(rotateFromModel);
+}
+
 function updateView() { //Quando giri knob
-    document.getElementsByClassName(classToRotate)[knobToRotateIndex].style.transform = "rotate(" + ((amounts[knobToRotateIndex] -maxAmount/2) * SENS )+ "deg)";
-    document.getElementsByClassName("knob-level-amount-percentage")[knobToRotateIndex].innerHTML=parseInt((amounts[knobToRotateIndex])*SENS/270*100);
+    document.getElementsByClassName(classToRotate)[knobToRotateIndex].style.transform = "rotate(" + ((amounts[knobToRotateIndex]-maxAmount/2) * SENS )+ "deg)";
+    knobVal = parseInt((amounts[knobToRotateIndex])*SENS/270*100); //0:100
+    if(knobToRotateIndex==1 || knobToRotateIndex==3){
+    	document.getElementsByClassName("knob-level-amount-percentage")[knobToRotateIndex].innerHTML = (2*knobVal-100) + " c";
+    }
+    else if(knobToRotateIndex==4 || knobToRotateIndex==6){
+    	document.getElementsByClassName("knob-level-amount-percentage")[knobToRotateIndex].innerHTML = (minFilt+knobVal*(maxFilt-minFilt)) + " Hz";
+    }
+    else if(knobToRotateIndex==5){
+    	document.getElementsByClassName("knob-level-amount-percentage")[knobToRotateIndex].innerHTML = minQ+(knobVal*(maxQ-minQ));
+    }
+    else if(knobToRotateIndex==7){
+    	document.getElementsByClassName("knob-level-amount-percentage")[knobToRotateIndex].innerHTML = (minLfo+knobVal*(maxLfo-minLfo)) + " Hz";
+    }
+    else {
+    	document.getElementsByClassName("knob-level-amount-percentage")[knobToRotateIndex].innerHTML=knobVal;
+    }
+
 
 }
 
@@ -45,7 +70,7 @@ function updateView3(){ //Prima di ruotare
 /*Envelope Functions*/
 
 function playNote(voice) {
-    voice.oscillator1.start();
+	voice.oscillator1.start();
     voice.oscillator2.start(); 
 
 

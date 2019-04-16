@@ -1,3 +1,5 @@
+setUp();
+
 function startVoice(voice) {
 
   voice.gain1.connect(pre_filt_gain);
@@ -14,18 +16,9 @@ function startVoice(voice) {
   voice.oscillator1.type = selectorValues[0];
   voice.oscillator2.type = selectorValues[1];
   
-  
-
-
   playNote(voice);
 
-
-
-
-
-
-
-
+}
 
 
 function keyDownListener(e) {
@@ -56,7 +49,7 @@ function sliderListener(data){
     pitch_amount2 = parseInt(slider.value);
     offset4 = Math.pow(2,(pitch_amount2)/12);
   }
-  else{
+  else {
     id = slider.getAttribute("id");
     id = id.substr(1); //Rimuove il primo elemento dell'array, dunque la prima lettera dell'id. Non si poteva utilizzare il metodo usato coi knob perchè alcuni index hanno due cifre
     sliderChangeIndex = parseInt(id) - 1;
@@ -176,45 +169,6 @@ function getMouseDirection(e) {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*DA SISTEMARE*/
-
-
 function timeoutRelease(e){
   var a = noteIsPlaying(tones[keys.indexOf(e.key)]);//prevents global variable to be changed while executing code here
   playingNotes[a].release();
@@ -237,35 +191,3 @@ function noteIsPlaying(frequency){
 
 //durante il timeout il valore di indexOfPlayingNote puo' essere modificato da
 //un evento key up per cui si generano errori nel release.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
