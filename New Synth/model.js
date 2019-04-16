@@ -1,103 +1,147 @@
-var lvl_osc1 = 0;
-var pitch_osc1 = 0;
-var fm_osc1 = 0;
-var wave_osc1 = 0;
-var lvl_osc2 = 0;
-var pitch_osc2 = 1134;
-var wave_osc2 = 0;
-var cutoff_filt = 0;
-var reso_filt = 0;
-var atck_filt = 0;
-var dcy_filt = 0;
-var sus_filt = 0;
-var rel_filt = 0;
-var rate_lfo = 0;
-var wave_lfo = 0;
-var dest_lfo = 0;
-var atck_lfo = 0;
-var dcy_lfo = 0;
-var sus_lfo = 0;
-var rel_lfo = 0;
-var lvl_mast = 0;
-var atck_mast = 0;
-var dcy_mast = 0;
-var sus_mast = 0;
-var rel_mast = 0;
+//VARIABILI GLOBALI
+var SENS = 3; /*Parametro di sensibilita' alla rotazione. E' possibile cambiarlo senza influenzare il resto del codice, a patto che sia un divisore esatto di 270.*/
 
-var sliderNumbers = document.getElementsByClassName("slider").length;
-var sliderAmounts = Array(sliderNumbers).fill(50); //Ipotizzando che il valore sia da 0 a 100 e all'inizio gli slider sono tutti a metà
-var sliderChangeIndex = 0;
+//Definizione nodi Web Audio API
+var c = new AudioContext(); 
+var lfo;
+var lfo_destinations;
+var lfo_gain;
+var pre_filt_gain; //Perchè si assume che il filtro possa avere un solo input, dunque si fanno confluire i due oscillatori in un unico nodo
+var filt;
+var master;
 
-var selectorNumbers = Array(document.getElementsByClassName("selector").length);
-var selectorValues = ["sawtooth", "sawtooth", "sawtooth", "0"];
-var selectorChangeIndex = 0;
+//Parametri vari Web Audio API
+var eg;
+var minLfo = 0;
+var maxLfo = 20;
+var minFilt = 200;
+var maxFilt = 15000; //Hz
+var minQ = -0.5;
+var maxQ = 20;
+var maxAmount = 270 / SENS; //Dei Knob
+var minAmount = 0;
+var classToRotate = "int-knob";/*indica la classe html di cui si vuole effettuare la rotazione*/
+var classToRotate2 = "." + classToRotate;
+var knobToRotateIndex = 0;
+var oldY = 0;
+var yDirection = "";
+var offset1 = 1;
+var offset3 = 1;
+var offset2 = 1;
+var pitch_amount1 = 0;
+var pitch_amount2 = 0;
 
-
-/*function updateKnobs(){
-
-	lvl_osc1=(amounts[0] * SENS) / 270 * 100;
-	pitch_osc1=(amounts[1] * SENS) / 270 * 100;
-	fm_osc1=(amounts[2] * SENS) / 270 * 100;
-	lvl_osc2=(amounts[3] * SENS) / 270 * 100;
-	pitch_osc2=(amounts[4] * SENS) / 270 * 100;
-	cutoff_filt=(amounts[5] * SENS) / 270 * 100;
-	reso_filt=(amounts[6] * SENS) / 270 * 100;
-	rate_lfo=(amounts[7] * SENS) / 270 * 100 ;
-	lvl_mast=(amounts[8] * SENS) / 270 * 100;
-
-}*/
+var amounts; /*Array contenente il valore di ogni knob*/
+var selectorValues; //Array contenente i valori dei selettori, inizializzato con i valori di default
+var sliderAmounts; //Array contenente il valore degli slider
+var sliderChangeIndex = 0; //Index dello slider che sta cambiando
+var selectorChangeIndex = 0; //Index del selector che si sta cambiando
+var antiGlitchFlag = 0;
 
 
-function updateSliders(slider){
-	id = slider.getAttribute("id");
-	id = id.substr(1); //Rimuove il primo elemento dell'array, dunque la prima lettera dell'id. Non si poteva utilizzare il metodo usato coi knob perchè alcuni index hanno due cifre
-    sliderChangeIndex = parseInt(id) - 1;
-    console.log(sliderChangeIndex);
-    sliderAmounts[sliderChangeIndex]=parseInt(slider.value);
-    console.log("New value: "+sliderAmounts);
+//Sezione tastiera
+var tones = [];
+keys = "awsedftgyhujkolpòà";
+var keys_elem_array = [];
+var playingNotes = [];
+var indexOfPlayingNote = 0;
+
+
+
+
+
+master.connect(c.destination);
+
+
+
+function setUp(){
+
+	/*Definizione variabili knob, slider, selettori*/
+
+	amounts = [maxAmount/2, maxAmount/2, 0, maxAmount/2, maxAmount, 0, maxAmount, 0, maxAmount/2]; //Valori default knob
+	selectorValues = ["sawtooth", "sawtooth", "sawtooth", "0"];
+	sliderAmounts = [50, 50, 50, 50, 50, 50, 50, 50, 50, 50];
+
+
+
+	/*Inizializzazione nodi Web Audio API*/
+
+	/*Sezione LFO*/
+	lfo = c.createOscillator();
+	lfo_destinations = [this.pre_gain1.gain, this.pre_gain2.gain, filt.frequency, filt.Q]; //Il terzo parametro è provvisorio, in attesa di implementare il filtro
+	lfo_gain = c.createGain();
+	lfo.frequency.value = minLfo+(amounts[7]/(maxAmount-minAmount)*maxLfo);
+	lfo.connect(lfo_gain); 
+	lfo.start();
+
+	/*Sezione Filter*/
+	pre_filt_gain = c.createGain();
+	pre_filt_gain.gain.value = 1;
+	filt = c.createBiquadFilter();
+	filt.type = "lowpass";
+	filt.gain.value = 1;
+	eg = minFilt+(amounts[6]/(maxAmount-minAmount)*(maxFilt-minFilt));
+	pre_filt_gain.connect(filt);
+
+	/*Sezione Master*/
+	master = c.createGain();
+	filt.connect(master);
+	master.connect(c.destination);
+
 }
 
-function updatePitch1(slider){
-	pitch_amount1 = parseInt(slider.value);
-}
 
-function updatePitch2(slider){
-	pitch_amount2 = parseInt(slider.value);
-}
+function Voice(frequency){ //Voce è inteso come signal path totale
+	this.frequency = frequency;
+	this.oscillator1 = c.createOscillator();
+	this.oscillator2 = c.createOscillator();
 
+	this.pre_gain1 = c.createGain(); //Nodo gain intermedio tra oscillator e gain1, su cui lfo agisce, indipendentemente dal valore del knob
+	this.pre_gain2 = c.createGain();
 
-document.querySelectorAll(".slider").forEach(function(){
-	this.oninput = function(e){controller(e.target)};
-})
-
-
-
-function updateSelectors(selector){
-	id = selector.getAttribute("id");
-	id = id.substr(8); 
-    selectorChangeIndex = parseInt(id) - 1;
-    console.log(selectorChangeIndex);
-    selectorValues[selectorChangeIndex]=selector.value;
-    console.log("New value: "+selectorValues[selectorChangeIndex]);
+	this.gain1 = c.createGain();
+	this.gain2 = c.createGain();
+ 
+  
 }
 
 
-document.querySelectorAll(".selector").forEach(function(){
-	this.oninput = function(e){controller(e.target)};
-})
 
-function controller(data){
 
-	if (data.getAttribute("class").includes("selector")){
-		updateSelectors(data);
-	}
-	else if(data.getAttribute("id")=='sp1'){
-		updatePitch1(data);
-	}
-	else if(data.getAttribute("id")=='sp2'){
-		updatePitch2(data);
-	}
-	else{
-		updateSliders(data);
-	}
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

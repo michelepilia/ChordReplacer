@@ -10,7 +10,7 @@ var tones = [];
 var now ;
 keys = "awsedftgyhujkolpòà";
 var keys_elem_array = [];
-var pre_filt_gain = c.createGain();
+var pre_filt_gain = c.createGain(); //Perchè si assume che il filtro possa avere un solo input, dunque si fanno confluire i due oscillatori in un unico nodo
 var filt = c.createBiquadFilter();
 var eg;
 var master = c.createGain();
@@ -35,7 +35,6 @@ function setUp(){
   eg = minFilt+(amounts[6]/(maxAmount-minAmount)*(maxFilt-minFilt));
   lfo.frequency.value = minLfo+(amounts[7]/(maxAmount-minAmount)*maxLfo);
   lfo.start();
-
 }
 
 
