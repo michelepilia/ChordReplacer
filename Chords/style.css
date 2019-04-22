@@ -14,7 +14,7 @@
 }
 #chords-blocks{
 	position: absolute;
-	top: 100px;
+	top: 180px;
 	left: 50px;
 	display: flex;
 	flex-direction: row;
@@ -22,6 +22,7 @@
 	height: auto;
 	background-color: gray;
 	align-items:center;
+	border: 1px solid black;
 }
 .chord-name{
     position: relative;
@@ -60,4 +61,37 @@
 	border: 1px solid black;
 	transform: translate(61px,61px);
 	text-align: center;
+}
+
+.function{
+	display: inline-flex;
+	flex-direction: row;
+	justify-content:center;
+	align-items: center;
+	width: 20%;
+	height: 50%;
+	background-color: gray;
+	border-radius: 10%;
+	margin-left: 10px;
+}
+
+.functions{
+	position: absolute;
+	display: inline-flex;
+	flex-direction: row;
+	justify-content:left;
+	align-items: center;
+	top: 20px;
+	left: 50px;
+	height: 75px;
+	width: auto;
+	background-color: green;
+}
+
+#time-bar{
+	position: absolute;
+	top: -30px;
+	width: 100%;
+	height: 10px;
+	border: 1px solid black;
 }
