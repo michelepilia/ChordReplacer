@@ -1,19 +1,16 @@
 ------------------------------------------------------------------------------------------------------------------------------------------------
 PARTE SYNTH:
 
-
-Sistemare LFO -> Aggiungere Attack e Level (il level regola l'intensita' dell lfo).
-Implementare il filtro -> funzionalita' EG con Attack e Level.
-Refactoring completo -> semplificare il codice, aggiungere classi.
-Sistemare view: 
-  1) Sistemare view all'apertura (alcuni knob non sono ruotati del loro valore di default).
-  2) Sistemare view knob (knob bipolari devono mostrare valori appropriati all'inizio).
 Sistemare definitivamente ADSR sul master.
 Sistemare allineamento html.
 Design css, migliorare colori ecc...
-Modifica dei parametri realtime ? Cioe' durante la fase di sustain ? In teoria e' possibile aggiungendo eventi ed alcuni metodi nella classe nota. vedere se e' fattibile.
 
 ----------------------------------------------------------------------------------------------------------------------------------------------
 PARTE SOSTITUZIONI:
 
+Traccia melodia ? La aggiungiamo oppur va bene anche senza ?
+Separare funzioni synth da quelle accordi (due menu diversi invece che il solo FUNCTIONS)
+Uso di javascript per interazione utente a livello di grafica. 
+Per il menu functions: menu dropdown con mouse click o hover.
+Per le sostituzioni: quando si clicca la S si apre un menu sottostante all'accordo la cui S e' stata cliccata. Il menu avra' uno z-index maggiore di quello di midi track, cosi' da nascondere la midi track. Eseguita la sositizione tale menu viene cancellato .
 ---------------------------------------------------------------------------------------------------------------------------------------------

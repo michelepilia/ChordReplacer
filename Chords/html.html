@@ -6,38 +6,55 @@
     	<link rel="stylesheet" href="style.css">
     </head>
 	<body>
+		In questa schermata si suppone che l'utente abbia scelto di sostituire l'accordo G7. Pertanto si e' aperto, sotto G7, un menu' contenente le sosituzioni effettuabili. Tale menu' nasconde temporaneamente la traccia midi rappresentante l'accordo G7.Sopra il blocco di accordi ci sono dei rettangoli bianchi, che rappresentanto la time-bar.
+		E' anche mostrato il menu' chord edit, che viene aperto sopra la traccia midi dell'accordo, quando l'utente clicca la E.
 		<div class="blocks" id="chords-blocks">
 			<span class="chord">
-				<canvas id="time-bar"></canvas>
-				<div class="chord-name">A
-			    </div>
+				<canvas class="time-bar" id="c1"></canvas>
+				<div class="chord-name">A</div>
 			    <div class="chord-type">maj 7</div>
 			    <div class="chord-substitution">S</div>
+			    <div class="chord-edit">E</div>
+			    <div class="midi-track">MIDI of chord</div>
 			</span>
 			<span class="chord">
-				<canvas id="time-bar"></canvas>
+				<canvas class="time-bar"></canvas>
 				<div class="chord-name">D
 			    </div>
 			    <div class="chord-type">min</div>
-			    <div class="chord-substitution">S</div>
+			    <div class="chord-substitution">S</div>	
+			    <div class="chord-edit" style="background-color: lightblue">E</div>		    	
+			    <div class="chord-substitution-menu chord-edit-menu">Chord edit
+	    			<div class="substitution edit" id="c2s1">here a graphic interface should make user change chord easily</div>
+	   			</div>
 			</span>
-			<span class="chord">
-				<canvas id="time-bar"></canvas>
+			<span class="chord" id="c3">
+				<canvas class="time-bar"></canvas>
 				<div class="chord-name">G
 			    </div>
 			    <div class="chord-type">7</div>
-			    <div class="chord-substitution">S</div>
+			    <div class="chord-substitution" style="background-color: lightblue">S</div>
+			    <div class="chord-edit">E</div>
+			    <div class="chord-substitution-menu">Chord substitutions
+	    			<div class="substitution" id="c3s1">sub1: -> ....</div>
+	    			<div class="substitution" id="c3s2">sub2</div>
+	    			<div class="substitution" id="c3s3">sub3</div>
+	    			<div class="substitution" id="c3s4">sub4</div>
+	   			</div>
 			</span>
-			<span class="chord">
+			<span class="chord pluschord">
 				<div class="chord-name plus">+
 			    </div>
 			</span>
 		</div>
-		<div class="functions">
-			<span class="function">DB Load</span>
-			<span class="function">DB Save</span>
-			<span class="function">Open Synth</span>
-			<span class="function">BPM: 120</span>
+		<div class="functions">FUNCTIONS
+			<div class="function">Load chords</div>
+			<div class="function">Save chords</div>
+			<div class="function">Open Synth</div>
+			<div class="function">Save synth preset</div>
+			<div class="function">Load synth preset</div>
+			<div class="function">BPM: 120</div>
 		</div>
 	</body>
+	  <script src="script.js"></script>
 </html>
