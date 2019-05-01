@@ -7,7 +7,7 @@ html{
 }
 #synth {
   position: relative;
-  top: 150px;
+  top: 350px;
   display: grid;
   grid-template-columns: 41% 41% 14%;
   grid-template-rows: auto auto;
