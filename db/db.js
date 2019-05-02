@@ -56,37 +56,85 @@ function loadSynthPreset(){
 	firebase.database().ref("Synth").once('value').then(
 			function(snapshot){
 				fbSnapshot = snapshot;
+				
+				fbNames = fbSnapshot.val();
+				fbNames = Object.keys(fbNames);
+
+				var synthLoaderTable = document.getElementById("synth-loader-table");
+				
+				while (synthLoaderTable.firstChild) { //Cleaning table from past rows
+    				synthLoaderTable.removeChild(synthLoaderTable.firstChild);
+				} 
+
+				for(i=0; i<fbNames.length; i++) {
+					var row = document.createElement("TR");
+					var tdName = document.createElement("TD");
+					tdName.id = "synth-loading-name"+i;
+					tdName.innerHTML = fbNames[i];
+					var tdDate = document.createElement("TD");
+					tdDate.innerHTML = "Today";
+					var tdButton = document.createElement("TD");
+					tdButton.id = "synth-loading-td-button"+i;
+					var insideButton = document.createElement("BUTTON");
+					insideButton.id = "synth-loading-button"+i;
+					insideButton.classList.add("synth-load-button");
+					insideButton.innerHTML = "Load";
+					tdButton.appendChild(insideButton);
+					row.appendChild(tdName);
+					row.appendChild(tdDate);
+					row.appendChild(tdButton);
+					synthLoaderTable.appendChild(row);
+					createSynthEventListeners();	
+				}
+				openSynthLoader();
+
 			});
-	fbNames = fbSnapshot.val();
-	fbNames = Object.keys(fbNames);
-
-	var synthLoaderTable = document.getElementById("synth-loader-table");
-	for(i=0; i<fbNames.length(); i++) {
-		var row = document.createElement("TR");
-		var tdName = document.createElement("TD");
-		tdName.id = "synth-loading-name"+i;
-		tdName.innerHTML = fbNames[i];
-		var tdDate = document.createElement("TD");
-		tdDate.innerHTML = "Today";
-		var tdButton = document.createElement("TD");
-		tdButton.id = "synth-loading-td-button"+i;
-		var insideButton = document.createElement("BUTTON");
-		insideButton.id = "synth-loading-button"+i;
-		insideButton.innerHTML = "Load";
-		tdButton.appendChild(insideButton);
-		row.appendChild(tdName);
-		row.appendChild(tdDate);
-		row.appendChild(tdButton);
-		synthLoaderTable.appendChild(row);	
-	}
-	openSynthLoader();
-	//chosen = fbNames [0] //Esempio, simulando l input dell'utente
-	fbSynth = fbSnapshot[chosen];
-
-
+	
 }
 
+function loadSynthFunction(data) {
+	chosenIndex = parseInt(data.target.getAttribute("id").substr(20));
 
+	firebase.database().ref("Synth").once('value').then(
+		function(snapshot){
+			fbSnapshot = snapshot;
+
+
+			fbNames = fbSnapshot.val();
+			fbNames = Object.keys(fbNames);
+
+			fbSynth = fbSnapshot.val()[fbNames[chosenIndex]];
+
+			amounts[0] = fbSynth.lvl1;
+	  		amounts[1] = fbSynth.detune1;
+	  		pitch_amount1 = fbSynth.pitch1;
+	  		selectorValues[0] = fbSynth.waveform1;
+	  		amounts[2] = fbSynth.lvl2;
+	  		amounts[3] = fbSynth.detune2;
+	  		pitch_amount2 = fbSynth.pitch2;
+	  		selectorValues[1] = fbSynth.waveform2;
+	  		amounts[4] = fbSynth.cutoff;
+	  		amounts[5] = fbSynth.resonance;
+	  		amounts[6] = fbSynth.eg;
+	  		sliderAmounts[0] = fbSynth.filt_atck;
+	  		sliderAmounts[1] = fbSynth.filt_dcy;
+	  		sliderAmounts[2] = fbSynth.filt_sus;
+	  		sliderAmounts[3] = fbSynth.filt_rel;
+	  		amounts[7] = fbSynth.rate;
+	  		selectorValues[2] = fbSynth.lfo_waveform;
+	  		selectorValues[3] = fbSynth.lfo_dest;
+	  		sliderAmounts[4] = fbSynth.lfo_atck;
+	  		sliderAmounts[5] = fbSynth.lfo_lvl;
+	  		amounts[8] = fbSynth.master;
+	  		sliderAmounts[6] = fbSynth.mast_atck;
+	  		sliderAmounts[7] = fbSynth.mast_dcy;
+	  		sliderAmounts[8] = fbSynth.mast_sus;
+	  		sliderAmounts[9] = fbSynth.mast_rel;
+
+			closeSynthLoader();
+			updateViewFromModel();
+	});
+}
 
 
 

@@ -4,7 +4,12 @@ var sliders = document.getElementsByClassName("slider");
 var selectors = document.getElementsByClassName("selector");
 var saveSynth = document.getElementById("save-synth");
 var synthPresetNameField = document.getElementById("preset-synth-name");
+var synthPresetNameFieldContainer = document.getElementById("preset-synth-name-ext");
 var loadSynth = document.getElementById("load-synth");
+var synthLoader = document.getElementById("synth-loader");
+var loadSynthButton = document.getElementsByClassName("synth-load-button");
+var synth = document.getElementById("synth");
+var openSynth = document.getElementById("open-synth");
 
 document.addEventListener("keydown", keyDownListener, false);
 document.addEventListener("keyup", keyUpListener, false);
@@ -13,6 +18,9 @@ window.addEventListener("load", viewInit);
 saveSynth.addEventListener("click", saveSynthPreset, false);
 synthPresetNameField.addEventListener("input", saveSynthPresetName, false);
 loadSynth.addEventListener("click", loadSynthPreset, false);
+openSynth.addEventListener("click", toggleSynthVisibility, false);
+
+
 
 
 
@@ -48,7 +56,17 @@ function viewInit(){
 	keyboardMaker();
 	knobToRotateIndex = 0;
 	for (var i = 0; i < knobs.length; i++) {rotateFromModel(knobs[i])};
-	knobToRotateIndex = 0;
+	knobToRotateIndex = 0;   
+}
+
+function updateViewFromModel(){ //Update All the view from model
+    knobToRotateIndex = 0;
+    for (var i = 0; i < knobs.length; i++) {rotateFromModel(knobs[i])};
+    knobToRotateIndex = 0;
+    sliders[0].value = pitch_amount1;
+    sliders[1].value = pitch_amount2;
+    for (var i = 2; i < sliders.length; i++) {sliders[i].value = sliderAmounts[i]};
+    for (var i = 0; i < selectors.length; i++) {selectors[i].value = selectorValues[i]};
 }
 
 function updateView() { //Quando giri knob
@@ -134,10 +152,25 @@ function postSavePreset(){
 
 
 function openSynthLoader(){
-    loadSynth.style.display = "block";
+    synthLoader.style.display = "block";
 }
 
+function closeSynthLoader(){
+    synthLoader.style.display = "none";
+}
 
+function createSynthEventListeners() {
+    loadSynthButton = document.getElementsByClassName("synth-load-button");
+    for (var i = 0; i < loadSynthButton.length; i++) { loadSynthButton[i].addEventListener("click", loadSynthFunction, false); };
+}
 
-
+function toggleSynthVisibility(){
+    if (synth.style.display === "none" && synthPresetNameFieldContainer.style.display === "none") {
+        synth.style.display = "grid";
+        synthPresetNameFieldContainer.style.display = "block";
+    } else {
+        synth.style.display = "none";
+        synthPresetNameFieldContainer.style.display = "none";
+    }
+}
   
