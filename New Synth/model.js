@@ -49,6 +49,7 @@ var keys_elem_array = [];
 var playingNotes = [];
 var indexOfPlayingNote = 0;
 
+var synthPresetName = "Init";
 
 function setUp(){
 

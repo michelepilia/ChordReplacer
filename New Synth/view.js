@@ -2,11 +2,19 @@
 var knobs = document.getElementsByClassName(classToRotate);
 var sliders = document.getElementsByClassName("slider");
 var selectors = document.getElementsByClassName("selector");
+var saveSynth = document.getElementById("save-synth");
+var synthPresetNameField = document.getElementById("preset-synth-name");
+var loadSynth = document.getElementById("load-synth");
 
 document.addEventListener("keydown", keyDownListener, false);
 document.addEventListener("keyup", keyUpListener, false);
 document.addEventListener("mouseup", stop, false);
 window.addEventListener("load", viewInit);
+saveSynth.addEventListener("click", saveSynthPreset, false);
+synthPresetNameField.addEventListener("input", saveSynthPresetName, false);
+loadSynth.addEventListener("click", loadSynthPreset, false);
+
+
 
 for (var i = 0; i < knobs.length; i++) { knobs[i].addEventListener("mousedown", preRotate, false); };
 for (var i = 0; i < sliders.length; i++) { sliders[i].addEventListener("input", sliderListener, false); };
@@ -116,10 +124,18 @@ function playNote(voice) {
   }
 
 
+function postSavePreset(){
+    saveSynth.style.backgroundColor = "red";
+    saveSynth.innerHTML = "Saved!";
+    setTimeout(function(){  saveSynth.style.backgroundColor = "darkgray";
+                            saveSynth.innerHTML = "Save synth preset"; 
+                        }, 700);
+}
 
 
-
-
+function openSynthLoader(){
+    loadSynth.style.display = "block";
+}
 
 
 

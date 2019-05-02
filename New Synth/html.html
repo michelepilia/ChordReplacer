@@ -53,17 +53,31 @@
       </span>
     </div>
     <div class="functions">FUNCTIONS
-      <div class="function">Load chords</div>
-      <div class="function">Save chords</div>
-      <div class="function">Open Synth</div>
-      <div class="function">Save synth preset</div>
-      <div class="function">Load synth preset</div>
+      <div class="function" id="load-chords">Load chords</div>
+      <div class="function" id="save-chords">Save chords</div>
+      <div class="function" id="open-synth">Open Synth</div>
+      <div class="function" id="save-synth">Save synth preset</div>
+      <div class="function" id="load-synth">Load synth preset</div>
       <div class="function">BPM: 120</div>
     </div>
     </div>
 
-    <div id="synth">
+    <div id="synth-loader">
+      <table id="synth-loader-table">
+        <tr id="header-row">
+            <th>Preset name</th>
+            <th>Date</th>
+            <th>Load</th>
+        </tr>
+      </table>
+    </div>
 
+
+    <div id="preset-synth-name-ext">
+      Preset name:
+      <input id="preset-synth-name" type="text" name="preset-name" value="Synth Name">
+    </div>  
+    <div id="synth">
     <div class="oscillators">
     	
       <div id="osc1" class="oscillator">
@@ -253,12 +267,12 @@
     </div> 
 
   </body>
+  <script src="https://www.gstatic.com/firebasejs/5.11.0/firebase.js"></script>
   <script src="model.js"></script>
   <script src="controller.js"></script>
+  <script src="../db/db.js"></script>
   <script src="view.js"></script>
   <script src="Script_Chords.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/5.11.0/firebase.js"></script>
-  <script src="../db/db.js"></script>
 
 
   </html>

@@ -1,3 +1,6 @@
+var fbSnapshot;
+
+
 // Initialize Firebase
 var firebaseConfig = {
   apiKey: "AIzaSyD6jsRjiBmcggDBNpYpfsB3ifvlzxwBELs",
@@ -12,19 +15,9 @@ firebase.initializeApp(firebaseConfig);
 db = firebase.database();
 
 
-var synthDb = firebase.database().ref('Synth');
-var newSynthPreset = synthDb.child("Sarti Big Jazz Band");
-newSynthPreset.set({
-  'lvl1': '50',
-  'lvl2': '80',
-  'lvl3': '70',
-  'lvl4': '60'
-});
-
-
-function savePreset() {
+function saveSynthPreset() {
 	var synthDb = firebase.database().ref('Synth');
-	var presetName = "pino";
+	var presetName = synthPresetName;
 	var newSynthPreset = synthDb.child(presetName);
 	newSynthPreset.set({
   		'lvl1': amounts[0],
@@ -52,5 +45,48 @@ function savePreset() {
   		'mast_dcy': sliderAmounts[7],
   		'mast_sus': sliderAmounts[8],
   		'mast_rel': sliderAmounts[9]
-});
+	});
+	postSavePreset();
 }
+
+
+function loadSynthPreset(){
+	var synthDb = firebase.database().ref('Synth');
+
+	firebase.database().ref("Synth").once('value').then(
+			function(snapshot){
+				fbSnapshot = snapshot;
+			});
+	fbNames = fbSnapshot.val();
+	fbNames = Object.keys(fbNames);
+
+	var synthLoaderTable = document.getElementById("synth-loader-table");
+	for(i=0; i<fbNames.length(); i++) {
+		var row = document.createElement("TR");
+		var tdName = document.createElement("TD");
+		tdName.id = "synth-loading-name"+i;
+		tdName.innerHTML = fbNames[i];
+		var tdDate = document.createElement("TD");
+		tdDate.innerHTML = "Today";
+		var tdButton = document.createElement("TD");
+		tdButton.id = "synth-loading-td-button"+i;
+		var insideButton = document.createElement("BUTTON");
+		insideButton.id = "synth-loading-button"+i;
+		insideButton.innerHTML = "Load";
+		tdButton.appendChild(insideButton);
+		row.appendChild(tdName);
+		row.appendChild(tdDate);
+		row.appendChild(tdButton);
+		synthLoaderTable.appendChild(row);	
+	}
+	openSynthLoader();
+	//chosen = fbNames [0] //Esempio, simulando l input dell'utente
+	fbSynth = fbSnapshot[chosen];
+
+
+}
+
+
+
+
+

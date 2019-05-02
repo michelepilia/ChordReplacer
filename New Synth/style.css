@@ -249,5 +249,21 @@ html{
   font-size: 15px;
   text-align: center;
   transform: translate(0,15%);
+}
 
+#preset-synth-name-ext{
+  position: absolute;
+  top: 450px;
+}
+
+#synth-loader{
+  position: absolute;
+  top:275px;
+  left: 225px;
+  background-color: gray;
+  border: 1px solid black;
+  width: auto;
+  height: 150px;
+  overflow: scroll;
+  display: none;
 }

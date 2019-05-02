@@ -199,3 +199,8 @@ function keyboardMaker() {
   }
   //console.log("Ciao");
 }
+
+
+function saveSynthPresetName(){
+  synthPresetName = document.getElementById("preset-synth-name").value;
+}
