@@ -68,6 +68,7 @@ function loadSynthPreset(){
 
 				for(i=0; i<fbNames.length; i++) {
 					var row = document.createElement("TR");
+					row.classList.add("preset-in-db");
 					var tdName = document.createElement("TD");
 					tdName.id = "synth-loading-name"+i;
 					tdName.innerHTML = fbNames[i];
@@ -142,7 +143,7 @@ function loadSynthFunction(data) {
 	  		sliderAmounts[9] = fbSynth.mast_rel;
 
 			closeSynthLoader();
-			updateViewFromModel();
+			updateViewFromModel(fbNames[chosenIndex]);
 	});
 }
 

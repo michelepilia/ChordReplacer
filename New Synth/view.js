@@ -11,7 +11,8 @@ var loadSynthButton = document.getElementsByClassName("synth-load-button");
 var deleteSynthButton = document.getElementsByClassName("synth-delete-button");
 var synth = document.getElementById("synth");
 var openSynth = document.getElementById("open-synth");
-
+var closeSynthLoaderOnDone = document.getElementById("done-load-synth");
+closeSynthLoaderOnDone.addEventListener("click",closeSynthLoader,false);
 document.addEventListener("keydown", keyDownListener, false);
 document.addEventListener("keyup", keyUpListener, false);
 document.addEventListener("mouseup", stop, false);
@@ -60,7 +61,7 @@ function viewInit(){
 	knobToRotateIndex = 0;   
 }
 
-function updateViewFromModel(){ //Update All the view from model
+function updateViewFromModel(name){ //Update All the view from model
     knobToRotateIndex = 0;
     for (var i = 0; i < knobs.length; i++) {rotateFromModel(knobs[i])};
     knobToRotateIndex = 0;
@@ -68,6 +69,7 @@ function updateViewFromModel(){ //Update All the view from model
     sliders[1].value = pitch_amount2;
     for (var i = 2; i < sliders.length; i++) {sliders[i].value = sliderAmounts[i]};
     for (var i = 0; i < selectors.length; i++) {selectors[i].value = selectorValues[i]};
+    document.getElementById("preset-synth-name").value =name; 
 }
 
 function updateView() { //Quando giri knob

@@ -7,7 +7,7 @@ html{
 }
 #synth {
   position: relative;
-  top: 350px;
+  top: 370px;
   display: grid;
   grid-template-columns: 41% 41% 14%;
   grid-template-rows: auto auto;
@@ -251,11 +251,6 @@ html{
   transform: translate(0,15%);
 }
 
-#preset-synth-name-ext{
-  position: absolute;
-  top: 450px;
-}
-
 #synth-loader{
   position: absolute;
   top:275px;
@@ -266,4 +261,27 @@ html{
   height: 150px;
   overflow: scroll;
   display: none;
+  padding: 15px;
+  z-index: 1;
+}
+.preset-in-db {
+  background-color: lightblue;
+  border: 1px solid blue;
+}
+td{
+  font-size: 12px;
+  padding: 15px;
+}
+
+#preset-synth-name-ext{
+  border: 1px solid blue !important;
+  align-items: center !important;
+  display: inline-flex !important;
+  height: 15px !important;
+  position: absolute !important;
+  top: -37.5px !important;
+  background-color: lightblue !important;
+  padding: 10px !important;
+  margin-left: 10px !important;
+  justify-content: center;
 }
