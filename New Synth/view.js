@@ -8,6 +8,7 @@ var synthPresetNameFieldContainer = document.getElementById("preset-synth-name-e
 var loadSynth = document.getElementById("load-synth");
 var synthLoader = document.getElementById("synth-loader");
 var loadSynthButton = document.getElementsByClassName("synth-load-button");
+var deleteSynthButton = document.getElementsByClassName("synth-delete-button");
 var synth = document.getElementById("synth");
 var openSynth = document.getElementById("open-synth");
 
@@ -161,8 +162,13 @@ function closeSynthLoader(){
 
 function createSynthEventListeners() {
     loadSynthButton = document.getElementsByClassName("synth-load-button");
-    for (var i = 0; i < loadSynthButton.length; i++) { loadSynthButton[i].addEventListener("click", loadSynthFunction, false); };
+    deleteSynthButton = document.getElementsByClassName("synth-delete-button");
+    for (var i = 0; i < loadSynthButton.length; i++) { 
+        loadSynthButton[i].addEventListener("click", loadSynthFunction, false); 
+        deleteSynthButton[i].addEventListener("click",deleteSynthFunction,false);
+    };
 }
+
 
 function toggleSynthVisibility(){
     if (synth.style.display === "none" && synthPresetNameFieldContainer.style.display === "none") {

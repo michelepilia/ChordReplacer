@@ -73,6 +73,7 @@ function loadSynthPreset(){
 					tdName.innerHTML = fbNames[i];
 					var tdDate = document.createElement("TD");
 					tdDate.innerHTML = "Today";
+
 					var tdButton = document.createElement("TD");
 					tdButton.id = "synth-loading-td-button"+i;
 					var insideButton = document.createElement("BUTTON");
@@ -80,9 +81,18 @@ function loadSynthPreset(){
 					insideButton.classList.add("synth-load-button");
 					insideButton.innerHTML = "Load";
 					tdButton.appendChild(insideButton);
+
+					var tdButton2 = document.createElement("TD");
+					tdButton2.id = "synth-deleting-td-button"+i;
+					var insideButton2 = document.createElement("BUTTON");
+					insideButton2.id = "synth-deleting-button"+i;
+					insideButton2.classList.add("synth-delete-button");
+					insideButton2.innerHTML = "Delete";
+					tdButton2.appendChild(insideButton2);
 					row.appendChild(tdName);
 					row.appendChild(tdDate);
 					row.appendChild(tdButton);
+					row.appendChild(tdButton2);
 					synthLoaderTable.appendChild(row);
 					createSynthEventListeners();	
 				}
@@ -136,5 +146,19 @@ function loadSynthFunction(data) {
 	});
 }
 
+function deleteSynthFunction(data){
+	chosenIndex = parseInt(data.target.getAttribute("id").substr(21));
+
+	firebase.database().ref("Synth").once('value').then(
+		function(snapshot){
+			fbSnapshot = snapshot;
+			fbNames = fbSnapshot.val();
+			fbNames = Object.keys(fbNames);
+			fbSynth = firebase.database().ref("Synth").child(fbNames[chosenIndex]);
+			fbSynth.remove();
+			closeSynthLoader();
+			updateViewFromModel();
+	});
+}
 
 
