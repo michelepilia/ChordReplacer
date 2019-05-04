@@ -46,7 +46,7 @@ function saveSynthPreset() {
   		'mast_sus': sliderAmounts[8],
   		'mast_rel': sliderAmounts[9]
 	});
-	postSavePreset();
+	postSaveSynthPreset();
 }
 
 
@@ -160,6 +160,20 @@ function deleteSynthFunction(data){
 			closeSynthLoader();
 			updateViewFromModel();
 	});
+}
+
+
+
+
+function saveChordsPreset() {
+	var chordsDb = firebase.database().ref('Chords');
+	var presetName = chordsPresetName;
+	var newChordsPreset = chordsDb.child(presetName);
+	newChordsPreset.set({
+		'sequence': sequencer,
+		'bpm': bpm
+	});
+	postSaveChordsPreset();
 }
 
 

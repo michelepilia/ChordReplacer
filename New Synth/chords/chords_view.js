@@ -7,12 +7,15 @@ var chordEditor = document.getElementById("edit-chord-window");
 var doneButton = document.getElementById("done-edit-chord");
 var saveChords = document.getElementById("save-chords");
 var loadChords = document.getElementById("load-chords");
+var chordsPresetNameField = document.getElementById("preset-chords-name");
+var chordsPresetNameFieldContainer = document.getElementById("preset-chords-name-ext");
 
 plusButton.addEventListener("click", addChord, false);
 minusButton.addEventListener("click", removeChord, false);
 doneButton.addEventListener("click", editChord, false);
 saveChords.addEventListener("click", saveChordsPreset, false);
 loadChords.addEventListener("click", loadChordsPreset, false);
+chordsPresetNameField.addEventListener("input", saveChordsPresetName, false);
 
 function createChordEventListeners(){
 	newEditButton = Array.from(document.getElementsByClassName("chord-edit")).pop();
@@ -32,10 +35,15 @@ function updateChordTag(chord, id){
 	var chordToChange = document.getElementById("c"+id).children[4].innerHTML = chord.fundamental + chord.quality + chord.extension + "[" + chord.inversion + "]";
 }
 
-function saveChordsPreset() {
-	alert("Basically");
-}
 
 function loadChordsPreset() {
 	alert("Tipically");
+}
+
+function postSaveChordsPreset(){
+    saveChords.style.backgroundColor = "red";
+    saveChords.innerHTML = "Saved!";
+    setTimeout(function(){  saveChords.style.backgroundColor = "darkgray";
+                            saveChords.innerHTML = "Save chords"; 
+                        }, 700);
 }

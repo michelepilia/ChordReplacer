@@ -145,7 +145,7 @@ function playNote(voice) {
   }
 
 
-function postSavePreset(){
+function postSaveSynthPreset(){
     saveSynth.style.backgroundColor = "red";
     saveSynth.innerHTML = "Saved!";
     setTimeout(function(){  saveSynth.style.backgroundColor = "darkgray";

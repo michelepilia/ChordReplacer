@@ -67,4 +67,6 @@ function editChord(){
 	updateChordTag(sequencer[chordIdx], chordIdx);
 }
 
-
+function saveChordsPresetName(){
+  chordsPresetName = document.getElementById("preset-chords-name").value;
+}
