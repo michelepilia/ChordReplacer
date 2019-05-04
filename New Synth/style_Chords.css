@@ -162,3 +162,41 @@
 	background-color: lightblue;
 
 }
+
+#edit-chord-window{
+	position: fixed;
+	top: 250px;
+	left: 300px;
+	font-size: 25px;
+	background-color: darkgray;
+	border: 1px solid black;
+	text-align: center;
+  	z-index: 1;
+  	display: none;
+}
+
+#preset-chords-name-ext{
+  border: 1px solid blue;
+  align-items: center;
+  display: inline-flex;
+  height: 15px;
+  width: 300px;
+  position: absolute;
+  top: -37px;
+  left: -11px;
+  background-color: lightblue;
+  padding: 10px;
+  margin-left: 10px;
+  justify-content: center;
+}
+
+#preset-chords-name-ext > p {
+	font-size: 16px;
+	margin-left: 35px;
+}
+
+#preset-chords-name-ext > input {
+	margin-left: 10px;
+	width: 90px;
+}
+

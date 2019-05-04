@@ -1,4 +1,7 @@
-
+var fundamentalSelector = document.getElementById("fundamental-chord");
+var qualitySelector = document.getElementById("quality-chord");
+var extensionSelector = document.getElementById("extension-chord");
+var inversionSelector = document.getElementById("inversion-chord");
 
 function addChord() {
 	var chord = new Chord();
@@ -39,8 +42,6 @@ function addChord() {
 	createChordEventListeners(); 
 
 
-
-
 }
 
 function removeChord(){
@@ -54,7 +55,16 @@ function removeChord(){
 }
 
 function editChord(){
-	alert("Basically");
+
+	var chordIdx = parseInt(document.getElementsByClassName("done-button-chord")[0].id.substr(15));
+	sequencer[chordIdx].noteFlag = true;
+	sequencer[chordIdx].fundamental = fundamentalSelector.value;
+	sequencer[chordIdx].quality = qualitySelector.value;
+	sequencer[chordIdx].extension = extensionSelector.value;
+	sequencer[chordIdx].inversion = inversionSelector.value;
+
+	closeChordEditor();
+	updateChordTag(sequencer[chordIdx], chordIdx);
 }
 
 
