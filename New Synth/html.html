@@ -15,7 +15,7 @@
     <div id="chords">
       <div class="blocks" id="chords-blocks">
       <span class="chord">
-        <canvas class="time-bar" id="c1"></canvas>
+        <canvas class="time-bar" id="c0"></canvas>
         <div class="chord-name">A</div>
           <div class="chord-type">maj 7</div>
           <div class="chord-substitution">S</div>
@@ -47,9 +47,9 @@
             <div class="substitution" id="c3s4">sub4</div>
           </div>
       </span>
-      <span class="chord pluschord">
-        <div class="chord-name plus">+
-          </div>
+      <span class="chord pluschord" id="plus-button-span">
+        <div id="plus-button" class="chord-name plus">+</div>
+        <div id="minus-button" class="chord-name minus">-</div>
       </span>
     </div>
     <div class="functions">FUNCTIONS
@@ -270,12 +270,20 @@
     </div> 
 
   </body>
+
+
   <script src="https://www.gstatic.com/firebasejs/5.11.0/firebase.js"></script>
-  <script src="model.js"></script>
-  <script src="controller.js"></script>
-  <script src="../db/db.js"></script>
-  <script src="view.js"></script>
-  <script src="Script_Chords.js"></script>
+
+  <script src="chords/chords_model.js"></script>
+  <script src="synth/synth_model.js"></script>0
+
+  <script src="chords/chords_controller.js"></script>
+  <script src="synth/synth_controller.js"></script>
+
+  <script src="db/db_controller.js"></script>
+
+  <script src="chords/chords_view.js"></script>
+  <script src="synth/synth_view.js"></script>
 
 
   </html>

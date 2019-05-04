@@ -48,11 +48,13 @@
 	margin-left: 5%;
 
 }
-.plus{
+.plus, .minus{
 	border-radius: 50%;
 	width: 30%;
 	height: 30%;
 	border: 1px solid black;
+	margin-top: 5px;
+	margin-bottom: 5px;
 }
 .chord-substitution{
 	position: absolute;
@@ -136,6 +138,8 @@
 }
 .pluschord{
 	border:1px solid blue;
+	display: inline-flex;
+	flex-direction: column;
 }
 
 .chord:hover{
