@@ -246,16 +246,28 @@ function loadChordsFunction(data) {
 
 			fbChords = fbSnapshot.val()[fbNames[chosenIndex]];
 
-			sequencer = fbChords.sequence;
+			for(i=0; i<fbChords.sequence.length; i++){
+				newChord = new Chord();
+
+				newChord.duration = fbChords.sequence[i].duration;
+				newChord.extension = fbChords.sequence[i].extension;
+				newChord.fundamental = fbChords.sequence[i].fundamental;
+				newChord.inversion = fbChords.sequence[i].inversion;
+				newChord.noteFlag = fbChords.sequence[i].noteFlag;
+				newChord.quality = fbChords.sequence[i].quality;
+
+				sequencer[i] = newChord; 
+			}
+
 			bpm = fbChords.bpm;
 
 			closeChordsLoader();
-			//updateChordsViewFromModel(fbNames[chosenIndex]);
+			updateChordsViewFromModel();
 	});
 }
 
 function deleteChordsFunction(data){
-	chosenIndex = parseInt(data.target.getAttribute("id").substr(21));
+	chosenIndex = parseInt(data.target.getAttribute("id").substr(22));
 
 	firebase.database().ref("Chords").once('value').then(
 		function(snapshot){
@@ -265,6 +277,6 @@ function deleteChordsFunction(data){
 			fbChords = firebase.database().ref("Chords").child(fbNames[chosenIndex]);
 			fbChords.remove();
 			closeChordsLoader();
-			//updateChordsViewFromModel(fbNames[chosenIndex]);
+			updateChordsViewFromModel();
 	});
 }

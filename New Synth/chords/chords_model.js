@@ -10,9 +10,5 @@ class Chord {
 	constructor() {
 		this.noteFlag = false;
 		this.duration = quantization;
-		this.fundamental = 'A';
-		this.quality = 'major';
-		this.extension = '7+';
-		this.inversion = '0';
 	};
 }

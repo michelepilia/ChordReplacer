@@ -42,7 +42,12 @@ function closeChordEditor(){
 }
 
 function updateChordTag(chord, id){
-	var chordToChange = document.getElementById("c"+id).children[4].innerHTML = chord.fundamental + chord.quality + chord.extension + "[" + chord.inversion + "]";
+    if (chord.noteFlag) {
+        document.getElementById("c"+id).children[4].innerHTML = chord.fundamental + chord.quality + chord.extension + "[" + chord.inversion + "]";
+    }
+    else {
+        document.getElementById("c"+id).children[4].innerHTML = "REST";
+    }
 }
 
 
@@ -61,3 +66,23 @@ function openChordsLoader(){
 function closeChordsLoader(){
     chordsLoader.style.display = "none";
 }
+
+
+
+function updateChordsViewFromModel(){
+
+    var sequencerHtml = Array.from(chordsBlocksHtml.children); //Blocchi HTML da rimuovere in formato array
+    sequencerHtml.pop(); //Rimuovo l'ultimo, che sarebbe il plus button block
+
+    for (i=1; i<sequencerHtml.length; i++){ //Ripulisco traccia, parto da 1 perché lo 0 è il field text per il name
+        sequencerHtml[i].remove();
+    }
+
+    for (i=0; i<sequencer.length; i++) {
+        addChordFromDB(i);
+    };
+
+}
+
+
+
