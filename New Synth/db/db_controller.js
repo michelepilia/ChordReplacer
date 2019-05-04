@@ -176,4 +176,95 @@ function saveChordsPreset() {
 	postSaveChordsPreset();
 }
 
+function loadChordsPreset(){
+	var chordsDb = firebase.database().ref('Chords');
 
+	chordsDb.once('value').then(
+			function(snapshot){
+				fbSnapshot = snapshot;
+				
+				fbNames = fbSnapshot.val();
+				fbNames = Object.keys(fbNames);
+
+				var chordsLoaderTable = document.getElementById("chords-loader-table");
+				
+				while (chordsLoaderTable.firstChild) { //Cleaning table from past rows
+    				chordsLoaderTable.removeChild(chordsLoaderTable.firstChild);
+				} 
+
+				for(i=0; i<fbNames.length; i++) {
+					var row = document.createElement("TR");
+					row.classList.add("preset-in-db");
+					var tdName = document.createElement("TD");
+					tdName.id = "chords-loading-name"+i;
+					tdName.innerHTML = fbNames[i];
+					var tdDate = document.createElement("TD");
+					tdDate.innerHTML = "Today";
+
+					var tdButton = document.createElement("TD");
+					tdButton.id = "chords-loading-td-button"+i;
+					var insideButton = document.createElement("BUTTON");
+					insideButton.id = "chords-loading-button"+i;
+					insideButton.classList.add("chords-load-button");
+					insideButton.innerHTML = "Load";
+					tdButton.appendChild(insideButton);
+
+					var tdButton2 = document.createElement("TD");
+					tdButton2.id = "chords-deleting-td-button"+i;
+					var insideButton2 = document.createElement("BUTTON");
+					insideButton2.id = "chords-deleting-button"+i;
+					insideButton2.classList.add("chords-delete-button");
+					insideButton2.innerHTML = "Delete";
+					tdButton2.appendChild(insideButton2);
+					row.appendChild(tdName);
+					row.appendChild(tdDate);
+					row.appendChild(tdButton);
+					row.appendChild(tdButton2);
+					chordsLoaderTable.appendChild(row);
+					createChordsLoaderEventListeners();
+				}
+				openChordsLoader(); //Create this function
+
+			});
+	
+}
+
+
+
+
+
+function loadChordsFunction(data) {
+	chosenIndex = parseInt(data.target.getAttribute("id").substr(21));
+
+	firebase.database().ref("Chords").once('value').then(
+		function(snapshot){
+			fbSnapshot = snapshot;
+
+
+			fbNames = fbSnapshot.val();
+			fbNames = Object.keys(fbNames);
+
+			fbChords = fbSnapshot.val()[fbNames[chosenIndex]];
+
+			sequencer = fbChords.sequence;
+			bpm = fbChords.bpm;
+
+			closeChordsLoader();
+			//updateChordsViewFromModel(fbNames[chosenIndex]);
+	});
+}
+
+function deleteChordsFunction(data){
+	chosenIndex = parseInt(data.target.getAttribute("id").substr(21));
+
+	firebase.database().ref("Chords").once('value').then(
+		function(snapshot){
+			fbSnapshot = snapshot;
+			fbNames = fbSnapshot.val();
+			fbNames = Object.keys(fbNames);
+			fbChords = firebase.database().ref("Chords").child(fbNames[chosenIndex]);
+			fbChords.remove();
+			closeChordsLoader();
+			//updateChordsViewFromModel(fbNames[chosenIndex]);
+	});
+}

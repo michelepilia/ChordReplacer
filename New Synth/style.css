@@ -251,7 +251,7 @@ html{
   transform: translate(0,15%);
 }
 
-#synth-loader{
+#synth-loader, #chords-loader{
   position: absolute;
   top:275px;
   left: 225px;
