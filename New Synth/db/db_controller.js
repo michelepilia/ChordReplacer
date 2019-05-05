@@ -245,7 +245,7 @@ function loadChordsFunction(data) {
 			fbNames = Object.keys(fbNames);
 
 			fbChords = fbSnapshot.val()[fbNames[chosenIndex]];
-
+			sequencer = [];
 			for(i=0; i<fbChords.sequence.length; i++){
 				newChord = new Chord();
 

@@ -175,24 +175,23 @@
   	display: none;
 }
 
-#preset-chords-name-ext{
+#upper-chords-bar{
   border: 1px solid blue;
   align-items: center;
   display: inline-flex;
-  height: 15px;
-  width: 300px;
+  height: 30px;
+  width: 448px;
   position: absolute;
-  top: -37px;
-  left: -11px;
+  top: -52px;
+  left: -1px;
   background-color: lightblue;
   padding: 10px;
-  margin-left: 10px;
-  justify-content: center;
+  justify-content: left;
 }
 
 #preset-chords-name-ext > p {
 	font-size: 16px;
-	margin-left: 35px;
+	margin: 0px;
 }
 
 #preset-chords-name-ext > input {
@@ -200,3 +199,11 @@
 	width: 90px;
 }
 
+#preset-chords-name-ext, #sequencer-function-ext{
+  border: 1px solid blue;
+  display: inline-flex;
+  background-color: lightblue;
+  align-items:center;
+  jusitfy-content:center;
+  margin-left: 10px;
+}

@@ -57,7 +57,7 @@ function addChordFromDB(idx) {
 
 	var chordNameHtml = document.createElement("div");
 	chordNameHtml.classList.add("chord-name");
-	chordNameHtml.innerHTML="";
+	chordNameHtml.innerHTML=""; 
 
 	var chordTypeHtml = document.createElement("div");
 	chordTypeHtml.classList.add("chord-type");
