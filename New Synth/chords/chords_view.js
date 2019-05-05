@@ -10,6 +10,11 @@ var loadChords = document.getElementById("load-chords");
 var chordsLoader = document.getElementById("chords-loader");
 var chordsPresetNameField = document.getElementById("preset-chords-name");
 var chordsPresetNameFieldContainer = document.getElementById("preset-chords-name-ext");
+var playButton = document.getElementById("play-button");
+var stopButton = document.getElementById("stop-button");
+
+playButton.addEventListener("click",playGraphicView);
+stopButton.addEventListener("click",pauseGraphicView);
 
 plusButton.addEventListener("click", addChord, false);
 minusButton.addEventListener("click", removeChord, false);
@@ -84,5 +89,61 @@ function updateChordsViewFromModel(){
 
 }
 
+function playGraphicView(){
+    startingChord = 0;
+    var startingChord = document.getElementsByClassName("chord")[startingChord];
+    canvasHTML = startingChord.firstChild;
+    playCanvas(canvasHTML);
+
+}
+
+function pauseGraphicView(){
+    
+}
+
+function playCanvas(canvas){
+
+    var ctx = canvas.getContext("2d")
+    var x=0;
+    var timeInterval = 60*4/bpm;
+    vx=10;
+    //var vx=canvas.width/timeInterval;
+    //console.log(vx);
+    var y=0;
+    var vy=0;
+    function move() {
+      console.log("called");
+      ctx.fillStyle = "black";
+      ctx.clearRect(0,0,canvas.width,canvas.height);
+      x += canvas.width/4;
+      ctx.fillRect(0,y,x,canvas.height); 
+      if (x>=canvas.width+canvas.width/4){
+        ctx.clearRect(0,0,canvas.width,canvas.height);
+        clearInterval(interval);
+      }
+    }
+    
+    /*
+    function fastMove(){
+        z=x;
+        z+=vx;
+        console.log("pinuccio");
+        ctx.clearRect(0,0,canvas.width,canvas.height);
+        ctx.fillRect(0,y,z,canvas.height); 
+        if(z>=x+canvas.width/4){
+        clearInterval(smallInterval);
+        }
+    }
+    */
+    var interval = setInterval(move,timeInterval*1000/4);
+    //var smallInterval = setInterval(fastMove, 0.1);
+    //var interval2 = setInterval(lamp(x),timeInterval/4);
+
+}
 
 
+function lamp(arrivingX){
+    ctx = canvasHTML.getContext("2d");
+    ctx.backgroundColor = "blue";
+   
+}
