@@ -111,3 +111,16 @@ function editChord(){
 function saveChordsPresetName(){
   chordsPresetName = document.getElementById("preset-chords-name").value;
 }
+
+function getNoteFromIntervalAbs(initNote, interval){
+	initValue = noteDict[initNote];
+	targetValue = (initValue+interval)%12;
+	targetNote = noteDictInverse[targetValue];
+	return targetNote;
+}
+
+
+
+
+
+

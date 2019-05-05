@@ -149,3 +149,72 @@ function lamp(arrivingX){
     ctx.backgroundColor = "blue";
    
 }
+
+
+
+
+
+function updateChordTag(chord, id){
+    var first;
+    var second;
+    var third;
+    var fourth;
+
+    if (chord.noteFlag) {
+        first = chord.fundamental;
+        if(chord.quality=="maj"){second="";}
+        else if (chord.quality=="min"){second="-";}
+        else if (chord.quality=="sus2" || chord.quality=="sus4"){second = "<sub style='vertical-align: sub; font-size: 30px;'>" + chord.quality + "</sub>";}
+        else if (chord.quality=="aug"){second="#5";}
+
+        if (chord.extension=="none"){third = "";}
+        else if (chord.extension=="maj7"){third = "<sup style='vertical-align: super; font-size: 30px;'>&#916</sup>";} //delta
+        else if (chord.extension=="b7"){third = "<sup style='vertical-align: super; font-size: 30px;'>7</sup>";}
+        else {third = "<sup style='vertical-align: super; font-size: 30px;'>" + chord.extension + "</sup>";}
+
+
+        if (chord.quality=="dim"){
+            if (chord.extension=="6"){ //bb7
+                second = "<sup style='vertical-align: super; font-size: 30px;'>°7</sup>";
+                third = "";
+            }
+            else if (chord.extension=="b7"){
+                second = "-" + "<sup style='vertical-align: super; font-size: 30px;'>7</sup>";
+                third = "&#9837"+"&#53;"; //bemolle
+            }
+            else if (chord.extension=="maj7"){
+                second = "-" + "<sup style='vertical-align: super; font-size: 30px;'>&#916</sup>"; //delta
+                third = "&#9837"+"&#53;"; //bemolle 5
+            }
+            else if (chord.extension=="none"){
+                second = "- ";
+                third = "&#9837"+"&#53;"; //bemolle
+            }
+            else {
+                second = "-" + "<sup style='vertical-align: super; font-size: 30px;'>7</sup>";
+                third = "&#9837"+"&#53"+"<sup style='vertical-align: super; font-size: 30px;'>9</sup>";
+            }
+        }
+
+        if (chord.inversion==0) {fourth="";}
+        else if (chord.inversion==1) {
+            if (chord.quality=="maj" || chord.quality=="aug"){fourth="/"+getNoteFromIntervalAbs(chord.fundamental, 4);}
+            else if (chord.quality=="min"||chord.quality=="dim"){fourth="/"+getNoteFromIntervalAbs(chord.fundamental, 3);}
+            else {fourth="";}
+        }
+        else if (chord.inversion==2) {
+            if (chord.quality=="maj" || chord.quality=="min" || chord.quality=="sus2" || chord.quality=="sus4"){
+                fourth="/"+getNoteFromIntervalAbs(chord.fundamental, 7);
+            }
+            else if (chord.quality=="dim"){fourth="/"+getNoteFromIntervalAbs(chord.fundamental, 6);}
+            else if (chord.quality=="aug"){fourth="/"+getNoteFromIntervalAbs(chord.fundamental, 8)}
+            else {fourth="";}
+        }
+        document.getElementById("c"+id).children[4].innerHTML = first+second+third+fourth;
+    }
+
+    else {
+        document.getElementById("c"+id).children[4].innerHTML = "";
+    }
+
+}
