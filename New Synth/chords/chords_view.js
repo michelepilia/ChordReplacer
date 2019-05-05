@@ -12,6 +12,7 @@ var chordsPresetNameField = document.getElementById("preset-chords-name");
 var chordsPresetNameFieldContainer = document.getElementById("preset-chords-name-ext");
 var playButton = document.getElementById("play-button");
 var stopButton = document.getElementById("stop-button");
+var actualIndex = 0;
 
 playButton.addEventListener("click",playGraphicView);
 stopButton.addEventListener("click",pauseGraphicView);
@@ -90,11 +91,30 @@ function updateChordsViewFromModel(){
 }
 
 function playGraphicView(){
-    startingChord = 0;
-    var startingChord = document.getElementsByClassName("chord")[startingChord];
-    canvasHTML = startingChord.firstChild;
-    playCanvas(canvasHTML);
+    numberOfChords = document.getElementsByClassName("chord").length - 1;
+    actualIndex=0;
+    var actualChord = document.getElementsByClassName("chord")[actualIndex];
+    function moveToNextCanvas(){
+        numberOfChords = document.getElementsByClassName("chord").length - 1;
+        if(actualIndex<document.getElementsByClassName("chord").length-1){
+            actualChord = document.getElementsByClassName("chord")[actualIndex];
+            canvasHTML = actualChord.firstChild;
+            playCanvas(canvasHTML);
+            actualIndex = (actualIndex+1) % numberOfChords;
+        }
+    }
 
+    function reLoop(){
+        numberOfChords = document.getElementsByClassName("chord").length - 1;
+        clearInterval(chordDurationInterval);
+        for(i=0; i<numberOfChords;i++){
+                actualChord = document.getElementsByClassName("chord")[i];
+                canvasHTML = actualChord.firstChild;
+                var ctx = canvasHTML.getContext("2d");
+                ctx.clearRect(0,0,canvasHTML.width,canvasHTML.height);
+        }
+    }
+    var chordDurationInterval = setInterval(moveToNextCanvas,60*4*1000/bpm);
 }
 
 function pauseGraphicView(){
@@ -103,17 +123,15 @@ function pauseGraphicView(){
 
 function playCanvas(canvas){
 
-    var ctx = canvas.getContext("2d")
+    var ctx = canvas.getContext("2d");
     var x=0;
     var timeInterval = 60*4/bpm;
     vx=10;
-    //var vx=canvas.width/timeInterval;
-    //console.log(vx);
     var y=0;
     var vy=0;
     function move() {
       console.log("called");
-      ctx.fillStyle = "black";
+      ctx.fillStyle = "lightblue";
       ctx.clearRect(0,0,canvas.width,canvas.height);
       x += canvas.width/4;
       ctx.fillRect(0,y,x,canvas.height); 
@@ -122,23 +140,7 @@ function playCanvas(canvas){
         clearInterval(interval);
       }
     }
-    
-    /*
-    function fastMove(){
-        z=x;
-        z+=vx;
-        console.log("pinuccio");
-        ctx.clearRect(0,0,canvas.width,canvas.height);
-        ctx.fillRect(0,y,z,canvas.height); 
-        if(z>=x+canvas.width/4){
-        clearInterval(smallInterval);
-        }
-    }
-    */
     var interval = setInterval(move,timeInterval*1000/4);
-    //var smallInterval = setInterval(fastMove, 0.1);
-    //var interval2 = setInterval(lamp(x),timeInterval/4);
-
 }
 
 
