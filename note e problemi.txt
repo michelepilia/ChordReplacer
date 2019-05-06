@@ -1,0 +1,2 @@
+Discontinuita' nella view della time bar canvas.
+Il tempo impiegato a 120 bpm per riempire la barra e' di 1800 ms circa, quando dovrebbe essere di 2000 ms. Quindi vi e' una discontinuita' di 200 ms nella view della time bar, nel passaggio all'accordo successivo.

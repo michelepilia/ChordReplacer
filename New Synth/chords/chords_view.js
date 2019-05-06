@@ -20,9 +20,12 @@ var t1 = (quarterTime*4)/numberOfUpdates; //-> t1 e' l'intervallo di tempo costa
 var numberOfUpdates; // numberOfUpdates = actualCanvas.width / diffLengthIncreasing
 var actualCanvas;
 var numberOfCanvas;
+var playStatus = 0;
+var updateTimeInterval;
+var chordTimeInterval;
 
-playButton.addEventListener("click",playGraphicView);
-stopButton.addEventListener("click",pauseGraphicView);
+playButton.addEventListener("click",playEffect);
+stopButton.addEventListener("click",stopGraphicView);
 
 plusButton.addEventListener("click", addChord, false);
 minusButton.addEventListener("click", removeChord, false);
@@ -96,8 +99,16 @@ function updateChordsViewFromModel(){
     };
 
 }
-
+function playEffect(){
+    if (playStatus==0){
+        playGraphicView();
+    }
+    else{
+        pauseGraphicView();
+    }
+}
 function playGraphicView(){
+    playStatus = 1;
     numberOfCanvas = document.getElementsByClassName("time-bar").length;
     actualCanvas = document.getElementsByClassName("time-bar")[actualIndex];
     var ctx = actualCanvas.getContext("2d");
@@ -109,7 +120,7 @@ function playGraphicView(){
     t1 = (quarterTime*4)/numberOfUpdates;
     console.log("tn = " + quarterTime*4);
     console.time();
-    var chordTimeInterval = setInterval(moveToNextCanvas,actualChordDuration());
+    chordTimeInterval = setInterval(moveToNextCanvas,actualChordDuration());
     playCanvas(actualCanvas);
 
     function moveToNextCanvas(){
@@ -124,14 +135,30 @@ function playGraphicView(){
     }
 }
 
+function pauseGraphicView(){
+    playStatus=0;
+    clearInterval(updateTimeInterval);
+    clearInterval(chordTimeInterval);
+}
+
+function stopGraphicView(){
+    pauseGraphicView();
+    actualIndex=0;
+    clearAllTimeBar();
+}
+function clearAllTimeBar(){
+    canvas = document.getElementsByClassName("time-bar");
+    for (i = 0; i < canvas.length; i++) {
+        ctx = canvas[i].getContext("2d");
+        ctx.clearRect(0,0,canvas[i].width,canvas[i].height);
+    }
+}
+
 function actualChordDuration(){
     var actualChordDurationInQuarters = sequencer[actualIndex].duration/2;
     return (actualChordDurationInQuarters*quarterTime);
 }
 
-function pauseGraphicView(){
-    
-}
 
 function playCanvas(canvas){
 
@@ -146,19 +173,18 @@ function playCanvas(canvas){
             ctx.fillRect(0,0,x,canvas.height);
       }
       else{
-//      ctx.clearRect(0,0,canvas.width,canvas.height);
+        ctx.clearRect(0,0,canvas.width,canvas.height);
         clearInterval(updateTimeInterval);
         //console.timeEnd();
       }
     }
-    var updateTimeInterval = setInterval(move,t1);
+    updateTimeInterval = setInterval(move,t1);
 }
 
 
 function lamp(arrivingX){
     ctx = canvasHTML.getContext("2d");
     ctx.backgroundColor = "blue";
-   
 }
 
 
