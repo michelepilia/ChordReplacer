@@ -13,6 +13,13 @@ var chordsPresetNameFieldContainer = document.getElementById("preset-chords-name
 var playButton = document.getElementById("play-button");
 var stopButton = document.getElementById("stop-button");
 var actualIndex = 0;
+var latency=0;
+var diffLengthIncreasing = 1; //[pixel]
+var quarterTime = 60*1000/bpm;//[ms] -> tn = quarterTime*4; e' il tempo di una battuta (4 quarti); 
+var t1 = (quarterTime*4)/numberOfUpdates; //-> t1 e' l'intervallo di tempo costante dopo cui chiamare il fillRect per la canvas
+var numberOfUpdates; // numberOfUpdates = actualCanvas.width / diffLengthIncreasing
+var actualCanvas;
+var numberOfCanvas;
 
 playButton.addEventListener("click",playGraphicView);
 stopButton.addEventListener("click",pauseGraphicView);
@@ -91,30 +98,35 @@ function updateChordsViewFromModel(){
 }
 
 function playGraphicView(){
-    numberOfChords = document.getElementsByClassName("chord").length - 1;
-    actualIndex=0;
-    var actualChord = document.getElementsByClassName("chord")[actualIndex];
-    function moveToNextCanvas(){
-        numberOfChords = document.getElementsByClassName("chord").length - 1;
-        if(actualIndex<document.getElementsByClassName("chord").length-1){
-            actualChord = document.getElementsByClassName("chord")[actualIndex];
-            canvasHTML = actualChord.firstChild;
-            playCanvas(canvasHTML);
-            actualIndex = (actualIndex+1) % numberOfChords;
-        }
-    }
+    numberOfCanvas = document.getElementsByClassName("time-bar").length;
+    actualCanvas = document.getElementsByClassName("time-bar")[actualIndex];
+    var ctx = actualCanvas.getContext("2d");
+    numberOfUpdates = actualCanvas.width/diffLengthIncreasing;
+    console.log("width = "+ actualCanvas.width);
+    console.log("numberOfUpdates = "+ numberOfUpdates);
+    quarterTime = 60*1000/bpm;
+    console.log("quarter time = " + quarterTime);
+    t1 = (quarterTime*4)/numberOfUpdates;
+    console.log("tn = " + quarterTime*4);
+    console.time();
+    var chordTimeInterval = setInterval(moveToNextCanvas,actualChordDuration());
+    playCanvas(actualCanvas);
 
-    function reLoop(){
-        numberOfChords = document.getElementsByClassName("chord").length - 1;
-        clearInterval(chordDurationInterval);
-        for(i=0; i<numberOfChords;i++){
-                actualChord = document.getElementsByClassName("chord")[i];
-                canvasHTML = actualChord.firstChild;
-                var ctx = canvasHTML.getContext("2d");
-                ctx.clearRect(0,0,canvasHTML.width,canvasHTML.height);
+    function moveToNextCanvas(){
+        if(++actualIndex<numberOfCanvas){
+            actualCanvas = document.getElementsByClassName("time-bar")[actualIndex];
+            playCanvas(actualCanvas);
+        }
+        else{
+            console.timeEnd();
+            clearInterval(chordTimeInterval);
         }
     }
-    var chordDurationInterval = setInterval(moveToNextCanvas,60*4*1000/bpm);
+}
+
+function actualChordDuration(){
+    var actualChordDurationInQuarters = sequencer[actualIndex].duration/2;
+    return (actualChordDurationInQuarters*quarterTime);
 }
 
 function pauseGraphicView(){
@@ -125,22 +137,21 @@ function playCanvas(canvas){
 
     var ctx = canvas.getContext("2d");
     var x=0;
-    var timeInterval = 60*4/bpm;
-    vx=10;
-    var y=0;
-    var vy=0;
+    //console.time();
     function move() {
-      console.log("called");
-      ctx.fillStyle = "lightblue";
-      ctx.clearRect(0,0,canvas.width,canvas.height);
-      x += canvas.width/4;
-      ctx.fillRect(0,y,x,canvas.height); 
-      if (x>=canvas.width+canvas.width/4){
-        ctx.clearRect(0,0,canvas.width,canvas.height);
-        clearInterval(interval);
+      if (x<=canvas.width+diffLengthIncreasing){
+            ctx.fillStyle = "lightblue";
+            ctx.clearRect(0,0,canvas.width,canvas.height);
+            x += diffLengthIncreasing;
+            ctx.fillRect(0,0,x,canvas.height);
+      }
+      else{
+//      ctx.clearRect(0,0,canvas.width,canvas.height);
+        clearInterval(updateTimeInterval);
+        //console.timeEnd();
       }
     }
-    var interval = setInterval(move,timeInterval*1000/4);
+    var updateTimeInterval = setInterval(move,t1);
 }
 
 
