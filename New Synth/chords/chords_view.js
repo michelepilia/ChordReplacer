@@ -25,7 +25,6 @@ var numberOfCanvas;
 var playStatus = 0;
 var updateTimeInterval;
 var chordTimeInterval;
-
 doneLoadChordsButton.addEventListener("click",closeChordsLoader,false);
 playButton.addEventListener("click",playEffect,false);
 stopButton.addEventListener("click",stopGraphicView,false);
@@ -36,6 +35,7 @@ doneButton.addEventListener("click", editChord, false);
 saveChords.addEventListener("click", saveChordsPreset, false);
 loadChords.addEventListener("click", loadChordsPreset, false);
 chordsPresetNameField.addEventListener("input", saveChordsPresetName, false);
+
 
 function createChordEventListeners(){
 	newEditButton = Array.from(document.getElementsByClassName("chord-edit")).pop();

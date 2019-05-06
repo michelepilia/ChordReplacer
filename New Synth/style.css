@@ -1,5 +1,7 @@
 
-
+body{
+  /*font-family:"Verdana" ; */
+}
 html{    
   -moz-user-select: none; /* Firefox */
   -ms-user-select: none; /* Internet Explorer */
@@ -9,7 +11,7 @@ html{
 }
 #synth {
   position: relative;
-  top: 370px;
+  top: 450px;
   display: grid;
   grid-template-columns: 41% 41% 14%;
   grid-template-rows: auto auto;
@@ -255,8 +257,8 @@ html{
 
 #synth-loader, #chords-loader{
   position: absolute;
-  top:275px;
-  left: 225px;
+  top:250px;
+  left: 180px;
   background-color: gray;
   border: 1px solid black;
   width: auto;
