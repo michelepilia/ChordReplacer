@@ -21,18 +21,20 @@
         <div id="upper-chords-bar">
 
           <div id="preset-chords-name-ext">
-            <p>Chords Preset name:</p>
-            <input id="preset-chords-name" type="text" name="preset-name" value="Chords Name">
+            <p>Block name:</p>
+            <input id="preset-chords-name" type="text" name="preset-name" value="init">
           </div>
 
 
           <div id="sequencer-function-ext">
-            <button class='button play' id="play-button">play/pause</button>
-            <button class='button play' id="stop-button">stop</button>
-            <button class='button play' id="inst-play-button">inst play</button>
-
+            <button class='upper-seq-function button play' id="play-button">play/pause</button>
+            <button class='upper-seq-function button play' id="stop-button">stop</button>
+            <button class='upper-seq-function button play' id="inst-play-button">inst play</button>
+            <button class='upper-seq-function button play' id="loop-button">loop</button>
           </div>
-
+            <div class='upper-seq-function'id="bpm-text-ext">BPM
+                <input id="bpm-value" type="text" name="bpm" value="120">
+            </div>
         </div>
 
         <span class="chord pluschord" id="plus-button-span">
@@ -40,13 +42,13 @@
         <div id="minus-button" class="chord-name minus">-</div>
       </span>
       </div>
-    <div class="functions">FUNCTIONS
+    <div class="functions">DATABASE FUNCTIONS
       <div class="function" id="load-chords">Load chords</div>
       <div class="function" id="save-chords">Save chords</div>
-      <div class="function" id="open-synth">Open Synth</div>
-      <div class="function" id="save-synth">Save synth preset</div>
-      <div class="function" id="load-synth">Load synth preset</div>
-      <div class="function">BPM: 120</div>
+      <div class="function" id="open-synth">Synth view</div>
+      <div class="function" id="load-synth">Load synth</div>
+      <div class="function" id="save-synth">Save synth</div>
+
     </div>
 
     </div>

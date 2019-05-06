@@ -7,11 +7,13 @@ var chordEditor = document.getElementById("edit-chord-window");
 var doneButton = document.getElementById("done-edit-chord");
 var saveChords = document.getElementById("save-chords");
 var loadChords = document.getElementById("load-chords");
+var doneLoadChordsButton = document.getElementById("done-load-chords");
 var chordsLoader = document.getElementById("chords-loader");
 var chordsPresetNameField = document.getElementById("preset-chords-name");
 var chordsPresetNameFieldContainer = document.getElementById("preset-chords-name-ext");
 var playButton = document.getElementById("play-button");
 var stopButton = document.getElementById("stop-button");
+var bpmText = document.getElementById("bpm-value");
 var actualIndex = 0;
 var latency=0;
 var diffLengthIncreasing = 1; //[pixel]
@@ -24,9 +26,10 @@ var playStatus = 0;
 var updateTimeInterval;
 var chordTimeInterval;
 
-playButton.addEventListener("click",playEffect);
-stopButton.addEventListener("click",stopGraphicView);
-
+doneLoadChordsButton.addEventListener("click",closeChordsLoader,false);
+playButton.addEventListener("click",playEffect,false);
+stopButton.addEventListener("click",stopGraphicView,false);
+bpmText.addEventListener('input',changeBpm,false)
 plusButton.addEventListener("click", addChord, false);
 minusButton.addEventListener("click", removeChord, false);
 doneButton.addEventListener("click", editChord, false);
@@ -85,7 +88,7 @@ function closeChordsLoader(){
 
 
 
-function updateChordsViewFromModel(){
+function updateChordsViewFromModel(chordsName){
 
     var sequencerHtml = Array.from(chordsBlocksHtml.children); //Blocchi HTML da rimuovere in formato array
     sequencerHtml.pop(); //Rimuovo l'ultimo, che sarebbe il plus button block
@@ -97,6 +100,7 @@ function updateChordsViewFromModel(){
     for (i=0; i<sequencer.length; i++) {
         addChordFromDB(i);
     };
+    chordsPresetNameField.value=chordsName;
 
 }
 function playEffect(){
@@ -130,6 +134,8 @@ function playGraphicView(){
         }
         else{
             console.timeEnd();
+            playStatus=0;
+            actualIndex=0;
             clearInterval(chordTimeInterval);
         }
     }
@@ -189,7 +195,9 @@ function lamp(arrivingX){
 
 
 
-
+function changeBpm() {
+    bpm = parseInt(bpmText.value);
+}
 
 function updateChordTag(chord, id){
     var first;

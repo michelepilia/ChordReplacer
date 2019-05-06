@@ -78,6 +78,7 @@
 	width: 80%;
 	background-color: darkgray;
 	border-radius: 10%;
+	text-align: center;
 }
 
 .functions{
@@ -93,6 +94,7 @@
 	background-color: gray;
 	padding: 10px;
 	border: 1px solid black;
+	text-align: center;
 }
 
 .time-bar{
@@ -180,13 +182,13 @@
   align-items: center;
   display: inline-flex;
   height: 30px;
-  width: 448px;
+  width: 600px;
   position: absolute;
   top: -52px;
   left: -1px;
   background-color: lightblue;
   padding: 10px;
-  justify-content: left;
+  justify-content: center;
 }
 
 #preset-chords-name-ext > p {
@@ -205,5 +207,32 @@
   background-color: lightblue;
   align-items:center;
   jusitfy-content:center;
-  margin-left: 10px;
+  margin:auto;
+  padding: 3px;
+}
+
+#bpm-value{
+	width: 40%;
+	background-color: gray;
+	text-align: center;
+	border: 1px solid black;
+	margin-left: 20px;
+}
+
+.upper-seq-function{
+	margin-left: 5px;
+	margin-right: 5px;
+}
+
+#bpm-text-ext{
+	display: inline-flex;
+	align-items: center;
+	width: 100px;
+	border: 1px solid gray;
+	padding: 5px;
+	justify-content: center;
+}
+
+#preset-chords-name{
+	text-align: center;
 }
