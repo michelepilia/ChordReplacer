@@ -44,6 +44,8 @@ function createChordEventListeners(){
     newQuantizationMinusButton = Array.from(document.getElementsByClassName("quantization-minus")).pop();
 	newEditButton.addEventListener("click", showChordEditor, false);
     newSwapButton.addEventListener("click", handleSwap, false);
+    newSwapButton.addEventListener("mouseover",handleMouseOver,false);
+    newSwapButton.addEventListener("mouseleave",handleMouseLeave,false);
     newQuantizationPlusButton.addEventListener("click", increaseChordSize, false);
     newQuantizationMinusButton.addEventListener("click", decreaseChordSize, false);
 }
@@ -279,6 +281,18 @@ function updateChordsViewForSwap(data){
         var classHtml=document.getElementsByClassName("chord-swap");
         for (var i = 0; i < classHtml.length; i++) {
             classHtml[i].style.backgroundColor="lightgray";
+            classHtml[i].style.backgroundColor="lightgray";
         }
+    }
+}
+
+function handleMouseOver(data){
+    var id = data.target.getAttribute("id");
+    document.getElementById(id).style.backgroundColor="green";
+}
+function handleMouseLeave(data){
+    if (swapActive==0) {
+        var id = data.target.getAttribute("id");
+        document.getElementById(id).style.backgroundColor="lightgray";
     }
 }
