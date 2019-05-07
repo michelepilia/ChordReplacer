@@ -2,6 +2,8 @@ var fundamentalSelector = document.getElementById("fundamental-chord");
 var qualitySelector = document.getElementById("quality-chord");
 var extensionSelector = document.getElementById("extension-chord");
 var inversionSelector = document.getElementById("inversion-chord");
+var chordsToSwap = [];
+var swapActive = 0;
 
 function addChord() {
 	var chord = new Chord();
@@ -32,6 +34,23 @@ function addChord() {
 	eButton.classList.add("chord-edit");
 	eButton.innerHTML = "E";
 
+	var swapButton = document.createElement("div");
+	swapButton.classList.add("chord-swap");
+	swapButton.innerHTML = "Sw";
+	swapButton.id="swap-button-"+(document.getElementsByClassName("chord").length-1);
+
+
+	var quantizationButton = document.createElement("div");
+	quantizationButton.classList.add("quantization-button");
+	var plusButton = document.createElement("div");
+	var minusButton = document.createElement("div");
+	plusButton.classList.add("quantization-plus");
+	minusButton.classList.add("quantization-minus");
+	plusButton.innerHTML="+";
+	minusButton.innerHTML="-";
+	quantizationButton.appendChild(plusButton);
+	quantizationButton.appendChild(minusButton);
+
 
 	chordsBlocksHtml.insertBefore(chordHtml, plusSpan);
 	chordHtml.appendChild(canvas);
@@ -39,6 +58,9 @@ function addChord() {
 	chordHtml.appendChild(chordSubHtml);
 	chordHtml.appendChild(chordTypeHtml);
 	chordHtml.appendChild(chordNameHtml);
+
+	chordHtml.appendChild(swapButton);
+	chordHtml.appendChild(quantizationButton);
 	createChordEventListeners(); 
 
 
@@ -71,6 +93,22 @@ function addChordFromDB(idx) {
 	eButton.classList.add("chord-edit");
 	eButton.innerHTML = "E";
 
+    var swapButton = document.createElement("div");
+	swapButton.classList.add("chord-swap");
+	swapButton.innerHTML = "Sw";
+	swapButton.id="swap-button-"+(document.getElementsByClassName("chord").length-1);
+
+
+	var quantizationButton = document.createElement("div");
+	quantizationButton.classList.add("quantization-button");
+	var plusButton = document.createElement("div");
+	var minusButton = document.createElement("div");
+	plusButton.classList.add("quantization-plus");
+	minusButton.classList.add("quantization-minus");
+	plusButton.innerHTML="+";
+	minusButton.innerHTML="-";
+	quantizationButton.appendChild(plusButton);
+	quantizationButton.appendChild(minusButton);
 
 	chordsBlocksHtml.insertBefore(chordHtml, plusSpan);
 	chordHtml.appendChild(canvas);
@@ -78,6 +116,9 @@ function addChordFromDB(idx) {
 	chordHtml.appendChild(chordSubHtml);
 	chordHtml.appendChild(chordTypeHtml);
 	chordHtml.appendChild(chordNameHtml);
+	chordHtml.appendChild(swapButton);
+	chordHtml.appendChild(quantizationButton);
+	
 	updateChordTag(sequencer[idx], idx);
 	createChordEventListeners(); 
 
@@ -120,7 +161,31 @@ function getNoteFromIntervalAbs(initNote, interval){
 }
 
 
+function handleSwap(data){
+	var id = data.target.getAttribute("id").substr(12);
+	if (swapActive==0) {
+		chordsToSwap[0] = sequencer[id];
+		chordsToSwap[1] = id;
+		swapActive=1;
+		updateChordsViewForSwap(data);
+	}
+	else if (swapActive==1) {
+		chordsToSwap[2] = sequencer[id];
+		chordsToSwap[3] = id;
+		sequencer[chordsToSwap[1]]=chordsToSwap[2];
+		sequencer[chordsToSwap[3]]=chordsToSwap[0];
+		swapActive=0;
+		updateChordsViewForSwap(data);
+		updateChordTag(sequencer[chordsToSwap[1]], chordsToSwap[1]);
+	    updateChordTag(sequencer[chordsToSwap[3]], chordsToSwap[3]);
+	}
+}
 
 
+function increaseChordSize(data){
+	console.log("handleIncreaseInSize");
+}
 
-
+function decreaseChordSize(data){
+	console.log("handleDescreaseInSize");
+}
