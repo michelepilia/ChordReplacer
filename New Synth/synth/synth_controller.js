@@ -1,3 +1,5 @@
+var dummyVoices = [];
+
 function startVoice(voice) {
 
   voice.gain1.connect(pre_filt_gain);
@@ -6,7 +8,6 @@ function startVoice(voice) {
   voice.oscillator2.connect(pre_gain2);
   pre_gain1.connect(voice.gain1);
   pre_gain2.connect(voice.gain2);
-
   voice.oscillator1.frequency.value = voice.frequency * offset3;
   voice.oscillator1.frequency.value = voice.oscillator1.frequency.value * offset1;
   voice.oscillator2.frequency.value = voice.frequency * offset4;
@@ -203,4 +204,41 @@ function keyboardMaker() {
 
 function saveSynthPresetName(){
   synthPresetName = document.getElementById("preset-synth-name").value;
+}
+
+function playNotesFromFrequencies(arrayOfFrequencies,multFactor){
+  dummyVoices = [];
+  for ( i = 0; i < arrayOfFrequencies.length; i++) {
+    var voice = new Voice(arrayOfFrequencies[i]*multFactor);
+    dummyVoices.push(voice);
+    voice.gain1.connect(master);
+    voice.gain2.connect(master);
+    voice.oscillator1.connect(voice.gain1);
+    voice.oscillator2.connect(voice.gain2);
+    voice.oscillator1.frequency.value = voice.frequency * offset3;
+    voice.oscillator1.frequency.value = voice.oscillator1.frequency.value * offset1;
+    voice.oscillator2.frequency.value = voice.frequency * offset4;
+    voice.oscillator2.frequency.value = voice.oscillator2.frequency.value * offset2;
+    voice.oscillator1.type = selectorValues[0];
+    voice.oscillator2.type = selectorValues[1];
+    playNote(voice);
+}
+    setTimeout(function(){
+      for (k = 0; k < dummyVoices.length; k++) {
+        releaseTheVoice(dummyVoices[k],k);        }
+      }, 1000); 
+  return dummyVoices;
+}
+
+function releaseTheVoice(voice,index){
+    console.log("aaaa "+voice);
+    voice.gain1.gain.linearRampToValueAtTime(0, 0.5);
+    voice.gain2.gain.linearRampToValueAtTime(0, 0.5);
+    voice.oscillator1.stop();
+    voice.oscillator2.stop();
+    voice.oscillator1.disconnect();
+    voice.oscillator2.disconnect();
+    voice.gain1.disconnect();
+    voice.gain2.disconnect();
+    dummyVoices[index]=0;
 }
