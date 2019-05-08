@@ -25,6 +25,8 @@ var numberOfCanvas;
 var playStatus = 0;
 var updateTimeInterval;
 var chordTimeInterval;
+var instPlayButton = document.getElementById("inst-play-button");
+
 doneLoadChordsButton.addEventListener("click",closeChordsLoader,false);
 playButton.addEventListener("click",playEffect,false);
 stopButton.addEventListener("click",stopGraphicView,false);
@@ -35,6 +37,7 @@ doneButton.addEventListener("click", editChord, false);
 saveChords.addEventListener("click", saveChordsPreset, false);
 loadChords.addEventListener("click", loadChordsPreset, false);
 chordsPresetNameField.addEventListener("input", saveChordsPresetName, false);
+instPlayButton.addEventListener("click", toggleInstPlayMode, false);
 
 
 function createChordEventListeners(){
@@ -66,15 +69,6 @@ function showChordEditor(data){
 
 function closeChordEditor(){
 	chordEditor.style.display = "none";
-}
-
-function updateChordTag(chord, id){
-    if (chord.noteFlag) {
-        document.getElementById("c"+id).children[4].innerHTML = chord.fundamental + chord.quality + chord.extension + "[" + chord.inversion + "]";
-    }
-    else {
-        document.getElementById("c"+id).children[4].innerHTML = "REST";
-    }
 }
 
 

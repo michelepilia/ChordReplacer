@@ -4,6 +4,7 @@ var extensionSelector = document.getElementById("extension-chord");
 var inversionSelector = document.getElementById("inversion-chord");
 var chordsToSwap = [];
 var swapActive = 0;
+var instPlayMode = false;
 
 function addChord() {
 	var chord = new Chord();
@@ -12,6 +13,7 @@ function addChord() {
 
 	var chordHtml = document.createElement("SPAN");
 	chordHtml.classList.add("chord");
+	chordHtml.classList.add("actual-chord");
 	currentIndex = document.getElementsByClassName("chord").length - 1;
 	chordHtml.id = "c"+currentIndex;
 
@@ -71,6 +73,7 @@ function addChordFromDB(idx) {
 
 	var chordHtml = document.createElement("SPAN");
 	chordHtml.classList.add("chord");
+	chordHtml.classList.add("actual-chord");
 	currentIndex = idx;
 	chordHtml.id = "c"+currentIndex;
 
@@ -189,3 +192,118 @@ function increaseChordSize(data){
 function decreaseChordSize(data){
 	console.log("handleDescreaseInSize");
 }
+
+
+function toggleInstPlayMode(){
+	var actualChords = document.getElementsByClassName("actual-chord");
+	if (instPlayMode){
+		for(i=0; i<actualChords.length; i++){
+			actualChords[i].removeEventListener("click", instPlayChord);
+		}
+	}
+	else {
+		for(i=0; i<actualChords.length; i++){
+			actualChords[i].addEventListener("click", instPlayChord);
+		}
+	}
+	instPlayMode = !instPlayMode;
+}
+
+function instPlayChord(data){
+	var id = parseInt(data.target.getAttribute("id").substr(1));
+	var playingchord = sequencer[id];
+	var freqs = createVoicing(playingchord);
+	var msQuantDur = (4/bpm)*(60000/quantization);
+	var msChordDur = playingchord.duration*msQuantDur;
+	var voices = [];
+
+	for(i=0; i<freqs.length; i++){
+		voices[i] = new Voice(freqs[i]);
+		startVoice(voices[i]);
+	}
+	setTimeout(function(){ 
+		for(i=0; i<voices.length; i++){
+			release(voices[i]);
+			release2(voices[i]);
+		}
+	}, msChordDur);
+	
+}
+
+function createVoicing(chord){
+
+	var fund = noteDict[chord.fundamental] + 16;
+	var voicing = [];
+	var freqVoicing = [];
+	var first;
+    var third;
+    var fifth;
+    var extension;
+
+    if (chord.noteFlag) {
+        first = fund;
+        if(chord.quality=="maj"){
+        	third=fund+4;
+        	fifth=fund+7;
+        }
+        else if (chord.quality=="min"){
+        	third=fund+3;
+        	fifth=fund+7;
+        }
+        else if (chord.quality=="sus2"){
+        	third=fund+2;
+        	fifth=fund+7;
+        }
+        else if (chord.quality=="sus4"){
+        	third=fund+5;
+        	fifth=fund+7;
+        }
+        else if (chord.quality=="aug"){
+        	third=fund+4;
+        	fifth=fund+8;
+        }
+        else if (chord.quality=="dim"){
+        	third=fund+3;
+        	fifth=fund+6;
+        }
+
+        if (chord.extension=="none") {ext=fund+12;}
+        else if (chord.extension=="6") {ext=fund+9;}
+        else if (chord.extension=="b7") {ext=fund+10;}
+        else if (chord.extension=="maj7") {ext=fund+11;}
+        else if (chord.extension=="9") {ext=fund+14;}
+        else if (chord.extension=="11") {ext=fund+17;}
+        else if (chord.extension=="13") {ext=fund+21;}
+
+
+        //C0, E4, G7, B11 The notes in variables
+      	//C0, C12, G19, E28, B35 The notes I want in a C maj7
+
+        voicing = [fund, fund+12, fifth+12, third+24, ext+24];
+      	if (chord.inversion==1){voicing[0] = third;}
+      	else if (chord.inversion==2){voicing[0] = fifth;}
+
+      	freqVoicing = voicing.map(function(x){
+      		return Math.pow(2, ((x-69)/12))*440;
+      	})
+
+
+      	return freqVoicing;
+    }
+    else { 
+    	return freqVoicing;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
