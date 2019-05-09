@@ -22,6 +22,7 @@ function addChord() {
 
 	var chordNameHtml = document.createElement("div");
 	chordNameHtml.classList.add("chord-name");
+	chordNameHtml.id = "t"+currentIndex;
 	chordNameHtml.innerHTML="REST";
 
 	var chordTypeHtml = document.createElement("div");
@@ -82,6 +83,7 @@ function addChordFromDB(idx) {
 
 	var chordNameHtml = document.createElement("div");
 	chordNameHtml.classList.add("chord-name");
+	chordNameHtml.id = "t"+currentIndex;
 	chordNameHtml.innerHTML=""; 
 
 	var chordTypeHtml = document.createElement("div");
@@ -200,11 +202,13 @@ function toggleInstPlayMode(){
 		for(i=0; i<actualChords.length; i++){
 			actualChords[i].removeEventListener("click", instPlayChord);
 		}
+		toggleInstPlayButton();
 	}
 	else {
 		for(i=0; i<actualChords.length; i++){
 			actualChords[i].addEventListener("click", instPlayChord);
 		}
+		toggleInstPlayButton();
 	}
 	instPlayMode = !instPlayMode;
 }
@@ -232,7 +236,7 @@ function instPlayChord(data){
 
 function createVoicing(chord){
 
-	var fund = noteDict[chord.fundamental] + 16;
+	var fund = noteDict[chord.fundamental] + 40;
 	var voicing = [];
 	var freqVoicing = [];
 	var first;

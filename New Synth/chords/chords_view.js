@@ -290,3 +290,13 @@ function handleMouseLeave(data){
         document.getElementById(id).style.backgroundColor="lightgray";
     }
 }
+
+
+function toggleInstPlayButton(){
+    if(instPlayMode){
+        instPlayButton.style.backgroundColor="lightgreen";
+    }
+    else {
+        instPlayButton.style.backgroundColor="white";
+    }
+}
