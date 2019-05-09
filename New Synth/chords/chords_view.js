@@ -126,6 +126,7 @@ function playGraphicView(){
     numberOfCanvas = document.getElementsByClassName("time-bar").length;
     actualCanvas = document.getElementsByClassName("time-bar")[actualIndex];
     var ctx = actualCanvas.getContext("2d");
+    console.log(actualCanvas);
     numberOfUpdates = actualCanvas.width/diffLengthIncreasing;
     console.log("width = "+ actualCanvas.width);
     console.log("numberOfUpdates = "+ numberOfUpdates);
