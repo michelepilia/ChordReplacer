@@ -197,20 +197,23 @@ function decreaseChordSize(data){
 
 
 function toggleInstPlayMode(){
-	var actualChords = document.getElementsByClassName("actual-chord");
+	var chordTags = document.getElementsByClassName("chord-name");
 	if (instPlayMode){
-		for(i=0; i<actualChords.length; i++){
-			actualChords[i].removeEventListener("click", instPlayChord);
+		for(i=0; i<chordTags.length; i++){
+			chordTags[i].removeEventListener("click", instPlayChord);
+			chordTags[i].removeEventListener("mouseover", chordTagMouseOver);
+			chordTags[i].removeEventListener("mouseout", chordTagMouseOut);
 		}
-		toggleInstPlayButton();
 	}
 	else {
-		for(i=0; i<actualChords.length; i++){
-			actualChords[i].addEventListener("click", instPlayChord);
+		for(i=0; i<chordTags.length; i++){
+			chordTags[i].addEventListener("click", instPlayChord);
+			chordTags[i].addEventListener("mouseover", chordTagMouseOver);
+			chordTags[i].addEventListener("mouseout", chordTagMouseOut);
 		}
-		toggleInstPlayButton();
 	}
 	instPlayMode = !instPlayMode;
+	toggleInstPlayButton();
 }
 
 function instPlayChord(data){
@@ -219,24 +222,14 @@ function instPlayChord(data){
 	var freqs = createVoicing(playingchord);
 	var msQuantDur = (4/bpm)*(60000/quantization);
 	var msChordDur = playingchord.duration*msQuantDur;
-	var voices = [];
-
-	for(i=0; i<freqs.length; i++){
-		voices[i] = new Voice(freqs[i]);
-		startVoice(voices[i]);
-	}
-	setTimeout(function(){ 
-		for(i=0; i<voices.length; i++){
-			release(voices[i]);
-			release2(voices[i]);
-		}
-	}, msChordDur);
+	
+	playNotesFromFrequencies(freqs, 1, false);
 	
 }
 
 function createVoicing(chord){
 
-	var fund = noteDict[chord.fundamental] + 40;
+	var fund = noteDict[chord.fundamental] + 36;
 	var voicing = [];
 	var freqVoicing = [];
 	var first;
@@ -292,11 +285,9 @@ function createVoicing(chord){
       	})
 
 
-      	return freqVoicing;
     }
-    else { 
-    	return freqVoicing;
-    }
+    return freqVoicing;
+
 }
 
 

@@ -208,7 +208,7 @@ function saveSynthPresetName(){
 
 function playNotesFromFrequencies(arrayOfFrequencies,multFactor,bypass){
   dummyVoices = [];
-  if (bypass==1){
+  if (!bypass){
     filt = c.createBiquadFilter();
     filt.type = "lowpass";
     filt.gain.value = 1;

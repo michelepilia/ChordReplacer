@@ -300,3 +300,11 @@ function toggleInstPlayButton(){
         instPlayButton.style.backgroundColor="white";
     }
 }
+
+function chordTagMouseOver(data){
+    data.target.style.backgroundColor = "#1c6dd8";
+}
+
+function chordTagMouseOut(data){
+    data.target.style.backgroundColor = "inherit";
+}
