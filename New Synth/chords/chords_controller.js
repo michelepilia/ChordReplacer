@@ -47,6 +47,8 @@ function addChord() {
 	quantizationButton.classList.add("quantization-button");
 	var plusButton = document.createElement("div");
 	var minusButton = document.createElement("div");
+	plusButton.id = "plus-button-"+currentIndex;
+	minusButton.id = "minus-button-"+currentIndex;
 	plusButton.classList.add("quantization-plus");
 	minusButton.classList.add("quantization-minus");
 	plusButton.innerHTML="+";
@@ -108,6 +110,8 @@ function addChordFromDB(idx) {
 	quantizationButton.classList.add("quantization-button");
 	var plusButton = document.createElement("div");
 	var minusButton = document.createElement("div");
+	plusButton.id = "plus-button-"+currentIndex;
+	minusButton.id = "minus-button-"+currentIndex;
 	plusButton.classList.add("quantization-plus");
 	minusButton.classList.add("quantization-minus");
 	plusButton.innerHTML="+";
@@ -187,12 +191,19 @@ function handleSwap(data){
 }
 
 
-function increaseChordSize(data){
-	console.log("handleIncreaseInSize");
-}
-
-function decreaseChordSize(data){
-	console.log("handleDescreaseInSize");
+function changeChordSize(data){
+	var type = -1;
+	var chordIndex = data.target.getAttribute("id").substr(13);;
+	if (data.target.getAttribute("class")=='quantization-plus') {
+		chordIndex = data.target.getAttribute("id").substr(12);
+		type = 1 ;
+	}
+	var chordHtml = document.getElementById("c"+chordIndex);
+	if (sequencer[chordIndex].duration + type >=1) {
+		sequencer[chordIndex].duration = sequencer[chordIndex].duration+type;
+		updateChordDurationInView("c"+chordIndex,type);
+	}
+	console.log(sequencer[chordIndex].duration);
 }
 
 

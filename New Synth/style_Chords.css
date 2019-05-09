@@ -7,8 +7,9 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	border-right: hidden;
+	border-radius:5px;
 	color: black;
+	margin-right:2px;
 }
 #chords-blocks{
 	position: absolute;
@@ -67,6 +68,9 @@
 	width: 26px;
 	height: 26px;
 	border: 1px solid black;
+	border-bottom: none;
+	border-right: none;
+	border-radius: 5px;
 	right: 0px;
 	bottom: 0px;
 	text-align: center;
@@ -162,6 +166,9 @@
 	width: 26px;
 	height: 26px;
 	border: 1px solid black;
+	border-left: hidden;
+	border-top:hidden;
+	border-radius: 5px;
 	left: 0px;
 	top: 0px;
 	text-align: center;
@@ -274,6 +281,9 @@
 	width: 26px;
 	height: 26px;
 	border: 1px solid black;
+	border-left: hidden;
+	border-bottom: hidden;
+	border-radius:5px;
 	left: 0px;
 	bottom: 0px;
 	text-align: center;
@@ -292,12 +302,16 @@
 	height: 26px;
 	border: 1px solid black;
 	text-align: center;
+	border-radius: 5px;
+	border-right: hidden;
+	border-top:hidden;
 }
 .quantization-plus, .quantization-minus{
-	border: 1px solid black;
 	width: 100%;
 	height: 50%;
+	border-radius: 5px;
 }
+
 .quantization-plus:hover,.quantization-minus:hover{
 	background-color:green;
 }

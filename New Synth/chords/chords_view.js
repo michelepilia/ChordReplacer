@@ -26,6 +26,8 @@ var playStatus = 0;
 var updateTimeInterval;
 var chordTimeInterval;
 var instPlayButton = document.getElementById("inst-play-button");
+var quantumSizeInPxs = document.getElementsByClassName('pluschord')[0].offsetWidth/8;
+console.log("qsize: "+quantumSizeInPxs);
 
 doneLoadChordsButton.addEventListener("click",closeChordsLoader,false);
 playButton.addEventListener("click",playEffect,false);
@@ -49,8 +51,8 @@ function createChordEventListeners(){
     newSwapButton.addEventListener("click", handleSwap, false);
     newSwapButton.addEventListener("mouseover",handleMouseOver,false);
     newSwapButton.addEventListener("mouseleave",handleMouseLeave,false);
-    newQuantizationPlusButton.addEventListener("click", increaseChordSize, false);
-    newQuantizationMinusButton.addEventListener("click", decreaseChordSize, false);
+    newQuantizationPlusButton.addEventListener("click", changeChordSize, false);
+    newQuantizationMinusButton.addEventListener("click", changeChordSize, false);
 }
 
 function createChordsLoaderEventListeners() {
@@ -107,12 +109,18 @@ function updateChordsViewFromModel(chordsName){
 }
 function playEffect(){
     if (playStatus==0){
+        playAudioView();
         playGraphicView();
     }
     else{
         pauseGraphicView();
     }
 }
+
+function playAudioView(){
+
+}
+
 function playGraphicView(){
     playStatus = 1;
     numberOfCanvas = document.getElementsByClassName("time-bar").length;
@@ -307,4 +315,15 @@ function chordTagMouseOver(data){
 
 function chordTagMouseOut(data){
     data.target.style.backgroundColor = "inherit";
+}
+
+function updateChordDurationInView(chordId,type){
+    var chordHtml = document.getElementById(chordId);
+    var style = window.getComputedStyle(chordHtml, null);
+    var actualSize = parseInt(style.getPropertyValue("width").substr(0,style.getPropertyValue("width").length-2));
+    console.log("previous: "+actualSize);
+    var increase = actualSize + quantumSizeInPxs*type;  
+    console.log("next shuold be: "+increase);
+    chordHtml.style.width = increase.toString()+"px";
+    console.log("next is: "+style.getPropertyValue("width"));
 }
