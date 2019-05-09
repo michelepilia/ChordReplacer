@@ -206,28 +206,55 @@ function saveSynthPresetName(){
   synthPresetName = document.getElementById("preset-synth-name").value;
 }
 
-function playNotesFromFrequencies(arrayOfFrequencies,multFactor){
+function playNotesFromFrequencies(arrayOfFrequencies,multFactor,bypass){
   dummyVoices = [];
-  for ( i = 0; i < arrayOfFrequencies.length; i++) {
-    var voice = new Voice(arrayOfFrequencies[i]*multFactor);
-    dummyVoices.push(voice);
-    voice.gain1.connect(master);
-    voice.gain2.connect(master);
-    voice.oscillator1.connect(voice.gain1);
-    voice.oscillator2.connect(voice.gain2);
-    voice.oscillator1.frequency.value = voice.frequency * offset3;
-    voice.oscillator1.frequency.value = voice.oscillator1.frequency.value * offset1;
-    voice.oscillator2.frequency.value = voice.frequency * offset4;
-    voice.oscillator2.frequency.value = voice.oscillator2.frequency.value * offset2;
-    voice.oscillator1.type = selectorValues[0];
-    voice.oscillator2.type = selectorValues[1];
-    playNote(voice);
-}
+  if (bypass==1){
+    filt = c.createBiquadFilter();
+    filt.type = "lowpass";
+    filt.gain.value = 1;
+    eg = minFilt+(amounts[6]/(maxAmount-minAmount)*(maxFilt-minFilt));
+    filt.connect(master);
+    for ( i = 0; i < arrayOfFrequencies.length; i++) {
+      var voice = new Voice(arrayOfFrequencies[i]*multFactor);
+      dummyVoices.push(voice);
+      voice.gain1.connect(filt);
+      voice.gain2.connect(filt);
+      voice.oscillator1.connect(voice.gain1);
+      voice.oscillator2.connect(voice.gain2);
+      voice.oscillator1.frequency.value = voice.frequency * offset3;
+      voice.oscillator1.frequency.value = voice.oscillator1.frequency.value * offset1;
+      voice.oscillator2.frequency.value = voice.frequency * offset4;
+      voice.oscillator2.frequency.value = voice.oscillator2.frequency.value * offset2;
+      voice.oscillator1.type = selectorValues[0];
+      voice.oscillator2.type = selectorValues[1];
+      playNote(voice);
+    }
+    lfo = c.createOscillator();
+    lfo_amp = c.createGain();
+    lfo.connect(lfo_amp);
+    lfo.type = 'sine';
+    lfo.frequency.value = 8;
+    lfo_amp.gain.value = 0.15;
+    lfo_amp.connect(master.gain);
+    lfo.start();
     setTimeout(function(){
       for (k = 0; k < dummyVoices.length; k++) {
         releaseTheVoice(dummyVoices[k],k);        }
       }, 1000); 
-  return dummyVoices;
+    return dummyVoices;
+  }
+  else{
+    for ( i = 0; i < arrayOfFrequencies.length; i++) {
+      var voice = new Voice(arrayOfFrequencies[i]*multFactor);
+      dummyVoices.push(voice);
+      startVoice(voice);
+    }
+    setTimeout(function(){
+      for (k = 0; k < dummyVoices.length; k++) {
+        releaseTheVoice(dummyVoices[k],k);        }
+      }, 1000); 
+    return dummyVoices;
+  }
 }
 
 function releaseTheVoice(voice,index){

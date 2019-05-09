@@ -81,7 +81,10 @@ function setUp(){
 	lfo_destinations = [pre_gain1.gain, pre_gain2.gain, filt.frequency, filt.Q]; 
 	lfo_gain = c.createGain();
 	lfo.frequency.value = minLfo+(amounts[7]/(maxAmount-minAmount)*maxLfo);
-	lfo.connect(lfo_gain); 
+	lfo.connect(lfo_gain);
+	lfo_gain.connect(pre_gain1); 
+	lfo_gain.connect(pre_gain2); 
+	lfo_gain.gain.value=0.15;
 	lfo.start();
 
 	
@@ -97,10 +100,10 @@ function Voice(frequency){ //Voce è inteso come signal path totale
 	this.frequency = frequency;
 	this.oscillator1 = c.createOscillator();
 	this.oscillator2 = c.createOscillator();
-
 	this.gain1 = c.createGain();
 	this.gain2 = c.createGain();
- 
+	this.pre_gain1 = c.createGain();
+	this.pre_gain2 = c.createGain(); 
   
 }
 
