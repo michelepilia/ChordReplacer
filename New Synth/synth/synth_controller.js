@@ -221,6 +221,8 @@ function playNotesFromFrequencies(arrayOfFrequencies,multFactor,bypass, sustainT
       voice.gain2.connect(filt);
       voice.oscillator1.connect(voice.gain1);
       voice.oscillator2.connect(voice.gain2);
+      //lfo_amp.connect(voice.pre_gain1);
+      //lfo_amp.connect(voice.pre_gain2);
       voice.oscillator1.frequency.value = voice.frequency * offset3;
       voice.oscillator1.frequency.value = voice.oscillator1.frequency.value * offset1;
       voice.oscillator2.frequency.value = voice.frequency * offset4;
