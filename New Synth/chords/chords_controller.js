@@ -241,6 +241,7 @@ function instPlayChord(data){
 	var playingchord = sequencer[id];
 	var freqs = createVoicing(playingchord);
 	var sustainTime = playingchord.duration*quantumTime/1000; /*[seconds]*/
+	console.log("stime = " +sustainTime);
 	playNotesFromFrequencies(freqs, 1, false,sustainTime);
 }
 

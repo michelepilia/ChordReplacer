@@ -105,31 +105,32 @@ function updateView3(){ //Prima di ruotare
 
 /*Envelope Functions*/
 
-function playTransient(voice,sustainTime) {
+function playTransient(voice,attackTime,decaytime,sustainTime) {
     console.time();
 	voice.oscillator1.start();
     voice.oscillator2.start(); 
-    now=c.currentTime;
-    amp_td = now + sliderAmounts[6]/100; /*[seconds]*/
-    amp_ts = amp_td +  sliderAmounts[7]/100 ;/*[seconds]*/
-    amp_tr = amp_ts + sustainTime;/*[seconds]*/
-    console.log(sustainTime);
-    filt_td = now+sliderAmounts[0]/100;
+    t0 = c.currentTime;
+    t1 = t0 + attackTime;/*[seconds]*/
+    t2 = t1 + decaytime ;/*[seconds]*/
+    t3 = t2 + sustainTime;/*[seconds]*/
+
+    filt_td = t0+sliderAmounts[0]/100;
     filt_ts = filt_td + sliderAmounts[1]/100;
     filt_tr = filt_ts + sustainTime;
-    //console.log("t1 = "+(amp_td) +" t2 = "+amp_ts +" t3 = "+(amp_tr));
+    console.log("t0 = "+t0 +" t1 = "+t1+" t2 = "+t2 +" t3 = "+t3);
     //console.log("tattack = "+(amp_td-now) +" tsust = "+(amp_ts-amp_td) +" trel = "+(amp_tr-amp_ts));
     //console.log("amp_tr = "+amp_tr)
-    voice.gain1.gain.setValueAtTime(0, now);
-    voice.gain2.gain.setValueAtTime(0, now);
-    voice.gain1.gain.linearRampToValueAtTime(1*amounts[0]*SENS/270, amp_td);
-    voice.gain2.gain.linearRampToValueAtTime(1*amounts[2]*SENS/270, amp_td);
+    voice.gain1.gain.setValueAtTime(0, t0);
+    voice.gain2.gain.setValueAtTime(0, t0);
+
+    voice.gain1.gain.linearRampToValueAtTime(1*amounts[0]*SENS/270, t1);
+    voice.gain2.gain.linearRampToValueAtTime(1*amounts[2]*SENS/270, t1);
     filt.frequency.linearRampToValueAtTime(eg, filt_td); //Linear ramp to eg at tima ATCK
-    lfo.frequency.linearRampToValueAtTime(minLfo+(amounts[7]/(maxAmount-minAmount)*(maxLfo-minLfo)), now+sliderAmounts[4]/100);
+    lfo.frequency.linearRampToValueAtTime(minLfo+(amounts[7]/(maxAmount-minAmount)*(maxLfo-minLfo)), t0+sliderAmounts[4]/100);
     filt.frequency.linearRampToValueAtTime(sliderAmounts[2]/100*eg, filt_td); //linear ramp tu SUS (% di eg) at time DCY
-    voice.gain1.gain.linearRampToValueAtTime(sliderAmounts[8]/100*amounts[0]*SENS/270, amp_ts);
-    voice.gain2.gain.linearRampToValueAtTime(sliderAmounts[8]/100*amounts[2]*SENS/270, amp_ts);
-    return amp_tr;
+    
+    voice.gain1.gain.linearRampToValueAtTime(sliderAmounts[8]/100*amounts[0]*SENS/270, t2);
+    voice.gain2.gain.linearRampToValueAtTime(sliderAmounts[8]/100*amounts[2]*SENS/270, t2);
 }
 
 

@@ -50,8 +50,9 @@ function sliderListener(data){
   }
   else {
     id = slider.getAttribute("id");
-    id = id.substr(1); //Rimuove il primo elemento dell'array, dunque la prima lettera dell'id. Non si poteva utilizzare il metodo usato coi knob perchè alcuni index hanno due cifre
-    sliderChangeIndex = parseInt(id) - 1;
+    id = id.substr(1) -1; //Rimuove il primo elemento dell'array, dunque la prima lettera dell'id. Non si poteva utilizzare il metodo usato coi knob perchè alcuni index hanno due cifre
+    sliderChangeIndex = parseInt(id);
+    console.log("sl index = "+sliderChangeIndex);
     sliderAmounts[sliderChangeIndex]=parseInt(slider.value);
     if (sliderChangeIndex == 5) {
       lfo_gain.gain.value = lfoGainType();
@@ -175,7 +176,7 @@ function timeoutRelease(e){
         a = noteIsPlaying(tones[keys.indexOf(e.key)]);
         release2(playingNotes[a]);
         playingNotes.splice(a,1);
-    }, now + sliderAmounts[11]/100*1000);
+    }, now + sliderAmounts[9]/100*1000);
 }
 
 function noteIsPlaying(frequency){
@@ -222,22 +223,30 @@ function playNotesFromFrequencies(arrayOfFrequencies,multFactor,bypass, sustainT
       voice.oscillator2.frequency.value = voice.oscillator2.frequency.value * offset2;
       voice.oscillator1.type = selectorValues[0];
       voice.oscillator2.type = selectorValues[1];
-      amp_tr = playTransient(voice, sustainTime);/*[seconds]*/
+      attackTime = sliderAmounts[6]/100;
+      decayTime = sliderAmounts[7]/100;
+      releaseTime = sliderAmounts[9]/100;
+      console.log("rltime = "+ releaseTime);
+      console.log(attackTime+decayTime+sustainTime);
+      playTransient(voice, attackTime, decayTime, sustainTime);/*[seconds]*/
     }
     setTimeout(function(){
       now = c.currentTime;
-      releaseTime = now+sliderAmounts[9]/100 ;
+      t3 = now;
+      console.log("rltime = "+ releaseTime);
       filt.frequency.linearRampToValueAtTime(minFilt+(amounts[4]/(maxAmount-minAmount)*(maxFilt-minFilt)), now + sliderAmounts[3]/100);
       for (k = 0; k < playingVoices.length; k++) {    
-          releaseVoice(playingVoices[k],k,releaseTime,now);        
+        console.log("rltime = "+ releaseTime);
+          releaseVoice(playingVoices[k],k,t3,releaseTime);        
       }
-      }, c.currentTime + amp_tr);
-  }
+      }, Math.min((attackTime+sustainTime+releaseTime)*1000,sustainTime*1000));
+    }
 }
 
-function releaseVoice(voice,index, releaseTime,beginTime){
-  voice.gain1.gain.linearRampToValueAtTime(0, releaseTime);
-  voice.gain2.gain.linearRampToValueAtTime(0, releaseTime);
+function releaseVoice(voice,index, t3,releaseTime){
+  console.log("rltime = "+ releaseTime);
+  voice.gain1.gain.linearRampToValueAtTime(0, t3+releaseTime);
+  voice.gain2.gain.linearRampToValueAtTime(0, t3+releaseTime);
   setTimeout(function(){
   voice.oscillator1.stop();
   voice.oscillator2.stop();
@@ -247,5 +256,5 @@ function releaseVoice(voice,index, releaseTime,beginTime){
   voice.gain2.disconnect();
   playingVoices[index]=0;
   console.timeEnd();
-  },releaseTime*1000-beginTime);
+  },releaseTime*1000);
 }
