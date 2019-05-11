@@ -1,17 +1,11 @@
-//VARIABILI GLOBALI
 var SENS = 3; /*Parametro di sensibilita' alla rotazione. E' possibile cambiarlo senza influenzare il resto del codice, a patto che sia un divisore esatto di 270.*/
-
-//Definizione nodi Web Audio API
-var c = new AudioContext(); 
-var pre_gain1;
-var pre_gain2;
+/*AUDIO GLOBAL NODES*/
 var lfo;
-var lfo_destinations;
-var lfo_gain;
-var pre_filt_gain; //Perchè si assume che il filtro possa avere un solo input, dunque si fanno confluire i due oscillatori in un unico nodo
+var lfo_amp;
 var filt;
 var master;
-
+var c = new AudioContext();
+/*--------------*/
 //Parametri vari Web Audio API
 var eg;
 var minLfo = 0;
@@ -40,6 +34,7 @@ var sliderAmounts; //Array contenente il valore degli slider
 var sliderChangeIndex = 0; //Index dello slider che sta cambiando
 var selectorChangeIndex = 0; //Index del selector che si sta cambiando
 var antiGlitchFlag = 0;
+var lfo_destinations;
 
 
 //Sezione tastiera
@@ -59,39 +54,27 @@ function setUp(){
 	selectorValues = ["sawtooth", "sawtooth", "sawtooth", "0"];
 	sliderAmounts = [50, 50, 50, 50, 50, 50, 50, 50, 50, 50];
 
-
-
 	/*Inizializzazione nodi Web Audio API*/
-	
+	master = c.createGain();
+
 	/*Sezione Filter*/
-	pre_filt_gain = c.createGain();
-	pre_filt_gain.gain.value = 1;
 	filt = c.createBiquadFilter();
 	filt.type = "lowpass";
 	filt.gain.value = 1;
 	eg = minFilt+(amounts[6]/(maxAmount-minAmount)*(maxFilt-minFilt));
-	pre_filt_gain.connect(filt);
+	filt.connect(master);
 
 	/*Sezione LFO*/
-	pre_gain1 = c.createGain(); //Nodo gain intermedio tra oscillator e gain1, su cui lfo agisce, indipendentemente dal valore del knob
-	pre_gain2 = c.createGain();
-	pre_gain1.gain.value = 1;
-	pre_gain2.gain.value = 1;
 	lfo = c.createOscillator();
-	lfo_destinations = [pre_gain1.gain, pre_gain2.gain, filt.frequency, filt.Q]; 
-	lfo_gain = c.createGain();
-	lfo.frequency.value = minLfo+(amounts[7]/(maxAmount-minAmount)*maxLfo);
-	lfo.connect(lfo_gain);
-	lfo_gain.connect(pre_gain1); 
-	lfo_gain.connect(pre_gain2); 
-	lfo_gain.gain.value=0.15;
-	lfo.start();
-
-	
+    lfo_amp = c.createGain();
+    lfo.connect(lfo_amp);
+    lfo.type = 'sine';
+    lfo.frequency.value = 8;
+    lfo_amp.gain.value = 0.15;
+    lfo_amp.connect(master.gain);
+    lfo.start();
 
 	/*Sezione Master*/
-	master = c.createGain();
-	filt.connect(master);
 	master.connect(c.destination);
 }
 

@@ -240,11 +240,8 @@ function instPlayChord(data){
 	var id = parseInt(data.target.getAttribute("id").substr(1));
 	var playingchord = sequencer[id];
 	var freqs = createVoicing(playingchord);
-	var msQuantDur = (4/bpm)*(60000/quantization);
-	var msChordDur = playingchord.duration*msQuantDur;
-	
-	playNotesFromFrequencies(freqs, 1, false);
-	
+	var sustainTime = playingchord.duration*quantumTime/1000; /*[seconds]*/
+	playNotesFromFrequencies(freqs, 1, false,sustainTime);
 }
 
 function createVoicing(chord){

@@ -105,26 +105,33 @@ function updateView3(){ //Prima di ruotare
 
 /*Envelope Functions*/
 
-function playNote(voice) {
+function playTransient(voice,sustainTime) {
+    console.time();
 	voice.oscillator1.start();
     voice.oscillator2.start(); 
-
-
     now=c.currentTime;
+    amp_td = now + sliderAmounts[6]/100; /*[seconds]*/
+    amp_ts = amp_td +  sliderAmounts[7]/100 ;/*[seconds]*/
+    amp_tr = amp_ts + sustainTime;/*[seconds]*/
+    console.log(sustainTime);
+    filt_td = now+sliderAmounts[0]/100;
+    filt_ts = filt_td + sliderAmounts[1]/100;
+    filt_tr = filt_ts + sustainTime;
+    //console.log("t1 = "+(amp_td) +" t2 = "+amp_ts +" t3 = "+(amp_tr));
+    //console.log("tattack = "+(amp_td-now) +" tsust = "+(amp_ts-amp_td) +" trel = "+(amp_tr-amp_ts));
+    //console.log("amp_tr = "+amp_tr)
     voice.gain1.gain.setValueAtTime(0, now);
     voice.gain2.gain.setValueAtTime(0, now);
-    
-    voice.gain1.gain.linearRampToValueAtTime(1*amounts[0]*SENS/270, now+sliderAmounts[6]/100);
-    voice.gain2.gain.linearRampToValueAtTime(1*amounts[2]*SENS/270, now+sliderAmounts[6]/100);
-    
-    filt.frequency.linearRampToValueAtTime(eg, now+sliderAmounts[0]/100); //Linear ramp to eg at tima ATCK
+    voice.gain1.gain.linearRampToValueAtTime(1*amounts[0]*SENS/270, amp_td);
+    voice.gain2.gain.linearRampToValueAtTime(1*amounts[2]*SENS/270, amp_td);
+    filt.frequency.linearRampToValueAtTime(eg, filt_td); //Linear ramp to eg at tima ATCK
     lfo.frequency.linearRampToValueAtTime(minLfo+(amounts[7]/(maxAmount-minAmount)*(maxLfo-minLfo)), now+sliderAmounts[4]/100);
-    
+    filt.frequency.linearRampToValueAtTime(sliderAmounts[2]/100*eg, filt_td); //linear ramp tu SUS (% di eg) at time DCY
+    voice.gain1.gain.linearRampToValueAtTime(sliderAmounts[8]/100*amounts[0]*SENS/270, amp_ts);
+    voice.gain2.gain.linearRampToValueAtTime(sliderAmounts[8]/100*amounts[2]*SENS/270, amp_ts);
+    return amp_tr;
+}
 
-    filt.frequency.linearRampToValueAtTime(sliderAmounts[2]/100*eg, now + sliderAmounts[1]/100 + sliderAmounts[0]/100); //linear ramp tu SUS (% di eg) at time DCY
-    voice.gain1.gain.linearRampToValueAtTime(sliderAmounts[8]/100*amounts[0]*SENS/270, now + sliderAmounts[7]/100 +sliderAmounts[6]/100);
-    voice.gain2.gain.linearRampToValueAtTime(sliderAmounts[8]/100*amounts[2]*SENS/270, now + sliderAmounts[7]/100+sliderAmounts[6]/100);
-  }
 
   function release(voice){
     now = c.currentTime;
@@ -181,4 +188,3 @@ function toggleSynthVisibility(){
         synthPresetNameFieldContainer.style.display = "none";
     }
 }
-  

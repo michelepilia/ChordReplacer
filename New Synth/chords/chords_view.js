@@ -111,16 +111,12 @@ function playEffect(){
     //console.log("play status == "+playStatus);
     if (playStatus==0){
         playStatus = 1;
-        playAudioView();
+        //playAudioView();
         performPlayerView();
     }
     else{
         pauseGraphicView();
     }
-}
-
-function playAudioView(){
-
 }
 
 function performPlayerView(){
@@ -132,7 +128,6 @@ function performPlayerView(){
     }
     else{
         console.timeEnd();
-        console.log("aaaa");
         stopGraphicView();
     }
 }
