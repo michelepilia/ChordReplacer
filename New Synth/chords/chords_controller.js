@@ -66,6 +66,11 @@ function addChord() {
 
 	chordHtml.appendChild(swapButton);
 	chordHtml.appendChild(quantizationButton);
+
+	var style = window.getComputedStyle(chordHtml, null);
+    var actualSize = parseInt(style.getPropertyValue("width").substr(0,style.getPropertyValue("width").length-2));
+	canvas.width = actualSize;
+
 	createChordEventListeners(); 
 
 
@@ -128,6 +133,10 @@ function addChordFromDB(idx) {
 	chordHtml.appendChild(swapButton);
 	chordHtml.appendChild(quantizationButton);
 	
+	var style = window.getComputedStyle(chordHtml, null);
+    var actualSize = parseInt(style.getPropertyValue("width").substr(0,style.getPropertyValue("width").length-2));
+	canvas.width = actualSize;
+
 	updateChordTag(sequencer[idx], idx);
 	createChordEventListeners(); 
 
@@ -203,7 +212,7 @@ function changeChordSize(data){
 		sequencer[chordIndex].duration = sequencer[chordIndex].duration+type;
 		updateChordDurationInView("c"+chordIndex,type);
 	}
-	console.log(sequencer[chordIndex].duration);
+	//console.log(sequencer[chordIndex].duration);
 }
 
 

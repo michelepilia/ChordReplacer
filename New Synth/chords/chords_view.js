@@ -17,8 +17,8 @@ var bpmText = document.getElementById("bpm-value");
 var actualIndex = 0;
 var latency=0;
 var diffLengthIncreasing = 1; //[pixel]
-var quarterTime = 60*1000/bpm;//[ms] -> tn = quarterTime*4; e' il tempo di una battuta (4 quarti); 
-var t1 = (quarterTime*4)/numberOfUpdates; //-> t1 e' l'intervallo di tempo costante dopo cui chiamare il fillRect per la canvas
+var quantumTime = 60*1000/bpm/2;//[ms] -> tn = quarterTime*4; e' il tempo di una battuta (4 quarti); 
+var t1 = (quantumTime*4)/numberOfUpdates; //-> t1 e' l'intervallo di tempo costante dopo cui chiamare il fillRect per la canvas
 var numberOfUpdates; // numberOfUpdates = actualCanvas.width / diffLengthIncreasing
 var actualCanvas;
 var numberOfCanvas;
@@ -122,34 +122,68 @@ function playAudioView(){
 }
 
 function playGraphicView(){
-    playStatus = 1;
-    numberOfCanvas = document.getElementsByClassName("time-bar").length;
+    if (playStatus==0) {
+        playStatus = 1;
+    }
     actualCanvas = document.getElementsByClassName("time-bar")[actualIndex];
-    var ctx = actualCanvas.getContext("2d");
-    console.log(actualCanvas);
     numberOfUpdates = actualCanvas.width/diffLengthIncreasing;
-    console.log("width = "+ actualCanvas.width);
+    quantumTime = 60*1000/bpm/2;
+    var actualChordQuantums = sequencer[actualIndex].duration;
+    t1 = (quantumTime*actualChordQuantums)/numberOfUpdates;
+    console.log("computed width = "+ actualCanvas.width);
+    console.log("style width = "+actualCanvas.width);
     console.log("numberOfUpdates = "+ numberOfUpdates);
-    quarterTime = 60*1000/bpm;
-    console.log("quarter time = " + quarterTime);
-    t1 = (quarterTime*4)/numberOfUpdates;
-    console.log("tn = " + quarterTime*4);
+    console.log("quarter time = " + quantumTime);
+    console.log("tn = " + quantumTime*actualChordQuantums);
+    console.log("t1 = " +t1);
     console.time();
-    chordTimeInterval = setInterval(moveToNextCanvas,actualChordDuration());
-    playCanvas(actualCanvas);
+    playCanvas(actualCanvas, actualCanvas.width);
+    setTimeout(function(){playCanvas(actualCanvas);},quantumTime*actualChordQuantums); 
+}
 
-    function moveToNextCanvas(){
-        if(++actualIndex<numberOfCanvas){
-            actualCanvas = document.getElementsByClassName("time-bar")[actualIndex];
-            playCanvas(actualCanvas);
-        }
-        else{
-            console.timeEnd();
-            playStatus=0;
-            actualIndex=0;
-            clearInterval(chordTimeInterval);
+function moveToNextCanvas(){
+    numberOfCanvas = document.getElementsByClassName("time-bar").length;
+    if(++actualIndex<numberOfCanvas){
+        actualCanvas = document.getElementsByClassName("time-bar")[actualIndex];
+        numberOfUpdates = actualCanvas.width/diffLengthIncreasing;
+        var actualChordQuantums = sequencer[actualIndex].duration;
+        t1 = (quantumTime*actualChordQuantums)/numberOfUpdates;
+        console.log(actualCanvas);
+        console.log("width = "+ actualCanvas.width);
+        console.log("numberOfUpdates = "+ numberOfUpdates);
+        console.log("quarter time = " + quantumTime);
+        console.log("tn = " + quantumTime*actualChordQuantums);
+        console.log("t1 = "+t1);
+        if (actualIndex+1 < numberOfCanvas) {
+            setTimeout(function(){playCanvas(actualCanvas);},quantumTime*actualChordQuantums); 
         }
     }
+    else{
+        console.timeEnd();
+        playStatus=0;
+        actualIndex=0;
+    }
+}
+
+function playCanvas(canvas){
+    var ctx = canvas.getContext("2d");
+    var x=0;
+    console.time();
+    function move() {
+      if (x<=canvas.width+diffLengthIncreasing){
+        ctx.fillStyle = "lightblue";
+        ctx.clearRect(0,0,canvas.width,canvas.height);
+        x += diffLengthIncreasing;
+        ctx.fillRect(0,0,x,canvas.height);
+      }
+      else{
+        ctx.clearRect(0,0,canvas.width,canvas.height);
+        clearInterval(updateTimeInterval);
+        moveToNextCanvas();
+        console.timeEnd();
+      }
+    }
+    updateTimeInterval = setInterval(move,t1);
 }
 
 function pauseGraphicView(){
@@ -173,38 +207,13 @@ function clearAllTimeBar(){
 
 function actualChordDuration(){
     var actualChordDurationInQuarters = sequencer[actualIndex].duration/2;
-    return (actualChordDurationInQuarters*quarterTime);
+    return (actualChordDurationInQuarters*quantumTime*2);
 }
-
-
-function playCanvas(canvas){
-
-    var ctx = canvas.getContext("2d");
-    var x=0;
-    //console.time();
-    function move() {
-      if (x<=canvas.width+diffLengthIncreasing){
-            ctx.fillStyle = "lightblue";
-            ctx.clearRect(0,0,canvas.width,canvas.height);
-            x += diffLengthIncreasing;
-            ctx.fillRect(0,0,x,canvas.height);
-      }
-      else{
-        ctx.clearRect(0,0,canvas.width,canvas.height);
-        clearInterval(updateTimeInterval);
-        //console.timeEnd();
-      }
-    }
-    updateTimeInterval = setInterval(move,t1);
-}
-
 
 function lamp(arrivingX){
     ctx = canvasHTML.getContext("2d");
     ctx.backgroundColor = "blue";
 }
-
-
 
 function changeBpm() {
     bpm = parseInt(bpmText.value);
@@ -322,9 +331,13 @@ function updateChordDurationInView(chordId,type){
     var chordHtml = document.getElementById(chordId);
     var style = window.getComputedStyle(chordHtml, null);
     var actualSize = parseInt(style.getPropertyValue("width").substr(0,style.getPropertyValue("width").length-2));
-    console.log("previous: "+actualSize);
+    //console.log("previous: "+actualSize);
     var increase = actualSize + quantumSizeInPxs*type;  
-    console.log("next shuold be: "+increase);
+    //console.log("next shuold be: "+increase);
     chordHtml.style.width = increase.toString()+"px";
-    console.log("next is: "+style.getPropertyValue("width"));
+    var style = window.getComputedStyle(chordHtml, null);
+    var actualSize = parseInt(style.getPropertyValue("width").substr(0,style.getPropertyValue("width").length-2));
+    var canvas = chordHtml.firstChild;
+    canvas.width = actualSize;
+    //console.log("next is: "+style.getPropertyValue("width"));
 }
