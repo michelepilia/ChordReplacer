@@ -1,4 +1,6 @@
 var playingVoices = [];
+var playedChord = false;
+playingChords = 0;
 
 function startVoice(voice) {
 
@@ -208,6 +210,8 @@ function saveSynthPresetName(){
 }
 
 function playNotesFromFrequencies(arrayOfFrequencies,multFactor,bypass, sustainTime){
+  dustMan();
+  playingChords++;
   playingVoices = [];
   if (!bypass){
     for ( i = 0; i < arrayOfFrequencies.length; i++) {
@@ -239,8 +243,18 @@ function playNotesFromFrequencies(arrayOfFrequencies,multFactor,bypass, sustainT
         console.log("rltime = "+ releaseTime);
           releaseVoice(playingVoices[k],k,t3,releaseTime);        
       }
+      playingChords--;
       }, Math.min((attackTime+sustainTime+releaseTime)*1000,sustainTime*1000));
     }
+}
+function dustMan(){
+  if (playingChords>=1) {
+    for ( i = 0; i < playingVoices.length; i++) {
+      playingVoices[i].oscillator1.stop();
+      playingVoices[i].oscillator2.stop();
+    }
+      playingChords=0;
+  }
 }
 
 function releaseVoice(voice,index, t3,releaseTime){
