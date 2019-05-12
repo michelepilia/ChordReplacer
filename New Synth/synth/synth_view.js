@@ -124,14 +124,14 @@ function playTransient(voice,attackTime,decaytime,sustainTime) {
     voice.gain1.gain.setValueAtTime(0, t0);
     voice.gain2.gain.setValueAtTime(0, t0);
 
-    voice.gain1.gain.linearRampToValueAtTime(1*amounts[0]*SENS/270, t1);
-    voice.gain2.gain.linearRampToValueAtTime(1*amounts[2]*SENS/270, t1);
+    voice.gain1.gain.linearRampToValueAtTime(1*amounts[0]*SENS/270/2, t1);
+    voice.gain2.gain.linearRampToValueAtTime(1*amounts[2]*SENS/270/2, t1);
     filt.frequency.linearRampToValueAtTime(eg, filt_td); //Linear ramp to eg at tima ATCK
     lfo.frequency.linearRampToValueAtTime(minLfo+(amounts[7]/(maxAmount-minAmount)*(maxLfo-minLfo)), t0+sliderAmounts[4]/100);
     filt.frequency.linearRampToValueAtTime(sliderAmounts[2]/100*eg, filt_td); //linear ramp tu SUS (% di eg) at time DCY
     
-    voice.gain1.gain.linearRampToValueAtTime(sliderAmounts[8]/100*amounts[0]*SENS/270, t2);
-    voice.gain2.gain.linearRampToValueAtTime(sliderAmounts[8]/100*amounts[2]*SENS/270, t2);
+    voice.gain1.gain.linearRampToValueAtTime(sliderAmounts[8]/100*amounts[0]*SENS/270/2, t2);
+    voice.gain2.gain.linearRampToValueAtTime(sliderAmounts[8]/100*amounts[2]*SENS/270/2, t2);
 }
 
 
