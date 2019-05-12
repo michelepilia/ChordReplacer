@@ -246,7 +246,7 @@ function playNotesFromFrequencies(arrayOfFrequencies,multFactor,bypass, sustainT
           releaseVoice(playingVoices[k],k,t3,releaseTime);        
       }
       playingChords--;
-      }, Math.min((attackTime+sustainTime+releaseTime)*1000,sustainTime*1000));
+      }, sustainTime*1000);
     }
 }
 function dustMan(){
