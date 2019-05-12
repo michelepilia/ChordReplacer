@@ -57,7 +57,7 @@ function sliderListener(data){
     console.log("sl index = "+sliderChangeIndex);
     sliderAmounts[sliderChangeIndex]=parseInt(slider.value);
     if (sliderChangeIndex == 5) {
-      lfo_gain.gain.value = lfoGainType();
+      lfo_amp.gain.value = lfoGainType();
     }
   }
 }
@@ -74,8 +74,8 @@ function selectorListener(data){
     lfo.type = selectorValues[2];
   }
   else if (selectorChangeIndex==3) {
-    lfo_gain.disconnect();
-    lfo_gain.connect(lfo_destinations[(parseInt(selectorValues[3]))]); 
+    lfo_amp.disconnect();
+    lfo_amp.connect(lfo_destinations[(parseInt(selectorValues[3]))]); 
   }
 }
 
@@ -125,7 +125,8 @@ function rotate(data) {
 
 function lfoGainType(){
   if (selectorValues[3] == "0" || selectorValues[3] == "1") {
-    return sliderAmounts[5]/100;
+    minFilt+(amounts[6]/(maxAmount-minAmount)*(maxFilt-minFilt));
+    return minLfo+(sliderAmounts[5]/100/(maxLfoAmpGain-minLfoAmpGain)*(maxLfoAmpGain-minLfoAmpGain));
   }
   else if (selectorValues[3] == "2"){
     return sliderAmounts[5]*10;

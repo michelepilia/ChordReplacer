@@ -27,6 +27,9 @@ var offset3 = 1;
 var offset4 = 1;
 var pitch_amount1 = 0;
 var pitch_amount2 = 0;
+var hipass;
+var maxLfoAmpGain = 0.20;
+var minLfoAmpGain = 0;
 
 var amounts; /*Array contenente il valore di ogni knob*/
 var selectorValues; //Array contenente i valori dei selettori, inizializzato con i valori di default
@@ -64,6 +67,11 @@ function setUp(){
 	eg = minFilt+(amounts[6]/(maxAmount-minAmount)*(maxFilt-minFilt));
 	filt.connect(master);
 
+	hipass = c.createBiquadFilter();
+	hipass.type = "highpass";
+	hipass.gain.value = 1;
+	hipass.frequency.value = 150;
+
 	/*Sezione LFO*/
 	lfo = c.createOscillator();
     lfo_amp = c.createGain();
@@ -75,7 +83,16 @@ function setUp(){
     lfo.start();
 
 	/*Sezione Master*/
-	master.connect(c.destination);
+	master.connect(hipass);
+	limiter = c.createDynamicsCompressor();
+	limiter.threshold.value = 0;
+	limiter.knee.value=0;
+	limiter.ratio.value=20;
+	limiter.attack.value = 0;
+	limiter.release.value=0;
+	hipass.connect(limiter);
+	limiter.connect(c.destination);
+	lfo_destinations = [master.gain,master.gain,filt.frequency,filt.Q];
 }
 
 

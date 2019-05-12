@@ -136,12 +136,13 @@ function loadSynthFunction(data) {
 	  		selectorValues[3] = fbSynth.lfo_dest;
 	  		sliderAmounts[4] = fbSynth.lfo_atck;
 	  		sliderAmounts[5] = fbSynth.lfo_lvl;
+	  		console.log(sliderAmounts);
+	  		console.log(amounts);
 	  		amounts[8] = fbSynth.master;
 	  		sliderAmounts[6] = fbSynth.mast_atck;
 	  		sliderAmounts[7] = fbSynth.mast_dcy;
 	  		sliderAmounts[8] = fbSynth.mast_sus;
 	  		sliderAmounts[9] = fbSynth.mast_rel;
-
 			closeSynthLoader();
 			updateViewFromModel(fbNames[chosenIndex]);
 	});
