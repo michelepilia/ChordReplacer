@@ -115,6 +115,7 @@ function loadSynthFunction(data) {
 			fbNames = Object.keys(fbNames);
 
 			fbSynth = fbSnapshot.val()[fbNames[chosenIndex]];
+			console.log(fbSynth);
 
 			amounts[0] = fbSynth.lvl1;
 	  		amounts[1] = fbSynth.detune1;
@@ -136,8 +137,7 @@ function loadSynthFunction(data) {
 	  		selectorValues[3] = fbSynth.lfo_dest;
 	  		sliderAmounts[4] = fbSynth.lfo_atck;
 	  		sliderAmounts[5] = fbSynth.lfo_lvl;
-	  		console.log(sliderAmounts);
-	  		console.log(amounts);
+	  		console.log("loaded sliderAmounts = "+sliderAmounts);
 	  		amounts[8] = fbSynth.master;
 	  		sliderAmounts[6] = fbSynth.mast_atck;
 	  		sliderAmounts[7] = fbSynth.mast_dcy;

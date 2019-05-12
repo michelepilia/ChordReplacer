@@ -67,7 +67,8 @@ function updateViewFromModel(name){ //Update All the view from model
     knobToRotateIndex = 0;
     sliders[0].value = pitch_amount1;
     sliders[1].value = pitch_amount2;
-    for (var i = 2; i < sliders.length; i++) {sliders[i].value = sliderAmounts[i]};
+    for (var i = 2; i < sliders.length; i++) {
+        sliders[i].value = sliderAmounts[i-2]};
     for (var i = 0; i < selectors.length; i++) {selectors[i].value = selectorValues[i]};
     document.getElementById("preset-synth-name").value =name; 
 }
