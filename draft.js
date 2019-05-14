@@ -1,4 +1,4 @@
-/*var editButtons = document.getElementsByClassName("chord-substitution");
+var editButtons = document.getElementsByClassName("chord-substitution");
 
 class Substitution{
 
@@ -142,6 +142,38 @@ function tellTheSubs(data){
 		subs.push(newSub);
 	}
 
+	if (chord.quality == "maj" && (chord.extension == "none" || chord.extension == "maj7" || chord.extension == "6")){ //IV minor substitution 1
+		tonic = noteDictInverse((noteDict.(chord.fundamental)-5)%12);
+		if (nextChord.fundamental = tonic && nextChord.quality == "maj" && (nextChord.extension == "none" || nextChord.extension == "maj7" || nextChord.extension == "6")){
+			newChord = new Chord();
+			Object.assign(newChord, chord);
+			newChord.quality = "min";
+			newChord.extension = "none";
+			newChord.inversion = "none";
+			newSub = new Substitution("IV minor(1)", chord, [newChord]);
+			subs.push(newSub);
+		}
+	}
+
+	if (chord.quality == "maj" && (chord.extension == "none" || chord.extension == "b7")){ //IV minor substitution 2
+		tonic = noteDictInverse((noteDict.(chord.fundamental)+5)%12);
+		subDom = noteDictInverse((noteDict.(chord.fundamental)-2)%12);
+		
+		if 
+		(prevChord.fundamental == subDom && prevChord.quality =="maj" nextChord.fundamental = tonic && nextChord.quality == "maj" && 
+		(nextChord.extension == "none" || nextChord.extension == "maj7" || nextChord.extension == "6") &&
+		(prevChord.extension == "none" || prevChord.extension == "maj7" || prevChord.extension == "6")){
+			newChord = new Chord();
+			Object.assign(newChord, chord);
+			newChord.quality = "min";
+			newChord.extension = "none";
+			newChord.inversion = "none";
+			newSub = new Substitution("IV minor(2)", chord, [newChord]);
+			subs.push(newSub);
+		}
+	
+	}
+
 	if (chord.quality == "dim" && chord.extension == "6"){ //General dim substitution (like a simple inversion)
 		newChord = new Chord();
 		Object.assign(newChord, chord);
@@ -162,10 +194,4 @@ function tellTheSubs(data){
 	newSub = new Substitution("Left deletion", chord, []);
 	subs.push(newSub);
 
-
-
-
-
-
-
-}*/
+}
