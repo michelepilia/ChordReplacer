@@ -243,13 +243,13 @@ function playNotesFromFrequencies(arrayOfFrequencies,multFactor,bypass, sustainT
       filt.frequency.linearRampToValueAtTime(minFilt+(amounts[4]/(maxAmount-minAmount)*(maxFilt-minFilt)), now + sliderAmounts[3]/100);
       for (k = 0; k < playingChords[ind].voices.length; k++) {    
         //console.log("rltime = "+ releaseTime);
-          releaseVoice(playingChords[ind].voices[k],t3,releaseTime);        
+          releaseVoice(playingChords[ind].voices[k],t3,releaseTime,ind);        
       }
       }, sustainTime*1000);
     }
 }
 
-function releaseVoice(voice, t3,releaseTime){
+function releaseVoice(voice, t3,releaseTime,ind){
   //console.log("rltime = "+ releaseTime);
   voice.gain1.gain.linearRampToValueAtTime(0, t3+releaseTime);
   voice.gain2.gain.linearRampToValueAtTime(0, t3+releaseTime);
@@ -260,6 +260,7 @@ function releaseVoice(voice, t3,releaseTime){
   voice.oscillator2.disconnect();
   voice.gain1.disconnect();
   voice.gain2.disconnect();
+  sequencer[ind].voices.pop();
   console.timeEnd();
   },releaseTime*1000);
 }

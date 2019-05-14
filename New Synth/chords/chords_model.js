@@ -14,7 +14,7 @@ class Chord {
 		this.voices = [];
 	};
 	setSustainTime = function(sustainTime) {
-		this.setSustainTime = sustainTime;
+		this.sustainTime = sustainTime;
 	}
 	setIndex = function(index){
 		this.chordIndex = index;

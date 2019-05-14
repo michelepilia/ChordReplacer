@@ -23,13 +23,13 @@ var numberOfUpdates; // numberOfUpdates = actualCanvas.width / diffLengthIncreas
 var actualCanvas;
 var numberOfCanvas;
 var playStatus = 0;
-var updateTimeInterval;
+var actualTimeInterval;
 var instPlayButton = document.getElementById("inst-play-button");
 var quantumSizeInPxs = document.getElementsByClassName('pluschord')[0].offsetWidth/8;
 console.log("qsize: "+quantumSizeInPxs);
 var nextCanvasTimeout;
 var playingChords = [];
-
+var a=0;
 
 doneLoadChordsButton.addEventListener("click",closeChordsLoader,false);
 playButton.addEventListener("click",playEffect,false);
@@ -123,6 +123,7 @@ function playEffect(){
 
 function performPlayerView(){
     numberOfCanvas = document.getElementsByClassName("time-bar").length;
+    quantumTime = 60*1000/bpm/(quantization/4);
     //console.log("actualIndex == "+actualIndex);
     if (actualIndex +1<numberOfCanvas) {
         //console.time();
@@ -177,20 +178,21 @@ function playCanvas(canvas){
         //console.timeEnd();
       }
     }
-    updateTimeInterval = setInterval(move,t1);
+
+    var updateTimeInterval = setInterval(move,t1);
+    actualTimeInterval = updateTimeInterval;
 }
 
 function pauseGraphicView(){
     playStatus=0;
-    actualIndex--;
-    clearInterval(updateTimeInterval);
+    clearInterval(actualTimeInterval);
     clearTimeout(nextCanvasTimeout);
 }
 
 function stopGraphicView(){
     playStatus = 0;
     actualIndex=-1;
-    clearInterval(updateTimeInterval);
+    clearInterval(actualTimeInterval);
     clearTimeout(nextCanvasTimeout);
     clearAllTimeBar();
 }
@@ -205,6 +207,7 @@ function clearAllTimeBar(){
 
 function changeBpm() {
     bpm = parseInt(bpmText.value);
+    console.log(bpm);
 }
 
 function updateChordTag(chord, id){
