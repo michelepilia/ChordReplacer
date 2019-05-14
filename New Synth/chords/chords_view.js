@@ -67,16 +67,19 @@ function createChordEventListeners(){
 
 function openSubstitutionMenu(data){
     chordSubstitutionMenu.style.display = "block";
-    subsName = tellTheSubs(data);
-    for (i=0; i<subsName.length; i++){
+    substitutions = tellTheSubs(data);
+    for (i=0; i<substitutions.length; i++){
         //divI = document.createElement("div");
-        //divI.innerHTML = subsName[i].name;
+        //divI.innerHTML = substitutions[i].name;
         //chordSubstitutionMenu.append(divI);
+        var exp = getSubsExplanation(substitutions[i]);
         var row = document.createElement("tr");
         row.classList.add("suggested-substitution");
         var tdName = document.createElement("td");
         //tdName.id = "substitution"+i;
-        tdName.innerHTML = subsName[i].name;
+        tdName.innerHTML = substitutions[i].name;
+        var tdExplanation = document.createElement("td");
+        tdExplanation.innerHTML = exp;
         var tdButton = document.createElement("td");
         //tdButton.id = "synth-loading-td-button"+i;
         var insideButton = document.createElement("BUTTON");
@@ -87,6 +90,7 @@ function openSubstitutionMenu(data){
         insideButton.addEventListener("click",applySubstitution,false);
         tdButton.appendChild(insideButton);
         row.appendChild(tdName);
+        row.appendChild(tdExplanation);
         row.appendChild(tdButton);
         chordSubstitutionTable.appendChild(row);
     }
@@ -249,10 +253,10 @@ function changeBpm() {
 }
 
 function updateChordTag(chord, id){
-    var first;
-    var second;
-    var third;
-    var fourth;
+    var first = "";
+    var second = "";
+    var third = "";
+    var fourth = "";
 
     if (chord.noteFlag) {
         first = chord.fundamental;

@@ -366,9 +366,13 @@ function tellTheSubs(data){
 	var newChord;
 	var newSub;
 
+	if (prevChord==undefined){prevChord = new Chord();};
+	if (nextChord==undefined){nextChord = new Chord();};
+
 	//Preparation by seventh
 	newChord = new Chord();
 	newChord.fundamental = noteDictInverse[(noteDict[chord.fundamental]+7)%12];
+	newChord.noteFlag = true;
 	newChord.quality = "maj";
 	newChord.extension = "b7";
 	newChord.inversion = "none";
@@ -397,14 +401,14 @@ function tellTheSubs(data){
 		//#IIdim7
 		newChord = new Chord();
 		Object.assign(newChord, chord);
-		newChord.fundamental = noteDictInverse[(noteDict[chord.fundamental]-4)%12]; //WRT V degree
+		newChord.fundamental = noteDictInverse[(noteDict[chord.fundamental]+8)%12]; //WRT V degree
 		newChord.quality = "dim";
 		newChord.extension = "b7";
 		newChord.inversion = "none";
 		newSub = new Substitution("#II dim7 as dominant", chord, [newChord]);
 		subs.push(newSub);
 
-		//#IIdim7
+		//Aug
 		newChord = new Chord();
 		Object.assign(newChord, chord);
 		newChord.quality = "aug";
@@ -412,11 +416,12 @@ function tellTheSubs(data){
 		newChord.inversion = "none";
 		newSub = new Substitution("V aug as dominant", chord, [newChord]);
 		subs.push(newSub);
+		
 
 		//Preparation by minor7
 		newChord = new Chord();
 		Object.assign(newChord, chord);
-		newChord.fundamental = noteDictInverse[(noteDict[chord.fundamental]-5)%12]; //WRT V degree (II-V)
+		newChord.fundamental = noteDictInverse[(noteDict[chord.fundamental]+7)%12]; //WRT V degree (II-V)
 		newChord.quality = "min";
 		newChord.extension = "b7";
 		newChord.inversion = "none";
@@ -428,12 +433,12 @@ function tellTheSubs(data){
 
 
 		//Backdoor Progression
-		var secMin = noteDictInverse[(noteDict[chord.fundamental]-5)%12];
+		var secMin = noteDictInverse[(noteDict[chord.fundamental]+7)%12];
 		var tonic = noteDictInverse[(noteDict[chord.fundamental]+5)%12];
 		if ((prevChord.fundamental==secMin && prevChord.quality=="min")&&(nextChord.fundamental==tonic && nextChord.quality=="maj")) {
 			var newChord1 = new Chord(); 
 			var newChord2 = new Chord();
-			newChord1.fundamental = noteDictInverse[(noteDict[chord.fundamental]-2)%12]; 
+			newChord1.fundamental = noteDictInverse[(noteDict[chord.fundamental]+10)%12]; 
 			newChord2.fundamental = noteDictInverse[(noteDict[chord.fundamental]+3)%12];
 			newChord1.quality = "min";
 			newChord2.quality = "maj";
@@ -455,6 +460,8 @@ function tellTheSubs(data){
 		var newChord2 = new Chord();
 		newChord1.fundamental = noteDictInverse[(noteDict[chord.fundamental]+2)%12]; 
 		newChord2.fundamental = noteDictInverse[(noteDict[chord.fundamental]+7)%12];
+		newChord1.noteFlag = true;
+		newChord2.noteFlag = true;
 		newChord1.quality = "min";
 		newChord2.quality = "maj";
 		newChord1.extension = "b7";
@@ -471,7 +478,7 @@ function tellTheSubs(data){
 	if (chord.quality == "maj" && (chord.extension=="none" || chord.extension=="maj7" || chord.extension=="6")){ //Tonic sub (Assuming that a major chord if no b7 is tonic) 
 		newChord = new Chord();
 		Object.assign(newChord, chord);
-		newChord.fundamental = noteDictInverse[(noteDict[chord.fundamental]-3)%12];
+		newChord.fundamental = noteDictInverse[(noteDict[chord.fundamental]+9)%12];
 		newChord.quality = "min";
 		newChord.extension = "b7";
 		newChord.inversion = "none";
@@ -489,7 +496,7 @@ function tellTheSubs(data){
 	}
 
 	if (chord.quality == "maj" && (chord.extension == "none" || chord.extension == "maj7" || chord.extension == "6")){ //IV minor substitution 1
-		tonic = noteDictInverse[(noteDict[chord.fundamental]-5)%12];
+		tonic = noteDictInverse[(noteDict[chord.fundamental]+7)%12];
 		if (nextChord.fundamental = tonic && nextChord.quality == "maj" && (nextChord.extension == "none" || nextChord.extension == "maj7" || nextChord.extension == "6")){
 			newChord = new Chord();
 			Object.assign(newChord, chord);
@@ -503,7 +510,7 @@ function tellTheSubs(data){
 
 	if (chord.quality == "maj" && (chord.extension == "none" || chord.extension == "b7")){ //IV minor substitution 2
 		tonic = noteDictInverse[(noteDict[chord.fundamental]+5)%12];
-		subDom = noteDictInverse[(noteDict[chord.fundamental]-2)%12];
+		subDom = noteDictInverse[(noteDict[chord.fundamental]+10)%12];
 		
 		if (prevChord.fundamental == subDom && prevChord.quality =="maj" && nextChord.fundamental == tonic && nextChord.quality == "maj" && (nextChord.extension == "none" || nextChord.extension == "maj7" || nextChord.extension == "6") && (prevChord.extension == "none" || prevChord.extension == "maj7" || prevChord.extension == "6")){
 			newChord = new Chord();
@@ -559,3 +566,93 @@ function isChordPlaying(sequencerIndex){
 	return -1;
 }
 
+
+function getSubsExplanation(subst){
+	var strToReturn = "";
+
+	
+	if ((subst.name=="Preparation by minor 7") || (subst.name=="Preparation by VII")){
+		strToReturn = "| X | " + chordToString(subst.origin) + " | " + "&#8594;" + "| X " + chordToString(subst.destination[0]) + " | " + chordToString(subst.origin) + " |";
+	}
+	else if (subst.name=="Back propagation of 7th"){
+		strToReturn = "| X | " + chordToString(subst.origin) + " Y | " + "&#8594;" + "| X " + chordToString(subst.origin) + " | Y |";
+	}
+	else if ((subst.name=="Backdoor Progression") || (subst.name=="Preparation by II-V")){
+		strToReturn = "| X | " + chordToString(subst.origin) + " | " + "&#8594;" + "| X " + chordToString(subst.destination[0]) + " " + chordToString(subst.destination[1]) + " | " + chordToString(subst.origin) + " |";
+	}
+	else if (subst.name=="Left deletion"){
+		strToReturn = "| X | " + chordToString(subst.origin) + " | " + "&#8594;" + "| X |";
+	}
+	else {
+		
+		strToReturn = chordToString(subst.origin) + "&#8594;" + chordToString(subst.destination[0]);
+		
+	}
+
+	return strToReturn;
+}
+
+function chordToString(chord){
+    var first = "";
+    var second = "";
+    var third = "";
+    var fourth = "";
+
+    if (chord.noteFlag) {
+        first = chord.fundamental;
+        if(chord.quality=="maj"){second="";}
+        else if (chord.quality=="min"){second="-";}
+        else if (chord.quality=="sus2" || chord.quality=="sus4"){second = "<sub style='vertical-align: sub; font-size: 10px;'>" + chord.quality + "</sub>";}
+        else if (chord.quality=="aug"){second="#5";}
+
+        if (chord.extension=="none"){third = "";}
+        else if (chord.extension=="maj7"){third = "<sup style='vertical-align: super; font-size: 10px;'>&#916</sup>";} //delta
+        else if (chord.extension=="b7"){third = "<sup style='vertical-align: super; font-size: 10px;'>7</sup>";}
+        else {third = "<sup style='vertical-align: super; font-size: 10px;'>" + chord.extension + "</sup>";}
+
+
+        if (chord.quality=="dim"){
+            if (chord.extension=="6"){ //bb7
+                second = "<sup style='vertical-align: super; font-size: 10px;'>°7</sup>";
+                third = "";
+            }
+            else if (chord.extension=="b7"){
+                second = "-" + "<sup style='vertical-align: super; font-size: 10px;'>7</sup>";
+                third = "&#9837"+"&#53;"; //bemolle
+            }
+            else if (chord.extension=="maj7"){
+                second = "-" + "<sup style='vertical-align: super; font-size: 10px;'>&#916</sup>"; //delta
+                third = "&#9837"+"&#53;"; //bemolle 5
+            }
+            else if (chord.extension=="none"){
+                second = "- ";
+                third = "&#9837"+"&#53;"; //bemolle
+            }
+            else {
+                second = "-" + "<sup style='vertical-align: super; font-size: 10px;'>7</sup>";
+                third = "&#9837"+"&#53"+"<sup style='vertical-align: super; font-size: 10px;'>9</sup>";
+            }
+        }
+
+        if (chord.inversion==0) {fourth="";}
+        else if (chord.inversion==1) {
+            if (chord.quality=="maj" || chord.quality=="aug"){fourth="/"+getNoteFromIntervalAbs(chord.fundamental, 4);}
+            else if (chord.quality=="min"||chord.quality=="dim"){fourth="/"+getNoteFromIntervalAbs(chord.fundamental, 3);}
+            else {fourth="";}
+        }
+        else if (chord.inversion==2) {
+            if (chord.quality=="maj" || chord.quality=="min" || chord.quality=="sus2" || chord.quality=="sus4"){
+                fourth="/"+getNoteFromIntervalAbs(chord.fundamental, 7);
+            }
+            else if (chord.quality=="dim"){fourth="/"+getNoteFromIntervalAbs(chord.fundamental, 6);}
+            else if (chord.quality=="aug"){fourth="/"+getNoteFromIntervalAbs(chord.fundamental, 8)}
+            else {fourth="";}
+        }
+        return first+second+third+fourth;
+    }
+
+    else {
+        return ".";
+    }
+
+}
