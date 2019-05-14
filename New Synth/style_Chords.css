@@ -315,3 +315,12 @@
 .quantization-plus:hover,.quantization-minus:hover{
 	background-color:green;
 }
+
+#chord-substitution-menu{
+	display: none;
+	flex-direction: column;
+	width: 200px;
+	height: auto;
+	background-color: lightgray;
+	border: 1px solid black;
+}

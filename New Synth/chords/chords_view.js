@@ -14,6 +14,7 @@ var chordsPresetNameFieldContainer = document.getElementById("preset-chords-name
 var playButton = document.getElementById("play-button");
 var stopButton = document.getElementById("stop-button");
 var bpmText = document.getElementById("bpm-value");
+var chordSubstitutionMenu = document.getElementById("chord-substitution-menu");
 var actualIndex = -1;
 var latency=0;
 var diffLengthIncreasing = 1; //[pixel]
@@ -49,12 +50,20 @@ function createChordEventListeners(){
     newSwapButton = Array.from(document.getElementsByClassName("chord-swap")).pop();
     newQuantizationPlusButton = Array.from(document.getElementsByClassName("quantization-plus")).pop();
     newQuantizationMinusButton = Array.from(document.getElementsByClassName("quantization-minus")).pop();
-	newEditButton.addEventListener("click", showChordEditor, false);
+	newSubstitutionButton = Array.from(document.getElementsByClassName("chord-substitution")).pop();
+    console.log(newSubstitutionButton);
+    newSubstitutionButton.addEventListener("click",openSubstitutionMenu,false);
+    newEditButton.addEventListener("click", showChordEditor, false);
     newSwapButton.addEventListener("click", handleSwap, false);
     newSwapButton.addEventListener("mouseover",handleMouseOver,false);
     newSwapButton.addEventListener("mouseleave",handleMouseLeave,false);
     newQuantizationPlusButton.addEventListener("click", changeChordSize, false);
     newQuantizationMinusButton.addEventListener("click", changeChordSize, false);
+
+}
+
+function openSubstitutionMenu(){
+    chordSubstitutionMenu.style.display = "inline-flex";
 }
 
 function createChordsLoaderEventListeners() {

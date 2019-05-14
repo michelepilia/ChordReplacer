@@ -23,3 +23,12 @@ class Chord {
 		this.voices.push(voice);
 	}
 }
+
+class Substitution{
+
+	constructor(name, origin, destination){
+		this.name = name;
+		this.origin = origin;
+		this.destination = destination;}
+}
+
