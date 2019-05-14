@@ -243,8 +243,10 @@ function instPlayChord(data){
 	var playingchord = sequencer[id];
 	var freqs = createVoicing(playingchord);
 	var sustainTime = playingchord.duration*quantumTime/1000; /*[seconds]*/
-	
-	playNotesFromFrequencies(freqs, 1, false,sustainTime);
+	sequencer[id].setSustainTime(sustainTime);
+    sequencer[id].setIndex(id);
+    playNotesFromFrequencies(freqs, 1, false,sustainTime,id);
+   
 }
 
 function createVoicing(chord){
@@ -503,4 +505,11 @@ function tellTheSubs(data){
 
 	return subs;
 
+}
+
+function applySubstitution(data){
+	var length = "apply-substitution-button".length-1;
+	var subIndexInSubs = data.target.getAttribute("id").substr(length);
+	closeSubstitution();
+	alert("Apply substituition with index: " + subIndexInSubs);
 }

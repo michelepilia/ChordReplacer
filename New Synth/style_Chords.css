@@ -250,7 +250,7 @@
 	text-align: center;
 }
 
-#done-load-chords, #done-load-synth{
+#done-load-chords, #done-load-synth, #apply-substitution{
 	position:absolute;
 	top:0px;
 	right: 0px;
@@ -263,7 +263,7 @@
 .closing-x{
 	transform: translate(-2px,0);
 }
-#done-load-chords:hover, #done-load-synth:hover{
+#done-load-chords:hover, #done-load-synth:hover, #apply-substitution:hover{
 	background-color: red;
 }
 #open-synth:hover{
@@ -318,12 +318,29 @@
 
 #chord-substitution-menu{
 	display: none;
-	flex-direction: column;
-	width: 200px;
+	width: auto;
 	height: auto;
 	background-color: lightgray;
 	border: 1px solid black;
 	position: absolute;
 	top: 400px;
 	left: 300px;
+	padding: 10px;
+  	overflow: scroll;
+  	z-index: 3;
+
+}
+
+.suggested-substitution{
+  background-color: lightblue;
+  border: 1px solid blue;
+  margin-top: 5px;
+ }
+
+.suggested-substitution >td{
+	justify-content: center;
+	align-items: center;
+	padding: 10px;
+	text-align: center;
+	margin-bottom: 5px;
 }

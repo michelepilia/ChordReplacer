@@ -209,12 +209,12 @@ function saveSynthPresetName(){
   synthPresetName = document.getElementById("preset-synth-name").value;
 }
 
-function playNotesFromFrequencies(arrayOfFrequencies,multFactor,bypass, sustainTime){
+function playNotesFromFrequencies(arrayOfFrequencies,multFactor,bypass, sustainTime,index){
   if (!bypass){
     var ind;
     for ( i = 0; i < arrayOfFrequencies.length; i++) {
       voice = new Voice(arrayOfFrequencies[i]*multFactor);
-      sequencer[actualIndex].addVoice(voice);
+      sequencer[index].addVoice(voice);
       voice.gain1.connect(filt);
       voice.gain2.connect(filt);
       voice.oscillator1.connect(voice.gain1);
@@ -234,8 +234,8 @@ function playNotesFromFrequencies(arrayOfFrequencies,multFactor,bypass, sustainT
       //console.log(attackTime+decayTime+sustainTime);
       playTransient(voice, attackTime, decayTime, sustainTime);/*[seconds]*/
     }
-    playingChords.push(sequencer[actualIndex]);
-    ind = actualIndex;
+    playingChords.push(sequencer[index]);
+    ind = index;
     setTimeout(function(){
       now = c.currentTime;
       t3 = now;

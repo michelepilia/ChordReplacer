@@ -15,6 +15,10 @@ var playButton = document.getElementById("play-button");
 var stopButton = document.getElementById("stop-button");
 var bpmText = document.getElementById("bpm-value");
 var chordSubstitutionMenu = document.getElementById("chord-substitution-menu");
+var chordSubstitutionTable = document.getElementById("chord-substitution-table");
+var closeSubstitutionMenu = document.getElementById("apply-substitution");
+closeSubstitutionMenu.addEventListener("click",closeSubstitution,false);
+
 var actualIndex = -1;
 var latency=0;
 var diffLengthIncreasing = 1; //[pixel]
@@ -63,12 +67,29 @@ function createChordEventListeners(){
 }
 
 function openSubstitutionMenu(data){
-    chordSubstitutionMenu.style.display = "inline-flex";
+    chordSubstitutionMenu.style.display = "block";
     subsName = tellTheSubs(data);
     for (i=0; i<subsName.length; i++){
-        divI = document.createElement("div");
-        divI.innerHTML = subsName[i].name;
-        chordSubstitutionMenu.append(divI);
+        //divI = document.createElement("div");
+        //divI.innerHTML = subsName[i].name;
+        //chordSubstitutionMenu.append(divI);
+        var row = document.createElement("tr");
+        row.classList.add("suggested-substitution");
+        var tdName = document.createElement("td");
+        //tdName.id = "substitution"+i;
+        tdName.innerHTML = subsName[i].name;
+        var tdButton = document.createElement("td");
+        //tdButton.id = "synth-loading-td-button"+i;
+        var insideButton = document.createElement("BUTTON");
+        //insideButton.id = "synth-loading-button"+i;
+        insideButton.classList.add("synth-load-button");
+        insideButton.innerHTML = "Apply";
+        insideButton.id="apply-substitution-button"+i;
+        insideButton.addEventListener("click",applySubstitution,false);
+        tdButton.appendChild(insideButton);
+        row.appendChild(tdName);
+        row.appendChild(tdButton);
+        chordSubstitutionTable.appendChild(row);
     }
 }
 
@@ -107,7 +128,10 @@ function closeChordsLoader(){
     chordsLoader.style.display = "none";
 }
 
-
+function closeSubstitution(){
+   chordSubstitutionMenu.style.display = "none";
+   chordSubstitutionTable.innerHTML="";
+}
 
 function updateChordsViewFromModel(chordsName){
 
@@ -172,7 +196,7 @@ function moveToNextCanvas(){
     var sustainTime = playingchord.duration*quantumTime/1000; /*[seconds]*/
     sequencer[actualIndex].setSustainTime(sustainTime);
     sequencer[actualIndex].setIndex(actualIndex);
-    playNotesFromFrequencies(freqs, 1, false,sustainTime);
+    playNotesFromFrequencies(freqs, 1, false,sustainTime,actualIndex);
     nextCanvasTimeout = setTimeout(function(){performPlayerView();},quantumTime*actualChordQuantums); 
 }
 
