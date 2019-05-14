@@ -31,7 +31,6 @@ var playStatus = 0;
 var actualTimeInterval;
 var instPlayButton = document.getElementById("inst-play-button");
 var quantumSizeInPxs = document.getElementsByClassName('pluschord')[0].offsetWidth/8;
-console.log("qsize: "+quantumSizeInPxs);
 var nextCanvasTimeout;
 var playingChords = [];
 var a=0;

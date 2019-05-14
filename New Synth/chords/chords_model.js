@@ -12,16 +12,26 @@ class Chord {
 		this.noteFlag = false;
 		this.duration = quantization;
 		this.voices = [];
+		this.timeOfRelease;
+		this.played = false;
+		this.indexInSequencer;
 	};
 	setSustainTime = function(sustainTime) {
 		this.sustainTime = sustainTime;
 	}
-	setIndex = function(index){
-		this.chordIndex = index;
+	setIndex = function(index){//is the index of the chord in the sequencer
+		this.indexInSequencer = index;
 	}
 	addVoice = function(voice){
 		this.voices.push(voice);
 	}
+	setTimeOfRelease = function(timer){
+		this.timeOfRelease = timer;
+	}
+	setAsPlayed = function(){
+		this.played = true;
+	}
+
 }
 
 class Substitution{

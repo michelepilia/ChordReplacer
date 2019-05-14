@@ -6,6 +6,7 @@ var chordsToSwap = [];
 var swapActive = 0;
 var instPlayMode = false;
 var actualChord;
+var allVoices=[];
 
 function addChord() {
 	var chord = new Chord();
@@ -245,8 +246,41 @@ function instPlayChord(data){
 	var sustainTime = playingchord.duration*quantumTime/1000; /*[seconds]*/
 	sequencer[id].setSustainTime(sustainTime);
     sequencer[id].setIndex(id);
-    playNotesFromFrequencies(freqs, 1, false,sustainTime,id);
-   
+  	var position = isChordPlaying(id);
+    if (position!=-1){
+    	clearTimeout(playingChords[position].timeOfRelease);
+    	scavenger();
+    	playNotesFromFrequencies(freqs, 1, false,sustainTime,id);
+    }
+    else{
+    	playNotesFromFrequencies(freqs, 1, false,sustainTime,id);
+    }
+}
+function scavenger(){
+	if (playingChords.length>0) {
+		for (var i = 0; i < playingChords.length; i++) {
+			for (var k = 0; k < playingChords[i].voices.length; k++) {
+				voice.oscillator1.stop();
+				voice.oscillator2.stop();
+				voice.oscillator1.disconnect();
+				voice.oscillator2.disconnect();
+				voice.gain1.disconnect();
+				voice.gain2.disconnect();
+				playingChords[i].voices.pop();
+			}
+		}
+	}
+	playingChords=[];
+
+	for (var i = 0; i <= allVoices.length; i++) {
+		if (allVoices[i]!=null &&allVoices[i].frequency!=0) {
+			allVoices[i].oscillator1.stop();
+			allVoices[i].oscillator2.stop();
+		}
+	}
+	for (var i = 0; i <= allVoices.length; i++) {
+		allVoices.pop();
+	}
 }
 
 function createVoicing(chord){
@@ -513,3 +547,15 @@ function applySubstitution(data){
 	closeSubstitution();
 	alert("Apply substituition with index: " + subIndexInSubs);
 }
+
+function isChordPlaying(sequencerIndex){
+	if (playingChords.length>0) {
+		for (var i = 0; i <= playingChords.length; i++) {
+			if (playingChords[i].indexInSequencer==sequencerIndex) {
+				return i;
+			}
+		}
+	}
+	return -1;
+}
+

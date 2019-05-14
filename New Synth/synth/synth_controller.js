@@ -230,22 +230,23 @@ function playNotesFromFrequencies(arrayOfFrequencies,multFactor,bypass, sustainT
       attackTime = sliderAmounts[6]/100;
       decayTime = sliderAmounts[7]/100;
       releaseTime = sliderAmounts[9]/100;
+      allVoices.push(voice);
       //console.log("rltime = "+ releaseTime);
       //console.log(attackTime+decayTime+sustainTime);
       playTransient(voice, attackTime, decayTime, sustainTime);/*[seconds]*/
     }
-    playingChords.push(sequencer[index]);
     ind = index;
-    setTimeout(function(){
+    sequencer[index].setTimeOfRelease = setTimeout(function(){
       now = c.currentTime;
       t3 = now;
       //console.log("rltime = "+ releaseTime);
       filt.frequency.linearRampToValueAtTime(minFilt+(amounts[4]/(maxAmount-minAmount)*(maxFilt-minFilt)), now + sliderAmounts[3]/100);
-      for (k = 0; k < playingChords[ind].voices.length; k++) {    
+      for (k = 0; k < sequencer[index].voices.length; k++) {    
         //console.log("rltime = "+ releaseTime);
-          releaseVoice(playingChords[ind].voices[k],t3,releaseTime,ind);        
+          releaseVoice(sequencer[index].voices[k],t3,releaseTime,ind);        
       }
       }, sustainTime*1000);
+    playingChords.push(sequencer[index]);
     }
 }
 
@@ -261,6 +262,10 @@ function releaseVoice(voice, t3,releaseTime,ind){
   voice.gain1.disconnect();
   voice.gain2.disconnect();
   sequencer[ind].voices.pop();
+  voice.frequency=0;
+  if (sequencer[ind].voices.length==0) {
+    playingChords.pop();
+  }
   console.timeEnd();
   },releaseTime*1000);
 }
