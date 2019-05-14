@@ -62,8 +62,14 @@ function createChordEventListeners(){
 
 }
 
-function openSubstitutionMenu(){
+function openSubstitutionMenu(data){
     chordSubstitutionMenu.style.display = "inline-flex";
+    subsName = tellTheSubs(data);
+    for (i=0; i<subsName.length; i++){
+        divI = document.createElement("div");
+        divI.innerHTML = subsName[i].name;
+        chordSubstitutionMenu.append(divI);
+    }
 }
 
 function createChordsLoaderEventListeners() {

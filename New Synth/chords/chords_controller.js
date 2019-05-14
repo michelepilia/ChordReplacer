@@ -33,6 +33,7 @@ function addChord() {
 	var chordSubHtml = document.createElement("div");
 	chordSubHtml.classList.add("chord-substitution");
 	chordSubHtml.innerHTML="S";
+	chordSubHtml.id = "s" + (document.getElementsByClassName("chord").length-1);
 
 	var eButton = document.createElement("DIV");
 	eButton.classList.add("chord-edit");
@@ -360,7 +361,7 @@ function tellTheSubs(data){
 		//#IIdim7
 		newChord = new Chord();
 		Object.assign(newChord, chord);
-		newChord.fundamental = noteDictInverse((noteDict[chord.fundamental]-4)%12); //WRT V degree
+		newChord.fundamental = noteDictInverse[(noteDict[chord.fundamental]-4)%12]; //WRT V degree
 		newChord.quality = "dim";
 		newChord.extension = "b7";
 		newChord.inversion = "none";
@@ -379,7 +380,7 @@ function tellTheSubs(data){
 		//Preparation by minor7
 		newChord = new Chord();
 		Object.assign(newChord, chord);
-		newChord.fundamental = noteDictInverse((noteDict[chord.fundamental]-5)%12); //WRT V degree (II-V)
+		newChord.fundamental = noteDictInverse[(noteDict[chord.fundamental]-5)%12]; //WRT V degree (II-V)
 		newChord.quality = "min";
 		newChord.extension = "b7";
 		newChord.inversion = "none";
@@ -391,13 +392,13 @@ function tellTheSubs(data){
 
 
 		//Backdoor Progression
-		var secMin = noteDictInverse((noteDict[chord.fundamental]-5)%12);
-		var tonic = noteDictInverse((noteDict[chord.fundamental]+5)%12);
+		var secMin = noteDictInverse[(noteDict[chord.fundamental]-5)%12];
+		var tonic = noteDictInverse[(noteDict[chord.fundamental]+5)%12];
 		if ((prevChord.fundamental==secMin && prevChord.quality=="min")&&(nextChord.fundamental==tonic && nextChord.quality=="maj")) {
 			var newChord1 = new Chord(); 
 			var newChord2 = new Chord();
-			newChord1.fundamental = noteDictInverse((noteDict[chord.fundamental]-2)%12); 
-			newChord2.fundamental = noteDictInverse((noteDict[chord.fundamental]+3)%12);
+			newChord1.fundamental = noteDictInverse[(noteDict[chord.fundamental]-2)%12]; 
+			newChord2.fundamental = noteDictInverse[(noteDict[chord.fundamental]+3)%12];
 			newChord1.quality = "min";
 			newChord2.quality = "maj";
 			newChord1.extension = "b7";
@@ -416,8 +417,8 @@ function tellTheSubs(data){
 	if (chord.quality == "maj"){ //II-V 
 		var newChord1 = new Chord(); 
 		var newChord2 = new Chord();
-		newChord1.fundamental = noteDictInverse((noteDict[chord.fundamental]+2)%12); 
-		newChord2.fundamental = noteDictInverse((noteDict[chord.fundamental]+7)%12);
+		newChord1.fundamental = noteDictInverse[(noteDict[chord.fundamental]+2)%12]; 
+		newChord2.fundamental = noteDictInverse[(noteDict[chord.fundamental]+7)%12];
 		newChord1.quality = "min";
 		newChord2.quality = "maj";
 		newChord1.extension = "b7";
@@ -434,7 +435,7 @@ function tellTheSubs(data){
 	if (chord.quality == "maj" && (chord.extension=="none" || chord.extension=="maj7" || chord.extension=="6")){ //Tonic sub (Assuming that a major chord if no b7 is tonic) 
 		newChord = new Chord();
 		Object.assign(newChord, chord);
-		newChord.fundamental = noteDictInverse((noteDict[chord.fundamental]-3)%12);
+		newChord.fundamental = noteDictInverse[(noteDict[chord.fundamental]-3)%12];
 		newChord.quality = "min";
 		newChord.extension = "b7";
 		newChord.inversion = "none";
@@ -443,7 +444,7 @@ function tellTheSubs(data){
 
 		newChord = new Chord();
 		Object.assign(newChord, chord);
-		newChord.fundamental = noteDictInverse((noteDict[chord.fundamental]+4)%12);
+		newChord.fundamental = noteDictInverse[(noteDict[chord.fundamental]+4)%12];
 		newChord.quality = "min";
 		newChord.extension = "b7";
 		newChord.inversion = "none";
@@ -452,7 +453,7 @@ function tellTheSubs(data){
 	}
 
 	if (chord.quality == "maj" && (chord.extension == "none" || chord.extension == "maj7" || chord.extension == "6")){ //IV minor substitution 1
-		tonic = noteDictInverse((noteDict[chord.fundamental]-5)%12);
+		tonic = noteDictInverse[(noteDict[chord.fundamental]-5)%12];
 		if (nextChord.fundamental = tonic && nextChord.quality == "maj" && (nextChord.extension == "none" || nextChord.extension == "maj7" || nextChord.extension == "6")){
 			newChord = new Chord();
 			Object.assign(newChord, chord);
@@ -465,8 +466,8 @@ function tellTheSubs(data){
 	}
 
 	if (chord.quality == "maj" && (chord.extension == "none" || chord.extension == "b7")){ //IV minor substitution 2
-		tonic = noteDictInverse((noteDict[chord.fundamental]+5)%12);
-		subDom = noteDictInverse((noteDict[chord.fundamental]-2)%12);
+		tonic = noteDictInverse[(noteDict[chord.fundamental]+5)%12];
+		subDom = noteDictInverse[(noteDict[chord.fundamental]-2)%12];
 		
 		if (prevChord.fundamental == subDom && prevChord.quality =="maj" && nextChord.fundamental == tonic && nextChord.quality == "maj" && (nextChord.extension == "none" || nextChord.extension == "maj7" || nextChord.extension == "6") && (prevChord.extension == "none" || prevChord.extension == "maj7" || prevChord.extension == "6")){
 			newChord = new Chord();
@@ -483,7 +484,7 @@ function tellTheSubs(data){
 	if (chord.quality == "dim" && chord.extension == "6"){ //General dim substitution (like a simple inversion)
 		newChord = new Chord();
 		Object.assign(newChord, chord);
-		newChord.fundamental = noteDictInverse((noteDict[chord.fundamental]+3)%12);
+		newChord.fundamental = noteDictInverse[(noteDict[chord.fundamental]+3)%12];
 		newSub = new Substitution("General dim7 substitution", chord, [newChord]);
 		subs.push(newSub);
 	}
@@ -491,7 +492,7 @@ function tellTheSubs(data){
 	if (chord.quality == "aug"){ //General dim substitution (like a simple inversion)
 		newChord = new Chord();
 		Object.assign(newChord, chord);
-		newChord.fundamental = noteDictInverse((noteDict[chord.fundamental]+4)%12);
+		newChord.fundamental = noteDictInverse[(noteDict[chord.fundamental]+4)%12];
 		newSub = new Substitution("General aug substitution", chord, [newChord]);
 		subs.push(newSub);
 	}
@@ -499,5 +500,7 @@ function tellTheSubs(data){
 	//Left deletion
 	newSub = new Substitution("Left deletion", chord, []);
 	subs.push(newSub);
+
+	return subs;
 
 }
