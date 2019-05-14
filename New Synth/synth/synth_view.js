@@ -118,7 +118,7 @@ function playTransient(voice,attackTime,decaytime,sustainTime) {
     filt_td = t0+sliderAmounts[0]/100;
     filt_ts = filt_td + sliderAmounts[1]/100;
     filt_tr = filt_ts + sustainTime;
-    console.log("t0 = "+t0 +" t1 = "+t1+" t2 = "+t2 +" t3 = "+t3);
+    //console.log("t0 = "+t0 +" t1 = "+t1+" t2 = "+t2 +" t3 = "+t3);
     //console.log("tattack = "+(amp_td-now) +" tsust = "+(amp_ts-amp_td) +" trel = "+(amp_tr-amp_ts));
     //console.log("amp_tr = "+amp_tr)
     voice.gain1.gain.setValueAtTime(0, t0);

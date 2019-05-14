@@ -28,6 +28,8 @@ var instPlayButton = document.getElementById("inst-play-button");
 var quantumSizeInPxs = document.getElementsByClassName('pluschord')[0].offsetWidth/8;
 console.log("qsize: "+quantumSizeInPxs);
 var nextCanvasTimeout;
+var playingChords = [];
+
 
 doneLoadChordsButton.addEventListener("click",closeChordsLoader,false);
 playButton.addEventListener("click",playEffect,false);
@@ -123,14 +125,16 @@ function performPlayerView(){
     numberOfCanvas = document.getElementsByClassName("time-bar").length;
     //console.log("actualIndex == "+actualIndex);
     if (actualIndex +1<numberOfCanvas) {
-        console.time();
+        //console.time();
         moveToNextCanvas();
     }
     else{
-        console.timeEnd();
+        //console.timeEnd();
         stopGraphicView();
+        //stopAudioPlay();
     }
 }
+
 
 function moveToNextCanvas(){
     actualIndex ++;
@@ -138,20 +142,28 @@ function moveToNextCanvas(){
     numberOfUpdates = actualCanvas.width/diffLengthIncreasing;
     var actualChordQuantums = sequencer[actualIndex].duration;
     t1 = (quantumTime*actualChordQuantums)/numberOfUpdates;
-    playCanvas(actualCanvas, actualCanvas.width);
+    playCanvas(actualCanvas);
     //console.log(actualCanvas);
     //console.log("width = "+ actualCanvas.width);
     //console.log("numberOfUpdates = "+ numberOfUpdates);
     //console.log("quarter time = " + quantumTime);
     //console.log("tn = " + quantumTime*actualChordQuantums);
     //console.log("t1 = "+t1);
+    actualChord = document.getElementsByClassName("chord")[actualIndex];
+    var actualChordQuantums = sequencer[actualIndex].duration;
+    var playingchord = sequencer[actualIndex];
+    var freqs = createVoicing(playingchord);
+    var sustainTime = playingchord.duration*quantumTime/1000; /*[seconds]*/
+    sequencer[actualIndex].setSustainTime(sustainTime);
+    sequencer[actualIndex].setIndex(actualIndex);
+    playNotesFromFrequencies(freqs, 1, false,sustainTime);
     nextCanvasTimeout = setTimeout(function(){performPlayerView();},quantumTime*actualChordQuantums); 
 }
 
 function playCanvas(canvas){
     var ctx = canvas.getContext("2d");
     var x=0;
-    console.time();
+    //console.time();
     function move() {
       if (x<=canvas.width+diffLengthIncreasing){
         ctx.fillStyle = "lightblue";
@@ -162,7 +174,7 @@ function playCanvas(canvas){
       else{
         ctx.clearRect(0,0,canvas.width,canvas.height);
         clearInterval(updateTimeInterval);
-        console.timeEnd();
+        //console.timeEnd();
       }
     }
     updateTimeInterval = setInterval(move,t1);

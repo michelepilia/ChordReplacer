@@ -1,6 +1,5 @@
 var playingVoices = [];
 var playedChord = false;
-playingChords = 0;
 
 function startVoice(voice) {
 
@@ -211,13 +210,11 @@ function saveSynthPresetName(){
 }
 
 function playNotesFromFrequencies(arrayOfFrequencies,multFactor,bypass, sustainTime){
-  dustMan();
-  playingChords++;
-  playingVoices = [];
   if (!bypass){
+    var ind;
     for ( i = 0; i < arrayOfFrequencies.length; i++) {
       voice = new Voice(arrayOfFrequencies[i]*multFactor);
-      playingVoices.push(voice);
+      sequencer[actualIndex].addVoice(voice);
       voice.gain1.connect(filt);
       voice.gain2.connect(filt);
       voice.oscillator1.connect(voice.gain1);
@@ -233,35 +230,27 @@ function playNotesFromFrequencies(arrayOfFrequencies,multFactor,bypass, sustainT
       attackTime = sliderAmounts[6]/100;
       decayTime = sliderAmounts[7]/100;
       releaseTime = sliderAmounts[9]/100;
-      console.log("rltime = "+ releaseTime);
-      console.log(attackTime+decayTime+sustainTime);
+      //console.log("rltime = "+ releaseTime);
+      //console.log(attackTime+decayTime+sustainTime);
       playTransient(voice, attackTime, decayTime, sustainTime);/*[seconds]*/
     }
+    playingChords.push(sequencer[actualIndex]);
+    ind = actualIndex;
     setTimeout(function(){
       now = c.currentTime;
       t3 = now;
-      console.log("rltime = "+ releaseTime);
+      //console.log("rltime = "+ releaseTime);
       filt.frequency.linearRampToValueAtTime(minFilt+(amounts[4]/(maxAmount-minAmount)*(maxFilt-minFilt)), now + sliderAmounts[3]/100);
-      for (k = 0; k < playingVoices.length; k++) {    
-        console.log("rltime = "+ releaseTime);
-          releaseVoice(playingVoices[k],k,t3,releaseTime);        
+      for (k = 0; k < playingChords[ind].voices.length; k++) {    
+        //console.log("rltime = "+ releaseTime);
+          releaseVoice(playingChords[ind].voices[k],t3,releaseTime);        
       }
-      playingChords--;
       }, sustainTime*1000);
     }
 }
-function dustMan(){
-  if (playingChords>=1) {
-    for ( i = 0; i < playingVoices.length; i++) {
-      playingVoices[i].oscillator1.stop();
-      playingVoices[i].oscillator2.stop();
-    }
-      playingChords=0;
-  }
-}
 
-function releaseVoice(voice,index, t3,releaseTime){
-  console.log("rltime = "+ releaseTime);
+function releaseVoice(voice, t3,releaseTime){
+  //console.log("rltime = "+ releaseTime);
   voice.gain1.gain.linearRampToValueAtTime(0, t3+releaseTime);
   voice.gain2.gain.linearRampToValueAtTime(0, t3+releaseTime);
   setTimeout(function(){
@@ -271,7 +260,6 @@ function releaseVoice(voice,index, t3,releaseTime){
   voice.oscillator2.disconnect();
   voice.gain1.disconnect();
   voice.gain2.disconnect();
-  playingVoices[index]=0;
   console.timeEnd();
   },releaseTime*1000);
 }

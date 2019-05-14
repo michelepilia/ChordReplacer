@@ -5,6 +5,7 @@ var inversionSelector = document.getElementById("inversion-chord");
 var chordsToSwap = [];
 var swapActive = 0;
 var instPlayMode = false;
+var actualChord;
 
 function addChord() {
 	var chord = new Chord();
@@ -241,7 +242,7 @@ function instPlayChord(data){
 	var playingchord = sequencer[id];
 	var freqs = createVoicing(playingchord);
 	var sustainTime = playingchord.duration*quantumTime/1000; /*[seconds]*/
-	console.log("stime = " +sustainTime);
+	
 	playNotesFromFrequencies(freqs, 1, false,sustainTime);
 }
 
@@ -309,14 +310,12 @@ function createVoicing(chord){
 }
 
 
+function moveToNextChord(){
+console.log("called");
+
+}
+
+function stopAudioPlay(){
 
 
-
-
-
-
-
-
-
-
-
+}

@@ -11,5 +11,15 @@ class Chord {
 	constructor() {
 		this.noteFlag = false;
 		this.duration = quantization;
+		this.voices = [];
 	};
+	setSustainTime = function(sustainTime) {
+		this.setSustainTime = sustainTime;
+	}
+	setIndex = function(index){
+		this.chordIndex = index;
+	}
+	addVoice = function(voice){
+		this.voices.push(voice);
+	}
 }
