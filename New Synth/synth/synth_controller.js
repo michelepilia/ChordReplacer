@@ -219,7 +219,7 @@ function playNotesFromFrequencies(arrayOfFrequencies,multFactor,bypass, sustainT
   var ind;
   for ( i = 0; i < arrayOfFrequencies.length; i++) {
     voice = new Voice(arrayOfFrequencies[i]*multFactor);
-    sequencer[index].addVoice(voice);
+    sequencer[index].voices.push(voice);
     voice.gain1.connect(filt);
     voice.gain2.connect(filt);
     voice.oscillator1.connect(voice.gain1);
@@ -239,7 +239,7 @@ function playNotesFromFrequencies(arrayOfFrequencies,multFactor,bypass, sustainT
     playTransient(voice, attackTime, decayTime, sustainTime);/*[seconds]*/
   }
   ind = index;
-  sequencer[index].setTimeOfRelease = setTimeout(function(){
+  sequencer[index].timerOfRelease = setTimeout(function(){
     now = c.currentTime;
     t3 = now;
     //console.log("rltime = "+ releaseTime);
@@ -263,6 +263,7 @@ function releaseVoice(voice, t3,releaseTime,ind){
   voice.oscillator2.disconnect();
   voice.gain1.disconnect();
   voice.gain2.disconnect();
+  voice.released = true;
   sequencer[ind].voices.pop();
   voice.frequency=0;
   if (sequencer[ind].voices.length==0) {

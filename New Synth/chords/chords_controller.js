@@ -245,8 +245,8 @@ function instPlayChord(data){
 	var playingchord = sequencer[id];
 	var freqs = createVoicing(playingchord);
 	var sustainTime = playingchord.duration*quantumTime/1000; /*[seconds]*/
-	sequencer[id].setSustainTime(sustainTime);
-    sequencer[id].setIndex(id);
+	sequencer[id].sustainTime = sustainTime;
+    sequencer[id].indexInSequencer = id;
   	var position = isChordPlaying(id);
     if (position!=-1){
     	clearTimeout(playingChords[position].timeOfRelease);

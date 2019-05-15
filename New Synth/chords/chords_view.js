@@ -197,8 +197,8 @@ function moveToNextCanvas(){
     var playingchord = sequencer[actualIndex];
     var freqs = createVoicing(playingchord);
     var sustainTime = playingchord.duration*quantumTime/1000; /*[seconds]*/
-    sequencer[actualIndex].setSustainTime(sustainTime);
-    sequencer[actualIndex].setIndex(actualIndex);
+    sequencer[actualIndex].sustainTime = sustainTime;
+    sequencer[actualIndex].indexInSequencer = actualIndex;
     playNotesFromFrequencies(freqs, 1, false,sustainTime,actualIndex);
     nextCanvasTimeout = setTimeout(function(){performPlayerView();},quantumTime*actualChordQuantums); 
 }

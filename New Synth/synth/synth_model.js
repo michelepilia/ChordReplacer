@@ -88,5 +88,6 @@ function Voice(frequency){ //Voce è inteso come signal path totale
 	this.gain1 = c.createGain();
 	this.gain2 = c.createGain();
 	this.pre_gain1 = c.createGain();
-	this.pre_gain2 = c.createGain(); 
+	this.pre_gain2 = c.createGain();
+	this.released = false;
 }

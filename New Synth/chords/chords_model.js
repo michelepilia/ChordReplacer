@@ -15,8 +15,12 @@ class Chord {
 		this.timeOfRelease;
 		this.played = false;
 		this.indexInSequencer;
+		this.sustainTime=0;
+		this.indexInSequencer;
+		this.timerOfRelease;
+		this.played;
 	};
-	setSustainTime = function(sustainTime) {
+	/*setSustainTime = function(sustainTime) {
 		this.sustainTime = sustainTime;
 	}
 	setIndex = function(index){//is the index of the chord in the sequencer
@@ -25,13 +29,13 @@ class Chord {
 	addVoice = function(voice){
 		this.voices.push(voice);
 	}
-	setTimeOfRelease = function(timer){
+	setTimerOfRelease = function(timer){
 		this.timeOfRelease = timer;
 	}
 	setAsPlayed = function(){
 		this.played = true;
 	}
-
+*/
 }
 
 class Substitution{
