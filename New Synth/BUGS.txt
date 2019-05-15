@@ -4,7 +4,8 @@ BUG TROVATI:
 3) errori aggiornamento lfo dopo caricamento preset
 5)distorsione causata da lfo a seguito di caricamento preset synth da database
 6)bug resonance nel caricamento e' 1, ma dovrebbe essere -0.5;
-
+7) nel caricamento dal db gli accordi non mantengono la loro size grafica originale
+8) nelle sostituzioni gli accordi non mantengono la loro size grafica originale
 
 -----------------------------------------------------------------------------------
 FIXED BUGS:
