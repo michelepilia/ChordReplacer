@@ -17,6 +17,7 @@ var bpmText = document.getElementById("bpm-value");
 var chordSubstitutionMenu = document.getElementById("chord-substitution-menu");
 var chordSubstitutionTable = document.getElementById("chord-substitution-table");
 var closeSubstitutionMenu = document.getElementById("apply-substitution");
+var loopButton = document.getElementById("loop-button");
 closeSubstitutionMenu.addEventListener("click",closeSubstitution,false);
 
 var actualIndex = 0;
@@ -35,6 +36,7 @@ var quantumSizeInPxs = document.getElementsByClassName('pluschord')[0].offsetWid
 var nextCanvasTimeout;
 var playingChords = [];
 var a=0;
+var loop = false;
 
 doneLoadChordsButton.addEventListener("click",closeChordsLoader,false);
 playButton.addEventListener("click",playEffect,false);
@@ -47,7 +49,11 @@ saveChords.addEventListener("click", saveChordsPreset, false);
 loadChords.addEventListener("click", loadChordsPreset, false);
 chordsPresetNameField.addEventListener("input", saveChordsPresetName, false);
 instPlayButton.addEventListener("click", toggleInstPlayMode, false);
+loopButton.addEventListener("click",activeLoop,false);
 
+function activeLoop(){
+    loop = !loop;
+}
 
 function createChordEventListeners(){
 	newEditButton = Array.from(document.getElementsByClassName("chord-edit")).pop();
@@ -154,6 +160,7 @@ function updateChordsViewFromModel(chordsName){
 function playEffect(){
     if (playStatus==0){
         playStatus = 1;
+        debugger;
         performPlayerView();
     }
     else{
@@ -163,6 +170,7 @@ function playEffect(){
 }
 
 function performPlayerView(){
+    debugger;
     numberOfCanvas = document.getElementsByClassName("time-bar").length;
     quantumTime = 60*1000/bpm/(quantization/4);
     //console.log("actualIndex == "+actualIndex);
@@ -175,9 +183,7 @@ function performPlayerView(){
         moveToNextCanvas();
     }
     else{
-        //console.timeEnd();
         stopGraphicView();
-        //stopAudioPlay();
     }
 }
 
@@ -242,6 +248,9 @@ function stopGraphicView(){
     clearInterval(actualTimeInterval);
     clearTimeout(nextCanvasTimeout);
     clearAllTimeBar();
+    if (loop) {
+        playEffect();
+    }
 }
 
 function clearAllTimeBar(){
