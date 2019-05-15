@@ -81,8 +81,11 @@ function selectorListener(data){
   }
   else if (selectorChangeIndex==3) {
     lfo_amp.disconnect();
-    console.log("lfo disconnected");
-    lfo_amp.connect(lfo_destinations[(parseInt(selectorValues[3]))]); 
+    //console.log(selectorChangeIndex);
+    lfo.connect(lfo_amp);
+    lfo_amp.connect(lfo_destinations[(parseInt(selectorValues[3]))]);
+    lfo_amp.gain.value = lfoGainType(); 
+    console.log(lfo_amp.gain);
   }
 }
 
@@ -130,7 +133,7 @@ function rotate(data) {
 function lfoGainType(){
   if (selectorValues[3] == "0") {
     //minFilt+(amounts[6]/(maxAmount-minAmount)*(maxFilt-minFilt));
-    return minLfo+(sliderAmounts[5]/100/(maxLfoAmpGain-minLfoAmpGain)*(maxLfoAmpGain-minLfoAmpGain));
+    return (minLfo+(sliderAmounts[5]/100/(maxLfoAmpGain-minLfoAmpGain)*(maxLfoAmpGain-minLfoAmpGain)))/3;
   }
   else if (selectorValues[3] == "1"){
     console.log(sliderAmounts[5]*10);
@@ -241,6 +244,7 @@ function playNotesFromFrequencies(arrayOfFrequencies,multFactor,bypass, sustainT
     now = c.currentTime;
     t3 = now;
     //console.log("rltime = "+ releaseTime);
+    lfo.frequency.value=0;
     filt.frequency.linearRampToValueAtTime(minFilt+(amounts[4]/(maxAmount-minAmount)*(maxFilt-minFilt)), now + sliderAmounts[3]/100);
    for (k = 0; k < sequencer[index].voices.length; k++) {    
       //console.log("rltime = "+ releaseTime);
@@ -267,7 +271,7 @@ function releaseVoice(voice, t3,releaseTime,ind){
   if (sequencer[ind].voices.length==0) {
     playingChords.pop();
   }
-  console.timeEnd();
+  //console.timeEnd();
   },releaseTime*1000);
 }
 

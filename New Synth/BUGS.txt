@@ -4,3 +4,7 @@ BUG TROVATI:
 3) errori aggiornamento lfo dopo caricamento preset
 4) attack lfo non va
 5)distorsione causata da lfo a seguito di caricamento preset synth da database
+6)bug resonaance nel caricamento e' 1, ma dovrebbe essere -0.5;
+-----------------------------------------------------------------------------------
+FIXED BUGS:
+1)risolto bug attacco lfo.
