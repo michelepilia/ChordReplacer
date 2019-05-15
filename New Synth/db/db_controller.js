@@ -143,6 +143,13 @@ function loadSynthFunction(data) {
 	  		sliderAmounts[7] = fbSynth.mast_dcy;
 	  		sliderAmounts[8] = fbSynth.mast_sus;
 	  		sliderAmounts[9] = fbSynth.mast_rel;
+	  		/*Aggiornato il modello bisogna aggiornare i valori dei nodi audio globali. Ovvero quei valori che 
+	  		non si aggiornano quando la nota e' suonata, ma solo su input diverso da parte dell'utente*/
+	  		lfo_amp.disconnect();
+		    lfo_amp.connect(lfo_destinations[(parseInt(selectorValues[3]))]); 
+		    lfo.type = selectorValues[2];
+		    lfo.frequency.value = minLfo+(amounts[7]/(maxAmount-minAmount)*maxLfo);
+
 			closeSynthLoader();
 			updateViewFromModel(fbNames[chosenIndex]);
 	});

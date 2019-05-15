@@ -1,0 +1,6 @@
+BUG TROVATI:
+1) caricare un preset synth. Modificarlo. Salvarlo. Ricaricarlo: -> le modifiche effettuate non sono state salvate
+2) caricare preset synth con filtro al minimo (a sinistra). Mettere eg massimo a destra. Attacco basso. Caricare traccia accordi con almeno 2. Dopo il primo accordo c'e' un cambiamento del suono per quanto riguarda l'applicazione del filtro
+3) errori aggiornamento lfo dopo caricamento preset
+4) attack lfo non va
+5)distorsione causata da lfo a seguito di caricamento preset synth da database

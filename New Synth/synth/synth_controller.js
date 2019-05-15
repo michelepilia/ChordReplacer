@@ -234,8 +234,6 @@ function playNotesFromFrequencies(arrayOfFrequencies,multFactor,bypass, sustainT
     decayTime = sliderAmounts[7]/100;
     releaseTime = sliderAmounts[9]/100;
     allVoices.push(voice);
-    //console.log("rltime = "+ releaseTime);
-    //console.log(attackTime+decayTime+sustainTime);
     playTransient(voice, attackTime, decayTime, sustainTime);/*[seconds]*/
   }
   ind = index;
@@ -244,7 +242,7 @@ function playNotesFromFrequencies(arrayOfFrequencies,multFactor,bypass, sustainT
     t3 = now;
     //console.log("rltime = "+ releaseTime);
     filt.frequency.linearRampToValueAtTime(minFilt+(amounts[4]/(maxAmount-minAmount)*(maxFilt-minFilt)), now + sliderAmounts[3]/100);
-    for (k = 0; k < sequencer[index].voices.length; k++) {    
+   for (k = 0; k < sequencer[index].voices.length; k++) {    
       //console.log("rltime = "+ releaseTime);
         releaseVoice(sequencer[index].voices[k],t3,releaseTime,ind);        
     }
