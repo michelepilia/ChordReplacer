@@ -261,7 +261,6 @@ function loadChordsFunction(data) {
 			}
 
 			bpm = fbChords.bpm;
-
 			closeChordsLoader();
 			updateChordsViewFromModel(fbNames[chosenIndex]);
 	});

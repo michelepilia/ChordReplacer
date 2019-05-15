@@ -7,6 +7,7 @@ var swapActive = 0;
 var instPlayMode = false;
 var actualChord;
 var allVoices=[];
+var sequencerSub=0;
 
 function addChord() {
 	var chord = new Chord();
@@ -361,6 +362,7 @@ function tellTheSubs(data){
 	var subs = [];
 	var id = parseInt(data.target.parentElement.getAttribute("id").substr(1));
 	var chord = sequencer[id];
+	sequencerSub = id; //Per tenere traccia dell'accordo durante la sostituzione
 	var prevChord = sequencer[id-1];
 	var nextChord = sequencer[id+1];
 	var newChord;
@@ -549,10 +551,75 @@ function tellTheSubs(data){
 }
 
 function applySubstitution(data){
-	var length = "apply-substitution-button".length-1;
-	var subIndexInSubs = data.target.getAttribute("id").substr(length);
+	var length = "apply-substitution-button".length;
+	var subIndexInSubs = parseInt(data.target.getAttribute("id").substr(length));
+	var subToApply = substitutions[subIndexInSubs];
+
+	if(subToApply.name=="Preparation by VII"){
+		if(sequencerSub>0){ //Se oltre il primo elemento del sequencer, inserisco dimezzando l'accordo precedente
+			sequencer[sequencerSub-1].duration = sequencer[sequencerSub-1].duration/2;
+			subToApply.destination[0].duration = sequencer[sequencerSub-1].duration;
+		}
+		sequencer.splice(sequencerSub, 0, subToApply.destination[0]); //altrimenti inserisco all'inizio con durata normale
+	}
+	if(subToApply.name=="Preparation by minor 7"){
+		if(sequencerSub==0){ //Se oltre il primo elemento del sequencer, inserisco dimezzando l'accordo precedente
+			sequencer.splice(sequencerSub, 0, subToApply.destination[0]);
+		}
+		else{//altrimenti inserisco all'inizio con durata normale
+			sequencer[sequencerSub-1] = subToApply.destination[0];
+		}
+	}
+	if(subToApply.name=="Back propagation of 7th"){
+		if (sequencerSub==0){
+			var rest = new Chord();
+			rest.duration = quantization/2;
+			sequencer.splice(sequencerSub, 0, rest, subToApply.origin);
+		}
+		else if(sequencerSub==(sequencer.length-1)){
+			var rest = new Chord();
+			sequencer[sequencerSub-1].duration /= 2;
+			rest.duration = sequencer[sequencerSub-1].duration;
+			sequencer.push(rest);
+		}
+		else{
+			sequencer[sequencerSub-1].duration /= 2;
+			sequencer[sequencerSub+1].duration += sequencer[sequencerSub-1].duration;
+		}
+	}
+	if(subToApply.name=="Backdoor Progression"){
+		sequencer.splice(sequencerSub, 1, subToApply.destination[0], subToApply.destination[1]);
+	}
+	if(subToApply.name=="Preparation by II-V"){
+		if(sequencerSub==0){
+			sequencer.splice(sequencerSub, 0, subToApply.destination[0], subToApply.destination[1]);
+		}
+		else{
+			sequencer[sequencerSub-1].duration /= 2;
+			subToApply.destination[0].duration = sequencer[sequencerSub-1].duration / 2;
+			subToApply.destination[0].duration = subToApply.destination[1].duration;
+			sequencer.splice(sequencerSub, 0, subToApply.destination[0], subToApply.destination[1]);
+		}
+	}
+	if(subToApply.name=="Left deletion"){
+		if (sequencerSub==0){
+			var rest = new Chord();
+			rest.duration = subToApply.origin.duration;
+			sequencer[sequencerSub] = rest;
+		}
+		else{
+			sequencer[sequencerSub-1].duration += sequencer[sequencerSub].duration;
+			sequencer.splice(sequencerSub, 1);//Rimuovo elemento dall'array
+		}
+	}
+	else{
+		sequencer[sequencerSub] = subToApply.destination[0];
+	}
+	sequencer.forEach(function(){
+		//Update view from model
+		updateChordsViewFromModel(chordsPresetNameField.value);
+	});
 	closeSubstitution();
-	alert("Apply substituition with index: " + subIndexInSubs);
 }
 
 function isChordPlaying(sequencerIndex){
