@@ -167,6 +167,10 @@ function performPlayerView(){
     quantumTime = 60*1000/bpm/(quantization/4);
     //console.log("actualIndex == "+actualIndex);
     if (actualIndex<numberOfCanvas) {
+        if (actualIndex<0) {
+            actualIndex++;
+            previousIndex=-1;
+        }
         //console.time();
         moveToNextCanvas();
     }
@@ -329,6 +333,7 @@ function updateChordsViewForSwap(data){
             classHtml[i].style.backgroundColor="lightgray";
             classHtml[i].style.backgroundColor="lightgray";
         }
+        updateChordsSize();
     }
 }
 
@@ -366,13 +371,32 @@ function updateChordDurationInView(chordId,type){
     var chordHtml = document.getElementById(chordId);
     var style = window.getComputedStyle(chordHtml, null);
     var actualSize = parseInt(style.getPropertyValue("width").substr(0,style.getPropertyValue("width").length-2));
-    //console.log("previous: "+actualSize);
     var increase = actualSize + quantumSizeInPxs*type;  
-    //console.log("next shuold be: "+increase);
     chordHtml.style.width = increase.toString()+"px";
     var style = window.getComputedStyle(chordHtml, null);
     var actualSize = parseInt(style.getPropertyValue("width").substr(0,style.getPropertyValue("width").length-2));
     var canvas = chordHtml.firstChild;
     canvas.width = actualSize;
+    
     //console.log("next is: "+style.getPropertyValue("width"));
+}
+
+function updateChordsSize(){
+    var canvasBlockHtml=document.getElementsByClassName("time-bar");
+    var length = canvasBlockHtml.length;
+    for (var i = 0; i < length ; i++) {
+        updateChordSize(canvasBlockHtml[i],i);
+    }
+}
+
+function updateChordSize(canvas,indexInSequencer){
+
+    canvas.width = quantumSizeInPxs*sequencer[indexInSequencer].duration;
+    console.log(canvas);
+    var id = "c"+indexInSequencer;
+    var chordHtml = document.getElementById(id);
+    var style = window.getComputedStyle(chordHtml, null);
+    var actualSize = parseInt(style.getPropertyValue("width").substr(0,style.getPropertyValue("width").length-2));
+    var increase = canvas.width;  
+    chordHtml.style.width = increase.toString()+"px";
 }

@@ -2,10 +2,13 @@ BUG TROVATI:
 1) caricare un preset synth. Modificarlo. Salvarlo. Ricaricarlo: -> le modifiche effettuate non sono state salvate
 2) caricare preset synth con filtro al minimo (a sinistra). Mettere eg massimo a destra. Attacco basso. Caricare traccia accordi con almeno 2. Dopo il primo accordo c'e' un cambiamento del suono per quanto riguarda l'applicazione del filtro
 3) errori aggiornamento lfo dopo caricamento preset
-4) attack lfo non va
 5)distorsione causata da lfo a seguito di caricamento preset synth da database
-6)bug resonaance nel caricamento e' 1, ma dovrebbe essere -0.5;
-7)bug nel sustain: dopo il decay si sente il suono anche se sustain e' a 0.
+6)bug resonance nel caricamento e' 1, ma dovrebbe essere -0.5;
+
+
 -----------------------------------------------------------------------------------
 FIXED BUGS:
 1)risolto bug attacco lfo.
+2)bug nel sustain: dopo il decay si sente il suono anche se sustain e' a 0.
+3) bug quando si cambia quanti di accordo e non si preme stop, durante il play.
+4)quando si fa lo swap la durata in quantizzazione non rispecchia la larghezza della canvas.
