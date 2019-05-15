@@ -1,6 +1,11 @@
 var playingVoices = [];
 var playedChord = false;
-
+var classToRotate = "int-knob";/*indica la classe html di cui si vuole effettuare la rotazione*/
+var classToRotate2 = "." + classToRotate;
+var knobToRotateIndex = 0;
+var oldY = 0;
+var yDirection = "";
+var antiGlitchFlag = 0;
 function startVoice(voice) {
 
   voice.gain1.connect(pre_filt_gain);
@@ -39,8 +44,7 @@ function keyUpListener(e) {
 }
 
 function sliderListener(data){
-  slider = data.target;
-
+  var slider = data.target;
   if(slider.getAttribute("id")=='sp1'){
     pitch_amount1 = parseInt(slider.value);
     offset3 = Math.pow(2,(pitch_amount1)/12);
@@ -74,6 +78,7 @@ function selectorListener(data){
   }
   else if (selectorChangeIndex==3) {
     lfo_amp.disconnect();
+    console.log("lfo disconnected");
     lfo_amp.connect(lfo_destinations[(parseInt(selectorValues[3]))]); 
   }
 }
@@ -123,11 +128,12 @@ function rotate(data) {
 
 
 function lfoGainType(){
-  if (selectorValues[3] == "0" || selectorValues[3] == "1") {
-    minFilt+(amounts[6]/(maxAmount-minAmount)*(maxFilt-minFilt));
+  if (selectorValues[3] == "0") {
+    //minFilt+(amounts[6]/(maxAmount-minAmount)*(maxFilt-minFilt));
     return minLfo+(sliderAmounts[5]/100/(maxLfoAmpGain-minLfoAmpGain)*(maxLfoAmpGain-minLfoAmpGain));
   }
-  else if (selectorValues[3] == "2"){
+  else if (selectorValues[3] == "1"){
+    console.log(sliderAmounts[5]*10);
     return sliderAmounts[5]*10;
   }
   else {
