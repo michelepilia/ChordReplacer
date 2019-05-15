@@ -160,7 +160,6 @@ function updateChordsViewFromModel(chordsName){
 function playEffect(){
     if (playStatus==0){
         playStatus = 1;
-        debugger;
         performPlayerView();
     }
     else{
@@ -170,7 +169,6 @@ function playEffect(){
 }
 
 function performPlayerView(){
-    debugger;
     numberOfCanvas = document.getElementsByClassName("time-bar").length;
     quantumTime = 60*1000/bpm/(quantization/4);
     //console.log("actualIndex == "+actualIndex);
