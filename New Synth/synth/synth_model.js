@@ -58,7 +58,7 @@ function setUp(){
 	hipass = c.createBiquadFilter();
 	hipass.type = "highpass";
 	hipass.gain.value = 1;
-	hipass.frequency.value = 150;
+	hipass.frequency.value = 100;
 	/*Sezione LFO*/
 	lfo = c.createOscillator();
     lfo_amp = c.createGain();

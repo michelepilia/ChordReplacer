@@ -6,6 +6,9 @@ var knobToRotateIndex = 0;
 var oldY = 0;
 var yDirection = "";
 var antiGlitchFlag = 0;
+var keyboardPlay = false; 
+
+
 function startVoice(voice) {
 
   voice.gain1.connect(pre_filt_gain);
@@ -20,17 +23,17 @@ function startVoice(voice) {
   voice.oscillator2.frequency.value = voice.oscillator2.frequency.value * offset2;
   voice.oscillator1.type = selectorValues[0];
   voice.oscillator2.type = selectorValues[1];
-  
   playNote(voice);
-
 }
 
 
-function keyDownListener(e) {
-  if(keys.includes(e.key) && !e.repeat){
-    voice = new Voice(tones[keys.indexOf(e.key)]); //Voce è inteso come signal path totale 
-    playingNotes.push(voice);
-    startVoice(playingNotes[playingNotes.length-1]);
+function keyDownListener(e){ 
+  if (keyboardPlay) {
+    if(keys.includes(e.key) && !e.repeat){
+      voice = new Voice(tones[keys.indexOf(e.key)]); //Voce è inteso come signal path totale 
+      //playingNotes.push(voice); 
+      //startVoice(playingNotes[playingNotes.length-1]);
+    }
   }
 }
 
@@ -82,9 +85,6 @@ function selectorListener(data){
     lfo_amp.connect(lfo_destinations[(parseInt(selectorValues[3]))]); 
   }
 }
-
-
-
 
 function rotate(data) {
   getMouseDirection(data);
@@ -216,44 +216,40 @@ function saveSynthPresetName(){
 }
 
 function playNotesFromFrequencies(arrayOfFrequencies,multFactor,bypass, sustainTime,index){
-  if (!bypass){
-    var ind;
-    for ( i = 0; i < arrayOfFrequencies.length; i++) {
-      voice = new Voice(arrayOfFrequencies[i]*multFactor);
-      sequencer[index].addVoice(voice);
-      voice.gain1.connect(filt);
-      voice.gain2.connect(filt);
-      voice.oscillator1.connect(voice.gain1);
-      voice.oscillator2.connect(voice.gain2);
-      //lfo_amp.connect(voice.pre_gain1);
-      //lfo_amp.connect(voice.pre_gain2);
-      voice.oscillator1.frequency.value = voice.frequency * offset3;
-      voice.oscillator1.frequency.value = voice.oscillator1.frequency.value * offset1;
-      voice.oscillator2.frequency.value = voice.frequency * offset4;
-      voice.oscillator2.frequency.value = voice.oscillator2.frequency.value * offset2;
-      voice.oscillator1.type = selectorValues[0];
-      voice.oscillator2.type = selectorValues[1];
-      attackTime = sliderAmounts[6]/100;
-      decayTime = sliderAmounts[7]/100;
-      releaseTime = sliderAmounts[9]/100;
-      allVoices.push(voice);
+  var ind;
+  for ( i = 0; i < arrayOfFrequencies.length; i++) {
+    voice = new Voice(arrayOfFrequencies[i]*multFactor);
+    sequencer[index].addVoice(voice);
+    voice.gain1.connect(filt);
+    voice.gain2.connect(filt);
+    voice.oscillator1.connect(voice.gain1);
+    voice.oscillator2.connect(voice.gain2);
+    voice.oscillator1.frequency.value = voice.frequency * offset3;
+    voice.oscillator1.frequency.value = voice.oscillator1.frequency.value * offset1;
+    voice.oscillator2.frequency.value = voice.frequency * offset4;
+    voice.oscillator2.frequency.value = voice.oscillator2.frequency.value * offset2;
+    voice.oscillator1.type = selectorValues[0];
+    voice.oscillator2.type = selectorValues[1];
+    attackTime = sliderAmounts[6]/100;
+    decayTime = sliderAmounts[7]/100;
+    releaseTime = sliderAmounts[9]/100;
+    allVoices.push(voice);
+    //console.log("rltime = "+ releaseTime);
+    //console.log(attackTime+decayTime+sustainTime);
+    playTransient(voice, attackTime, decayTime, sustainTime);/*[seconds]*/
+  }
+  ind = index;
+  sequencer[index].setTimeOfRelease = setTimeout(function(){
+    now = c.currentTime;
+    t3 = now;
+    //console.log("rltime = "+ releaseTime);
+    filt.frequency.linearRampToValueAtTime(minFilt+(amounts[4]/(maxAmount-minAmount)*(maxFilt-minFilt)), now + sliderAmounts[3]/100);
+    for (k = 0; k < sequencer[index].voices.length; k++) {    
       //console.log("rltime = "+ releaseTime);
-      //console.log(attackTime+decayTime+sustainTime);
-      playTransient(voice, attackTime, decayTime, sustainTime);/*[seconds]*/
+        releaseVoice(sequencer[index].voices[k],t3,releaseTime,ind);        
     }
-    ind = index;
-    sequencer[index].setTimeOfRelease = setTimeout(function(){
-      now = c.currentTime;
-      t3 = now;
-      //console.log("rltime = "+ releaseTime);
-      filt.frequency.linearRampToValueAtTime(minFilt+(amounts[4]/(maxAmount-minAmount)*(maxFilt-minFilt)), now + sliderAmounts[3]/100);
-      for (k = 0; k < sequencer[index].voices.length; k++) {    
-        //console.log("rltime = "+ releaseTime);
-          releaseVoice(sequencer[index].voices[k],t3,releaseTime,ind);        
-      }
-      }, sustainTime*1000);
-    playingChords.push(sequencer[index]);
-    }
+    }, sustainTime*1000);
+  playingChords.push(sequencer[index]);
 }
 
 function releaseVoice(voice, t3,releaseTime,ind){
@@ -274,4 +270,8 @@ function releaseVoice(voice, t3,releaseTime,ind){
   }
   console.timeEnd();
   },releaseTime*1000);
+}
+
+function enableKeyboard(){
+  keyboardPlay = !keyboardPlay;
 }
