@@ -53,6 +53,7 @@ loopButton.addEventListener("click",activeLoop,false);
 
 function activeLoop(){
     loop = !loop;
+    applyGraphicEffect("loop");
 }
 
 function createChordEventListeners(){
@@ -166,6 +167,7 @@ function playEffect(){
         pauseGraphicView();
         pauseAudioView();
     }
+    applyGraphicEffect("play");
 }
 
 function performPlayerView(){
@@ -216,7 +218,7 @@ function playCanvas(canvas){
     //console.time();
     function move() {
       if (x<=canvas.width+diffLengthIncreasing){
-        ctx.fillStyle = "lightblue";
+        ctx.fillStyle = "hsl(0, 95%, 71%)";
         ctx.clearRect(0,0,canvas.width,canvas.height);
         x += diffLengthIncreasing;
         ctx.fillRect(0,0,x,canvas.height);
@@ -248,6 +250,9 @@ function stopGraphicView(){
     clearAllTimeBar();
     if (loop) {
         playEffect();
+    }
+    else{
+        applyGraphicEffect("stop");
     }
 }
 
@@ -358,7 +363,7 @@ function handleMouseLeave(data){
 
 function toggleInstPlayButton(){
     if(instPlayMode){
-        instPlayButton.style.backgroundColor="lightgreen";
+        instPlayButton.style.backgroundColor="hsl(90, 95%, 85%)";
     }
     else {
         instPlayButton.style.backgroundColor="white";
@@ -406,4 +411,24 @@ function updateChordSize(canvas,indexInSequencer){
     var actualSize = parseInt(style.getPropertyValue("width").substr(0,style.getPropertyValue("width").length-2));
     var increase = canvas.width;  
     chordHtml.style.width = increase.toString()+"px";
+}
+
+function applyGraphicEffect(type){
+    if (type=="play"){
+        if (playStatus==1) playButton.style.backgroundColor="hsl(90, 95%, 85%)";
+        else {
+            playButton.style.backgroundColor = "white";
+        }
+    }
+    else if (type=="stop"){
+        playButton.style.backgroundColor = "white";
+    }
+    else if (type=="loop") {
+        if (loop==true){
+            loopButton.style.backgroundColor = "hsl(90, 95%, 85%)";
+        }
+        else{
+            loopButton.style.backgroundColor="white";
+        }
+    }
 }
