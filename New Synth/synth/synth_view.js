@@ -133,8 +133,8 @@ function playTransient(voice,attackTime,decaytime,sustainTime) {
     //console.log(lfo_ta);
     filt.frequency.linearRampToValueAtTime(sliderAmounts[2]/100*eg, filt_td); //linear ramp tu SUS (% di eg) at time DCY
     
-    voice.gain1.gain.linearRampToValueAtTime(sliderAmounts[8]/100*amounts[0]*SENS/270/2, t2);
-    voice.gain2.gain.linearRampToValueAtTime(sliderAmounts[8]/100*amounts[2]*SENS/270/2, t2);
+    voice.gain1.gain.linearRampToValueAtTime((sliderAmounts[8]-1)/100*amounts[0]*SENS/270/2, t2);
+    voice.gain2.gain.linearRampToValueAtTime((sliderAmounts[8]-1)/100*amounts[2]*SENS/270/2, t2);
 }
 
 

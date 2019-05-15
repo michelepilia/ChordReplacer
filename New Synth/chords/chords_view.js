@@ -55,7 +55,6 @@ function createChordEventListeners(){
     newQuantizationPlusButton = Array.from(document.getElementsByClassName("quantization-plus")).pop();
     newQuantizationMinusButton = Array.from(document.getElementsByClassName("quantization-minus")).pop();
 	newSubstitutionButton = Array.from(document.getElementsByClassName("chord-substitution")).pop();
-    console.log(newSubstitutionButton);
     newSubstitutionButton.addEventListener("click",openSubstitutionMenu,false);
     newEditButton.addEventListener("click", showChordEditor, false);
     newSwapButton.addEventListener("click", handleSwap, false);

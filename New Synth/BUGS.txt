@@ -5,6 +5,7 @@ BUG TROVATI:
 4) attack lfo non va
 5)distorsione causata da lfo a seguito di caricamento preset synth da database
 6)bug resonaance nel caricamento e' 1, ma dovrebbe essere -0.5;
+7)bug nel sustain: dopo il decay si sente il suono anche se sustain e' a 0.
 -----------------------------------------------------------------------------------
 FIXED BUGS:
 1)risolto bug attacco lfo.
