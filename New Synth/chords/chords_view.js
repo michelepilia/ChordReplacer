@@ -19,7 +19,8 @@ var chordSubstitutionTable = document.getElementById("chord-substitution-table")
 var closeSubstitutionMenu = document.getElementById("apply-substitution");
 closeSubstitutionMenu.addEventListener("click",closeSubstitution,false);
 
-var actualIndex = -1;
+var actualIndex = 0;
+var previousIndex=-1;
 var latency=0;
 var diffLengthIncreasing = 1; //[pixel]
 var quantumTime = 60*1000/bpm/2;//[ms] -> divided by 2 works correctly only if grid is 1/8 !!
@@ -152,14 +153,13 @@ function updateChordsViewFromModel(chordsName){
 
 }
 function playEffect(){
-    //console.log("play status == "+playStatus);
     if (playStatus==0){
         playStatus = 1;
-        //playAudioView();
         performPlayerView();
     }
     else{
         pauseGraphicView();
+        pauseAudioView();
     }
 }
 
@@ -167,7 +167,7 @@ function performPlayerView(){
     numberOfCanvas = document.getElementsByClassName("time-bar").length;
     quantumTime = 60*1000/bpm/(quantization/4);
     //console.log("actualIndex == "+actualIndex);
-    if (actualIndex +1<numberOfCanvas) {
+    if (actualIndex<numberOfCanvas) {
         //console.time();
         moveToNextCanvas();
     }
@@ -180,7 +180,6 @@ function performPlayerView(){
 
 
 function moveToNextCanvas(){
-    actualIndex ++;
     actualCanvas = document.getElementsByClassName("time-bar")[actualIndex];
     numberOfUpdates = actualCanvas.width/diffLengthIncreasing;
     var actualChordQuantums = sequencer[actualIndex].duration;
@@ -199,7 +198,8 @@ function moveToNextCanvas(){
     var sustainTime = playingchord.duration*quantumTime/1000; /*[seconds]*/
     sequencer[actualIndex].sustainTime = sustainTime;
     sequencer[actualIndex].indexInSequencer = actualIndex;
-    playNotesFromFrequencies(freqs, 1, false,sustainTime,actualIndex);
+    playNotesFromFrequencies(freqs, 1, false,sustainTime,actualIndex++);
+    previousIndex=actualIndex-1;
     nextCanvasTimeout = setTimeout(function(){performPlayerView();},quantumTime*actualChordQuantums); 
 }
 
@@ -227,13 +227,15 @@ function playCanvas(canvas){
 
 function pauseGraphicView(){
     playStatus=0;
+    actualIndex=previousIndex;
     clearInterval(actualTimeInterval);
     clearTimeout(nextCanvasTimeout);
 }
 
 function stopGraphicView(){
     playStatus = 0;
-    actualIndex=-1;
+    actualIndex=0;
+    previousIndex=-1;
     clearInterval(actualTimeInterval);
     clearTimeout(nextCanvasTimeout);
     clearAllTimeBar();

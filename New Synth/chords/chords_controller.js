@@ -348,11 +348,6 @@ function createVoicing(chord){
 }
 
 
-function moveToNextChord(){
-console.log("called");
-
-}
-
 function stopAudioPlay(){
 
 
@@ -721,5 +716,9 @@ function chordToString(chord){
     else {
         return ".";
     }
+
+}
+function pauseAudioView(){
+	
 
 }
