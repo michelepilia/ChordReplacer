@@ -246,7 +246,7 @@ function playNotesFromFrequencies(arrayOfFrequencies,multFactor,bypass, sustainT
     //console.log("rltime = "+ releaseTime);
     lfo.frequency.value=0;
     filt.frequency.linearRampToValueAtTime(minFilt+(amounts[4]/(maxAmount-minAmount)*(maxFilt-minFilt)), now + sliderAmounts[3]/100);
-    scavenger(sequencer[index].voices);
+    if (!bypass) scavenger(sequencer[index].voices);
     for (k = 0; k < sequencer[index].voices.length; k++) {    
       //console.log("rltime = "+ releaseTime);
         releaseVoice(sequencer[index].voices[k],t3,releaseTime,ind);        

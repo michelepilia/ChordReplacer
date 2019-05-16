@@ -235,6 +235,7 @@ function playCanvas(canvas){
 }
 
 function pauseGraphicView(){
+    if (!instPlayMode && playStatus==1) {
     playStatus=0;
     actualIndex=previousIndex;
     clearInterval(actualTimeInterval);
@@ -245,6 +246,8 @@ function pauseGraphicView(){
     //if in release phase, wait the end of release and then call scavenger, else call directly scavenger
     var a = [];
     scavenger(a);
+    }
+
 }
 
 function stopGraphicView(){

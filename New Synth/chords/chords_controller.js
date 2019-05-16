@@ -241,22 +241,18 @@ function toggleInstPlayMode(){
 }
 
 function instPlayChord(data){
+	var a = [];
+	//scavenger(a);
+	setTimeout(scavenger(a),1000);
 	var id = parseInt(data.target.getAttribute("id").substr(1));
-	var playingchord = sequencer[id];
-	var freqs = createVoicing(playingchord);
-	var sustainTime = playingchord.duration*quantumTime/1000; /*[seconds]*/
+	//var playingchord = sequencer[id];
+	var freqs = createVoicing(sequencer[id]);
+	var sustainTime = sequencer[id].duration*quantumTime/1000; /*[seconds]*/
 	sequencer[id].sustainTime = sustainTime;
     sequencer[id].indexInSequencer = id;
-  	var position = isChordPlaying(id);
-    if (position!=-1){
-    	clearTimeout(playingChords[position].timeOfRelease);
-    	scavenger();
-    	playNotesFromFrequencies(freqs, 1, false,sustainTime,id);
-    }
-    else{
-    	playNotesFromFrequencies(freqs, 1, false,sustainTime,id);
-    }
+    playNotesFromFrequencies(freqs, 1, true,sustainTime,id);//bypass default scavenger
 }
+
 function scavenger(voicesToExclude){
 	for (var i = 0; i <= allVoices.length; i++) {
 		if (allVoices[i]!=null && allVoices[i].frequency!=0 && !voicesToExclude.includes(allVoices[i])) {
