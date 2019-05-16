@@ -8,7 +8,7 @@ var instPlayMode = false;
 var actualChord;
 var allVoices=[];
 var sequencerSub=0;
-
+var tx = 0;
 function addChord() {
 	var chord = new Chord();
 
@@ -224,14 +224,14 @@ function toggleInstPlayMode(){
 	var chordTags = document.getElementsByClassName("chord-name");
 	if (instPlayMode){
 		for(i=0; i<chordTags.length; i++){
-			chordTags[i].removeEventListener("click", instPlayChord);
+			chordTags[i].removeEventListener("mousedown", instPlayChord);
 			chordTags[i].removeEventListener("mouseover", chordTagMouseOver);
 			chordTags[i].removeEventListener("mouseout", chordTagMouseOut);
 		}
 	}
 	else {
 		for(i=0; i<chordTags.length; i++){
-			chordTags[i].addEventListener("click", instPlayChord);
+			chordTags[i].addEventListener("mousedown", instPlayChord);
 			chordTags[i].addEventListener("mouseover", chordTagMouseOver);
 			chordTags[i].addEventListener("mouseout", chordTagMouseOut);
 		}
@@ -242,10 +242,9 @@ function toggleInstPlayMode(){
 
 function instPlayChord(data){
 	var a = [];
-	//scavenger(a);
-	setTimeout(scavenger(a),1000);
+	scavenger(a);
+	tx=c.currentTime;
 	var id = parseInt(data.target.getAttribute("id").substr(1));
-	//var playingchord = sequencer[id];
 	var freqs = createVoicing(sequencer[id]);
 	var sustainTime = sequencer[id].duration*quantumTime/1000; /*[seconds]*/
 	sequencer[id].sustainTime = sustainTime;

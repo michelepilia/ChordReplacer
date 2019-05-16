@@ -6,7 +6,7 @@ BUG TROVATI:
 6)bug resonance nel caricamento e' 1, ma dovrebbe essere -0.5;
 7) nel caricamento dal db gli accordi non mantengono la loro size grafica originale
 8) nelle sostituzioni gli accordi non mantengono la loro size grafica originale
-
+9)instant play certe volte si intoppano delle voci. Basta pero' suonare un accordo per toglierle
 -----------------------------------------------------------------------------------
 FIXED BUGS:
 1)risolto bug attacco lfo.
