@@ -3,7 +3,7 @@
 	width: 148px;
 	height: 148px;
 	background-color: hsl(40, 90%, 85%);
-	border: 1px solid hsl(40, 90%, 50%);
+	border: 1px solid hsl(25, 100%, 45%);
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -65,15 +65,13 @@
 .chord-substitution{
 	position: absolute;
 	font-size: 25px;
-	background-color: hsl(25, 90%, 65%);
+	background-color: hsl(25, 90%, 75%);
 	width: 26px;
 	height: 26px;
-	border: 1px solid black;
-	border-bottom: none;
-	border-right: none;
+	border: 1px solid hsl(0, 85%, 50%);
 	border-radius: 5px;
-	right: 0px;
-	bottom: 0px;
+	right: -1px;
+	bottom: -1px;
 	text-align: center;
 }
 
@@ -149,7 +147,7 @@
 	background-color: lightgray;
 }
 .pluschord{
-	border:1px solid blue;
+	border:1px solid hsl(0, 95%, 45%);
 	display: inline-flex;
 	flex-direction: column;
 }
@@ -163,20 +161,17 @@
 .chord-edit{
 	position: absolute;
 	font-size: 25px;
-	background-color: hsl(0, 95%, 71%);
+	background-color: hsl(25, 90%, 75%);
 	width: 26px;
 	height: 26px;
 	border: 1px solid hsl(0, 85%, 50%);
-	//border-left: hidden;
-	//border-top:hidden;
 	border-radius: 5px;
-	left: 0px;
-	top: 0px;
+	left: -1px;
+	top: -1px;
 	text-align: center;
 }
 .chord-substitution:hover, .chord-edit:hover{
-	background-color: green;
-
+	background-color: hsl(0, 95%, 71%);
 }
 
 #edit-chord-window{
@@ -289,34 +284,33 @@
 .chord-swap{
 	position: absolute;
 	font-size: 15px;
-	background-color: hsl(25, 90%, 65%);;
+	background-color: hsl(25, 90%, 75%);
 	width: 26px;
 	height: 26px;
-	border: 1px solid black;
-	border-left: hidden;
-	border-bottom: hidden;
+	border: 1px solid hsl(0, 85%, 50%);
 	border-radius:5px;
-	left: 0px;
-	bottom: 0px;
+	left: -1px;
+	bottom: -1px;
 	text-align: center;
 }
 .quantization-button{
 	position: absolute;
-	top:0px;
-	right: 0px;
+	top:-1px;
+	right: -1px;
 	display: inline-flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
 	font-size: 10px;
-	background-color: hsl(25, 90%, 65%);;
+	background-color: hsl(25, 90%, 75%);;
 	width: 26px;
 	height: 26px;
-	border: 1px solid black;
+	border: 1px solid hsl(0, 85%, 50%);
 	text-align: center;
 	border-radius: 5px;
-	border-right: hidden;
-	border-top:hidden;
+}
+.quantization-button:hover{
+	background-color:hsl(0, 95%, 71%);
 }
 .quantization-plus, .quantization-minus{
 	width: 100%;
@@ -325,7 +319,7 @@
 }
 
 .quantization-plus:hover{
-	background-color: hsl(90, 90%, 40%);;
+	background-color: hsl(90, 90%, 40%);
 }
 .quantization-minus:hover{
 	background-color: hsl(0, 95%, 60%);
@@ -363,6 +357,10 @@ button{
 	background-color: white;
 	border-color: hsl(0, 95%, 70%);
 	outline:none;
+}
+button >i{
+	margin-top: 2px;
+
 }
 
 .fa-play{

@@ -346,13 +346,13 @@ function updateChordTag(chord, id){
 function updateChordsViewForSwap(data){
     var id=data.target.getAttribute("id");
     if (swapActive==1) {
-        document.getElementById(id).style.backgroundColor="green";
+        document.getElementById(id).style.backgroundColor="hsl(0, 95%, 60%)";
     }
     else{
         var classHtml=document.getElementsByClassName("chord-swap");
         for (var i = 0; i < classHtml.length; i++) {
-            classHtml[i].style.backgroundColor="lightgray";
-            classHtml[i].style.backgroundColor="lightgray";
+            classHtml[i].style.backgroundColor="hsl(25, 90%, 75%)";
+            classHtml[i].style.backgroundColor="hsl(25, 90%, 75%)";
         }
         updateChordsSize();
     }
@@ -360,12 +360,20 @@ function updateChordsViewForSwap(data){
 
 function handleMouseOver(data){
     var id = data.target.getAttribute("id");
-    document.getElementById(id).style.backgroundColor="green";
+        document.getElementById(id).style.backgroundColor="hsl(0, 95%, 71%)";
 }
+
 function handleMouseLeave(data){
+    var id = data.target.getAttribute("id"); 
+    var index = id.substr(12);
     if (swapActive==0) {
-        var id = data.target.getAttribute("id");
-        document.getElementById(id).style.backgroundColor="lightgray";
+        document.getElementById(id).style.backgroundColor="hsl(25, 90%, 75%)";
+    }
+    else if(swapActive==1 && chordsToSwap[1]==index){
+        document.getElementById(id).style.backgroundColor="hsl(0, 95%, 60%)";
+    }
+    else{
+        document.getElementById(id).style.backgroundColor="hsl(25, 90%, 75%)";
     }
 }
 
