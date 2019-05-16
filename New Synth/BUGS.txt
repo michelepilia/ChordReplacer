@@ -7,9 +7,5 @@ BUG TROVATI:
 7) nel caricamento dal db gli accordi non mantengono la loro size grafica originale
 8) nelle sostituzioni gli accordi non mantengono la loro size grafica originale
 9)instant play certe volte si intoppano delle voci. Basta pero' suonare un accordo per toglierle
------------------------------------------------------------------------------------
-FIXED BUGS:
-1)risolto bug attacco lfo.
-2)bug nel sustain: dopo il decay si sente il suono anche se sustain e' a 0.
-3) bug quando si cambia quanti di accordo e non si preme stop, durante il play.
-4)quando si fa lo swap la durata in quantizzazione non rispecchia la larghezza della canvas.
+10) Alcune sostituzioni sono ancora sbagliate
+11) Nel menu edit la finestra deve mostrare le caratteristiche dell'acordo che sto modificando, anziché l'ultimo modificato

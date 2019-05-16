@@ -144,7 +144,6 @@ function closeSubstitution(){
 }
 
 function updateChordsViewFromModel(chordsName){
-
     var sequencerHtml = Array.from(chordsBlocksHtml.children); //Blocchi HTML da rimuovere in formato array
     sequencerHtml.pop(); //Rimuovo l'ultimo, che sarebbe il plus button block
 

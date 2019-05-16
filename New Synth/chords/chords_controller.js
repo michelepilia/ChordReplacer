@@ -26,7 +26,7 @@ function addChord() {
 	var chordNameHtml = document.createElement("div");
 	chordNameHtml.classList.add("chord-name");
 	chordNameHtml.id = "t"+currentIndex;
-	chordNameHtml.innerHTML="REST";
+	chordNameHtml.innerHTML="";
 
 	var chordTypeHtml = document.createElement("div");
 	chordTypeHtml.classList.add("chord-type");
@@ -82,7 +82,6 @@ function addChord() {
 
 
 function addChordFromDB(idx) {
-
 	var chordHtml = document.createElement("SPAN");
 	chordHtml.classList.add("chord");
 	chordHtml.classList.add("actual-chord");
@@ -472,7 +471,7 @@ function tellTheSubs(data){
 
 	if (chord.quality == "maj" && (chord.extension == "none" || chord.extension == "maj7" || chord.extension == "6")){ //IV minor substitution 1
 		tonic = noteDictInverse[(noteDict[chord.fundamental]+7)%12];
-		if (nextChord.fundamental = tonic && nextChord.quality == "maj" && (nextChord.extension == "none" || nextChord.extension == "maj7" || nextChord.extension == "6")){
+		if (nextChord.fundamental == tonic && nextChord.quality == "maj" && (nextChord.extension == "none" || nextChord.extension == "maj7" || nextChord.extension == "6")){
 			newChord = new Chord();
 			Object.assign(newChord, chord);
 			newChord.quality = "min";
@@ -490,6 +489,7 @@ function tellTheSubs(data){
 		if (prevChord.fundamental == subDom && prevChord.quality =="maj" && nextChord.fundamental == tonic && nextChord.quality == "maj" && (nextChord.extension == "none" || nextChord.extension == "maj7" || nextChord.extension == "6") && (prevChord.extension == "none" || prevChord.extension == "maj7" || prevChord.extension == "6")){
 			newChord = new Chord();
 			Object.assign(newChord, chord);
+			newChord.fundamental = noteDictInverse[(noteDict[chord.fundamental]+10)%12];
 			newChord.quality = "min";
 			newChord.extension = "none";
 			newChord.inversion = "none";
@@ -589,7 +589,6 @@ function applySubstitution(data){
 		sequencer[sequencerSub] = subToApply.destination[0];
 	}
 	sequencer.forEach(function(){
-		//Update view from model
 		updateChordsViewFromModel(chordsPresetNameField.value);
 	});
 	closeSubstitution();
@@ -624,7 +623,6 @@ function getSubsExplanation(subst){
 		strToReturn = "| X | " + chordToString(subst.origin) + " | " + "&#8594;" + "| X |";
 	}
 	else {
-		
 		strToReturn = chordToString(subst.origin) + "&#8594;" + chordToString(subst.destination[0]);
 		
 	}

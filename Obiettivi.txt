@@ -8,9 +8,11 @@ Design css, migliorare colori ecc...
 ----------------------------------------------------------------------------------------------------------------------------------------------
 PARTE SOSTITUZIONI:
 
-Traccia melodia ? La aggiungiamo oppur va bene anche senza ?
+Traccia melodia ? La aggiungiamo oppur va bene anche senza ? [Michele: Per me meglio senza]
 Separare funzioni synth da quelle accordi (due menu diversi invece che il solo FUNCTIONS)
 Uso di javascript per interazione utente a livello di grafica. 
 Per il menu functions: menu dropdown con mouse click o hover.
 Per le sostituzioni: quando si clicca la S si apre un menu sottostante all'accordo la cui S e' stata cliccata. Il menu avra' uno z-index maggiore di quello di midi track, cosi' da nascondere la midi track. Eseguita la sositizione tale menu viene cancellato .
+Metro nel sequencer
+Sostituzione Loop
 ---------------------------------------------------------------------------------------------------------------------------------------------
