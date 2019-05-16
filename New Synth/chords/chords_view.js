@@ -241,6 +241,8 @@ function pauseGraphicView(){
     clearTimeout(nextCanvasTimeout);
     clearTimeout(sequencer[actualIndex].timerOfRelease);
     /*release all voices*/
+    //Should be better:
+    //if in release phase, wait the end of release and then call scavenger, else call directly scavenger
     var a = [];
     scavenger(a);
 }
