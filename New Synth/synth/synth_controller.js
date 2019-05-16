@@ -246,12 +246,13 @@ function playNotesFromFrequencies(arrayOfFrequencies,multFactor,bypass, sustainT
     //console.log("rltime = "+ releaseTime);
     lfo.frequency.value=0;
     filt.frequency.linearRampToValueAtTime(minFilt+(amounts[4]/(maxAmount-minAmount)*(maxFilt-minFilt)), now + sliderAmounts[3]/100);
-   for (k = 0; k < sequencer[index].voices.length; k++) {    
+    scavenger(sequencer[index].voices);
+    for (k = 0; k < sequencer[index].voices.length; k++) {    
       //console.log("rltime = "+ releaseTime);
         releaseVoice(sequencer[index].voices[k],t3,releaseTime,ind);        
     }
     }, sustainTime*1000);
-  playingChords.push(sequencer[index]);
+  //playingChords.push(sequencer[index]);
 }
 
 function releaseVoice(voice, t3,releaseTime,ind){
@@ -268,9 +269,9 @@ function releaseVoice(voice, t3,releaseTime,ind){
   voice.released = true;
   sequencer[ind].voices.pop();
   voice.frequency=0;
-  if (sequencer[ind].voices.length==0) {
-    playingChords.pop();
-  }
+  //if (sequencer[ind].voices.length==0) {
+  //  playingChords.pop();
+  //}
   //console.timeEnd();
   },releaseTime*1000);
 }

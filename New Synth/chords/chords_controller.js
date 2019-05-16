@@ -257,31 +257,14 @@ function instPlayChord(data){
     	playNotesFromFrequencies(freqs, 1, false,sustainTime,id);
     }
 }
-function scavenger(){
-	if (playingChords.length>0) {
-		for (var i = 0; i < playingChords.length; i++) {
-			for (var k = 0; k < playingChords[i].voices.length; k++) {
-				voice.oscillator1.stop();
-				voice.oscillator2.stop();
-				voice.oscillator1.disconnect();
-				voice.oscillator2.disconnect();
-				voice.gain1.disconnect();
-				voice.gain2.disconnect();
-				playingChords[i].voices.pop();
-			}
-		}
-	}
-	playingChords=[];
-
+function scavenger(voicesToExclude){
 	for (var i = 0; i <= allVoices.length; i++) {
-		if (allVoices[i]!=null &&allVoices[i].frequency!=0) {
+		if (allVoices[i]!=null && allVoices[i].frequency!=0 && !voicesToExclude.includes(allVoices[i])) {
 			allVoices[i].oscillator1.stop();
 			allVoices[i].oscillator2.stop();
 		}
 	}
-	for (var i = 0; i <= allVoices.length; i++) {
-		allVoices.pop();
-	}
+	allVoices=[];
 }
 
 function createVoicing(chord){

@@ -239,6 +239,10 @@ function pauseGraphicView(){
     actualIndex=previousIndex;
     clearInterval(actualTimeInterval);
     clearTimeout(nextCanvasTimeout);
+    clearTimeout(sequencer[actualIndex].timerOfRelease);
+    /*release all voices*/
+    var a = [];
+    scavenger(a);
 }
 
 function stopGraphicView(){
