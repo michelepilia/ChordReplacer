@@ -10,8 +10,9 @@ html{
   -webkit-touch-callout: none; /* Disable Android and iOS callouts*/
 }
 #synth {
-  position: relative;
-  top: 450px;
+  position: absolute;
+  top:475px;
+  left:170px;
   display: grid;
   grid-template-columns: 41% 41% 14%;
   grid-template-rows: auto auto;
@@ -20,9 +21,9 @@ html{
   background-color: #1c6dd8;
   padding: 10px;
   height: auto;
-  width: auto;
+  width: 1300px;
   max-width: 1500px;
-  min-width: 1315px;
+  min-width: 1200px;
   border:1px solid black;
 }
 #synth > div {
@@ -277,15 +278,6 @@ td{
   padding: 15px;
 }
 
-#preset-synth-name-ext{
-  border: 1px solid blue !important;
-  align-items: center !important;
-  display: inline-flex !important;
-  height: 15px !important;
-  position: absolute !important;
-  top: -37.5px !important;
-  background-color: lightblue !important;
-  padding: 10px !important;
-  margin-left: 10px !important;
-  justify-content: center;
+#preset-synth-name{
+  text-align: center;
 }

@@ -13,32 +13,34 @@
   </head>
 
   <body>
-  <h4>"I think every jazz producer should use this...Definetly The Jazziest Synth Ever! Rating: 5/5 &#x2605 &#x2605 &#x2605 &#x2605 &#x2605. Augusto"</h4>
+  <!-- <h4>"I think every jazz producer should use this...Definetly The Jazziest Synth Ever! Rating: 5/5 &#x2605 &#x2605 &#x2605 &#x2605 &#x2605. Augusto"</h4> !-->
     <div id="chords">
       
       
 
       <div class="blocks" id="chords-blocks">
 
-        <div id="upper-chords-bar">
+        <div class="upper-bar" id="upper-chords-bar">
 
-          <div id="preset-chords-name-ext">
+          <div class="upper-bar-function preset" id="preset-chords-name-ext">
             <p>Block name:</p>
             <input id="preset-chords-name" type="text" name="preset-name" value="init">
           </div>
 
-
-          <div id="sequencer-function-ext">
-            <button class='upper-seq-function button play' id="play-button"><i class="fas fa-play"></i></button>
-            <button class='upper-seq-function button play' id="stop-button"><i class="fas fa-stop"></i></button>
-            <button class='upper-seq-function button play' id="inst-play-button"><i class="far fa-caret-square-right"></i></i></button>
-            <button class='upper-seq-function button play' id="loop-button"><i class="fas fa-sync"></i></button>
+          <div class="upper-bar-function" id="sequencer-function-ext">
+            <button class='button play' id="play-button"><i class="fas fa-play"></i></button>
+            <button class='button play' id="stop-button"><i class="fas fa-stop"></i></button>
+            <button class='button play' id="inst-play-button"><i class="far fa-caret-square-right"></i></i></button>
+            <button class='button play' id="loop-button"><i class="fas fa-sync"></i></button>
           </div>
-            <div class='upper-seq-function'id="bpm-text-ext">BPM
+            <div class='upper-bar-function'id="bpm-text-ext">BPM
                 <input id="bpm-value" type="text" name="bpm" value="120">
             </div>
-            <div class="upper-seq-function" id="open-synth">Synth view</div>
-
+            <div class="upper-bar-function" id="open-synth">Synth view</div>
+            <div class="upper-bar-function functions chord-functions">
+              <div class="function" id="load-chords">Load chords</div>
+              <div class="function" id="save-chords">Save chords</div>
+            </div>
         </div>
 
         <span class="chord pluschord" id="plus-button-span">
@@ -46,13 +48,6 @@
         <div id="minus-button" class="chord-name minus"><div class="plus-button-text">-</div></div>
       </span>
       </div>
-    <div class="functions">DATABASE FUNCTIONS
-      <div class="function" id="load-chords">Load chords</div>
-      <div class="function" id="save-chords">Save chords</div>
-      <div class="function" id="load-synth">Load synth</div>
-      <div class="function" id="save-synth">Save synth</div>
-
-    </div>
 
     </div>
 
@@ -86,13 +81,17 @@
         <button id="keyboard-play">keyboard</button>
     <div>
     <div id="synth">
-      <div id="preset-synth-name-ext">
-        <p style="font-size: 16px;margin-left: 35px;">Preset name:</p>
-        <input id="preset-synth-name" type="text" name="preset-name" value="Synth Name"style="margin-left: 10px;width: 90px;">
-      </div>
+      <div class="upper-bar"id="upper-synth-bar">
+          <div class="upper-bar-function preset id="preset-synth-name-ext">
+            Preset name:
+            <input id="preset-synth-name" type="text" name="preset-name" value="Synth Name"style="margin-left: 10px;width: 90px;">
+          </div>
+          <div class="upper-bar-function functions synth-functions">
+            <div class="function" id="load-synth">Load synth</div>
+            <div class="function" id="save-synth">Save synth</div>
+          </div>
 
-
-
+      </div>      
     <div class="oscillators">
     	
       <div id="osc1" class="oscillator">

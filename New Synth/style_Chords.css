@@ -11,10 +11,12 @@
 	color: black;
 	margin-right:2px;
 }
+
+
 #chords-blocks{
 	position: absolute;
-	top: 150px;
-	left: 180px;
+	top: 120px;
+	left: 170px;
 	display: flex;
 	flex-direction: row;
 	width: auto;
@@ -80,29 +82,19 @@
 	flex-direction: row;
 	justify-content:center;
 	align-items: center;
-	margin-top: 5px;
-	margin-bottom: 5px;
-	height: 50px;
-	width: 80%;
-	background-color: darkgray;
+	width: 80px;
+	margin-left: 15px;
+	background-color: hsl(35, 70%, 90%);
 	border-radius: 10%;
 	text-align: center;
 }
 
 .functions{
-	position: absolute;
-	display: flex;
-	flex-direction: column;
-	justify-content:left;
-	align-items: center;
-	top: 100px;
-	left: 10px;
-	height: 300px;
-	width: 120px;
-	background-color: gray;
-	padding: 10px;
-	border: 1px solid black;
-	text-align: center;
+	display: inline-flex;
+	width: 200px;
+	height: 15px;
+	background-color: hsl(25, 95%, 75%);
+	border: 1px solid hsl(25, 90%, 50%);
 }
 
 .time-bar{
@@ -156,7 +148,7 @@
 	background-color: hsl(40, 80%, 92%);
 }
 .function:hover{
-	background-color: lightblue;
+	background-color: hsl(40, 80%, 80%);
 }
 .chord-edit{
 	position: absolute;
@@ -186,44 +178,8 @@
   	display: none;
 }
 
-#upper-chords-bar{
-  border: 1px solid hsl(25, 100%, 45%);;
-  align-items: center;
-  display: inline-flex;
-  height: 30px;
-  width: 600px;
-  position: absolute;
-  top: -52px;
-  left: -1px;
-  background-color: hsl(25, 95%, 75%);
-  padding: 10px;
-  justify-content: center;
-}
 
-#preset-chords-name-ext > p {
-	font-size: 16px;
-	margin: 0px;
-}
 
-#preset-chords-name-ext > input {
-	margin-left: 10px;
-	width: 90px;
-	background-color: hsl(25, 95%, 95%);
-	outline: none;
-	border-color: hsl(25, 95%, 75%)
-}
-#preset-chords-name-ext > input:focus{
-	background-color: hsl(25, 90%, 80%);
-}
-#preset-chords-name-ext, #sequencer-function-ext{
-  border: 1px solid hsl(25, 95%, 50%);
-  display: inline-flex;
-  background-color: hsl(25, 95%, 90%);
-  align-items:center;
-  jusitfy-content:center;
-  margin:auto;
-  padding: 3px;
-}
 
 #bpm-value{
 	width: 40%;
@@ -237,24 +193,8 @@
 	background-color: hsl(25, 90%, 80%);
 }
 
-.upper-seq-function{
-	margin-left: 5px;
-	margin-right: 5px;
-}
 
-#bpm-text-ext{
-	display: inline-flex;
-	align-items: center;
-	width: 100px;
-	border: 1px solid hsl(25, 95%, 50%);
-	padding: 5px;
-	justify-content: center;
-	background-color: hsl(25, 95%, 90%);
-}
 
-#preset-chords-name{
-	text-align: center;
-}
 
 #done-load-chords, #done-load-synth, #apply-substitution{
 	position:absolute;
@@ -272,15 +212,8 @@
 #done-load-chords:hover, #done-load-synth:hover, #apply-substitution:hover{
 	background-color: red;
 }
-#open-synth:hover{
-	background-color: lightgray;
 
-}
-#open-synth{
-	border: 1px solid hsl(25, 95%, 50%);
-	padding: 5px;
-	background-color: hsl(25, 95%, 90%);
-}
+
 .chord-swap{
 	position: absolute;
 	font-size: 15px;
@@ -377,4 +310,63 @@ button >i{
 }
 .fa-sync{
 	color: hsl(25, 95%, 50%);
+}
+
+.upper-bar{
+  position: absolute;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid hsl(25, 100%, 45%);
+  background-color: hsl(25, 95%, 75%) !important;
+  padding: 10px !important;
+  font-size: 16px !important;
+  height: 30px;
+}
+
+.upper-bar-function{
+	display: inline-flex;
+	align-items: center;
+    jusitfy-content: center;
+	border: 1px solid hsl(25, 95%, 50%);
+    background-color: hsl(25, 95%, 90%);
+}
+
+#upper-synth-bar{
+  width: 450px;
+  top: -53px;
+  left: -1px;
+}
+
+#upper-chords-bar{
+  width: 800px;
+  top: -52px;
+  left: -1px;
+}
+
+.upper-bar > div{
+	height: 20px;
+	margin-left: 5px;
+	padding: 8px;
+}
+
+.preset > input {
+	margin-left: 10px;
+	width: 90px;
+	background-color: hsl(25, 95%, 95%);
+	outline: none;
+	border-color: hsl(25, 95%, 75%)
+}
+
+.preset > input:focus{
+	background-color: hsl(25, 90%, 80%);
+}
+#preset-chords-name{
+	text-align: center;
+}
+#open-synth:hover{
+	background-color: hsl(25, 90%, 80%);
+}
+#bpm-text-ext{
+	width: 100px;
 }
