@@ -171,15 +171,41 @@
 	top: 250px;
 	left: 300px;
 	font-size: 25px;
-	background-color: darkgray;
-	border: 1px solid black;
+	background-color: hsl(0, 95%, 75%);
+	border: 3px groove hsl(0, 95%, 50%);
 	text-align: center;
   	z-index: 1;
   	display: none;
+  	width: 320px;
+  	height: 90px;
+  	min-width: 358px;
+  	font-size: 16px;
+}
+#chord-editor-text{
+	top: 10px;
+	margin-top: 5px;
+	margin-bottom: 30px;
+
+}
+.edit-chord-selector{
+	padding: 5px;
+	background-color: hsl(10, 95%, 95%);
+	height: 30px;
+	border: 1px solid hsl(10, 95%, 50%);
+	outline: none;
+}
+
+.done-button-chord{
+	height: 30px !important;
+	border: 1px solid hsl(10, 95%, 50%);
 }
 
 
 
+.edit-chord-selector:hover, .done-button-chord:hover{
+	border: 1px solid hsl(10, 95%, 40%);
+	background-color: hsl(5, 95%, 90%);
+}
 
 #bpm-value{
 	width: 40%;
