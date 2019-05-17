@@ -8,3 +8,4 @@ BUG TROVATI:
 8) nelle sostituzioni gli accordi non mantengono la loro size grafica originale
 9)instant play certe volte si intoppano delle voci. Basta pero' suonare un accordo per toglierle
 10) Se hai la finestra di sostituzione aperta su un accordo, e contemporaneamente ne apri un altra, anziche ricreare la finestra aggiunge le nuove sovrapposizioni in coda
+11)talvolta non va piu' hover su piu' e meno per aggiungere accordi

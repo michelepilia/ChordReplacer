@@ -311,7 +311,9 @@ button >i{
 .fa-sync{
 	color: hsl(25, 95%, 50%);
 }
-
+.sequencer-button{
+	margin-left: 5px;
+}
 .upper-bar{
   position: absolute;
   display: inline-flex;
@@ -339,7 +341,7 @@ button >i{
 }
 
 #upper-chords-bar{
-  width: 800px;
+  width: 820px;
   top: -52px;
   left: -1px;
 }
