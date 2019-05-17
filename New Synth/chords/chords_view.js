@@ -113,8 +113,33 @@ function createChordsLoaderEventListeners() {
 }
 
 function showChordEditor(data){
+    var chordId = data.target.parentElement.getAttribute("id").substr(1);
+    var fund = sequencer[chordId].fundamental;
+    var qual = sequencer[chordId].quality;
+    var exten = sequencer[chordId].extension;
+    var inv = sequencer[chordId].inversion;
+    var selFund = document.getElementById("fundamental-chord");
+    var selQual = document.getElementById("quality-chord");
+    var selExt = document.getElementById("extension-chord");
+    var selInv = document.getElementById("inversion-chord");
+    
+
+    if (fund!=undefined){
+        selFund.value = fund;
+    }
+    if (qual!=undefined){
+        selQual.value = qual;
+    }
+    if (exten!=undefined){
+        selExt.value = exten;
+    }
+    if (inv!=undefined){
+        selInv.value = inv;
+    }
+    
+    
 	chordEditor.style.display = "block";
-	doneButton.id = "done-edit-chord" + data.target.parentElement.getAttribute("id").substr(1);
+	doneButton.id = "done-edit-chord" + chordId;
 }
 
 function closeChordEditor(){

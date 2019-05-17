@@ -340,8 +340,14 @@ function tellTheSubs(data){
 	var newChord;
 	var newSub;
 
-	if (prevChord==undefined){prevChord = new Chord();};
-	if (nextChord==undefined){nextChord = new Chord();};
+	if (loop){
+		if (prevChord==undefined){prevChord = sequencer.pop()};
+		if (nextChord==undefined){nextChord = sequencer[0]};
+	}
+	else {
+		if (prevChord==undefined){prevChord = new Chord();};
+		if (nextChord==undefined){nextChord = new Chord();};
+	}
 
 	//Preparation by seventh
 	newChord = new Chord();
@@ -353,6 +359,16 @@ function tellTheSubs(data){
 	newChord.duration = quantization;
 	newSub = new Substitution("Preparation by VII", chord, [newChord]);
 	subs.push(newSub);
+
+	if (nextChord.quality == "maj" || nextChord.quality == "min"){
+		newChord = new Chord();
+		Object.assign(newChord, chord);
+		newChord.fundamental = noteDictInverse[(noteDict[nextChord.fundamental]+7)%12]; //WRT V degree
+		newChord.quality = "maj";
+		newChord.extension = "b7"
+		newSub = new Substitution("Secondary Dominant", chord, [newChord]);
+		subs.push(newSub);
+	}
 
 	if (chord.quality == "maj" && chord.extension == "b7"){ //Tritone Substitution + VII dim7 + #II dim7 as dominant + aug triad +...
 		//Tritone

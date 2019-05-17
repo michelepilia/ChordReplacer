@@ -7,5 +7,4 @@ BUG TROVATI:
 7) nel caricamento dal db gli accordi non mantengono la loro size grafica originale
 8) nelle sostituzioni gli accordi non mantengono la loro size grafica originale
 9)instant play certe volte si intoppano delle voci. Basta pero' suonare un accordo per toglierle
-10) Alcune sostituzioni sono ancora sbagliate
-11) Nel menu edit la finestra deve mostrare le caratteristiche dell'acordo che sto modificando, anziché l'ultimo modificato
+10) Se hai la finestra di sostituzione aperta su un accordo, e contemporaneamente ne apri un altra, anziche ricreare la finestra aggiunge le nuove sovrapposizioni in coda
