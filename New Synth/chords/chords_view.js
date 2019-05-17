@@ -32,7 +32,10 @@ var numberOfCanvas;
 var playStatus = 0;
 var actualTimeInterval;
 var instPlayButton = document.getElementById("inst-play-button");
-var quantumSizeInPxs = document.getElementsByClassName('pluschord')[0].offsetWidth/8;
+
+var plusChordStyle = window.getComputedStyle(document.getElementsByClassName('pluschord')[0], null);
+var quantumSizeInPxs =  parseInt(plusChordStyle.getPropertyValue("width").substr(0,plusChordStyle.getPropertyValue("width").length-2))/8;
+
 var nextCanvasTimeout;
 var playingChords = [];
 var a=0;
