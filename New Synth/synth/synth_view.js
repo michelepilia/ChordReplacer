@@ -160,8 +160,8 @@ function playTransient(voice,attackTime,decaytime,sustainTime) {
 function postSaveSynthPreset(){
     saveSynth.style.backgroundColor = "red";
     saveSynth.innerHTML = "Saved!";
-    setTimeout(function(){  saveSynth.style.backgroundColor = "darkgray";
-                            saveSynth.innerHTML = "Save synth preset"; 
+    setTimeout(function(){  saveSynth.style.backgroundColor = "hsl(35, 70%, 90%)";
+                            saveSynth.innerHTML = "Save synth"; 
                         }, 700);
 }
 

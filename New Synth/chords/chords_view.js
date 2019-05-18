@@ -153,7 +153,7 @@ function closeChordEditor(){
 function postSaveChordsPreset(){
     saveChords.style.backgroundColor = "red";
     saveChords.innerHTML = "Saved!";
-    setTimeout(function(){  saveChords.style.backgroundColor = "darkgray";
+    setTimeout(function(){  saveChords.style.backgroundColor = "hsl(35, 70%, 90%)";
                             saveChords.innerHTML = "Save chords"; 
                         }, 700);
 }
