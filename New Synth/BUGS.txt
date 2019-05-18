@@ -1,11 +1,6 @@
 BUG TROVATI:
-1) caricare un preset synth. Modificarlo. Salvarlo. Ricaricarlo: -> le modifiche effettuate non sono state salvate
-2) caricare preset synth con filtro al minimo (a sinistra). Mettere eg massimo a destra. Attacco basso. Caricare traccia accordi con almeno 2. Dopo il primo accordo c'e' un cambiamento del suono per quanto riguarda l'applicazione del filtro
-3) errori aggiornamento lfo dopo caricamento preset
-5)distorsione causata da lfo a seguito di caricamento preset synth da database
-6)bug resonance nel caricamento e' 1, ma dovrebbe essere -0.5;
-7) nel caricamento dal db gli accordi non mantengono la loro size grafica originale
-8) nelle sostituzioni gli accordi non mantengono la loro size grafica originale
-9)instant play certe volte si intoppano delle voci. Basta pero' suonare un accordo per toglierle
-10) Se hai la finestra di sostituzione aperta su un accordo, e contemporaneamente ne apri un altra, anziche ricreare la finestra aggiunge le nuove sovrapposizioni in coda
-11)talvolta non va piu' hover su piu' e meno per aggiungere accordi
+1M) caricare preset synth con filtro al minimo (a sinistra). Mettere eg massimo a destra. Attacco basso. Caricare traccia accordi con almeno 2. Dopo il primo accordo c'e' un cambiamento del suono per quanto riguarda l'applicazione del filtro
+2M)bug resonance nel caricamento e' 1, ma dovrebbe essere -0.5;
+3A) nel caricamento dal db gli accordi non mantengono la loro size grafica originale (Aggiornamento view chords model)
+4A) nelle sostituzioni gli accordi non mantengono la loro size grafica originale (Aggiornamento view chords model)
+5A)talvolta non va piu' hover su piu' e meno per aggiungere accordi

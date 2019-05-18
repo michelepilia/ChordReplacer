@@ -151,6 +151,7 @@ function loadSynthFunction(data) {
 		    lfo.frequency.value = minLfo+(amounts[7]/(maxAmount-minAmount)*maxLfo);
 
 			closeSynthLoader();
+    		synthPresetName = fbNames[chosenIndex];
 			updateViewFromModel(fbNames[chosenIndex]);
 	});
 }
