@@ -267,7 +267,7 @@ function loadChordsFunction(data) {
 
 				sequencer[i] = newChord; 
 			}
-
+            chordsPresetName = fbNames[chosenIndex];
 			bpm = fbChords.bpm;
 			closeChordsLoader();
 			updateChordsViewFromModel(fbNames[chosenIndex]);
