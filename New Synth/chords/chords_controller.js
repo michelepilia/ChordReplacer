@@ -246,12 +246,13 @@ function instPlayChord(data){
 	scavenger(a);
 	tx=c.currentTime;
 	var id = parseInt(data.target.getAttribute("id").substr(1));
-	var freqs = createVoicing(sequencer[id]);
+	var freqs = createVoicing(sequencer[id],false);
+	var midiNotes = createVoicing(sequencer[id],true);
 	var sustainTime = sequencer[id].duration*quantumTime/1000; /*[seconds]*/
 	sequencer[id].sustainTime = sustainTime;
     sequencer[id].indexInSequencer = id;
     if (sendMidi) {
-    	sendMidiNotes();
+    	sendMidiNotes(midiNotes,sustainTime,id);
     }
     else{
     	playNotesFromFrequencies(freqs, 1, true,sustainTime,id);//bypass default scavenger
@@ -268,7 +269,7 @@ function scavenger(voicesToExclude){
 	allVoices=[];
 }
 
-function createVoicing(chord){
+function createVoicing(chord, sendMidi){
 
 	var fund = noteDict[chord.fundamental] + 36;
 	var voicing = [];
@@ -324,11 +325,11 @@ function createVoicing(chord){
       	freqVoicing = voicing.map(function(x){
       		return Math.pow(2, ((x-69)/12))*440;
       	})
-
-
+    }
+    if (sendMidi) {
+    	return voicing;
     }
     return freqVoicing;
-
 }
 
 

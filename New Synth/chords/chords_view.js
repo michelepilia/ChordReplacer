@@ -232,12 +232,13 @@ function moveToNextCanvas(){
     actualChord = document.getElementsByClassName("chord")[actualIndex];
     var actualChordQuantums = sequencer[actualIndex].duration;
     var playingchord = sequencer[actualIndex];
-    var freqs = createVoicing(playingchord);
+    var freqs = createVoicing(playingchord,false);
+    var midiNotes = createVoicing(sequencer[actualIndex],true);
     var sustainTime = playingchord.duration*quantumTime/1000; /*[seconds]*/
     sequencer[actualIndex].sustainTime = sustainTime;
     sequencer[actualIndex].indexInSequencer = actualIndex;
     if (sendMidi) {
-        sendMidiNotes();
+        sendMidiNotes(midiNotes,sustainTime,actualIndex++);
     }
     else{
         playNotesFromFrequencies(freqs, 1, false,sustainTime,actualIndex++);

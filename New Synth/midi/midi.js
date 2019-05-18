@@ -40,11 +40,23 @@ function onFailure(error) {
   console.log("Could not connect to the MIDI interface");
 }
 
-function sendNote(note){
-  outputs[document.getElementById("midi-outputs").value].send(note);
+function sendMidiMessageOn(note){
+  message = [0x92,note,127];
+  outputs[document.getElementById("midi-outputs").value].send(message);
 }
 
-function sendMidiNotes(){
+function sendMidiNotes(midiNotes,sustainTime,index){
+  for (var i = 0; i < midiNotes.length; i++) {
+    sendMidiMessageOn(midiNotes[i]);
+  }
+  sequencer[index].timerOfRelease = setTimeout(function(){
+    for (var i = 0; i < midiNotes.length; i++) {
+      sendMidiMessageOff(midiNotes[i]);
+    }
+    }, sustainTime*1000);
+}
 
-
+function sendMidiMessageOff(note){
+  message = [0x82,note,127];
+  outputs[document.getElementById("midi-outputs").value].send(message);
 }
