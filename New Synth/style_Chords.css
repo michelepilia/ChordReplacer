@@ -222,16 +222,14 @@
 
 #done-load-chords, #done-load-synth, #apply-substitution{
 	position:absolute;
-	top:0px;
-	right: 0px;
+	text-align: center;
+	top:50px;
+	right: 50px;
 	width:auto;
 	height:auto;
-	transform: translate(4px,-3px);
-    background-color: lightblue;
     border:1px solid black;
 }
 .closing-x{
-	transform: translate(-2px,0);
 }
 #done-load-chords:hover, #done-load-synth:hover, #apply-substitution:hover{
 	background-color: red;
@@ -288,14 +286,10 @@
 	height: auto;
 	top: 400px;
 	left: 300px;
-	padding: 10px;
-  	overflow: scroll;
-  	z-index: 3;
-
 }
 
 .suggested-substitution{
-  background-color: hsl(16, 90%, 85%);
+  background-color: hsl(16, 90%, 93%);
   border: 1px solid hsl(18, 70%, 50%);
   margin-top: 5px;
  }
@@ -352,19 +346,20 @@ button >i{
 .upper-bar-function{
 	display: inline-flex;
 	align-items: center;
-    jusitfy-content: center;
+    justify-content: center;
+    text-align: center;
 	border: 1px solid hsl(25, 95%, 50%);
     background-color: hsl(25, 95%, 90%);
 }
 
 #upper-synth-bar{
-  width: 450px;
+  width: 460px;
   top: -53px;
   left: -1px;
 }
 
 #upper-chords-bar{
-  width: 1000px;
+  width: 1060px;
   top: -52px;
   left: -1px;
 }
@@ -373,9 +368,13 @@ button >i{
 	height: 20px;
 	margin-left: 5px;
 	padding: 8px;
+	font-size:14px;
+
 }
 #midi-outputs{
 	width: 100px;
+	border: none;
+	outline: none;
 }
 .preset > input {
 	margin-left: 10px;
@@ -388,6 +387,7 @@ button >i{
 .preset > input:focus{
 	background-color: hsl(25, 90%, 80%);
 }
+
 #preset-chords-name{
 	text-align: center;
 }

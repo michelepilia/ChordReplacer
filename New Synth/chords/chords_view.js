@@ -7,7 +7,6 @@ var chordEditor = document.getElementById("edit-chord-window");
 var doneButton = document.getElementById("done-edit-chord");
 var saveChords = document.getElementById("save-chords");
 var loadChords = document.getElementById("load-chords");
-var doneLoadChordsButton = document.getElementById("done-load-chords");
 var chordsLoader = document.getElementById("chords-loader");
 var chordsPresetNameField = document.getElementById("preset-chords-name");
 var chordsPresetNameFieldContainer = document.getElementById("preset-chords-name-ext");
@@ -43,7 +42,6 @@ var playingChords = [];
 var a=0;
 var loop = false;
 
-doneLoadChordsButton.addEventListener("click",closeChordsLoader,false);
 playButton.addEventListener("click",playEffect,false);
 stopButton.addEventListener("click",stopGraphicView,false);
 bpmText.addEventListener('input',changeBpm,false)
@@ -51,11 +49,19 @@ plusButton.addEventListener("click", addChord, false);
 minusButton.addEventListener("click", removeChord, false);
 doneButton.addEventListener("click", editChord, false);
 saveChords.addEventListener("click", saveChordsPreset, false);
-loadChords.addEventListener("click", loadChordsPreset, false);
+loadChords.addEventListener("click", handleLoadChords, false);
 chordsPresetNameField.addEventListener("input", saveChordsPresetName, false);
 instPlayButton.addEventListener("click", toggleInstPlayMode, false);
 loopButton.addEventListener("click",activeLoop,false);
 
+function handleLoadChords(){
+    if (chordsLoader.style.display == "none") {
+        loadChordsPreset();
+    }
+    else{
+        closeChordsLoader();
+    }
+}
 function activeLoop(){
     loop = !loop;
     applyGraphicEffect("loop");

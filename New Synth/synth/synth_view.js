@@ -11,20 +11,26 @@ var loadSynthButton = document.getElementsByClassName("synth-load-button");
 var deleteSynthButton = document.getElementsByClassName("synth-delete-button");
 var synth = document.getElementById("synth");
 var openSynth = document.getElementById("open-synth");
-var closeSynthLoaderOnDone = document.getElementById("done-load-synth");
 var keyboardPlay = document.getElementById("keyboard-play");
 
-closeSynthLoaderOnDone.addEventListener("click",closeSynthLoader,false);
 document.addEventListener("keydown", keyDownListener, false);
 document.addEventListener("keyup", keyUpListener, false);
 document.addEventListener("mouseup", stop, false);
 window.addEventListener("load", viewInit);
 saveSynth.addEventListener("click", saveSynthPreset, false);
 synthPresetNameField.addEventListener("input", saveSynthPresetName, false);
-loadSynth.addEventListener("click", loadSynthPreset, false);
+loadSynth.addEventListener("click", handleSynthLoad, false);
 openSynth.addEventListener("click", toggleSynthVisibility, false);
 keyboardPlay.addEventListener("click",enableKeyboard,false);
 
+function handleSynthLoad(){
+    if(synthLoader.style.display == "none"){
+        loadSynthPreset();
+    }
+    else{
+        closeSynthLoader();
+    }
+}
 
 
 
