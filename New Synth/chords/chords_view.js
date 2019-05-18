@@ -1,4 +1,4 @@
-var plusButton = document.getElementById("plus-button");
+    var plusButton = document.getElementById("plus-button");
 var minusButton = document.getElementById("minus-button");
 var plusSpan = document.getElementById("plus-button-span");
 var editButtons = document.getElementsByClassName("chord-edit");
@@ -78,8 +78,15 @@ function createChordEventListeners(){
 }
 
 function openSubstitutionMenu(data){
+    var first = chordSubstitutionTable.firstElementChild; 
     chordSubstitutionMenu.style.display = "block";
     substitutions = tellTheSubs(data);
+
+    while (first) { //Ripulisco tabella
+        first.remove(); 
+        first = chordSubstitutionTable.firstElementChild; 
+    } 
+
     for (i=0; i<substitutions.length; i++){
         //divI = document.createElement("div");
         //divI.innerHTML = substitutions[i].name;
