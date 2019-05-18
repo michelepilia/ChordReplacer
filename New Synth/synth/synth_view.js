@@ -11,7 +11,7 @@ var loadSynthButton = document.getElementsByClassName("synth-load-button");
 var deleteSynthButton = document.getElementsByClassName("synth-delete-button");
 var synth = document.getElementById("synth");
 var openSynth = document.getElementById("open-synth");
-var keyboardPlay = document.getElementById("keyboard-play");
+//var keyboardPlay = document.getElementById("keyboard-play");
 
 document.addEventListener("keydown", keyDownListener, false);
 document.addEventListener("keyup", keyUpListener, false);
@@ -21,7 +21,7 @@ saveSynth.addEventListener("click", saveSynthPreset, false);
 synthPresetNameField.addEventListener("input", saveSynthPresetName, false);
 loadSynth.addEventListener("click", handleSynthLoad, false);
 openSynth.addEventListener("click", toggleSynthVisibility, false);
-keyboardPlay.addEventListener("click",enableKeyboard,false);
+//keyboardPlay.addEventListener("click",enableKeyboard,false);
 
 function handleSynthLoad(){
     if(synthLoader.style.display != "block"){
