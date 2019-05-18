@@ -205,6 +205,7 @@ function updateChordsViewFromModel(chordsName){
         addChordFromDB(i);
     };
     chordsPresetNameField.value=chordsName;
+    updateChordsSize();
 
 }
 function playEffect(){
@@ -477,7 +478,6 @@ function updateChordsSize(){
 function updateChordSize(canvas,indexInSequencer){
 
     canvas.width = quantumSizeInPxs*sequencer[indexInSequencer].duration;
-    console.log(canvas);
     var id = "c"+indexInSequencer;
     var chordHtml = document.getElementById(id);
     var style = window.getComputedStyle(chordHtml, null);

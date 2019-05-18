@@ -270,11 +270,12 @@
 }
 
 #chord-substitution-menu{
+	position: absolute;
 	display: none;
 	width: auto;
 	height: auto;
-	top: 400px;
-	left: 300px;
+	top: 350px;
+	left: 310px;
 }
 
 .suggested-substitution{
