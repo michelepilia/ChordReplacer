@@ -1,4 +1,4 @@
-    var plusButton = document.getElementById("plus-button");
+var plusButton = document.getElementById("plus-button");
 var minusButton = document.getElementById("minus-button");
 var plusSpan = document.getElementById("plus-button-span");
 var editButtons = document.getElementsByClassName("chord-edit");
@@ -15,12 +15,10 @@ var stopButton = document.getElementById("stop-button");
 var bpmText = document.getElementById("bpm-value");
 var chordSubstitutionMenu = document.getElementById("chord-substitution-menu");
 var chordSubstitutionTable = document.getElementById("chord-substitution-table");
-var closeSubstitutionMenu = document.getElementById("apply-substitution");
 var loopButton = document.getElementById("loop-button");
-closeSubstitutionMenu.addEventListener("click",closeSubstitution,false);
+
 var sendMIDIButton = document.getElementById("ext-midi");
 sendMIDIButton.addEventListener("click",enableSendMIDI,false);
-
 var actualIndex = 0;
 var previousIndex=-1;
 var latency=0;
@@ -62,6 +60,15 @@ function handleLoadChords(){
         closeChordsLoader();
     }
 }
+function handleSubstitution(data){
+    if (chordSubstitutionMenu.style.display == "none") {
+        openSubstitutionMenu(data);
+    }
+    else{
+        closeSubstitution();
+    }
+}
+
 function activeLoop(){
     loop = !loop;
     applyGraphicEffect("loop");
@@ -73,7 +80,7 @@ function createChordEventListeners(){
     newQuantizationPlusButton = Array.from(document.getElementsByClassName("quantization-plus")).pop();
     newQuantizationMinusButton = Array.from(document.getElementsByClassName("quantization-minus")).pop();
 	newSubstitutionButton = Array.from(document.getElementsByClassName("chord-substitution")).pop();
-    newSubstitutionButton.addEventListener("click",openSubstitutionMenu,false);
+    newSubstitutionButton.addEventListener("click",handleSubstitution,false);
     newEditButton.addEventListener("click", showChordEditor, false);
     newSwapButton.addEventListener("click", handleSwap, false);
     newSwapButton.addEventListener("mouseover",handleMouseOver,false);
