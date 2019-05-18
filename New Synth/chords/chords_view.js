@@ -281,8 +281,8 @@ function pauseGraphicView(){
     //if in release phase, wait the end of release and then call scavenger, else call directly scavenger
     var a = [];
     scavenger(a);
+    midiScavenger(a);
     }
-
 }
 
 function stopGraphicView(){
@@ -483,6 +483,9 @@ function applyGraphicEffect(type){
             loopButton.style.backgroundColor="white";
         }
     }
+    else if(type=="send-midi"){
+
+    }
 }
 
 function updateOutputsView(outputs){
@@ -496,5 +499,6 @@ function updateOutputsView(outputs){
 }
 function enableSendMIDI(){
     sendMidi = true;
+    applyGraphicEffect("send-midi");
 
 }

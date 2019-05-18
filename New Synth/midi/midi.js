@@ -1,6 +1,7 @@
 var outputs = [];
 var noteon;
 var noteoff;
+var allMidiNotes = [];
 if (navigator.requestMIDIAccess) {
   // Try to connect to the MIDI interface.
   navigator.requestMIDIAccess().then(onSuccess, onFailure);
@@ -26,11 +27,13 @@ function onFailure(error) {
 }
 
 function sendMidiMessageOn(note){
+  allMidiNotes.push(note);
   message = [0x92,note,127];
   outputs[document.getElementById("midi-outputs").value].send(message);
 }
 
 function sendMidiNotes(midiNotes,sustainTime,index){
+  midiScavenger(a);
   for (var i = 0; i < midiNotes.length; i++) {
     sendMidiMessageOn(midiNotes[i]);
   }
@@ -44,4 +47,11 @@ function sendMidiNotes(midiNotes,sustainTime,index){
 function sendMidiMessageOff(note){
   message = [0x82,note,127];
   outputs[document.getElementById("midi-outputs").value].send(message);
+}
+
+function midiScavenger(){
+  for (var i = 0; i < allMidiNotes.length; i++) {
+    sendMidiMessageOff(allMidiNotes[i]);
+  }
+  allMidiNotes = [];
 }

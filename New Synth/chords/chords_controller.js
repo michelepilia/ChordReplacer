@@ -244,6 +244,7 @@ function toggleInstPlayMode(){
 function instPlayChord(data){
 	var a = [];
 	scavenger(a);
+	midiScavenger();
 	tx=c.currentTime;
 	var id = parseInt(data.target.getAttribute("id").substr(1));
 	var freqs = createVoicing(sequencer[id],false);
