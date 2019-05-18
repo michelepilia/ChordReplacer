@@ -476,3 +476,13 @@ function applyGraphicEffect(type){
         }
     }
 }
+
+function updateOutputsView(outputs){
+    for (var i = 0; i < outputs.length; i++) {
+        var option = document.createElement("option");
+        option.value = i;
+        option.innerHTML = outputs[i].name;
+        document.getElementById("midi-outputs").appendChild(option);
+    }
+
+}
