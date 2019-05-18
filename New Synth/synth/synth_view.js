@@ -24,7 +24,7 @@ openSynth.addEventListener("click", toggleSynthVisibility, false);
 keyboardPlay.addEventListener("click",enableKeyboard,false);
 
 function handleSynthLoad(){
-    if(synthLoader.style.display == "none"){
+    if(synthLoader.style.display != "block"){
         loadSynthPreset();
     }
     else{

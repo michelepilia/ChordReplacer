@@ -53,7 +53,7 @@ instPlayButton.addEventListener("click", toggleInstPlayMode, false);
 loopButton.addEventListener("click",activeLoop,false);
 
 function handleLoadChords(){
-    if (chordsLoader.style.display == "none") {
+    if (chordsLoader.style.display != "block") {
         loadChordsPreset();
     }
     else{
@@ -61,7 +61,7 @@ function handleLoadChords(){
     }
 }
 function handleSubstitution(data){
-    if (chordSubstitutionMenu.style.display == "none") {
+    if (chordSubstitutionMenu.style.display != "block") {
         openSubstitutionMenu(data);
     }
     else{
