@@ -4,3 +4,4 @@ BUG TROVATI:
 3A) nel caricamento dal db gli accordi non mantengono la loro size grafica originale (Aggiornamento view chords model)
 4A) nelle sostituzioni gli accordi non mantengono la loro size grafica originale (Aggiornamento view chords model)
 5A)talvolta non va piu' hover su piu' e meno per aggiungere accordi
+6M) Inversione in certi accordi
