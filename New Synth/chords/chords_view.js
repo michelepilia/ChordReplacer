@@ -484,6 +484,12 @@ function applyGraphicEffect(type){
         }
     }
     else if(type=="send-midi"){
+        if (sendMidi) {
+            sendMIDIButton.style.backgroundColor="hsl(90, 95%, 85%)";
+        }
+        else{
+           sendMIDIButton.style.backgroundColor="white";
+        }
 
     }
 }
@@ -498,7 +504,7 @@ function updateOutputsView(outputs){
 
 }
 function enableSendMIDI(){
-    sendMidi = true;
+    sendMidi = !sendMidi;
     applyGraphicEffect("send-midi");
 
 }

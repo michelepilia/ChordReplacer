@@ -1,7 +1,7 @@
 
 body{
   font-family:"Courier New";
-  font-size:10px;
+  font-size:14px;
 }
 html{    
   -moz-user-select: none; /* Firefox */
@@ -257,7 +257,7 @@ html{
   transform: translate(0,15%);
 }
 
-#synth-loader, #chords-loader{
+#synth-loader, #chords-loader, #chord-substitution-menu{
   position: absolute;
   background-color: hsl(25, 90%, 65%);
   border: 1px solid hsl(25, 95%, 50%);
