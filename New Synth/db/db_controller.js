@@ -127,6 +127,7 @@ function loadSynthFunction(data) {
 	  		selectorValues[1] = fbSynth.waveform2;
 	  		amounts[4] = fbSynth.cutoff;
 	  		amounts[5] = fbSynth.resonance;
+	  		filt.Q.value = minQ+(amounts[5]/(maxAmount-minAmount)*(maxQ-minQ));
 	  		amounts[6] = fbSynth.eg;
 	  		sliderAmounts[0] = fbSynth.filt_atck;
 	  		sliderAmounts[1] = fbSynth.filt_dcy;
