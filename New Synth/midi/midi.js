@@ -40,6 +40,11 @@ function onFailure(error) {
   console.log("Could not connect to the MIDI interface");
 }
 
-function sendNote(){
-  outputs[document.getElementById("midi-outputs").value].send(noteon);
+function sendNote(note){
+  outputs[document.getElementById("midi-outputs").value].send(note);
+}
+
+function sendMidiNotes(){
+
+
 }

@@ -9,6 +9,8 @@ var actualChord;
 var allVoices=[];
 var sequencerSub=0;
 var tx = 0;
+var sendMidi = false;
+
 function addChord() {
 	var chord = new Chord();
 
@@ -248,7 +250,12 @@ function instPlayChord(data){
 	var sustainTime = sequencer[id].duration*quantumTime/1000; /*[seconds]*/
 	sequencer[id].sustainTime = sustainTime;
     sequencer[id].indexInSequencer = id;
-    playNotesFromFrequencies(freqs, 1, true,sustainTime,id);//bypass default scavenger
+    if (sendMidi) {
+    	sendMidiNotes();
+    }
+    else{
+    	playNotesFromFrequencies(freqs, 1, true,sustainTime,id);//bypass default scavenger
+    }
 }
 
 function scavenger(voicesToExclude){

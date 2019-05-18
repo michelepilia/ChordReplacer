@@ -19,6 +19,8 @@ var chordSubstitutionTable = document.getElementById("chord-substitution-table")
 var closeSubstitutionMenu = document.getElementById("apply-substitution");
 var loopButton = document.getElementById("loop-button");
 closeSubstitutionMenu.addEventListener("click",closeSubstitution,false);
+var sendMIDIButton = document.getElementById("ext-midi");
+sendMIDIButton.addEventListener("click",enableSendMIDI,false);
 
 var actualIndex = 0;
 var previousIndex=-1;
@@ -234,7 +236,12 @@ function moveToNextCanvas(){
     var sustainTime = playingchord.duration*quantumTime/1000; /*[seconds]*/
     sequencer[actualIndex].sustainTime = sustainTime;
     sequencer[actualIndex].indexInSequencer = actualIndex;
-    playNotesFromFrequencies(freqs, 1, false,sustainTime,actualIndex++);
+    if (sendMidi) {
+        sendMidiNotes();
+    }
+    else{
+        playNotesFromFrequencies(freqs, 1, false,sustainTime,actualIndex++);
+    }
     previousIndex=actualIndex-1;
     nextCanvasTimeout = setTimeout(function(){performPlayerView();},quantumTime*actualChordQuantums); 
 }
@@ -484,5 +491,9 @@ function updateOutputsView(outputs){
         option.innerHTML = outputs[i].name;
         document.getElementById("midi-outputs").appendChild(option);
     }
+
+}
+function enableSendMIDI(){
+    sendMidi = true;
 
 }
