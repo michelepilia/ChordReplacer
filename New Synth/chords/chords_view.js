@@ -366,7 +366,8 @@ function updateChordTag(chord, id){
         else if (chord.inversion==1) {
             if (chord.quality=="maj" || chord.quality=="aug"){fourth="/"+getNoteFromIntervalAbs(chord.fundamental, 4);}
             else if (chord.quality=="min"||chord.quality=="dim"){fourth="/"+getNoteFromIntervalAbs(chord.fundamental, 3);}
-            else {fourth="";}
+            else if (chord.quality=="sus2"){fourth="/"+getNoteFromIntervalAbs(chord.fundamental, 2);}
+            else if (chord.quality=="sus4"){fourth="/"+getNoteFromIntervalAbs(chord.fundamental, 5);}
         }
         else if (chord.inversion==2) {
             if (chord.quality=="maj" || chord.quality=="min" || chord.quality=="sus2" || chord.quality=="sus4"){
