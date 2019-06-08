@@ -236,6 +236,9 @@
 	left: -1px;
 	bottom: -1px;
 	text-align: center;
+	align-items: center;
+	display: inline-flex;
+	justify-content: center;
 }
 .quantization-button{
 	position: absolute;
