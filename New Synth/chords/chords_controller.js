@@ -561,15 +561,14 @@ function applySubstitution(data){
 		}
 		sequencer.splice(sequencerSub, 0, subToApply.destination[0]); //altrimenti inserisco all'inizio con durata normale
 	}
-	if(subToApply.name=="Preparation by minor 7"){
-		if(sequencerSub==0){ //Se oltre il primo elemento del sequencer, inserisco dimezzando l'accordo precedente
-			sequencer.splice(sequencerSub, 0, subToApply.destination[0]);
+	else if(subToApply.name=="Preparation by minor 7"){
+		if(sequencerSub>0){ //Se oltre il primo elemento del sequencer, inserisco dimezzando l'accordo precedente
+			sequencer[sequencerSub-1].duration = sequencer[sequencerSub-1].duration/2;
+			subToApply.destination[0].duration = sequencer[sequencerSub-1].duration;
 		}
-		else{//altrimenti inserisco all'inizio con durata normale
-			sequencer[sequencerSub-1] = subToApply.destination[0];
-		}
+		sequencer.splice(sequencerSub, 0, subToApply.destination[0]); //altrimenti inserisco all'inizio con durata normale
 	}
-	if(subToApply.name=="Back propagation of 7th"){
+	else if(subToApply.name=="Back propagation of 7th"){
 		if (sequencerSub==0){
 			var rest = new Chord();
 			rest.duration = quantization/2;
@@ -586,10 +585,10 @@ function applySubstitution(data){
 			sequencer[sequencerSub+1].duration += sequencer[sequencerSub-1].duration;
 		}
 	}
-	if(subToApply.name=="Backdoor Progression"){
+	else if(subToApply.name=="Backdoor Progression"){
 		sequencer.splice(sequencerSub, 1, subToApply.destination[0], subToApply.destination[1]);
 	}
-	if(subToApply.name=="Preparation by II-V"){
+	else if(subToApply.name=="Preparation by II-V"){
 		if(sequencerSub==0){
 			sequencer.splice(sequencerSub, 0, subToApply.destination[0], subToApply.destination[1]);
 		}
@@ -600,7 +599,7 @@ function applySubstitution(data){
 			sequencer.splice(sequencerSub, 0, subToApply.destination[0], subToApply.destination[1]);
 		}
 	}
-	if(subToApply.name=="Left deletion"){
+	else if(subToApply.name=="Left deletion"){
 		if (sequencerSub==0){
 			var rest = new Chord();
 			rest.duration = subToApply.origin.duration;
