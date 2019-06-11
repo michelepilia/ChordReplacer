@@ -85,16 +85,16 @@ function updateView() { //Quando giri knob
     document.getElementsByClassName(classToRotate)[knobToRotateIndex].style.transform = "rotate(" + ((amounts[knobToRotateIndex]-maxAmount/2) * SENS )+ "deg)";
     knobVal = parseInt((amounts[knobToRotateIndex])*SENS/270*100); //0:100
     if(knobToRotateIndex==1 || knobToRotateIndex==3){
-    	document.getElementsByClassName("knob-level-amount-percentage")[knobToRotateIndex].innerHTML = (2*knobVal-100) + " c";
+    	document.getElementsByClassName("knob-level-amount-percentage")[knobToRotateIndex].innerHTML = (2*knobVal-100).toFixed(0);
     }
     else if(knobToRotateIndex==4 || knobToRotateIndex==6){
-    	document.getElementsByClassName("knob-level-amount-percentage")[knobToRotateIndex].innerHTML = (minFilt+knobVal*(maxFilt-minFilt)/100) + " Hz";
+    	document.getElementsByClassName("knob-level-amount-percentage")[knobToRotateIndex].innerHTML = (minFilt+knobVal*(maxFilt-minFilt)/100).toFixed(0);
     }
     else if(knobToRotateIndex==5){
-    	document.getElementsByClassName("knob-level-amount-percentage")[knobToRotateIndex].innerHTML = minQ+(knobVal*(maxQ-minQ)/100);
+    	document.getElementsByClassName("knob-level-amount-percentage")[knobToRotateIndex].innerHTML = (minQ+(knobVal*(maxQ-minQ)/100)).toFixed(2);
     }
     else if(knobToRotateIndex==7){
-    	document.getElementsByClassName("knob-level-amount-percentage")[knobToRotateIndex].innerHTML = (minLfo+knobVal*(maxLfo-minLfo)/100) + " Hz";
+    	document.getElementsByClassName("knob-level-amount-percentage")[knobToRotateIndex].innerHTML = (minLfo+knobVal*(maxLfo-minLfo)/100).toFixed(2);
     }
     else {
     	document.getElementsByClassName("knob-level-amount-percentage")[knobToRotateIndex].innerHTML=knobVal;
