@@ -72,8 +72,10 @@ function loadSynthPreset(){
 					var tdName = document.createElement("TD");
 					tdName.id = "synth-loading-name"+i;
 					tdName.innerHTML = fbNames[i];
+					var today = new Date();
+					var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
 					var tdDate = document.createElement("TD");
-					tdDate.innerHTML = "Today";
+					tdDate.innerHTML = date;
 
 					var tdButton = document.createElement("TD");
 					tdButton.id = "synth-loading-td-button"+i;
@@ -208,8 +210,10 @@ function loadChordsPreset(){
 					var tdName = document.createElement("TD");
 					tdName.id = "chords-loading-name"+i;
 					tdName.innerHTML = fbNames[i];
+					var today = new Date();
+					var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
 					var tdDate = document.createElement("TD");
-					tdDate.innerHTML = "Today";
+					tdDate.innerHTML = date;
 
 					var tdButton = document.createElement("TD");
 					tdButton.id = "chords-loading-td-button"+i;
