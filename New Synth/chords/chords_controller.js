@@ -224,14 +224,14 @@ function changeChordSize(data){
 function toggleInstPlayMode(){
 	var chordTags = document.getElementsByClassName("chord-name");
 	if (instPlayMode){
-		for(i=0; i<chordTags.length; i++){
+		for(i=0; i<chordTags.length-2; i++){
 			chordTags[i].removeEventListener("mousedown", instPlayChord);
 			chordTags[i].removeEventListener("mouseover", chordTagMouseOver);
 			chordTags[i].removeEventListener("mouseout", chordTagMouseOut);
 		}
 	}
 	else {
-		for(i=0; i<chordTags.length; i++){
+		for(i=0; i<chordTags.length-2; i++){
 			chordTags[i].addEventListener("mousedown", instPlayChord);
 			chordTags[i].addEventListener("mouseover", chordTagMouseOver);
 			chordTags[i].addEventListener("mouseout", chordTagMouseOut);

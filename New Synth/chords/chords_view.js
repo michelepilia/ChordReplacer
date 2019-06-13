@@ -445,7 +445,7 @@ function toggleInstPlayButton(){
 }
 
 function chordTagMouseOver(data){
-    data.target.style.backgroundColor = "#1c6dd8";
+    data.target.style.backgroundColor = "hsl(25, 90%, 80%)";
 }
 
 function chordTagMouseOut(data){
