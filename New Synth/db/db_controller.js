@@ -168,7 +168,7 @@ function deleteSynthFunction(data){
 			fbSynth = firebase.database().ref("Synth").child(fbNames[chosenIndex]);
 			fbSynth.remove();
 			closeSynthLoader();
-			updateViewFromModel();
+			updateViewFromModel(fbNames[chosenIndex]);
 	});
 }
 
@@ -286,6 +286,7 @@ function deleteChordsFunction(data){
 			fbChords = firebase.database().ref("Chords").child(fbNames[chosenIndex]);
 			fbChords.remove();
 			closeChordsLoader();
-			updateChordsViewFromModel();
+			console.log("aaaaaaaaaa");
+			updateChordsViewFromModel(fbNames[chosenIndex]);
 	});
 }
