@@ -1,7 +1,7 @@
 <p align="center"><img height="150" src="https://github.com/michelepilia/ChordReplacer/blob/master/Logo.png"></p>
 
 
-# ChordReplacer
+# Chord Replacer
 
 Project entirely realized by:
 
@@ -25,6 +25,9 @@ Languages used:
 3) JavaScript (with particular references to Web Audio API
 
 Furthermore, following the syllabus of Advanced Coding Tools and Methodologies course, Firebase has been used to allow users to store and load custom presets
+## GUI
+<p align="center"><img height="300" src="https://github.com/michelepilia/ChordReplacer/screens/GUI.jpg"></p>
+
 
 ## Sequencer 
 <p align="center"><img height="300" src="https://github.com/michelepilia/ChordReplacer/blob/master/Sequencer.png"></p>
