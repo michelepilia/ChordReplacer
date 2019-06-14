@@ -1,4 +1,4 @@
-<h1 align="center"><img width="250" src="https://github.com/michelepilia/ChordReplacer/blob/master/Logo.png"></h1>
+<p align="center"><img width="250" src="https://github.com/michelepilia/ChordReplacer/blob/master/Logo.png"></p>
 
 
 # ChordReplacer
