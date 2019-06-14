@@ -122,7 +122,7 @@ Blocks diagram of the audio nodes:
 ### LFO
 <p align="left"><img height="100" src="https://github.com/michelepilia/ChordReplacer/blob/master/screens/lfo.JPG"></p>
 <div>Rate: controls the frequency of the lfo<div>
-<div>Waveform: it's possible to choose 3 different waveforms: square, sawtooth and sine</div>
+<div>Waveform: it's possible to choose 3 different waveforms (square, sawtooth and sine)</div>
 <div>Destination: parameter to be modulated</div>
 <div>AL (Attack Level) envelope can be used to modulate the rate of the lfo</div>
 <div></div>
@@ -136,8 +136,6 @@ It's necessary to install a virtual audio cable.
 ## Useful Links
 
 > Project link: [http://chordreplacer.surge.sh/html.html](http://chordreplacer.surge.sh/html.html)
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/8YuT3bDQDpQ" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 > Demo Video: [https://youtu.be/8YuT3bDQDpQ](https://youtu.be/8YuT3bDQDpQ)
 
