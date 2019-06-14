@@ -75,16 +75,17 @@ Description of sequencer
 15) General aug substitution
 16) Left deletion
 
-## Synth 
-Type of Synthesis: Subtractive
-Modules: 2 oscillators, LP filter, LFO, ADSR envelopes
+# Polyphonic Synthesizer
+<div>The user can use this internal synth to play the chords he has created</div>
+<div>Type of Synthesis: Subtractive</div>
+<div>Modules: 2 oscillators, LP filter, LFO, ADSR envelopes</div>
 <p align="center"><img height="200" src="https://github.com/michelepilia/ChordReplacer/blob/master/screens/SynthGui.JPG"></p>
 
 
 ### Audio Graph
 
-Block diagram of the audio nodes:
-<p align="center"><img height="200" src="https://github.com/michelepilia/ChordReplacer/blob/master/screens/Untitled Diagram.jpg"></p>
+Blocks diagram of the audio nodes:
+<p align="lefy"><img height="200" src="https://github.com/michelepilia/ChordReplacer/blob/master/screens/Untitled Diagram.jpg"></p>
 
 ### Oscillator
 <p align="left"><img height="80" src="https://github.com/michelepilia/ChordReplacer/blob/master/screens/oscillator.JPG"></p>
@@ -112,7 +113,7 @@ Block diagram of the audio nodes:
   
 ## External MIDI
 <p align="left"><img height="80" src="https://github.com/michelepilia/ChordReplacer/blob/master/screens/sendMidi.JPG"></p>
-Allows using external vsts and daws.
+Allows using external VSTs and DAWs, in order to record the chords track and to create a complete musical project.
 It's necessary to install a virtual audio cable.
 
 ## Useful Links
