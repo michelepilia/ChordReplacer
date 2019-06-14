@@ -30,36 +30,36 @@ Furthermore, following the syllabus of Advanced Coding Tools and Methodologies c
 
 
 ## Sequencer 
-<p align="center"><img height="250" src="https://github.com/michelepilia/ChordReplacer/blob/master/screens/Sequencer.png"></p>
+<p align="left"><img height="300" src="https://github.com/michelepilia/ChordReplacer/blob/master/screens/Sequencer.png"></p>
 
 Description of sequencer
 
 ### Play/Stop
-<p align="center"><img height="70" src="https://github.com/michelepilia/ChordReplacer/blob/master/screens/play.png"></p>
+<p align="left"><img height="60" src="https://github.com/michelepilia/ChordReplacer/blob/master/screens/play.png"></p>
 
 ### Instant Play
-<p align="center"><img height="70" src="https://github.com/michelepilia/ChordReplacer/blob/master/screens/instplay.png"></p>
+<p align="left"><img height="60" src="https://github.com/michelepilia/ChordReplacer/blob/master/screens/instplay.png"></p>
 
 ### Loop
-<p align="center"><img height="70" src="https://github.com/michelepilia/ChordReplacer/blob/master/screens/loop.png"></p>
+<p align="left"><img height="60" src="https://github.com/michelepilia/ChordReplacer/blob/master/screens/loop.png"></p>
 
 ### Add/Remove Chord
-<p align="center"><img height="150" src="https://github.com/michelepilia/ChordReplacer/blob/master/screens/pluschord.png"></p>
+<p align="left"><img height="150" src="https://github.com/michelepilia/ChordReplacer/blob/master/screens/pluschord.png"></p>
 
 ### Add Random Chord
-<p align="center"><img height="150" src="https://github.com/michelepilia/ChordReplacer/blob/master/screens/randadd.png"></p>
+<p align="left"><img height="150" src="https://github.com/michelepilia/ChordReplacer/blob/master/screens/randadd.png"></p>
 
 ### Edit Chord
-<p align="center"><img height="150" src="https://github.com/michelepilia/ChordReplacer/blob/master/screens/editchord.png"></p>
+<p align="left"><img height="150" src="https://github.com/michelepilia/ChordReplacer/blob/master/screens/editchord.png"></p>
 
 ### Change Size
-<p align="center"><img height="150" src="https://github.com/michelepilia/ChordReplacer/blob/master/screens/plus%20size.png"></p>
+<p align="left"><img height="150" src="https://github.com/michelepilia/ChordReplacer/blob/master/screens/plus%20size.png"></p>
 
 ### Swap Chords
-<p align="center"><img height="150" src="https://github.com/michelepilia/ChordReplacer/blob/master/screens/swap.png"></p>
+<p align="left"><img height="150" src="https://github.com/michelepilia/ChordReplacer/blob/master/screens/swap.png"></p>
 
 ## Substitutions
-<p align="center"><img height="400" src="https://github.com/michelepilia/ChordReplacer/blob/master/screens/subs.png"></p>
+<p align="center"><img height="600" src="https://github.com/michelepilia/ChordReplacer/blob/master/screens/subs.png"></p>
 
 ### List of implemented substitutions
 
