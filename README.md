@@ -26,7 +26,7 @@ Languages used:
 
 Furthermore, following the syllabus of Advanced Coding Tools and Methodologies course, Firebase has been used to allow users to store and load custom presets
 ## GUI
-<p align="center"><img height="300" src="https://github.com/michelepilia/ChordReplacer/blob/master/screens/GUI.JPG"></p>
+<p align="center"><img height="400" src="https://github.com/michelepilia/ChordReplacer/blob/master/screens/GUI.JPG"></p>
 
 
 ## Sequencer 
