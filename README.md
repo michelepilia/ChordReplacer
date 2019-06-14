@@ -80,16 +80,16 @@ Description of sequencer
 
 
 ### Audio Graph
-<p align="center"><img height="60" src="https://github.com/michelepilia/ChordReplacer/blob/master/screens/Untitled Diagram.JPG"></p>
+<p align="center"><img height="200" src="https://github.com/michelepilia/ChordReplacer/blob/master/screens/Untitled Diagram.JPG"></p>
 
 ### Oscillator
-<p align="center"><img height="60" src="https://github.com/michelepilia/ChordReplacer/blob/master/screens/Oscillator.JPG"></p>
+<p align="left"><img height="80" src="https://github.com/michelepilia/ChordReplacer/blob/master/screens/Oscillator.JPG"></p>
 
 ### Low-Pass Filter
-<p align="center"><img height="60" src="https://github.com/michelepilia/ChordReplacer/blob/master/screens/LPF.JPG"></p>
+<p align="left"><img height="80" src="https://github.com/michelepilia/ChordReplacer/blob/master/screens/LPF.JPG"></p>
 
 ### LFO
-<p align="center"><img height="60" src="https://github.com/michelepilia/ChordReplacer/blob/master/screens/lfo.JPG"></p>
+<p align="left"><img height="80" src="https://github.com/michelepilia/ChordReplacer/blob/master/screens/lfo.JPG"></p>
 
 ## External MIDI
 
