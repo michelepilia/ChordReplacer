@@ -88,22 +88,30 @@ Block diagram of the audio nodes:
 
 ### Oscillator
 <p align="left"><img height="80" src="https://github.com/michelepilia/ChordReplacer/blob/master/screens/oscillator.JPG"></p>
-Level: adjusts the gain of the oscillator.
-Detune: detunes the oscillator, in cents.
-Pitch: changes frequency of the fundamental, in semitones.
-Waveform: it's possible to choose 3 different waveforms: square, sawtooth and triangular.
-
+<div>Level: adjusts the gain of the oscillator</div>
+<div>Detune: detunes the oscillator, in cents</div>
+<div>Pitch: changes frequency of the fundamental, in semitones</div>
+<div>Waveform: it's possible to choose 3 different waveforms: square, sawtooth and triangular</div>
+<div></div>
 ### Low-Pass Filter
 <p align="left"><img height="80" src="https://github.com/michelepilia/ChordReplacer/blob/master/screens/LPF.JPG"></p>
-<div>Cutoff: cutoff frequency of the filter.</div>
-<div>Reso: Q factor.</div>
-<div>EG: cutoff frequency of the filter reached after the decay, and mantained during the sustain.</div>
-<div>ADSR envelope can be used on to modulate the cutoff frequency.</div>
+<div>Cutoff: cutoff frequency of the filter</div>
+<div>Reso: Q factor</div>
+<div>EG: cutoff frequency of the filter reached after the decay, and mantained during the sustain</div>
+<div>ADSR envelope can be used on to modulate the cutoff frequency</div>
+<div></div>
 ### LFO
 <p align="left"><img height="80" src="https://github.com/michelepilia/ChordReplacer/blob/master/screens/lfo.JPG"></p>
-
-
+<div>Rate: controls the frequency of the lfo<div>
+<div>Waveform: it's possible to choose 3 different waveforms: square, sawtooth and sine</div>
+<div>Destination: parameter to be modulated</div>
+<div>AL (Attack Level) envelope can be used to modulate the rate of the lfo</div>
+<div></div>
+  
 ## External MIDI
+<p align="left"><img height="80" src="https://github.com/michelepilia/ChordReplacer/blob/master/screens/sendMidi.JPG"></p>
+Allows using external vsts and daws.
+It's necessary to install a virtual audio cable.
 
 ## Useful Links
 
