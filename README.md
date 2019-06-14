@@ -74,32 +74,33 @@ Description of sequencer
 14) General dim7 substitution
 15) General aug substitution
 16) Left deletion
-
+<div></div>
 # Polyphonic Synthesizer
 <div>The user can use this internal synth to play the chords he has created</div>
 <div>Type of Synthesis: Subtractive</div>
 <div>Modules: 2 oscillators, LP filter, LFO, ADSR envelopes</div>
+<div></div>
 <p align="center"><img height="200" src="https://github.com/michelepilia/ChordReplacer/blob/master/screens/SynthGui.JPG"></p>
 
-
+<div></div>
 ### Audio Graph
 
 Blocks diagram of the audio nodes:
 <p align="lefy"><img height="200" src="https://github.com/michelepilia/ChordReplacer/blob/master/screens/Untitled Diagram.jpg"></p>
-
+<div></div>
 ### Oscillator
 <p align="left"><img height="80" src="https://github.com/michelepilia/ChordReplacer/blob/master/screens/oscillator.JPG"></p>
 <div>Level: adjusts the gain of the oscillator</div>
-<div>Detune: detunes the oscillator, in cents</div>
-<div>Pitch: changes frequency of the fundamental, in semitones</div>
-<div>Waveform: it's possible to choose 3 different waveforms: square, sawtooth and triangular</div>
+<div>Detune: detunes the oscillator in cents</div>
+<div>Pitch: changes frequency of the fundamental in semitones</div>
+<div>Waveform: it's possible to choose 3 different waveforms (square, sawtooth and triangular)</div>
 <div></div>
 
 ### Low-Pass Filter
 <p align="left"><img height="80" src="https://github.com/michelepilia/ChordReplacer/blob/master/screens/LPF.JPG"></p>
 <div>Cutoff: cutoff frequency of the filter</div>
 <div>Reso: Q factor</div>
-<div>EG: cutoff frequency of the filter reached after the decay, and mantained during the sustain</div>
+<div>EG: cutoff frequency of the filter reached after the decay</div>
 <div>ADSR envelope can be used on to modulate the cutoff frequency</div>
 <div></div>
 
@@ -115,6 +116,7 @@ Blocks diagram of the audio nodes:
 <p align="left"><img height="80" src="https://github.com/michelepilia/ChordReplacer/blob/master/screens/sendMidi.JPG"></p>
 Allows using external VSTs and DAWs, in order to record the chords track and to create a complete musical project.
 It's necessary to install a virtual audio cable.
+<div></div>
 
 ## Useful Links
 
