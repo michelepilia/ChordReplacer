@@ -50,7 +50,7 @@ Add one bar or remove the last chord
 
 ### Add Random Chord
 <p align="left"><img height="150" src="https://github.com/michelepilia/ChordReplacer/blob/master/screens/randadd.png"></p>
-Add a chord in a completely random way
+Add a chord in a completely-random way
 
 ### Edit Chord
 <p align="left"><img height="150" src="https://github.com/michelepilia/ChordReplacer/blob/master/screens/editchord.png"></p>
