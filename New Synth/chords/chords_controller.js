@@ -271,22 +271,24 @@ function toggleInstPlayMode(){
 }
 
 function instPlayChord(data){
-	var a = [];
-	scavenger(a);
-	midiScavenger();
-	tx=c.currentTime;
-	var id = parseInt(data.target.getAttribute("id").substr(1));
-	var freqs = createVoicing(sequencer[id],false);
-	var midiNotes = createVoicing(sequencer[id],true);
-	var sustainTime = sequencer[id].duration*quantumTime/1000; /*[seconds]*/
-	sequencer[id].sustainTime = sustainTime;
-    sequencer[id].indexInSequencer = id;
-    if (sendMidi) {
-    	sendMidiNotes(midiNotes,sustainTime,id);
-    }
-    else{
-    	playNotesFromFrequencies(freqs, 1, true,sustainTime,id);//bypass default scavenger
-    }
+	if (data.target.getAttribute("id")!= null) {
+		var a = [];
+		scavenger(a);
+		midiScavenger();
+		tx=c.currentTime;
+		var id = parseInt(data.target.getAttribute("id").substr(1));
+		var freqs = createVoicing(sequencer[id],false);
+		var midiNotes = createVoicing(sequencer[id],true);
+		var sustainTime = sequencer[id].duration*quantumTime/1000; /*[seconds]*/
+		sequencer[id].sustainTime = sustainTime;
+	    sequencer[id].indexInSequencer = id;
+	    if (sendMidi) {
+	    	sendMidiNotes(midiNotes,sustainTime,id);
+	    }
+	    else{
+	    	playNotesFromFrequencies(freqs, 1, true,sustainTime,id);//bypass default scavenger
+	    }	
+	}
 }
 
 function scavenger(voicesToExclude){
