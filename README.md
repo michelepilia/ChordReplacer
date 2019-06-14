@@ -83,7 +83,7 @@ Description of sequencer
 <p align="center"><img height="200" src="https://github.com/michelepilia/ChordReplacer/blob/master/screens/Untitled Diagram.JPG"></p>
 
 ### Oscillator
-<p align="left"><img height="80" src="https://github.com/michelepilia/ChordReplacer/blob/master/screens/Oscillator.JPG"></p>
+<p align="left"><img height="80" src="https://github.com/michelepilia/ChordReplacer/blob/master/screens/oscillator.JPG"></p>
 
 ### Low-Pass Filter
 <p align="left"><img height="80" src="https://github.com/michelepilia/ChordReplacer/blob/master/screens/LPF.JPG"></p>
