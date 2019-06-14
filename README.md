@@ -30,7 +30,7 @@ Furthermore, following the syllabus of Advanced Coding Tools and Methodologies c
 
 
 ## Sequencer 
-<p align="center"><img height="300" src="https://github.com/michelepilia/ChordReplacer/blob/master/Sequencer.png"></p>
+<p align="center"><img height="250" src="https://github.com/michelepilia/ChordReplacer/blob/master/Sequencer.png"></p>
 
 Description of sequencer
 
