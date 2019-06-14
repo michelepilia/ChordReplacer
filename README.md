@@ -77,12 +77,13 @@ Description of sequencer
 <div></div>
 
 # Polyphonic Synthesizer
+<p align="center"><img height="200" src="https://github.com/michelepilia/ChordReplacer/blob/master/screens/SynthGui.JPG"></p>
+<div></div>
 <div>The user can use this internal synth to play the chords he has created</div>
 <div>Type of Synthesis: Subtractive</div>
 <div>Modules: 2 oscillators, LP filter, LFO, ADSR envelopes</div>
 <div></div>
-<p align="center"><img height="200" src="https://github.com/michelepilia/ChordReplacer/blob/master/screens/SynthGui.JPG"></p>
-<div></div>
+
 
 ### Audio Graph
 
