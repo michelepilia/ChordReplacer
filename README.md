@@ -30,18 +30,18 @@ Furthermore, following the syllabus of Advanced Coding Tools and Methodologies c
 
 
 ## Sequencer 
-<p align="center"><img height="250" src="https://github.com/michelepilia/ChordReplacer/blob/master/Sequencer.png"></p>
+<p align="center"><img height="250" src="https://github.com/michelepilia/ChordReplacer/blob/master/screens/Sequencer.png"></p>
 
 Description of sequencer
 
 ### Play/Stop
-<p align="center"><img height="100" src="https://github.com/michelepilia/ChordReplacer/blob/master/screens/play.png"></p>
+<p align="center"><img height="70" src="https://github.com/michelepilia/ChordReplacer/blob/master/screens/play.png"></p>
 
 ### Instant Play
-<p align="center"><img height="100" src="https://github.com/michelepilia/ChordReplacer/blob/master/screens/instplay.png"></p>
+<p align="center"><img height="70" src="https://github.com/michelepilia/ChordReplacer/blob/master/screens/instplay.png"></p>
 
 ### Loop
-<p align="center"><img height="100" src="https://github.com/michelepilia/ChordReplacer/blob/master/screens/loop.png"></p>
+<p align="center"><img height="70" src="https://github.com/michelepilia/ChordReplacer/blob/master/screens/loop.png"></p>
 
 ### Add/Remove Chord
 <p align="center"><img height="150" src="https://github.com/michelepilia/ChordReplacer/blob/master/screens/pluschord.png"></p>
@@ -59,7 +59,7 @@ Description of sequencer
 <p align="center"><img height="150" src="https://github.com/michelepilia/ChordReplacer/blob/master/screens/swap.png"></p>
 
 ## Substitutions
-<p align="center"><img height="150" src="https://github.com/michelepilia/ChordReplacer/blob/master/screens/subs.png"></p>
+<p align="center"><img height="400" src="https://github.com/michelepilia/ChordReplacer/blob/master/screens/subs.png"></p>
 
 ### List of implemented substitutions
 
