@@ -75,21 +75,33 @@ Description of sequencer
 15) General aug substitution
 16) Left deletion
 
-## Synth
+## Synth 
+Type of Synthesis: Subtractive
+Modules: 2 oscillators, LP filter, LFO, ADSR envelopes
 <p align="center"><img height="200" src="https://github.com/michelepilia/ChordReplacer/blob/master/screens/SynthGui.JPG"></p>
 
 
 ### Audio Graph
+
+Block diagram of the audio nodes:
 <p align="center"><img height="200" src="https://github.com/michelepilia/ChordReplacer/blob/master/screens/Untitled Diagram.jpg"></p>
 
 ### Oscillator
 <p align="left"><img height="80" src="https://github.com/michelepilia/ChordReplacer/blob/master/screens/oscillator.JPG"></p>
+Level: adjusts the gain of the oscillator.
+Detune: detunes the oscillator, in cents.
+Pitch: changes frequency of the fundamental, in semitones.
+Waveform: it's possible to choose 3 different waveforms: square, sawtooth and triangular.
 
 ### Low-Pass Filter
 <p align="left"><img height="80" src="https://github.com/michelepilia/ChordReplacer/blob/master/screens/LPF.JPG"></p>
 
 ### LFO
 <p align="left"><img height="80" src="https://github.com/michelepilia/ChordReplacer/blob/master/screens/lfo.JPG"></p>
+Cutoff: cutoff frequency of the filter.
+Reso: Q factor.
+EG: cutoff frequency of the filter reached after the decay, and mantained during the sustain.
+ADSR envelope can be used on to modulate the cutoff frequency.
 
 ## External MIDI
 
