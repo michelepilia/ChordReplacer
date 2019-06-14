@@ -93,6 +93,7 @@ Block diagram of the audio nodes:
 <div>Pitch: changes frequency of the fundamental, in semitones</div>
 <div>Waveform: it's possible to choose 3 different waveforms: square, sawtooth and triangular</div>
 <div></div>
+
 ### Low-Pass Filter
 <p align="left"><img height="80" src="https://github.com/michelepilia/ChordReplacer/blob/master/screens/LPF.JPG"></p>
 <div>Cutoff: cutoff frequency of the filter</div>
@@ -100,6 +101,7 @@ Block diagram of the audio nodes:
 <div>EG: cutoff frequency of the filter reached after the decay, and mantained during the sustain</div>
 <div>ADSR envelope can be used on to modulate the cutoff frequency</div>
 <div></div>
+
 ### LFO
 <p align="left"><img height="80" src="https://github.com/michelepilia/ChordReplacer/blob/master/screens/lfo.JPG"></p>
 <div>Rate: controls the frequency of the lfo<div>
