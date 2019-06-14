@@ -16,6 +16,7 @@ var bpmText = document.getElementById("bpm-value");
 var chordSubstitutionMenu = document.getElementById("chord-substitution-menu");
 var chordSubstitutionTable = document.getElementById("chord-substitution-table");
 var loopButton = document.getElementById("loop-button");
+var randButton = document.getElementById("rand-button");
 
 var sendMIDIButton = document.getElementById("ext-midi");
 sendMIDIButton.addEventListener("click",enableSendMIDI,false);
@@ -51,6 +52,9 @@ loadChords.addEventListener("click", handleLoadChords, false);
 chordsPresetNameField.addEventListener("input", saveChordsPresetName, false);
 instPlayButton.addEventListener("click", toggleInstPlayMode, false);
 loopButton.addEventListener("click",activeLoop,false);
+randButton.addEventListener("click",randomChord,false);
+
+
 
 function handleLoadChords(){
     if (chordsLoader.style.display != "block") {
@@ -344,8 +348,8 @@ function updateChordTag(chord, id){
         first = chord.fundamental;
         if(chord.quality=="maj"){second="";}
         else if (chord.quality=="min"){second="-";}
-        else if (chord.quality=="sus2" || chord.quality=="sus4"){second = "<sub style='vertical-align: sub; font-size: 30px;'>" + chord.quality + "</sub>";}
-        else if (chord.quality=="aug"){second="#5";}
+        else if (chord.quality=="sus2" || chord.quality=="sus4"){second = "<sub style='vertical-align: sub; font-size: 23px; margin-right:2px;'>" + chord.quality + "</sub>";}
+        else if (chord.quality=="aug"){second = "<sup style='vertical-align: super; font-size: 22px; margin-right:2px;'>#5</sup>";}
 
         if (chord.extension=="none"){third = "";}
         else if (chord.extension=="maj7"){third = "<sup style='vertical-align: super; font-size: 30px;'>&#916</sup>";} //delta
@@ -360,19 +364,19 @@ function updateChordTag(chord, id){
             }
             else if (chord.extension=="b7"){
                 second = "-" + "<sup style='vertical-align: super; font-size: 30px;'>7</sup>";
-                third = "&#9837"+"&#53;"; //bemolle
+                third = "<sup style='vertical-align: super; font-size: 22px; margin-right:2px;'>"+"&#9837"+"&#53;"+"</sup>"; //bemolle
             }
             else if (chord.extension=="maj7"){
                 second = "-" + "<sup style='vertical-align: super; font-size: 30px;'>&#916</sup>"; //delta
-                third = "&#9837"+"&#53;"; //bemolle 5
+                third = "<sup style='vertical-align: super; font-size: 22px; margin-right:2px;'>"+"&#9837"+"&#53;"+"</sup>"; //bemolle 5
             }
             else if (chord.extension=="none"){
                 second = "- ";
-                third = "&#9837"+"&#53;"; //bemolle
+                third = "<sup style='vertical-align: super; font-size: 22px; margin-right:2px;'>"+"&#9837"+"&#53;"+"</sup>"; //bemolle
             }
             else {
                 second = "-" + "<sup style='vertical-align: super; font-size: 30px;'>7</sup>";
-                third = "&#9837"+"&#53"+"<sup style='vertical-align: super; font-size: 30px;'>9</sup>";
+                third = "<sup style='vertical-align: super; font-size: 22px; margin-right:2px;'>"+"&#9837"+"&#53;"+"</sup>"+"<sup style='vertical-align: super; font-size: 30px;'>9</sup>";
             }
         }
 

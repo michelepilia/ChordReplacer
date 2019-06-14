@@ -159,6 +159,35 @@ function removeChord(){
 	else return;
 }
 
+function randomChord(){
+	addChord();
+	var chordIdx = parseInt(document.getElementsByClassName("chord").length-2);
+	sequencer[chordIdx].noteFlag = true;
+	sequencer[chordIdx].fundamental = randomFund();
+	sequencer[chordIdx].quality = randomQ();
+	sequencer[chordIdx].extension = randomExt();
+	sequencer[chordIdx].inversion = randomInv();
+	updateChordTag(sequencer[chordIdx], chordIdx);
+}
+function randomFund(){
+	index = Math.floor(Math.random() * 12);
+	return noteDictInverse[index];
+}
+
+function randomQ() {
+	index = Math.floor(Math.random() * 6);
+	return qualitySelector[index].value;
+
+}
+function randomInv() {
+	index = Math.floor(Math.random() * 3);
+	return inversionSelector[index].value;
+}
+function randomExt() {
+	index = Math.floor(Math.random() * 6);
+	return extensionSelector[index].value;
+}
+
 function editChord(){
 
 	var chordIdx = parseInt(document.getElementsByClassName("done-button-chord")[0].id.substr(15));
