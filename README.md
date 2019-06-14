@@ -1,12 +1,49 @@
 # ChordReplacer
-1st semester project
 
-Studenti: Antonino Natoli (849020), Michele Pilia (915389).
+Students: Antonino Natoli (928370), Michele Pilia (915389).
 
-Descrizione generale: Il sistema deve permettere all’utente di comporre una struttura armonica/melodica di base, eventualmente partendo da giri armonici standard. A partire da tale struttura il sistema suggerisce delle sostituzioni armoniche all’utente, selezionabili tramite un’apposita interfaccia.
-In ogni stato del processo, il sistema deve consentire la riproduzione sonora della struttura allo stato attuale. I suoni riprodotti vengono generati da un sintetizzatore.
+http://chordreplacer.surge.sh/html.html
 
-Funzionalità base:
+
+Aim: creating a web application that allows even inexperienced users to create chords using the standard notation and to apply harmonic substitutions suggested by the system.
+
+Abstract:
+Realization of a basic sequencer, synthesizer, external vst, data persistance.
+
+Languages used:
+Html, Css, Javascript
+
+Sequencer:
+
+
+Creating a chord tracks:
+
+
+Substitutions:
+
+
+
+Synthesizer:
+
+Audio graph:
+
+Modules:
+
+
+Db persistance:
+
+
+
+
+
+
+
+
+
+
+
+
+
 1) creazione blocchi di accordi con pulsante apposito dell'interfaccia '+'
 2) inserimento di accordi tramite inserimento stringa o procedura guidata 
 3) suggerimento sostituzioni armoniche in base al contesto
