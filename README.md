@@ -5,9 +5,7 @@
 Project entirely realized by:
 
 Antonino Natoli (928370)
-
 Michele Pilia (915389)
-
 Politecnico di Milano
 
 ## Goals
