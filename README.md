@@ -76,14 +76,20 @@ Description of sequencer
 16) Left deletion
 
 ## Synth
+<p align="center"><img height="400" src="https://github.com/michelepilia/ChordReplacer/blob/master/SynthGui.JPG"></p>
+
 
 ### Audio Graph
+<p align="center"><img height="300" src="https://github.com/michelepilia/ChordReplacer/blob/master/Untitled Diagram.JPG"></p>
 
 ### Oscillator
+<p align="center"><img height="300" src="https://github.com/michelepilia/ChordReplacer/blob/master/Oscillator.JPG"></p>
 
 ### Low-Pass Filter
+<p align="center"><img height="300" src="https://github.com/michelepilia/ChordReplacer/blob/master/LPF.JPG"></p>
 
 ### LFO
+<p align="center"><img height="300" src="https://github.com/michelepilia/ChordReplacer/blob/master/lfo.JPG"></p>
 
 ## External MIDI
 
