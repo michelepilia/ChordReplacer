@@ -95,13 +95,13 @@ Waveform: it's possible to choose 3 different waveforms: square, sawtooth and tr
 
 ### Low-Pass Filter
 <p align="left"><img height="80" src="https://github.com/michelepilia/ChordReplacer/blob/master/screens/LPF.JPG"></p>
-
+<div>Cutoff: cutoff frequency of the filter.</div>
+<div>Reso: Q factor.</div>
+<div>EG: cutoff frequency of the filter reached after the decay, and mantained during the sustain.</div>
+<div>ADSR envelope can be used on to modulate the cutoff frequency.</div>
 ### LFO
 <p align="left"><img height="80" src="https://github.com/michelepilia/ChordReplacer/blob/master/screens/lfo.JPG"></p>
-Cutoff: cutoff frequency of the filter.
-Reso: Q factor.
-EG: cutoff frequency of the filter reached after the decay, and mantained during the sustain.
-ADSR envelope can be used on to modulate the cutoff frequency.
+
 
 ## External MIDI
 
