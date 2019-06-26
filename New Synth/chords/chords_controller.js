@@ -385,7 +385,7 @@ function tellTheSubs(data){
 		if (nextChord==undefined){nextChord = sequencer[0]};
 	}
 	else {
-		if (prevChord==undefined){prevChord = new Chord();};
+		if (prevChord==undefined){prevChord = new Chord();}; //To ease the computation 
 		if (nextChord==undefined){nextChord = new Chord();};
 	}
 	if (chord.noteFlag){
@@ -411,78 +411,82 @@ function tellTheSubs(data){
 		}
 
 		if (chord.quality == "maj" && chord.extension == "b7"){ //Tritone Substitution + VII dim7 + #II dim7 as dominant + aug triad +...
-			//Tritone
-			newChord = new Chord();
-			Object.assign(newChord, chord);
-			newChord.fundamental = noteDictInverse[(noteDict[chord.fundamental]+6)%12]; //WRT V degree
-			newSub = new Substitution("Tritone Substitution", chord, [newChord]);
-			subs.push(newSub);
+			if (nextChord.fundamental == noteDictInverse[(noteDict[chord.fundamental]+5)%12]){
 
-			//VII dim7
-			newChord = new Chord();
-			Object.assign(newChord, chord);
-			newChord.fundamental = noteDictInverse[(noteDict[chord.fundamental]+3)%12]; //WRT V degree
-			newChord.quality = "dim";
-			newChord.extension = "b7";
-			newChord.inversion = "none";
-			newSub = new Substitution("VII dim7 as dominant", chord, [newChord]);
-			subs.push(newSub);
-
-			//#IIdim7
-			newChord = new Chord();
-			Object.assign(newChord, chord);
-			newChord.fundamental = noteDictInverse[(noteDict[chord.fundamental]+8)%12]; //WRT V degree
-			newChord.quality = "dim";
-			newChord.extension = "b7";
-			newChord.inversion = "none";
-			newSub = new Substitution("#II dim7 as dominant", chord, [newChord]);
-			subs.push(newSub);
-
-			//Aug
-			newChord = new Chord();
-			Object.assign(newChord, chord);
-			newChord.quality = "aug";
-			newChord.extension = "b7";
-			newChord.inversion = "none";
-			newSub = new Substitution("V aug as dominant", chord, [newChord]);
-			subs.push(newSub);
-			
-
-			//Preparation by minor7
-			newChord = new Chord();
-			Object.assign(newChord, chord);
-			newChord.fundamental = noteDictInverse[(noteDict[chord.fundamental]+7)%12]; //WRT V degree (II-V)
-			newChord.quality = "min";
-			newChord.extension = "b7";
-			newChord.inversion = "none";
-			newSub = new Substitution("Preparation by minor 7", chord, [newChord]);
-			subs.push(newSub);
-
-			newSub = new Substitution("Back propagation of 7th", chord, []);
-			subs.push(newSub);
-
-
-			//Backdoor Progression
-			var secMin = noteDictInverse[(noteDict[chord.fundamental]+7)%12];
-			var tonic = noteDictInverse[(noteDict[chord.fundamental]+5)%12];
-			if ((prevChord.fundamental==secMin && prevChord.quality=="min")&&(nextChord.fundamental==tonic && nextChord.quality=="maj")) {
-				var newChord1 = new Chord(); 
-				var newChord2 = new Chord();
-				newChord1.fundamental = noteDictInverse[(noteDict[chord.fundamental]+10)%12]; 
-				newChord2.fundamental = noteDictInverse[(noteDict[chord.fundamental]+3)%12];
-				newChord1.quality = "min";
-				newChord2.quality = "maj";
-				newChord1.extension = "b7";
-				newChord2.extension = "b7";
-				newChord1.inversion = "none";
-				newChord2.inversion = "none";
-				newChord1.duration = chord.duration/2;
-				newChord2.duration = chord.duration/2;
-
-				newSub = new Substitution("Backdoor Progression", chord, [newChord1, newChord2]);
+				//VII dim7
+				newChord = new Chord();
+				Object.assign(newChord, chord);
+				newChord.fundamental = noteDictInverse[(noteDict[chord.fundamental]+3)%12]; //WRT V degree
+				newChord.quality = "dim";
+				newChord.extension = "b7";
+				newChord.inversion = "none";
+				newSub = new Substitution("VII dim7 as dominant", chord, [newChord]);
 				subs.push(newSub);
-			};
 
+				//#IIdim7
+				newChord = new Chord();
+				Object.assign(newChord, chord);
+				newChord.fundamental = noteDictInverse[(noteDict[chord.fundamental]+8)%12]; //WRT V degree
+				newChord.quality = "dim";
+				newChord.extension = "b7";
+				newChord.inversion = "none";
+				newSub = new Substitution("#II dim7 as dominant", chord, [newChord]);
+				subs.push(newSub);
+			}
+
+			else {
+
+				//Tritone
+				newChord = new Chord();
+				Object.assign(newChord, chord);
+				newChord.fundamental = noteDictInverse[(noteDict[chord.fundamental]+6)%12]; //WRT V degree
+				newSub = new Substitution("Tritone Substitution", chord, [newChord]);
+				subs.push(newSub);
+
+				//Aug
+				newChord = new Chord();
+				Object.assign(newChord, chord);
+				newChord.quality = "aug";
+				newChord.extension = "b7";
+				newChord.inversion = "none";
+				newSub = new Substitution("V aug as dominant", chord, [newChord]);
+				subs.push(newSub);
+
+				//Preparation by minor7
+				newChord = new Chord();
+				Object.assign(newChord, chord);
+				newChord.fundamental = noteDictInverse[(noteDict[chord.fundamental]+7)%12]; //WRT V degree (II-V)
+				newChord.quality = "min";
+				newChord.extension = "b7";
+				newChord.inversion = "none";
+				newSub = new Substitution("Preparation by minor 7", chord, [newChord]);
+				subs.push(newSub);
+
+				newSub = new Substitution("Back propagation of 7th", chord, []);
+				subs.push(newSub);
+
+
+				//Backdoor Progression
+				var secMin = noteDictInverse[(noteDict[chord.fundamental]+7)%12];
+				var tonic = noteDictInverse[(noteDict[chord.fundamental]+5)%12];
+				if ((prevChord.fundamental==secMin && prevChord.quality=="min")&&(nextChord.fundamental==tonic && nextChord.quality=="maj")) {
+					var newChord1 = new Chord(); 
+					var newChord2 = new Chord();
+					newChord1.fundamental = noteDictInverse[(noteDict[chord.fundamental]+10)%12]; 
+					newChord2.fundamental = noteDictInverse[(noteDict[chord.fundamental]+3)%12];
+					newChord1.quality = "min";
+					newChord2.quality = "maj";
+					newChord1.extension = "b7";
+					newChord2.extension = "b7";
+					newChord1.inversion = "none";
+					newChord2.inversion = "none";
+					newChord1.duration = chord.duration/2;
+					newChord2.duration = chord.duration/2;
+
+					newSub = new Substitution("Backdoor Progression", chord, [newChord1, newChord2]);
+					subs.push(newSub);
+				}
+			}
 		}
 
 		if (chord.quality == "maj"){ //II-V 
