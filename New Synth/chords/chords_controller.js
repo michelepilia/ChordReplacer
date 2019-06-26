@@ -416,7 +416,7 @@ function tellTheSubs(data){
 				//VII dim7
 				newChord = new Chord();
 				Object.assign(newChord, chord);
-				newChord.fundamental = noteDictInverse[(noteDict[chord.fundamental]+3)%12]; //WRT V degree
+				newChord.fundamental = noteDictInverse[(noteDict[chord.fundamental]+4)%12]; //WRT V degree
 				newChord.quality = "dim";
 				newChord.extension = "b7";
 				newChord.inversion = "none";
