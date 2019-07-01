@@ -472,6 +472,8 @@ function tellTheSubs(data){
 				var newChord2 = new Chord();
 				newChord1.fundamental = noteDictInverse[(noteDict[chord.fundamental]+10)%12]; 
 				newChord2.fundamental = noteDictInverse[(noteDict[chord.fundamental]+3)%12];
+				newChord1.noteFlag = true;
+				newChord2.noteFlag = true;
 				newChord1.quality = "min";
 				newChord2.quality = "maj";
 				newChord1.extension = "b7";
@@ -666,7 +668,6 @@ function isChordPlaying(sequencerIndex){
 function getSubsExplanation(subst){
 	var strToReturn = "";
 
-	
 	if ((subst.name=="Preparation by minor 7") || (subst.name=="Preparation by VII")){
 		strToReturn = "| X | " + chordToString(subst.origin) + " | " + "&#8594;" + "| X " + chordToString(subst.destination[0]) + " | " + chordToString(subst.origin) + " |";
 	}
