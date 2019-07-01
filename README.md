@@ -137,5 +137,5 @@ It's necessary to install a virtual audio cable.
 
 > Project link: [http://chordreplacer.surge.sh/html.html](http://chordreplacer.surge.sh/html.html)
 
-> Demo Video: [https://youtu.be/8YuT3bDQDpQ](https://youtu.be/8YuT3bDQDpQ)
+> Demo Video: [https://youtu.be/G487QCjn-gE](https://youtu.be/G487QCjn-gE)
 
