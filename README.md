@@ -139,5 +139,5 @@ It's necessary to install a virtual audio cable.
 
 > Demo Video: [https://youtu.be/G487QCjn-gE](https://youtu.be/G487QCjn-gE)
 
-> Google Drive Presentation: [https://docs.google.com/presentation/d/1B6aDNXhhGJO3_FIgUvt5xYydiFFhu0T_kXkV8e36w2g/edit?usp=sharing] (https://docs.google.com/presentation/d/1B6aDNXhhGJO3_FIgUvt5xYydiFFhu0T_kXkV8e36w2g/edit?usp=sharing)
+> Google Drive Presentation: [https://docs.google.com/presentation/d/1B6aDNXhhGJO3_FIgUvt5xYydiFFhu0T_kXkV8e36w2g/edit?usp=sharing](https://docs.google.com/presentation/d/1B6aDNXhhGJO3_FIgUvt5xYydiFFhu0T_kXkV8e36w2g/edit?usp=sharing)
 
